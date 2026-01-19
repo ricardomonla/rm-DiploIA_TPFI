@@ -27,5 +27,18 @@ He implementado una barra lateral moderna que funciona como centro de control pa
 1.  **style.css**: Nueva estructura `flex` con sidebar fija y estilos interactivos.
 2.  **navigation.js**: Lógica JS para poblar la ToC y gestionar el desplazamiento.
 3.  **Archivos HTML**: Refactorizados para separar el contenido de la navegación e incluir IDs ancla.
+4.  **Refactorización Modular (`layout.js`)**: Se implementó una inyección dinámica de la **Barra Lateral** y el **Pie de Página** para eliminar redundancia de código y facilitar el mantenimiento.
+
+## Verificación Visual
+
+Se ha confirmado que la estructura se mantiene consistente en todas las páginas:
+
+````carousel
+![Portal Principal](assets/img/index_page_verification_1768841246127.png)
+<!-- slide -->
+![Entregable E01](assets/img/e01_page_verification_1768841272326.png)
+<!-- slide -->
+![Consignas (Footer)](assets/img/consignas_footer_view_1768841692972.png)
+````
 
 Este cambio eleva la calidad del portal de entregables, dándole un aspecto mucho más profesional y funcional.

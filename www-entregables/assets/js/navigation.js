@@ -7,13 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sidebarNav = document.querySelector('.sidebar-nav');
 
     // 1. Marcar el ítem de navegación activo basado en la URL
-    const currentPath = window.location.pathname;
-    const navItems = sidebarNav.querySelectorAll('.sidebar-nav-item');
-    navItems.forEach(item => {
-        if (currentPath.includes(item.getAttribute('href'))) {
-            item.classList.add('active');
-        }
-    });
+    // (Manejado ahora por layout.js)
 
     // 2. Generar ToC basada en los encabezados
     headers.forEach((header, index) => {

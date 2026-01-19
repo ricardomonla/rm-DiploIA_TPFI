@@ -9,30 +9,7 @@
 </head>
 
 <body>
-    <aside class="sidebar no-print">
-        <div class="sidebar-profile">
-            <div class="avatar-container">
-                <video src="assets/img/avatar/dtic-GEMA_01.mp4" class="sidebar-avatar" autoplay muted
-                    playsinline></video>
-            </div>
-            <div class="profile-name">dtic-GEMA</div>
-            <div class="profile-title">Entidad de Asistencia Virtual</div>
-        </div>
-        <nav class="sidebar-nav">
-            <a href="index.html" class="sidebar-nav-item">Portal Principal</a>
-            <a href="consignas.html" class="sidebar-nav-item">Consignas TP Final</a>
-            <a href="e01.html" class="sidebar-nav-item">Entregable E01</a>
-            <a href="e02.html" class="sidebar-nav-item">Entregable E02</a>
-            <a href="e03.html" class="sidebar-nav-item">Entregable E03</a>
-        </nav>
-
-        <div class="toc-container">
-            <p class="toc-header">En esta página</p>
-            <ul class="toc-list" id="tocList">
-                <!-- Se generará dinámicamente -->
-            </ul>
-        </div>
-    </aside>
+    <div id="sidebar-root"></div>
 
     <main class="main-content">
         <div class="nav-buttons no-print">
@@ -87,12 +64,11 @@
                     seguimiento humano si fuera necesario.</p>
             </section>
 
-            <footer>
-                <p>dtic-GEMA | Lic. Ricardo Monla</p>
-            </footer>
+            <div id="footer-root"></div>
         </div>
     </main>
 
+    <script src="assets/js/layout.js"></script>
     <script src="assets/js/navigation.js"></script>
 </body>
 
