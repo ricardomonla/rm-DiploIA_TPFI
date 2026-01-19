@@ -1,46 +1,30 @@
-# Proyecto Final: Sistema Inteligente de Gestión TIC (dtic-GEMA)
+# dtic-GEMA v0.3: Sistema Inteligente de Gestión TIC
 
-**Trabajo Final Integrador - Diplomatura en Inteligencia Artificial**
+**Sistema de Gestión Estratégica Mediante Automatización - UTN FRLR**
 
-## 📋 Descripción del Proyecto
-**dtic-GEMA** (Gestión de Entradas con Modelos Avanzados) es un ecosistema de soporte inteligente diseñado para la **Dirección de TIC de la Facultad Regional (UTN FRLR)**. Utiliza IA Generativa para automatizar el triaje, clasificación y respuesta de consultas técnicas de alumnos, docentes y autoridades.
+Este proyecto implementa un asistente inteligente para la Dirección de TIC que automatiza el triaje, clasificación y registro de tickets de soporte. La versión 0.3 evoluciona hacia una arquitectura web desacoplada para mayor control y flexibilidad.
 
-### Objetivos
-*   **Reducir la carga operativa:** Filtrando consultas repetitivas (blanqueo de claves, fechas).
-*   **Mejorar la experiencia de usuario:** Brindando respuestas inmediatas y personalizadas ("Sabías qué..." por carrera).
-*   **Priorización Inteligente:** Clasificando tickets con SLAs diferenciados según el rol del usuario.
+## 🚀 Arquitectura v0.3
 
-## 👤 Autor
-*   **Responsable:** Lic. Ricardo Monla
-*   **Contexto:** Dirección de TIC - Facultad Regional (UTN FRLR)
+- **Frontend:** Interfaz de Chatbot Web Premium (Vanilla JS / CSS Glassmorphism).
+- **Automatización:** Webhooks y flujo lógico en **Make.com**.
+- **IA:** Engine de procesamiento basado en **Google Gemini**.
+- **Persistencia:** Base de datos relacional en **Google Sheets**.
+- **Documentación:** Portal de entregables web optimizado para impresión.
 
-## 📂 Estructura del Repositorio
-Este repositorio actúa como la **Fuente de la Verdad** y respaldo de configuración para la implementación No-Code.
+## 📂 Estructura del Proyecto
 
-| Directorio | Contenido |
-| :--- | :--- |
-| `/prompts` | **System Instructions** para los Gems (Personalidad, Reglas de Negocio). |
-| `/schemas` | **Definiciones JSON** para las herramientas (Tool Calling) del Gem. |
-| `/data` | **Datos de Prueba (Mock Data)** en CSV para poblar Google Sheets. |
-| `/docs` | Documentación adicional del proyecto. |
+- `www-chatbot/`: Interfaz principal del usuario.
+- `www-entregables/`: Portal de informes y ficha técnica (E01, E02).
+- `docs/`: Documentación estática y planes de implementación.
+- `_hist/`: Archivo histórico de versiones anteriores (v0.1, v0.2).
 
-## 🔗 Recursos y Entregables
-Enlaces rápidos a la documentación oficial y herramientas del proyecto:
+## 🛠️ Guía Rápida de Uso
 
-### Entregables
-*   **E00 - Portal de Entregables:** [Docs](https://docs.google.com/document/d/11AzRAXEA1fCTRq_GAkLluZMotQM_Bg51TNkvHqDO_mE)
-*   **E01 - Relevamiento y Diseño:** [Docs](https://docs.google.com/document/d/1yuPy40BAXGNHPeYfBqzzHeaa2H-vpVVM8mDh8yZQ-bw)
-*   **E02 - Ficha Técnica:** [Docs](https://docs.google.com/document/d/1hi18UX_uSeXuELkJqJTxay6VfLZ_m2w1Aqs4EJH5x1k/edit?usp=drive_link)
-
-### Herramientas
-*   **Carpeta Drive del Proyecto:** [2601_DipoIA_TPFinal](https://drive.google.com/drive/folders/14YlQvuAahxo95qk4e5xzPqHVSqpu9eCz)
-*   **GEM DiploIA - Tutor TP Final:** [Enlace al Gem](https://gemini.google.com/gem/1O0I-cRrVCCpCukC1_EQMN-7MPH2MZfwR)
-
-## 🚀 Implementación
-Para desplegar este proyecto:
-1.  **Google Sheets:** Importar los archivos de `/data` para crear la estructura base.
-2.  **Make.com:** Crear el escenario y conectar el Webhook usando el esquema de `/schemas`.
-3.  **Gemini:** Crear un nuevo Gem y copiar el contenido de `/prompts/maestro.md` en las instrucciones.
+1.  **Backend (Make):** Asegúrate de que el Webhook de Make esté activo y configurado para recibir datos.
+2.  **Interfaz (Chatbot):** Abre `www-chatbot/index.html` en tu navegador.
+3.  **Interacción:** Envía consultas desde el chat. Los datos viajarán al Webhook y se registrarán en la hoja de Sheets `dtic-GEMA_BD`.
+4.  **Reportes:** Accede a `www-entregables/index.html` para generar los PDFs de los trabajos prácticos.
 
 ---
-*Repositorio configurado para el TP Final de DiploIA.*
+*Desarrollado por Lic. Ricardo Monla para el TP Final de la Diplomatura en IA Generativa.*

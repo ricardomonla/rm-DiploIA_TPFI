@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E02 - Ficha Técnica - dtic-GEMA</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <div class="nav-buttons no-print">
+        <a href="index.html" class="btn btn-outline">← Volver al Portal</a>
+        <button onclick="window.print()" class="btn">Imprimir a PDF</button>
+    </div>
+
+    <div class="container">
+        <header>
+            <img src="assets/img/logo_utn.png" alt="UTN Logo" class="logo">
+            <div class="header-text">
+                <h1>Entregable E02</h1>
+                <p>Ficha Técnica de la Solución</p>
+            </div>
+        </header>
+
+        <section>
+            <h2>1. Arquitectura de la Solución</h2>
+            <p>La v0.3 utiliza una arquitectura desacoplada para garantizar estabilidad y control total sobre la UX.</p>
+            <img src="../data/capturas/arquitectura_v03.png" alt="Arquitectura"
+                style="width: 100%; border-radius: 8px; margin: 20px 0;">
+
+            <h2>2. Lógica de Nodos (Make.com)</h2>
+            <ul>
+                <li><strong>Trigger:</strong> Webhook personalizado que recibe JSON desde la Interfaz Web.</li>
+                <li><strong>Validación:</strong> Módulo de Google Sheets "Search Rows" (Email + DNI).</li>
+                <li><strong>Router:</strong> Bifurcación entre "Usuario Validado" y "Usuario Desconocido".</li>
+                <li><strong>IA Gemini:</strong> Motor de procesamiento para categorización y respuesta adaptativa.</li>
+                <li><strong>Almacenamiento:</strong> Registro final en la hoja de "Tickets".</li>
+            </ul>
+
+            <div class="highlight-box">
+                <h3>Integración v0.3</h3>
+                <p>En esta versión, eliminamos la dependencia de Gemini Gems. La comunicación se realiza mediante
+                    <code>fetch API</code> directamente al Webhook de Make, permitiendo una respuesta mucho más rápida y
+                    personalizada en el chatbot web.</p>
+            </div>
+
+            <h2>3. Ficha de Datos</h2>
+            <p>El sistema utiliza una base de datos distribuida en Google Sheets para mantener la persistencia sin
+                incurrir en costos de infraestructura complejos:</p>
+            <ul>
+                <li><strong>BD_Agentes:</strong> Datos maestros de alumnos y docentes.</li>
+                <li><strong>BD_Tickets:</strong> Registro histórico de gestiones.</li>
+                <li><strong>BD_Conocimiento:</strong> FAQs y tutoriales consumidos por la IA.</li>
+            </ul>
+        </section>
+
+        <footer>
+            <p>dtic-GEMA | v0.3 | Lic. Ricardo Monla</p>
+        </footer>
+    </div>
+</body>
+
+</html>

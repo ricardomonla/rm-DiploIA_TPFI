@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E01 - Relevamiento y Diseño - dtic-GEMA</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <div class="nav-buttons no-print">
+        <a href="index.html" class="btn btn-outline">← Volver al Portal</a>
+        <button onclick="window.print()" class="btn">Imprimir a PDF</button>
+    </div>
+
+    <div class="container">
+        <header>
+            <img src="assets/img/logo_utn.png" alt="UTN Logo" class="logo">
+            <div class="header-text">
+                <h1>Entregable E01</h1>
+                <p>Relevamiento y Diseño de Proceso</p>
+            </div>
+        </header>
+
+        <section>
+            <h2>1. Relevamiento y Puntos de Dolor</h2>
+            <p>En el entorno operativo de la Dirección de TIC de la Facultad Regional, se han identificado procesos
+                críticos que presentan ineficiencias debido a su naturaleza manual. Los puntos de dolor detectados son:
+            </p>
+            <ul>
+                <li><strong>Gestión de Consultas (Triaje Manual):</strong> Saturación de canales por consultas
+                    repetitivas (blanqueo de claves, matriculación).</li>
+                <li><strong>Registro de Bitácora:</strong> Documentación fragmentada de tareas técnicas.</li>
+                <li><strong>Administración de Accesos:</strong> Validación manual propensa a errores humanos.</li>
+            </ul>
+
+            <h2>2. Elección del Quick Win</h2>
+            <div class="highlight-box">
+                <p><strong>Seleccionado:</strong> Proceso 1 - Consultas de Agentes.</p>
+                <p><strong>Clasificación:</strong> Quick Win (Alto Impacto / Bajo Esfuerzo).</p>
+                <p><strong>Justificación:</strong> El despliegue de un chatbot inteligente permite resolver el 80% de
+                    las dudas inmediatas sin intervención humana, liberando tiempo técnico.</p>
+            </div>
+
+            <h2>3. Diseño del Flujo (Lenguaje Natural)</h2>
+            <h3>A. Entrada (Input)</h3>
+            <p>El usuario ingresa su email institucional y DNI. El Chatbot valida estos datos contra la base histórica.
+            </p>
+
+            <h3>B. Lógica IA</h3>
+            <p>A través de un motor conversacional, el sistema identifica la urgencia y asigna un SLA (autoridades: 2h,
+                alumnos: 24h). Además, genera un "Sabías que..." personalizado según la carrera del usuario.</p>
+
+            <h3>C. Salida (Output)</h3>
+            <p>Se genera un número de ticket único y se registra la consulta en una hoja centralizada de Tickets para
+                seguimiento humano si fuera necesario.</p>
+        </section>
+
+        <footer>
+            <p>dtic-GEMA | v0.3 | Lic. Ricardo Monla</p>
+        </footer>
+    </div>
+</body>
+
+</html>

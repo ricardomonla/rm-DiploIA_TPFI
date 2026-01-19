@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GEMA Chat - UTN FRLR</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Lucide Icons for premium feel -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <div class="chat-container">
+        <!-- Header -->
+        <header class="chat-header">
+            <div class="brand">
+                <img src="../www-entregables/assets/img/logo_utn.png" alt="UTN Logo">
+                <div class="brand-text">
+                    <h1>dtic-GEMA</h1>
+                    <span>Asistente Inteligente FRLR</span>
+                </div>
+            </div>
+            <div class="user-info-bar">
+                <div class="input-group">
+                    <i data-lucide="mail"></i>
+                    <input type="email" id="userEmail" placeholder="Email" value="alumno1@frlr.utn.edu.ar">
+                </div>
+                <div class="input-group">
+                    <i data-lucide="id-card"></i>
+                    <input type="text" id="userDNI" placeholder="DNI" value="12345678">
+                </div>
+            </div>
+            <div class="status-badge">
+                <div class="status-dot"></div>
+                Sistema Activo
+            </div>
+        </header>
+
+        <!-- Messages Area -->
+        <main class="chat-messages" id="chatMessages">
+            <div class="message bot">
+                ¡Hola! Soy **GEMA**, el Asistente Estratégico de la Dirección de TIC. ¿En qué puedo ayudarte hoy?
+            </div>
+            <!-- Los mensajes aparecerán aquí -->
+        </main>
+
+        <!-- Input Area -->
+        <footer class="chat-input-area">
+            <div class="typing" id="typingIndicator">GEMA está pensando...</div>
+            <form class="input-wrapper" id="chatForm">
+                <input type="text" id="userInput" placeholder="Escribe tu consulta aquí..." autocomplete="off">
+                <button type="submit" class="send-btn">
+                    <i data-lucide="send"></i>
+                </button>
+            </form>
+        </footer>
+    </div>
+
+    <script src="assets/js/script.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
