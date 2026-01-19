@@ -9,56 +9,108 @@
 </head>
 
 <body>
-    <div class="nav-buttons no-print">
-        <a href="index.html" class="btn btn-outline">← Volver al Portal</a>
-        <button onclick="window.print()" class="btn">Imprimir a PDF</button>
-    </div>
-
-    <div class="container">
-        <header>
-            <img src="assets/img/logo_utn.png" alt="UTN Logo" class="logo">
-            <div class="header-text">
-                <h1>Entregable E02</h1>
-                <p>Ficha Técnica de la Solución</p>
+    <aside class="sidebar no-print">
+        <div class="sidebar-profile">
+            <div class="avatar-container">
+                <video src="assets/img/avatar/dtic-GEMA_01.mp4" class="sidebar-avatar" autoplay muted
+                    playsinline></video>
             </div>
-        </header>
+            <div class="profile-name">dtic-GEMA</div>
+            <div class="profile-title">Entidad de Asistencia Virtual</div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="index.html" class="sidebar-nav-item">Portal Principal</a>
+            <a href="consignas.html" class="sidebar-nav-item">Consignas TP Final</a>
+            <a href="e01.html" class="sidebar-nav-item">Entregable E01</a>
+            <a href="e02.html" class="sidebar-nav-item">Entregable E02</a>
+            <a href="e03.html" class="sidebar-nav-item">Entregable E03</a>
+        </nav>
 
-        <section>
-            <h2>1. Arquitectura de la Solución</h2>
-            <p>La v0.3 utiliza una arquitectura desacoplada para garantizar estabilidad y control total sobre la UX.</p>
-            <img src="../data/capturas/arquitectura_v03.png" alt="Arquitectura"
-                style="width: 100%; border-radius: 8px; margin: 20px 0;">
-
-            <h2>2. Lógica de Nodos (Make.com)</h2>
-            <ul>
-                <li><strong>Trigger:</strong> Webhook personalizado que recibe JSON desde la Interfaz Web.</li>
-                <li><strong>Validación:</strong> Módulo de Google Sheets "Search Rows" (Email + DNI).</li>
-                <li><strong>Router:</strong> Bifurcación entre "Usuario Validado" y "Usuario Desconocido".</li>
-                <li><strong>IA Gemini:</strong> Motor de procesamiento para categorización y respuesta adaptativa.</li>
-                <li><strong>Almacenamiento:</strong> Registro final en la hoja de "Tickets".</li>
+        <div class="toc-container">
+            <p class="toc-header">En esta página</p>
+            <ul class="toc-list" id="tocList">
+                <!-- Se generará dinámicamente -->
             </ul>
+        </div>
+    </aside>
 
-            <div class="highlight-box">
-                <h3>Integración v0.3</h3>
-                <p>En esta versión, eliminamos la dependencia de Gemini Gems. La comunicación se realiza mediante
-                    <code>fetch API</code> directamente al Webhook de Make, permitiendo una respuesta mucho más rápida y
-                    personalizada en el chatbot web.</p>
-            </div>
+    <main class="main-content">
+        <div class="nav-buttons no-print">
+            <a href="index.html" class="btn btn-outline">← Volver al Portal</a>
+            <button onclick="window.print()" class="btn">Imprimir a PDF</button>
+        </div>
 
-            <h2>3. Ficha de Datos</h2>
-            <p>El sistema utiliza una base de datos distribuida en Google Sheets para mantener la persistencia sin
-                incurrir en costos de infraestructura complejos:</p>
-            <ul>
-                <li><strong>BD_Agentes:</strong> Datos maestros de alumnos y docentes.</li>
-                <li><strong>BD_Tickets:</strong> Registro histórico de gestiones.</li>
-                <li><strong>BD_Conocimiento:</strong> FAQs y tutoriales consumidos por la IA.</li>
-            </ul>
-        </section>
+        <div class="container">
+            <header>
+                <img src="assets/img/logo_utn.png" alt="UTN Logo" class="logo">
+                <div class="header-text">
+                    <h1>Entregable E02</h1>
+                    <p>Ficha Técnica de la Solución</p>
+                </div>
+            </header>
 
-        <footer>
-            <p>dtic-GEMA | v0.3 | Lic. Ricardo Monla</p>
-        </footer>
-    </div>
+            <section>
+                <h2 id="arquitectura">1. Arquitectura de la Solución</h2>
+                <p>La solución se basa en un ecosistema desacoplado que separa la experiencia de usuario de la ejecución
+                    lógica, permitiendo un flujo de información lineal y eficiente:</p>
+
+                <div class="workflow-steps" style="margin: 20px 0;">
+                    <ul>
+                        <li><strong>Capa de Captura (Interfaz Chatbot):</strong> La interfaz web personalizada capta la
+                            intención del usuario y la envía mediante una petición segura (fetch API).</li>
+                        <li><strong>Capa de Orquestación (Orquestador Make):</strong> Actúa como el motor central que
+                            recibe los datos, valida las identidades contra la base de datos y coordina las llamadas a
+                            la IA.</li>
+                        <li><strong>Capa de Inteligencia (IA Gemini):</strong> Procesa la consulta en lenguaje natural,
+                            categoriza el ticket y genera una respuesta adaptativa basada en el perfil del usuario.</li>
+                    </ul>
+                </div>
+
+                <img src="assets/img/arquitectura_gema.png" alt="Arquitectura dtic-GEMA Flow"
+                    style="width: 100%; border-radius: 8px; margin: 20px 0; border: 1px solid #e1e4e8;">
+
+                <h2 id="logica-nodos">2. Estrategia de Backend</h2>
+                <p>El núcleo del sistema reside en un flujo automatizado en Make.com. Para ver el detalle técnico del
+                    blueprint y los nodos, consulte el <a href="e03.html">Entregable E03</a>.</p>
+
+                <div class="highlight-box">
+                    <h3 id="integracion-chatbot">Integración del Chatbot</h3>
+                    <p>Para esta solución, eliminamos la dependencia de asistentes externos rígidos. La comunicación se
+                        realiza mediante
+                        <code>fetch API</code> directamente a la <strong>Interfaz Chatbot</strong> conectada al
+                        <strong>Orquestador Make</strong>, permitiendo una respuesta mucho más rápida y
+                        personalizada en la interfaz web.
+                    </p>
+                </div>
+
+                <h2 id="ficha-datos">3. Ficha de Datos</h2>
+                <p>La persistencia del sistema se gestiona mediante el libro de Google Sheets
+                    <strong>dtic-GEMA_BD</strong>, el cual centraliza la información en 3 hojas principales:
+                </p>
+                <ul>
+                    <li><strong>Agentes:</strong> Datos maestros de alumnos y docentes para validación de identidad.
+                    </li>
+                    <li><strong>Tickets:</strong> Registro histórico de todas las incidencias y consultas generadas.
+                    </li>
+                    <li><strong>Conocimiento:</strong> Base de FAQs y procedimientos que alimentan la lógica de la IA.
+                    </li>
+                </ul>
+                <div class="highlight-box" style="margin-top: 20px;">
+                    <p><strong>Acceso a la Base de Datos:</strong></p>
+                    <a href="https://docs.google.com/spreadsheets/d/1gsRyE_cS0jPUR-UQUpIfQ674g3Ws08WnTY6Xbfcb69Q/edit?usp=sharing"
+                        target="_blank" class="btn btn-outline">
+                        Ver Planilla dtic-GEMA_BD
+                    </a>
+                </div>
+            </section>
+
+            <footer>
+                <p>dtic-GEMA | Lic. Ricardo Monla</p>
+            </footer>
+        </div>
+    </main>
+
+    <script src="assets/js/navigation.js"></script>
 </body>
 
 </html>

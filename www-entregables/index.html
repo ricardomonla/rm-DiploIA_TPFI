@@ -1,41 +1,83 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal de Entregables - dtic-GEMA</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
-    <div class="container">
-        <header>
-            <img src="assets/img/logo_utn.png" alt="UTN Logo" class="logo">
-            <div class="header-text">
-                <h1>dtic-GEMA</h1>
-                <p>Sistema de Gestión Estratégica Mediante Automatización</p>
+    <aside class="sidebar no-print">
+        <div class="sidebar-profile">
+            <div class="avatar-container">
+                <video src="assets/img/avatar/dtic-GEMA_01.mp4" class="sidebar-avatar" autoplay muted
+                    playsinline></video>
             </div>
-        </header>
+            <div class="profile-name">dtic-GEMA</div>
+            <div class="profile-title">Entidad de Asistencia Virtual</div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="index.html" class="sidebar-nav-item">Portal Principal</a>
+            <a href="consignas.html" class="sidebar-nav-item">Consignas TP Final</a>
+            <a href="e01.html" class="sidebar-nav-item">Entregable E01</a>
+            <a href="e02.html" class="sidebar-nav-item">Entregable E02</a>
+            <a href="e03.html" class="sidebar-nav-item">Entregable E03</a>
+        </nav>
 
-        <section>
-            <h2>Portal de Entregables</h2>
-            <p>Bienvenido al mini sitio de documentación del proyecto <strong>dtic-GEMA</strong>. Este espacio centraliza los informes técnicos requeridos para la Diplomatura en IA Generativa y No-Code.</p>
-            
-            <div class="highlight-box">
-                <h3>V0.3 - Nueva Estrategia</h3>
-                <p>Tras el análisis de la Versión 0.2, hemos decidido pivotar hacia una interfaz de <strong>Chatbot Web dinámico</strong>, manteniendo la robustez del backend en Make.com y Google Sheets.</p>
-            </div>
-
-            <h3>Lista de Entregables</h3>
-            <ul>
-                <li><strong><a href="e01.html">E01 - Relevamiento y Diseño de Proceso</a>:</strong> Identificación de puntos de dolor, matriz de impacto y diseño del flujo.</li>
-                <li><strong><a href="e02.html">E02 - Ficha Técnica de la Solución</a>:</strong> Arquitectura detallada, nodos de Make y lógica de la IA.</li>
-                <li><strong>E03 - Manual de Usuario y Video:</strong> <em>(Próximamente)</em></li>
+        <div class="toc-container">
+            <p class="toc-header">En esta página</p>
+            <ul class="toc-list" id="tocList">
+                <!-- Se generará dinámicamente -->
             </ul>
-        </section>
+        </div>
+    </aside>
 
-        <footer>
-            <p>Lic. Ricardo Monla | DiploIA TP Final | Enero 2026</p>
-        </footer>
-    </div>
+    <main class="main-content">
+        <div class="container">
+            <header>
+                <img src="assets/img/logo_utn.png" alt="UTN Logo" class="logo">
+                <div class="header-text">
+                    <h1>dtic-GEMA</h1>
+                    <p>La Evolución de una Entidad de Asistencia Inteligente</p>
+                </div>
+            </header>
+
+            <section>
+                <h2 id="bienvenida">Conoce a dtic-GEMA</h2>
+                <p>Este espacio documenta el nacimiento y desarrollo de <strong>dtic-GEMA</strong>. Ella no es solo un
+                    sistema: es una entidad diseñada para transformar la interacción administrativa en la UTN Facultad
+                    Regional La Rioja.</p>
+
+                <div class="highlight-box">
+                    <h3 id="estrategia-proyecto">Estrategia del Proyecto</h3>
+                    <p>Ella integra una **Interfaz Chatbot** personalizada que se comunica con su **Orquestador Make**,
+                        el cual gestiona la lógica de negocio y consume servicios de **IA Gemini** para que dtic-GEMA
+                        pueda ofrecer una respuesta inteligente y automatizada.</p>
+                </div>
+
+                <h3 id="lista-entregables">Lista de Entregables</h3>
+                <ul>
+                    <li><strong><a href="consignas.html">Consigna TP Final</a>:</strong> Requerimientos y objetivos
+                        solicitados
+                        para la diplomatura.</li>
+                    <li><strong><a href="e01.html">E01 - Relevamiento y Diseño de Proceso</a>:</strong> Identificación
+                        de puntos de dolor, matriz de impacto y diseño del flujo.</li>
+                    <li><strong><a href="e02.html">E02 - Ficha Técnica de la Solución</a>:</strong> Arquitectura
+                        detallada y lógica de datos.</li>
+                    <li><strong><a href="e03.html">E03 - Blueprint del Escenario Make.com</a>:</strong> Diagrama de
+                        flujo y descarga del componente técnico.</li>
+                </ul>
+            </section>
+
+            <footer>
+                <p>Lic. Ricardo Monla | DiploIA TP Final | Enero 2026</p>
+            </footer>
+        </div>
+    </main>
+
+    <script src="assets/js/navigation.js"></script>
 </body>
+
 </html>
