@@ -40,12 +40,20 @@ chatForm.addEventListener('submit', async (e) => {
         });
 
         if (response.ok) {
-            const data = await response.json();
-            // 3. Mostrar respuesta del bot
-            // Asumimos que Make devuelve un objeto con un campo 'mensaje'
-            appendMessage('bot', data.mensaje || "He recibido tu consulta. Estamos procesando tu ticket.");
+            const contentType = response.headers.get("content-type");
+            if (contentType && contentType.includes("application/json")) {
+                const data = await response.json();
+                appendMessage('bot', data.mensaje || data.response || "Consulta procesada exitosamente.");
+            } else {
+                const text = await response.text();
+                if (text.trim() === "Accepted") {
+                    appendMessage('bot', "¡Recibido! Tu consulta ha ingresado al sistema **dtic-GEMA**. Estamos procesando tu ticket.");
+                } else {
+                    appendMessage('bot', text || "He recibido tu consulta. Estamos trabajando en ello.");
+                }
+            }
         } else {
-            appendMessage('bot', "Lo siento, tuve un problema al conectar con el servidor central. Intenta nuevamente más tarde.");
+            appendMessage('bot', "Lo siento, hubo un problema técnico (Error " + response.status + ").");
         }
     } catch (error) {
         console.error('Error:', error);
