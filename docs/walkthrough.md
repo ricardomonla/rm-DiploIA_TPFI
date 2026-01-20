@@ -41,4 +41,12 @@ Se ha confirmado que la estructura se mantiene consistente en todas las páginas
 ![Consignas (Footer)](assets/img/consignas_footer_view_1768841692972.png)
 ````
 
-Este cambio eleva la calidad del portal de entregables, dándole un aspecto mucho más profesional y funcional.
+
+## Validación Local (Servidores de Desarrollo)
+
+Se ha verificado el correcto funcionamiento de los servidores locales ejecutados mediante `./app-run.sh`.
+
+- **Puerto 7701**: Interfaz Chatbot (Operativa).
+- **Puerto 7702**: Portal Entregables (Operativo).
+
+![Verificación Navegador](assets/img/local_verification.webp)
