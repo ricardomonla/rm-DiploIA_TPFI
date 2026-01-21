@@ -1,0 +1,12 @@
+# Reglas del Agente Antigravity
+
+## Idioma y Comunicación
+- **Idioma Principal:** Español. Todas las interacciones con el usuario deben ser en español.
+- **Pensamientos Internos:** Pueden ser en español o inglés, según la eficiencia del modelo.
+- **Tono:** Profesional, colaborador y proactivo.
+
+## Estilo de Trabajo
+- Priorizar la estética y el diseño "Premium" en aplicaciones web.
+- Mantener la documentación en la carpeta `data/memoria` con el formato de fecha `YYYYMMDD_HHMM_nombre.md`.
+- **Visualización:** Abrir archivos `.md` en modo vista previa por defecto siempre que sea posible.
+- **Flujo de Cierre:** Al finalizar una tarea, guardar el `walkthrough.md` en `data/memoria` con el formato `YYYYMMDD_HHMM_walkthrough_nombre.md` y subir todos los cambios al repositorio Git.

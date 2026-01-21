@@ -1,0 +1,399 @@
+Solución No Code que automatiza la
+recomendación de regalos
+personalizados mediante IA
+Generativa, optimizando tiempos,
+estandarizando respuestas y
+garantizando trazabilidad.
+
+Diseño e
+Implementación
+de una Solución
+No Code
+Trabajo Final
+
+Santiago Solari
+
+Diseño e Implementación de una Solución No Code – UTN – Diplomatura en IA
+
+Tabla de contenido
+Trabajo Práctico Final .................................................................................................... 2
+1.
+
+Relevamiento hecho sin IA (descripción del proceso y puntos de dolor) ............... 2
+Mi contexto ............................................................................................................ 2
+Puntos de Dolor 1 ................................................................................................... 2
+Puntos de Dolor 2 ................................................................................................... 2
+Puntos de Dolor 3 ................................................................................................... 3
+
+2. Relevamiento del proceso e identificación de puntos de dolor (con IA) ..................... 4
+Contexto general .................................................................................................... 4
+Punto de dolor 1 – Generación manual de recomendaciones ................................... 4
+Punto de dolor 2 – Falta de trazabilidad de solicitudes ............................................. 4
+Punto de dolor 3 – Calidad variable de las respuestas .............................................. 4
+3. Priorización y selección del Quick Win .................................................................... 4
+Justificación del Quick Win ..................................................................................... 5
+4. Diseño del flujo de la solución (Lenguaje Natural) .................................................... 5
+Input (Entrada)........................................................................................................ 5
+Process (Proceso)................................................................................................... 5
+Output (Salida) ....................................................................................................... 6
+Herramientas involucradas ..................................................................................... 6
+Ficha Técnica de la Solución .......................................................................................... 7
+Trigger (Disparador) .................................................................................................... 7
+Frecuencia................................................................................................................. 7
+Nodos / Módulos en Make .......................................................................................... 7
+Descripción del flujo .................................................................................................. 7
+Manejo básico de errores ........................................................................................... 7
+Ciclo de Make ........................................................................................................... 8
+Ejemplo Respuesta .................................................................................................... 8
+Ejemplo Respuesta .................................................................................................... 8
+Conclusión (sin IA) ......................................................................................................... 9
+Conclusión (Mejorada con IA) ........................................................................................ 9
+
+Página 1|9
+Santiago Solari
+
+Diseño e Implementación de una Solución No Code – UTN – Diplomatura en IA
+
+Trabajo Práctico Final
+Diplomatura en IA para No Programadores
+Título: Automatización No Code para recomendaciones personalizadas de regalos
+
+1. Relevamiento hecho sin IA (descripción del proceso y puntos
+de dolor)
+Mi contexto
+Tengo una web en la que estoy planificando hacer recomendaciones de todo tipo.
+Principalmente arranco por obsequios personalizados (o casi personalizados).
+Todas las mañanas, reviso las solicitudes que me llegan desde un form,
+WhatsApp, mails, IG, etc. Estas solicitudes contienen nombre, mail, edad, gustos,
+y más.
+Luego de leer la solicitud, busco que existe entre las recomendaciones y
+recomiendo, con un link al obsequio. Luego se marca para futuras consultas que
+se recomendó. El proceso es simple, pero lleva tiempo.
+Mi idea es automatizar el proceso de entrada de datos, con un cruce con IA para
+hacer mejores recomendaciones y enviar por mail la respuesta junto con los links
+a obsequios. Luego, actualizar la planilla.
+
+Puntos de Dolor 1
+El principal punto de dolor es la pérdida de tiempo en un proceso repetitivo como
+la lectura de consultas y envío de respuestas analizadas.
+Dolor: Alto y pérdida de tiempo
+
+Puntos de Dolor 2
+El proceso es manual, y muchas veces se pasan algunas consultas, o se
+desconoce si se envió una respuesta.
+Dolor: medio y pérdida de tiempo en repasar lo realizado.
+
+Página 2|9
+Santiago Solari
+
+Diseño e Implementación de una Solución No Code – UTN – Diplomatura en IA
+
+Puntos de Dolor 3
+Muchas veces me responden que las respuestas no tienen nada que ver a las
+condiciones descriptas por el cliente. Para este caso solicito más información de
+ser necesario.
+Dolor: Medio y mala calidad de servicio.
+
+Página 3|9
+Santiago Solari
+
+Diseño e Implementación de una Solución No Code – UTN – Diplomatura en IA
+
+2. Relevamiento del proceso e identificación de puntos de dolor
+(con IA)
+Contexto general
+En “Queregalo?”, se reciben de forma recurrente solicitudes para sugerir ideas de
+regalos (cumpleaños, aniversarios, agradecimientos, etc.). Estas solicitudes se
+gestionan de manera manual, implicando tiempo operativo y respuestas poco
+estandarizadas.
+
+Punto de dolor 1 – Generación manual de recomendaciones
+•
+
+Problema central: cada solicitud requiere analizar información, pensar
+ideas personalizadas y redactar una respuesta. (Se usa Google e IA)
+
+•
+
+Consecuencia negativa: consumo elevado de tiempo operativo y
+respuestas inconsistentes.
+
+•
+
+Métricas de dolor estimadas:
+o
+
+Frecuencia: 10 a 20 solicitudes semanales.
+
+o
+
+Tiempo promedio por solicitud: 10 minutos.
+
+o
+
+Impacto semanal: entre 100 y 200 minutos de trabajo manual.
+
+Punto de dolor 2 – Falta de trazabilidad de solicitudes
+•
+
+Problema central: los pedidos llegan por distintos canales sin un registro
+único. (web, mail, WhatsApp, IG)
+
+•
+
+Consecuencia negativa: solicitudes sin responder o duplicadas.
+
+•
+
+Métricas de dolor estimadas:
+o
+
+5–10% de los pedidos requieren seguimiento adicional.
+
+Punto de dolor 3 – Calidad variable de las respuestas
+•
+
+Problema central: las sugerencias dependen del criterio individual.
+
+•
+
+Consecuencia negativa: necesidad de reformular respuestas o generar
+nuevas recomendaciones.
+
+3. Priorización y selección del Quick Win
+Se aplica una matriz de priorización considerando impacto, esfuerzo y volumen.
+
+Página 4|9
+Santiago Solari
+
+Diseño e Implementación de una Solución No Code – UTN – Diplomatura en IA
+Punto de dolor
+
+Impacto
+
+Esfuerzo
+
+Volumen
+
+Decisión
+
+Generación manual de
+recomendaciones
+
+Alto
+
+Bajo
+
+Alto
+
+Seleccionado
+
+Falta de trazabilidad
+
+Medio
+
+Medio
+
+Medio
+
+Fase 2
+
+Calidad variable
+
+Medio
+
+Medio
+
+Medio
+
+Fase 3
+
+Justificación del Quick Win
+La automatización de la generación de recomendaciones:
+•
+
+Reduce significativamente el tiempo operativo. (Dejo de utilizar horas
+diarias en lectura y respuesta)
+
+•
+
+Es simple de implementar con herramientas No Code.
+
+•
+
+Tiene impacto inmediato en la experiencia del usuario.
+
+4. Diseño del flujo de la solución (Lenguaje Natural)
+Input (Entrada)
+Un usuario completa un formulario con los siguientes datos:
+•
+
+Nombre
+
+•
+
+Email
+
+•
+
+Ocasión del regalo
+
+•
+
+Relación con la persona
+
+•
+
+Edad aproximada
+
+•
+
+Presupuesto
+
+•
+
+Intereses o referencias adicionales
+
+Process (Proceso)
+1. El formulario registra una nueva respuesta en una planilla. (uso forms)
+2. La automatización detecta la nueva entrada.
+3. Se construye un prompt con la información ingresada.
+4. Una IA procesa los datos y produce recomendaciones personalizadas.
+Página 5|9
+Santiago Solari
+
+Diseño e Implementación de una Solución No Code – UTN – Diplomatura en IA
+5. El resultado se formatea automáticamente.
+6. Se envía un email al solicitante con las sugerencias.
+
+Output (Salida)
+•
+
+Email automático con ideas de regalos personalizadas.
+
+•
+
+Registro actualizado con estado y fecha de envío.
+
+Herramientas involucradas
+•
+
+Google Forms
+
+•
+
+Google Sheets (como DB)
+
+•
+
+Make
+
+•
+
+IA (ChatGPT o Gemini)
+
+•
+
+Gmail
+
+Página 6|9
+Santiago Solari
+
+Diseño e Implementación de una Solución No Code – UTN – Diplomatura en IA
+
+Ficha Técnica de la Solución
+QueRegalo?.com → Recomendador automático de regalos
+
+Trigger (Disparador)
+•
+
+Nueva fila creada en Google Sheets proveniente de Google Forms.
+
+Frecuencia
+•
+
+Ejecución automática cada 15 minutos.
+
+Nodos / Módulos en Make
+1. Google Sheets – Watch New Rows
+2. Tools – Compose a String (armado del prompt)
+3. ChatGPT – Create Chat Completion
+4. Gmail – Envía mail a destinatario
+5. Google Sheets – Actualiza el Sheets con los datos (con manejo de errores)
+
+Descripción del flujo
+1. Se detecta una nueva respuesta del formulario.
+2. Se validan los campos obligatorios.
+3. Se genera un prompt estructurado con los datos ingresados.
+4. La IA devuelve recomendaciones personalizadas.
+5. Se envía un email automático al usuario se cargó la solicitud.
+6. Se actualiza el estado del registro como “Enviado”.
+
+Manejo básico de errores
+•
+
+Si el email está vacío: se marca el registro como error.
+
+•
+
+Si falla la IA: se registra el error y no se envía el correo.
+
+Página 7|9
+Santiago Solari
+
+Diseño e Implementación de una Solución No Code – UTN – Diplomatura en IA
+
+Ciclo de Make
+
+Ejemplo Respuesta
+https://docs.google.com/forms/d/e/1FAIpQLSedGcLOmXRbTWZN_W4grK7482bZV
+YJjFf3sNlzPrAO-OBFFjQ/viewform?fbzx=-8213499339804007460
+
+Ejemplo Respuesta
+
+Página 8|9
+Santiago Solari
+
+Diseño e Implementación de una Solución No Code – UTN – Diplomatura en IA
+
+Conclusión (sin IA)
+El trabajo me ayudó a darme cuenta mis puntos de dolor, como es la pérdida de
+tiempo o respuestas “vagas” que se dan a los posibles clientes.
+También identifiqué que podría hacerse más eficiente el flujo y formulario, ya que
+hay campos de más, y que, en una prueba con un grupo reducido, se nota que
+saltean los campos.
+Una de las posibles mejoras que podría avanzar, es armar en la WEB una sección
+de “Ayuda” reemplazando el formulario de Google, y arrancar el circuito desde ahí.
+Codeando con Firebase y usando una base como Firestore, podría hacer
+escalable la solución, además de hacerlo más robusto y segura, ni hablar de
+poder conectar todas las RRSS al flujo o, agregar un agente directamente a la
+WEB, todo es posible.
+
+Conclusión (Mejorada con IA)
+El desarrollo de este trabajo permitió identificar y analizar de manera estructurada
+distintos puntos de dolor asociados al proceso seleccionado, principalmente
+vinculados a la ineficiencia operativa, la pérdida de tiempo y la generación de
+respuestas poco consistentes hacia los usuarios. A través del relevamiento y la
+implementación del MVP, se evidenció cómo una solución No Code apoyada en IA
+Generativa puede optimizar el flujo, estandarizar resultados y mejorar
+significativamente la experiencia del usuario, sin necesidad de desarrollar código
+tradicional.
+Durante la validación inicial de la solución, también se detectaron oportunidades
+de mejora en el diseño del formulario y del flujo de entrada, observando que
+algunos campos resultan redundantes y tienden a ser omitidos por los usuarios en
+escenarios reales. Este aprendizaje refuerza la importancia de aplicar enfoques
+iterativos, validar con usuarios reales y priorizar la simplicidad como principio
+clave en el diseño de MVPs.
+Como posible evolución futura, la solución podría ampliarse mediante la
+incorporación de una interfaz web propia que reemplace el formulario actual,
+centralizando el punto de entrada del proceso. A través de tecnologías como
+Firebase y Firestore, sería posible escalar la arquitectura, fortalecer la seguridad y
+habilitar integraciones adicionales, como redes sociales o agentes
+conversacionales embebidos en la web. De este modo, la automatización
+desarrollada constituye una base sólida y extensible para una solución más
+robusta, escalable y orientada al negocio.
+
+Página 9|9
+Santiago Solari
+
+

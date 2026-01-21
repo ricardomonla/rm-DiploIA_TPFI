@@ -1,0 +1,111 @@
+Trabajo Práctico Final: Diseño e
+Implementación de una
+Solución No Code
+Diplomatura en IA para No Programadores
+
+🎯 Objetivo General
+
+Integrar los conocimientos adquiridos sobre herramientas No-Code (Make), Inteligencia
+Artificial Generativa y metodologías de relevamiento de procesos para desarrollar un Producto
+Mínimo Viable (MVP) que resuelva una problemática real de negocio o personal mediante la
+automatización.
+El objetivo es pasar de la identificación de un "punto de dolor" a una solución funcional (Quick
+Win) sin escribir código tradicional.
+
+📝 Estructura del Trabajo
+
+El trabajo se divide en dos fases, una de relevamiento y análisis y otra de diseño e
+implementación de la solución NO CODE.
+
+FASE 1: Relevamiento y análisis del proceso a mejorar
+Esta fase se desarrolla en tres pasos:
+1. Relevamiento de procesos e identificación de Puntos de Dolor:
+●​ Realiza un relevamiento de procesos en tu entorno laboral o personal.(Clase 8)
+●​ Describe brevemente mínimo 2 y máximo 4 puntos de dolor (procesos manuales,
+repetitivos, propensos a error o de alto volumen).
+●​ Para cada uno, identifica el problema central y la consecuencia negativa actual (pérdida
+de tiempo, datos incorrectos, falta de respuesta, etc.) Cuantificar métricas de dolor.
+
+2. Priorización y selección del “Quick Win"
+Elige UN punto de dolor para mejorar a través de una solución no code. Justifica tu elección
+aplicando la matriz de priorización.
+Impacto: ¿Cuánto valor genera automatizarlo?
+●​ Esfuerzo/Complejidad: ¿Es factible realizarlo en el tiempo del TP?
+●​ Volumen: ¿Con qué frecuencia ocurre?
+●​ Explicación: Argumenta por qué esta mejora de proceso representa un Quick Win (Alto
+impacto / Bajo esfuerzo relativo).
+3. Diseño del flujo de la solución:
+Define el flujo de la automatización seleccionada. Utiliza la técnica de "Requerimientos en
+Lenguaje Natural" (Clase 6)
+Elementos del flujo a considerar:
+●​ Input (Entrada): ¿Qué dispara el proceso? (Ej: Nuevo lead en formulario, correo recibido,
+nueva fila en Sheet).
+●​ Process (Proceso): ¿Qué transformaciones o decisiones suceden? ¿Interviene la IA?
+¿Dónde? (Ej: Clasificación con GPT, formateo de texto, cálculos).
+●​ Output (Salida): ¿Cuál es el entregable final? (Ej: Mensaje en Slack, PDF creado, registro
+actualizado).
+●​ Herramientas involucradas: Liste las apps a conectar a Make (Ej: Gmail, OpenAI, Google
+Sheets).
+
+FASE 2: Diseño e implementación de la solución No Code
+La fase 2 cuenta con dos pasos:
+1. Diseño Técnico
+Elabora una ficha técnica de una página que detalle la arquitectura de la solución elegida.
+Contenido de la ficha:
+●​ Disparador (Trigger): ¿Cuál es el evento exacto que inicia la automatización?
+●​ Frecuencia: ¿Cada cuánto se ejecutará el escenario? (Ej: Instantáneo/Webhook, cada 15
+minutos, una vez al día).
+●​ Nodos Involucrados: Lista detallada de los módulos que usarás en Make (alto nivel,
+cuáles son los pasos y los nodos necesarios).
+●​ Descripción del Flujo: Explicación paso a paso de la lógica del proceso, desde que entra
+el dato hasta el resultado final.
+2.Implementación técnica: Construye el escenario en Make basándote en el diseño técnico
+previo.
+
+●​ El escenario debe ser funcional y manejar correctamente los datos de prueba.
+
+📦 Entregables
+El Trabajo práctico final consta de tres entregables:
+1.​ Documento de relevamiento del proceso (.PDF, máximo 3 páginas): Pasos a
+desarrollar: Relevamiento e identificación de puntos de dolor,priorización y elección del
+Quick Win y diseño del flujo)
+2.​ Ficha técnica de la solución (.PDF, una página): Que contenga el diseño de la
+automatización (Trigger,Frecuencia, nodos y descripción del flujo).
+3.​ Documento Blueprint del Escenario (.JSON): El archivo exportado directamente desde
+Make (Botón "More" -> "Export Blueprint").
+
+El trabajo puede realizarse de manera individual o grupal. En caso de hacerlo en
+grupo consignen en el documento el nombre de los integrantes y tengan en cuenta
+que todos deberán presentar el trabajo en el campus para poder ser calificados.
+Importante: Para resguardar la confidencialidad, no incluyan nombres reales ni datos
+sensibles de sus empresas: usen “Empresa X”, “Área Y”, “Sistema Z”, etc.
+
+📊 Criterios de Evaluación
+El trabajo será evaluado bajo los siguientes pilares conceptuales vistos en la cursada:
+1.​ Criterio de Selección de Quick Win (20%): Capacidad para identificar un verdadero
+Quick Win. Se valorará que el proceso no sea excesivamente complejo pero que aporte
+valor real.
+2.​ Diseño del Flujo de la solución (30%): Claridad en la definición de Inputs y Outputs.
+Correcta aplicación de la lógica de automatización.
+3.​ Implementación Técnica en Make (30%):
+○​ Correcta conexión de módulos en el Blueprint.
+○​ Manejo de datos entre nodos (mapping).
+
+○​ El escenario debe ser ejecutable y no contener errores de configuración básicos.
+4.​ Uso de IA Generativa (20%): La integración de la IA debe tener sentido dentro del flujo y
+no ser meramente decorativa. Se evaluará la calidad del prompt implícito en la solución.
+
+💡 Tips para el éxito
+
+●​ Menos es más: Recuerda el concepto de MVP (Clase 7). Es preferible una
+automatización pequeña de 3 o 4 nodos que funcione perfectamente, a un escenario
+gigante que falle.
+●​ Apóyate en la IA: Utiliza ChatGPT o Gemini como "Asistente de Desarrollo" (Clase 7)
+para preguntarle cómo configurar un módulo específico de Make o cómo resolver un error
+JSON.
+●​ No Code, pero SI Logica: Aunque no escribas código, asegúrate de entender la lógica de
+los datos que fluyen de un módulo a otro.
+
+¡Muchos éxitos en el desarrollo de su primera automatización!
+
+

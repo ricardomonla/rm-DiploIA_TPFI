@@ -1,0 +1,213 @@
+Trabajo Práctico Final: Diseño e Implementación de una Solución No Code
+Diplomatura en IA para No Programadores
+Alumna: Mariana Listrani
+
+A
+Estructura del Trabajo
+FASE 1: Relevamiento y análisis del proceso a mejorar
+Esta fase se desarrolla en tres pasos:
+1. Relevamiento de procesos e identificación de Puntos de Dolor:
+En mi rol como coordinadora del canal de venta interna, presentaré los procesos correspondientes a este sector,
+encargado de gestionar la comercialización de vehículos 0 km para empleados de una empresa automotriz que
+actualmente se encuentra en proceso de fusión.
+Como área de ventas, dependemos de la Dirección Comercial y trabajamos para alcanzar objetivos clave relacionados
+con la facturación, el patentamiento, la entrega de unidades y la satisfacción del cliente.
+PROCESO 1: Descarga de archivos adjuntos provenientes de correos electrónicos de clientes
+En todos los casos los clientes generan una reserva por un vehículo de la marca que es de su interés en una plataforma
+de venta (B2E). Una vez el vendedor identifica la unidad que cubre esa necesidad y esta disponible para facturar
+contacta al cliente para que confirme si desea avanzar con la compra brindándole información respecto a precio,
+condiciones de venta y documentación requerida. En caso de que el cliente decida continuar responde al vendedor
+enviando por mail los archivos solicitados para conformar el legajo.
+Problema central: Los clientes suelen enviar la documentación de forma parcial, distribuyéndola en diferentes correos
+electrónicos. Esto implica gestionar un volumen diario inicial de 15 a 20 mails, que se incrementa aún más.
+Consecuencias: demoras y problemas para identificar faltantes de documentación
+Punto de dolor: alto volumen y tiempo involucrado en la descarga y completamiento del legajo. Métricas involucradas:
+tiempo, calidad, volumen.
+Es posible automatización no code: es repetitivo, escalable, posee reglas claras, conocemos los inputs y outputs.
+Ofrecen una oportunidad de mejora respecto a un ahorro evidente de tiempo, el volumen es alto y la participación del
+vendedor no aporta valor por lo que es una tarea tediosa para él.
+PROCESO 2: Envío del instructivo de pago acompañado del archivo PDF de la factura, remitido a los clientes por
+correo electrónico
+Tal como se mencionó al inicio, la empresa se encuentra actualmente en proceso de fusión, lo que implica la utilización
+de diferentes sistemas de trabajo según la marca que se esté gestionando. Aunque el procedimiento paso a paso es
+el mismo para ambas marcas, su ejecución se realiza en plataformas distintas por el vendedor asignado.
+“En todos los casos los clientes generan una reserva por un vehículo de la marca que es de su interés en una plataforma
+de venta (B2E). Una vez el vendedor identifica la unidad que cubre esa necesidad y est disponible para facturar contacta
+al cliente para que confirme si desea avanzar con la compra brindándole información respecto a precio, condiciones
+de venta y documentación requerida. En caso de que el cliente decida continuar responde al vendedor enviando por
+mail los archivos solicitados para conformar el legajo”
+Posteriormente asigna la unidad al cliente en el sistema de marca A o de marca B y carga la solicitud de facturación
+mediante Google form para el equipo de control comercial. Une vez facturada el vendedor descarga los archivos PDF
+del sistema que corresponda a una carpeta específica. Abre la casilla de mail y crea un nuevo mensaje usando la
+plantilla del instructivo de pago pero con datos específicos de cada operación como Marca / Modelo / Plazo de pago,
+adjunta el PDF de la factura y envía el correo electrónico al cliente con el instructivo de pago.
+Problema central: El principal inconveniente radica en el tiempo que demanda redactar cada correo electrónico y
+adjuntar manualmente, uno por uno, las facturas correspondientes. Actualmente se gestionan aproximadamente 300
+envíos mensuales, con un tiempo promedio de 3 minutos por cada envío, lo que representa una carga operativa
+significativa. En algunas ocasiones, este proceso genera demoras de hasta 72 horas en el envío, debido a que el flujo
+de facturación depende de factores adicionales relacionados con la disponibilidad comercial de las unidades
+(vehículos).
+
+Trabajo Práctico Final: Diseño e Implementación de una Solución No Code
+Diplomatura en IA para No Programadores
+Alumna: Mariana Listrani
+Consecuencia: Reducción en el flujo de caja del A
+mes y demoras en el cumplimiento de objetivos patentamiento, la
+entrega de la unidad y afectando la satisfacción del cliente.
+Punto de dolor: El retraso en el envío de la factura impacta directamente en el resto del proceso comercial. Métricas:
+volumen / frecuencia / tiempo / calidad: valor estratégico/ dinero / satisfacción
+Igual que el proceso anterior es posible automatización no code: es repetitivo, escalable, posee reglas claras,
+conocemos los inputs y outputs. Ofrecen una oportunidad de mejora con impacto económico y valor estratégico para
+la compañía.
+PROCESO 3: Envío de correos electrónicos a los clientes según el avance del estado comercial
+“En todos los casos los clientes generan una reserva por un vehículo de la marca que es de su interés en una plataforma
+de venta (B2E). Una vez el vendedor identifica la unidad que cubre esa necesidad y está disponible para facturar
+contacta al cliente para que confirme si desea avanzar con la compra brindándole
+información respecto a precio, condiciones de venta y documentación requerida. En caso de que el cliente decida
+continuar responde al vendedor enviando por mail los archivos solicitados para conformar el legajo
+Posteriormente asigna la unidad al cliente en el sistema de marca A o de marca B y carga la solicitud de facturación
+mediante Google form para el equipo de control comercial. Une vez facturada el vendedor descarga los archivos PDF
+del sistema que corresponda a una carpeta específica. Abre la casilla de mail y crea un nuevo mensaje usando la
+plantilla del instructivo de pago pero con datos específicos de cada operación como Marca / Modelo / Plazo de pago,
+adjunta el PDF de la factura y envía el correo electrónico al cliente con el instructivo de pago.” El proceso continúa con
+el pago del cliente dentro del plazo establecido, seguido del envío de los comprobantes al vendedor. Este los registra
+en la plataforma correspondiente y, junto con el ID del pago, los remite al área de imputación y compensaciones, que
+libera los certificados de fabricación/importación y el vehículo para su patentamiento y despacho.
+Posteriormente, el vendedor realiza el seguimiento en los sistemas de las marcas A y B, informando a las gestorías
+para que emitan los formularios y contacten al cliente con el fin de informar el presupuesto y coordinar la firma de
+documentación y el patentamiento.
+Una vez completado este paso, se presenta el trámite en la DNRPA, donde se obtiene la chapa patente en un plazo
+aproximado de 48 horas. Esta información se registra en Google Forms y, junto con las chapas, se entrega al equipo
+de calidad del taller para la preentrega del vehículo.
+Finalmente, se coordina con el cliente el envío del certificado de no rodamiento (para la gestión del seguro) y el turno
+para la entrega final de la unidad, asegurando la correcta culminación del proceso comercial.
+Estados del proceso: Lista de espera / Confirmar / Facturar / Pendiente de pago (en plazo) / Pendiente de pago
+(vencido) / Patentar / Entregar / Encuestar / Cancelado.
+Problema Central: El cliente percibe una falta de información oportuna y completa sobre el flujo de la operación.
+Punto de dolor: Insatisfacción del cliente debido a la falta de visibilidad y control sobre el proceso.
+Métrica: Volumen, frecuencia, tiempo y calidad, en un flujo con múltiples estados que avanzan de forma dinámica.
+Es posible implementar la automatización; sin embargo, en este caso implica un esfuerzo elevado debido a la inversión
+económica requerida y a la dependencia del equipo de ICT para habilitar la integración entre la plataforma
+B2E/Salesforce —donde se reflejan los cambios de estado— y el ERP con capacidades de IA.
+PROCESO 4: Reportes de indicadores clave del área comercial:
+Incluye el seguimiento y análisis de los principales indicadores de desempeño, tales como:
+Facturación: Control del volumen y cumplimiento de objetivos.
+Patentamiento: Avance en la gestión administrativa para la entrega de unidades.
+Remitado: Coordinación y tiempos de despacho.
+Satisfacción del cliente: Evaluación de la experiencia y calidad del servicio.
+Consecuencia: Falta de claridad en la detección temprana de desvíos, lo que dificulta su corrección. Además, se limita
+la capacidad para aprovechar oportunidades y para contener o reducir riesgos y amenazas.
+Punto de dolor: Al gestionarse la información en sistemas diferentes, pero considerarse de forma unificada, se generan
+demoras en la preparación, presentación y análisis de los datos.
+Métricas: Frecuencia, impacto económico y calidad.
+Si bien la automatización es técnicamente viable, en este caso no se considera prioritaria por las siguientes razones:
+
+Trabajo Práctico Final: Diseño e Implementación de una Solución No Code
+Diplomatura en IA para No Programadores
+Alumna: Mariana Listrani
+Alto esfuerzo e inversión requerida: La implementación
+implica una compleja integración entre los sistemas que
+A
+actualmente gestionan las marcas A y B, lo que demanda recursos significativos y dependencia del equipo de ICT.
+Contexto de fusión empresarial: La compañía se encuentra en proceso de fusión, y uno de los sistemas actualmente
+en uso será desactivado en breve. Esto significa que no se realizará inversión sobre un sistema que quedará obsoleto.
+Falta de continuidad tecnológica: Dado que no se desarrollarán integraciones con el sistema que será desactivado ni
+con el que quedará implementado de forma definitiva en esta etapa, el retorno de la inversión sería nulo.
+2. Priorización y selección del “Quick Win"
+Elige UN punto de dolor para mejorar a través de una solución no code. Justifica tu elección
+aplicando la matriz de priorización.
+
+✓
+✓
+✓
+
+Quick wins: Procesos 1 y 2 : Mejoras simples con alto impacto inmediato
+Proyecto Estratégico: Proceso 3: Alta complejidad por la necesidad de sincronización entre sistemas y comunicación
+dinámica
+Proyectos Prioritario: Proceso 4: Requiere integración de datos, pero aporta gran valor en control y toma de decisiones.
+
+La automatización del Proceso 2 - envío del instructivo de pago junto con la factura en PDF a los clientes,
+mediante correo electrónico, constituye una mejora de tipo Quick Win por las siguientes razones:
+•
+
+Implementación sencilla y rápida: Se trata de una solución de automatización NO CODE, enfocada en un
+MVP, que puede ser puesta en marcha sin la intervención de equipos de ICT ni desarrollos complejos. Esto
+permite una adopción ágil, con bajo esfuerzo de recursos humanos, tiempo y coste económico.
+
+•
+
+Alto impacto estratégico: El envío automatizado de la factura activa el flujo comercial, impactando
+directamente en el flujo de caja y reduciendo el tiempo de permanencia de las unidades en playa. Esto
+genera una disminución de los costes de mantenimiento y acelera los tiempos de entrega.
+
+•
+
+Mejora en la satisfacción del cliente: Al reducir los tiempos críticos de la operación, el cliente recibe su
+documentación más rápido, lo que incrementa la calidad percibida y la satisfacción general.
+
+•
+
+Alivio operativo para el equipo: El proceso automatizado gestiona un volumen aproximado de 300
+facturaciones mensuales, con una frecuencia diaria de 15 a 20 envíos, lo que reduce significativamente la
+carga administrativa y el riesgo de errores.
+
+•
+
+Escalabilidad y control: La solución es escalable y permite la validación del envío, asegurando la
+trazabilidad y el control sobre el proceso.
+
+•
+
+Resultados tangibles y medibles: La mejora genera beneficios inmediatos y visibles en la gestión
+comercial, optimizando recursos y aportando valor estratégico al negocio.
+
+En resumen, esta iniciativa representa un Quick Win porque es una acción estratégica de fácil implementación, con
+bajo coste y esfuerzo, que genera un impacto positivo directo en la operación y en la experiencia del cliente.
+
+Trabajo Práctico Final: Diseño e Implementación de una Solución No Code
+Diplomatura en IA para No Programadores
+Alumna: Mariana Listrani
+3. Diseño del flujo de la solución:
+A
+Define el flujo de la automatización seleccionada. Utiliza la técnica de "Requerimientos en Lenguaje Natural"
+Elementos del flujo a considerar:
+Objetivo principal: La solución automatiza el envío por correo electrónico del instructivo de pago junto con la
+factura en PDF a los clientes, asegurándonos mediante una validación final que la información y el archivo se haya
+enviado correctamente.
+Contexto y acción principal: la aplicación será utilizada por el equipo de ventas del canal de venta interna para enviar
+por correo electrónico de instrucciones de pago y archivo de la factura a los clientes por correo electrónico de forma
+masiva.
+Datos de entrada (inputs): consolidar los reportes de facturación de los Sistemas A y B en una planilla única y
+recuperar la fila correcta por ID de Factura para alimentar los pasos siguientes. - Google Sheets
+Proceso (Process):
+i. Buscar la factura en Google Drive
+ii. Componer y enviar el correo en Gmail
+Salida esperada (outputs): Audita que el proceso se haya realizado correctamente actualizando una fila
+Criterios de calidad: validación que el envío se haya realizado correctamente, es una solución escalable que debe
+realizarse en un tiempo determinado
+Herramientas involucradas:
+
+FASE 2: Diseño e implementación de la solución No Code
+La fase 2 cuenta con dos pasos:
+1. Diseño Técnico
+Paso 1- Módulo: Google Sheets – Search Rows
+Disparador: Las filas que cumplan con la condición de que la columna de Status se encuentre vacía iniciará el
+proceso de automatización todos los días a las 20:05.
+Configuración: indicar el archivo donde se encuentran los criterios necesarios para cargar la información que
+utilizaremos como base para los siguientes pasos:
+Paso 2 - Modulo: Google Drive – Search for Files/Folders
+Configuración: indicar la carpeta donde se almacenan los PDF de las facturas.
+Filtro (Query): utilizar el ID de la factura proveniente del paso anterior para localizar el archivo correcto.
+Paso 3 - Módulo: Gmail – Send an Email
+Para: dirección de correo electrónico del cliente (campo “To”).
+Asunto: Instructivo de pago y envío de factura.
+Cuerpo del correo: texto con instrucciones de pago personalizadas, completando los campos con datos obtenidos del
+Módulo 1 (por ejemplo, número de factura, importe, vencimiento).
+Adjuntos (Add Attachments): referenciar el ID del archivo encontrado en la Query del Paso 1; Make adjuntará
+automáticamente el PDF de la factura al correo.
+Paso 4 – Módulo Google sheets – Update a rows
+Configuración: Utiliza el ID de fila del 1er módulo y le carga la condición a Procesado en la columna de status.
+2.Implementación técnica:
+Construye el escenario en Make basándote en el diseño técnico previo.
+
+
