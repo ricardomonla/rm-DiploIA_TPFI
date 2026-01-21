@@ -17,7 +17,7 @@ Se analizaron 3 trabajos de referencia y la consigna oficial. Los hallazgos clav
 ## 📄 Plantilla Generada
 
 La nueva plantilla se encuentra en:
-[20260121_0940_plantilla_unificada_tpfi.md](file:///home/rmonla/Documentos/GitHub/rm-DiploIA_TPFI/data/memoria/20260121_0940_plantilla_unificada_tpfi.md)
+[plantilla_unificada_tpfi.md](file:///home/rmonla/Documentos/GitHub/rm-DiploIA_TPFI/data/plantillas/plantilla_unificada_tpfi.md)
 
 ### Características Destacadas:
 *   **Modular:** Fácil de rellenar sección por sección.
