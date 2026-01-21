@@ -9,4 +9,4 @@
 - Priorizar la estética y el diseño "Premium" en aplicaciones web.
 - Mantener la documentación en la carpeta `data/memoria` con el formato de fecha `YYYYMMDD_HHMM_nombre.md`.
 - **Visualización:** Abrir archivos `.md` en modo vista previa por defecto siempre que sea posible.
-- **Flujo de Cierre:** Al finalizar una tarea (detonado por las frases **"OK guarda ya terminamos"** o **"OK guarda para contuar despues"**), guardar el `walkthrough.md` en `data/memoria` con el formato `YYYYMMDD_HHMM_walkthrough_nombre.md` y subir todos los cambios al repositorio Git.
+- **Flujo de Cierre:** Al finalizar una tarea (detonado por las frases **"OK guarda ya terminamos"** o **"OK guarda continuamos despues"**), guardar el `walkthrough.md` en `data/memoria` con el formato `YYYYMMDD_HHMM_walkthrough_nombre.md` y subir todos los cambios al repositorio Git.
