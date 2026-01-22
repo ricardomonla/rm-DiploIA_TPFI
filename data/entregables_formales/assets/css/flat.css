@@ -1,0 +1,65 @@
+/* Estilos planos para entrega formal - Estilo NotebookLM / Documento Académico */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+    color: #000;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+    background-color: #fff;
+}
+
+h1, h2, h3 {
+    color: #000;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+}
+
+h1 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+}
+
+h2 {
+    font-size: 18px;
+    margin-top: 30px;
+}
+
+h3 {
+    font-size: 16px;
+}
+
+p, li {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.header-info {
+    margin-bottom: 40px;
+    border-bottom: 2px solid #000;
+    padding-bottom: 20px;
+}
+
+.anexo {
+    margin-top: 50px;
+    padding: 20px;
+    border: 1px dashed #666;
+    background-color: #f9f9f9;
+}
+
+.no-print {
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+@media print {
+    .no-print {
+        display: none;
+    }
+    body {
+        margin: 0;
+        padding: 20px;
+    }
+}

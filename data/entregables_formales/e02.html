@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>E02 - Ficha Técnica - Institución X</title>
+    <link rel="stylesheet" href="assets/css/flat.css">
+</head>
+
+<body>
+    <div class="no-print">
+        <button onclick="window.print()">Imprimir a PDF</button>
+    </div>
+
+    <div class="header-info">
+        <h1>ENTREGABLE E02: FICHA TÉCNICA DE LA SOLUCIÓN</h1>
+        <p><strong>Alumno:</strong> Ricardo MONLA</p>
+        <p><strong>Institución:</strong> Institución X</p>
+        <p><strong>Área:</strong> Dirección de TIC - Facultad X</p>
+        <p><strong>Fecha:</strong> 22 de enero de 2026</p>
+    </div>
+
+    <section>
+        <h2>1. Arquitectura de la Solución</h2>
+        <p>La solución se basa en una arquitectura desacoplada utilizando herramientas No-Code y servicios de IA
+            Generativa:</p>
+        <ul>
+            <li><strong>Disparador (Trigger):</strong> Custom Webhook instantáneo.</li>
+            <li><strong>Frecuencia:</strong> Bajo demanda (tiempo real).</li>
+            <li><strong>Nodos Involucrados (Make):</strong> Webhook, Search Rows (Google Sheets), Gemini AI Module, Add
+                Row (Google Sheets), Webhook Respond.</li>
+        </ul>
+
+        <h2>2. Descripción del Flujo Lógico</h2>
+        <p>1. El sistema recibe los datos del agente (Email y DNI).<br>
+            2. Se valida la identidad en la hoja maestra "Agentes".<br>
+            3. La IA analiza la consulta, asigna prioridad (Autoridad: 2h / Alumno: 24h) y categoriza el problema.<br>
+            4. Se registra el ticket en la hoja "Tickets" y se devuelve la respuesta al usuario.</p>
+
+        <h2>3. Estrategia de IA</h2>
+        <p>Se utiliza un Prompt Maestro que garantiza la seguridad (no pedir contraseñas) y adapta el tono según el rol
+            del usuario (conciso para autoridades, didáctico para alumnos).</p>
+    </section>
+
+    <div class="anexo">
+        <h3>➕ Valor Agregado (Plus del Proyecto)</h3>
+        <p>Este trabajo incluye el desarrollo de un <strong>Centro de Servicios TIC Inteligente</strong> que va más allá
+            de un escenario de Make aislado, integrando:</p>
+        <ul>
+            <li>Comunicación vía Fetch API entre Front-end y Back-end.</li>
+            <li>Base de conocimientos dinámica gestionada en Google Sheets.</li>
+            <li>Diseño visual premium consistente en todos los puntos de contacto.</li>
+        </ul>
+    </div>
+</body>
+
+</html>
