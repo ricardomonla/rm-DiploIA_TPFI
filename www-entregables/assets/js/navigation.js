@@ -59,12 +59,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Lista de animaciones disponibles
     const animations = [
-        'assets/img/avatar/dtic-GEMA_00.mp4',
-        'assets/img/avatar/dtic-GEMA_01.mp4',
-        'assets/img/avatar/dtic-GEMA_02.mp4',
-        'assets/img/avatar/dtic-GEMA_03.mp4',
-        'assets/img/avatar/dtic-GEMA_04.mp4',
-        'assets/img/avatar/dtic-GEMA_05.mp4'
+        `${pathBase}assets/img/avatar/dtic-GEMA_00.mp4`,
+        `${pathBase}assets/img/avatar/dtic-GEMA_01.mp4`,
+        `${pathBase}assets/img/avatar/dtic-GEMA_02.mp4`,
+        `${pathBase}assets/img/avatar/dtic-GEMA_03.mp4`,
+        `${pathBase}assets/img/avatar/dtic-GEMA_04.mp4`,
+        `${pathBase}assets/img/avatar/dtic-GEMA_05.mp4`
     ];
 
     // Inicializar o recuperar índice

@@ -1,4 +1,6 @@
-/* portal-entregables/assets/js/layout.js */
+// Detección de base para soportar despliegue desde root
+const isRoot = !window.location.pathname.includes('/www-entregables/') && !window.location.pathname.includes('e01.html') && !window.location.pathname.includes('e02.html');
+const pathBase = isRoot ? 'www-entregables/' : '';
 
 document.addEventListener('DOMContentLoaded', () => {
     renderSidebar();
@@ -26,7 +28,7 @@ function renderSidebar() {
             <div class="toc-container">
                 <p class="toc-header">Documento</p>
                 <ul class="toc-list">
-                    <li><a href="assets/docs/consigna_tp.pdf" download class="toc-link">↓ Descargar PDF</a></li>
+                    <li><a href="${pathBase}assets/docs/consigna_tp.pdf" download class="toc-link">↓ Descargar PDF</a></li>
                 </ul>
             </div>
         `;
@@ -46,16 +48,16 @@ function renderSidebar() {
         <aside class="sidebar no-print">
             <div class="sidebar-profile">
                 <div class="avatar-container">
-                    <video src="assets/img/avatar/dtic-GEMA_01.mp4" class="sidebar-avatar" autoplay muted playsinline></video>
+                    <video src="${pathBase}assets/img/avatar/dtic-GEMA_01.mp4" class="sidebar-avatar" autoplay muted playsinline></video>
                 </div>
                 <div class="profile-name">dtic-GEMA</div>
                 <div class="profile-title">Entidad de Asistencia Virtual</div>
             </div>
             <nav class="sidebar-nav">
-                <a href="index.html" class="sidebar-nav-item">Portal Principal</a>
-                <a href="consignas.html" class="sidebar-nav-item">Consignas TP Final</a>
-                <a href="e01.html" class="sidebar-nav-item">Entregable E01</a>
-                <a href="e02.html" class="sidebar-nav-item">Entregable E02</a>
+                <a href="${isRoot ? 'index.html' : 'index.html'}" class="sidebar-nav-item">Portal Principal</a>
+                <a href="${pathBase}consignas.html" class="sidebar-nav-item">Consignas TP Final</a>
+                <a href="${pathBase}e01.html" class="sidebar-nav-item">Entregable E01</a>
+                <a href="${pathBase}e02.html" class="sidebar-nav-item">Entregable E02</a>
             </nav>
             ${tocContent}
         </aside>
