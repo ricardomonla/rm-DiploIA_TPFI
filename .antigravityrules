@@ -10,6 +10,6 @@
 - Mantener la documentación en la carpeta `data/memoria` con el formato de fecha `YYYYMMDD_HHMM_nombre.md`.
 - **Visualización:** Abrir archivos `.md` en modo vista previa por defecto siempre que sea posible.
 - **Comandos de Automatización (Iniciados con "OK"):**
-    - **"OK procede":** Ejecutar las tareas del plan de implementación y, al finalizar, registrar los cambios en Git (commit y push).
     - **"OK guarda":** Únicamente registrar los cambios actuales en el repositorio Git (commit y push).
-    - **"OK guarda ya terminamos"** / **"OK guarda continuamos despues"**: Flujo de cierre que incluye guardar el `walkthrough.md` en `data/memoria` y subir a Git.
+    - **"OK procede":** Ejecutar las tareas del plan de implementación y, al finalizar, los procesos de "OK guarda".
+    - **"OK ya terminamos"** / **"OK continuamos despues"**: Flujo de cierre que incluye guardar el `walkthrough.md` en `data/memoria` y los procesos de "OK guarda".
