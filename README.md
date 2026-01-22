@@ -24,4 +24,5 @@
 4.  **Reportes:** Accede a `www-entregables/index.html` para generar los PDFs de los trabajos prácticos.
 
 ---
-*Desarrollado por Lic. Ricardo Monla para el TP Final de la Diplomatura en IA Generativa.*
+---
+*Desarrollado por Lic. Ricardo Monla para el TP Final de la Diplomatura en IA Generativa. Desplegado en GitHub Pages.*
