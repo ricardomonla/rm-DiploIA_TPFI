@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dtic-GEMA | Portal de Acceso</title>
+    <link rel="stylesheet" href="www-chatbot/assets/css/style.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            color: white;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        .portal-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 3rem;
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .brand-logo {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(45deg, #3b82f6, #60a5fa);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p {
+            color: #94a3b8;
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+        }
+
+        .nav-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .nav-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+            border-color: #3b82f6;
+            box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.3);
+        }
+
+        .nav-card i {
+            font-size: 2rem;
+            color: #3b82f6;
+        }
+
+        .nav-card span {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .nav-card small {
+            color: #64748b;
+            font-size: 0.8rem;
+        }
+
+        footer {
+            margin-top: 3rem;
+            font-size: 0.85rem;
+            color: #475569;
+        }
+
+        @media (max-width: 480px) {
+            .nav-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <div class="portal-container">
+        <div class="brand-logo">G</div>
+        <h1>dtic-GEMA</h1>
+        <p>Sistema Inteligente de Gestión TIC - UTN FRLR</p>
+
+        <div class="nav-options">
+            <a href="www-chatbot/index.html" class="nav-card">
+                <i data-lucide="message-square"></i>
+                <span>Chatbot GEMA</span>
+                <small>Asistente Inteligente</small>
+            </a>
+            <a href="www-entregables/index.html" class="nav-card">
+                <i data-lucide="file-text"></i>
+                <span>Entregables</span>
+                <small>Informes y Gestión</small>
+            </a>
+        </div>
+
+        <footer>
+            Desarrollado para el TP Final de la Diplomatura en IA Generativa
+        </footer>
+    </div>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

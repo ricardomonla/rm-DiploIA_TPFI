@@ -2,10 +2,7 @@
 
 **Sistema de Gestión Estratégica Mediante Automatización - UTN FRLR**
 
-Este proyecto implementa un asistente inteligente para la Dirección de TIC que automatiza el triaje, clasificación y registro de tickets de soporte. La versión 0.3 evoluciona hacia una arquitectura web desacoplada para mayor control y flexibilidad.
-
-## 🚀 Arquitectura v0.3
-
+- **Publicación:** [Portal de Acceso Online](https://ricardomonla.github.io/rm-DiploIA_TPFI/)
 - **Frontend:** Interfaz de Chatbot Web Premium (Vanilla JS / CSS Glassmorphism).
 - **Automatización:** Webhooks y flujo lógico en **Make.com**.
 - **IA:** Engine de procesamiento basado en **Google Gemini**.
