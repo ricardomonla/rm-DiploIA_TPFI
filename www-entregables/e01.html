@@ -12,53 +12,145 @@
     <div id="sidebar-root"></div>
 
     <main class="main-content">
-        <div class="nav-buttons no-print">
-            <a href="index.html" class="btn btn-outline">← Volver al Portal</a>
-            <button onclick="window.print()" class="btn">Imprimir a PDF</button>
-        </div>
-
         <div class="container">
             <header>
-                <img src="assets/img/logo_utn.png" alt="UTN Logo" class="logo">
                 <div class="header-text">
-                    <h1>Entregable E01</h1>
-                    <p>Relevamiento y Diseño de Proceso</p>
+                    <h1>PROYECTO dtic-GEMA: Sistema Inteligente de Gestión TIC</h1>
+                    <p>Diplomatura en IA para No Programadores - Institución X</p>
                 </div>
             </header>
 
-            <section>
-                <h2 id="relevamiento">1. Relevamiento y Puntos de Dolor</h2>
-                <p>La Dirección de TIC de la Facultad X es operada por un único integrante, lo que genera una carga
-                    crítica por la gestión manual de consultas simples. Los puntos de mayor conflicto son:</p>
-                <ul>
-                    <li><strong>Gestión de Accesos (Moodle):</strong> Saturación por blanqueo de claves y matriculación
-                        (~20 tickets/día).</li>
-                    <li><strong>Soporte a Preinscripción:</strong> Resolución de datos duplicados y accesos al Sistema
-                        Académico.</li>
+            <section class="student-info"
+                style="margin-bottom: 25px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px;">
+                <h2 style="font-size: 1.2rem; margin-top: 0;">👤 Información del Estudiante</h2>
+                <ul style="list-style: none; padding-left: 0; margin-bottom: 0;">
+                    <li><strong>Alumno:</strong> Ricardo MONLA</li>
+                    <li><strong>Áreas de Aplicación:</strong> Dirección de TIC - Facultad X</li>
+                    <li><strong>Fecha:</strong> 22 de enero de 2026</li>
                 </ul>
+            </section>
 
-                <h2 id="quick-win">2. Elección del Quick Win</h2>
-                <div class="highlight-box">
-                    <p><strong>Seleccionado:</strong> Gestión de Consultas de Agentes.</p>
-                    <p><strong>Justificación:</strong> Al ser un área unipersonal, automatizar el 80% de las dudas
-                        recurrentes permite recuperar 4 horas diarias para tareas de infraestructura crítica (Servidores
-                        y Redes).</p>
+            <section>
+                <h2 id="fase1">1. FASE 1: Relevamiento y Análisis del Proceso</h2>
+
+                <h3 id="contexto">1.1 Contexto General</h3>
+                <p>La Dirección de TIC de la Facultad X es el área encargada de la infraestructura, sistemas y soporte
+                    técnico de la institución. Cabe destacar que, debido a la estructura actual, <strong>la mayor parte
+                        de estas tareas son llevadas a cabo por un único integrante</strong>, lo que genera una carga
+                    operativa crítica al tener que equilibrar el mantenimiento de servidores, redes y el soporte directo
+                    a usuarios.</p>
+
+                <h3 id="puntos-dolor">1.2 Identificación de Puntos de Dolor</h3>
+
+                <div class="pain-point" style="margin-bottom: 15px;">
+                    <h4 style="color: var(--primary-color); font-size: 1rem; margin-bottom: 5px;">Punto de Dolor 1:
+                        Gestión de Accesos al Campus Virtual (Moodle)</h4>
+                    <ul style="margin-bottom: 5px;">
+                        <li><strong>Problema Central:</strong> Alumnos y docentes informan dificultades para
+                            matricularse o pérdida de accesos en el Campus Virtual.</li>
+                        <li><strong>Consecuencias:</strong> Carga operativa excesiva para verificar matriculaciones
+                            manuales y blanquear contraseñas.</li>
+                        <li><strong>Métricas de Dolor:</strong> ~20 tickets diarios. 10-15 min por ticket = <strong>~4
+                                horas diarias</strong> de trabajo manual.</li>
+                    </ul>
                 </div>
 
-                <h2 id="diseno-flujo">3. Diseño del Flujo (Lenguaje Natural)</h2>
-                <h3 id="entrada">A. Entrada (Input)</h3>
-                <p>El usuario ingresa su email institucional y DNI. El Chatbot valida estos datos contra la base
-                    histórica.
-                </p>
+                <div class="pain-point">
+                    <h4 style="color: var(--primary-color); font-size: 1rem; margin-bottom: 5px;">Punto de Dolor 2:
+                        Soporte a la Preinscripción y Sistema Académico</h4>
+                    <ul style="margin-bottom: 5px;">
+                        <li><strong>Problema Central:</strong> Postulantes bloqueados por datos preexistentes o usuarios
+                            olvidados en el sistema académico.</li>
+                        <li><strong>Consecuencias:</strong> Necesidad de validación de identidad (DNI+Email) constante
+                            antes de cualquier acción.</li>
+                    </ul>
+                </div>
 
-                <h3 id="logica-ia">B. Lógica IA (IA Gemini)</h3>
-                <p>A través del <strong>Orquestador Make</strong>, el sistema envía la consulta a la <strong>IA
-                        Gemini</strong>, que identifica la urgencia y asigna un SLA (autoridades: 2h, alumnos: 24h).</p>
+                <div class="pain-point" style="margin-bottom: 15px;">
+                    <h4 style="color: var(--primary-color); font-size: 1rem; margin-bottom: 5px;">Punto de Dolor 3:
+                        Análisis de Logs y Administración de Servidores</h4>
+                    <ul style="margin-bottom: 5px;">
+                        <li><strong>Problema Central:</strong> Monitoreo manual de logs, backups, control y soluciones
+                            técnicas en servidores.</li>
+                        <li><strong>Consecuencias:</strong> Alta carga de tareas críticas de infraestructura que
+                            compiten con el soporte a usuarios.</li>
+                    </ul>
+                </div>
 
-                <h3 id="salida">C. Salida (Output)</h3>
-                <p>Se genera un número de ticket único y se registra la consulta en una hoja centralizada de Tickets
-                    para
-                    seguimiento humano si fuera necesario.</p>
+                <h3 id="priorizacion">1.3 Priorización y Selección del "Quick Win"</h3>
+                <table class="matrix-table"
+                    style="width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.9rem;">
+                    <thead>
+                        <tr style="background: var(--primary-color); color: white;">
+                            <th style="padding: 8px; border: 1px solid var(--border-color);">Punto de Dolor</th>
+                            <th style="padding: 8px; border: 1px solid var(--border-color);">Impacto</th>
+                            <th style="padding: 8px; border: 1px solid var(--border-color);">Esfuerzo</th>
+                            <th style="padding: 8px; border: 1px solid var(--border-color);">Volumen</th>
+                            <th style="padding: 8px; border: 1px solid var(--border-color);">Decisión</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid var(--border-color);">Gestión de Consultas</td>
+                            <td style="padding: 8px; border: 1px solid var(--border-color); text-align: center;">Alto
+                            </td>
+                            <td style="padding: 8px; border: 1px solid var(--border-color); text-align: center;">Bajo
+                            </td>
+                            <td style="padding: 8px; border: 1px solid var(--border-color); text-align: center;">Alto
+                            </td>
+                            <td style="padding: 8px; border: 1px solid var(--border-color); text-align: center;">
+                                <strong>Seleccionado</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid var(--border-color);">Bitácora de Tareas</td>
+                            <td style="padding: 8px; border: 1px solid var(--border-color); text-align: center;">Medio
+                            </td>
+                            <td style="padding: 8px; border: 1px solid var(--border-color); text-align: center;">Bajo
+                            </td>
+                            <td style="padding: 8px; border: 1px solid var(--border-color); text-align: center;">Medio
+                            </td>
+                            <td style="padding: 8px; border: 1px solid var(--border-color); text-align: center;">Tarea
+                                Interna</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid var(--border-color);">Admin. de Servidores</td>
+                            <td style="padding: 8px; border: 1px solid var(--border-color); text-align: center;">Alto
+                            </td>
+                            <td style="padding: 8px; border: 1px solid var(--border-color); text-align: center;">Alto
+                            </td>
+                            <td style="padding: 8px; border: 1px solid var(--border-color); text-align: center;">Medio
+                            </td>
+                            <td style="padding: 8px; border: 1px solid var(--border-color); text-align: center;">Tarea
+                                Crítica</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="highlight-box" style="padding: 10px 15px; margin: 10px 0;">
+                    <p style="margin-bottom: 0;"><strong>Justificación:</strong> Se seleccionó la Gestión de Consultas
+                        como Quick Win porque, al ser un área operada por una sola persona, automatizar el 80% de las
+                        dudas recurrentes permite recuperar casi 4 horas diarias de productividad para tareas de
+                        infraestructura crítica.</p>
+                </div>
+
+                <h2 id="fase2">2. FASE 2: Diseño de la Solución No Code</h2>
+                <h3 id="flujo-natural">2.1 Diseño del Flujo (Lenguaje Natural)</h3>
+                <ul style="margin-bottom: 10px;">
+                    <li><strong>Input (Entrada):</strong> El usuario ingresa su Email institucional y DNI en la Interfaz
+                        Chatbot Web.</li>
+                    <li><strong>Process (Proceso):</strong>
+                        <ol style="margin-top: 5px;">
+                            <li>Validación de identidad en BD `dtic-GEMA_BD`.</li>
+                            <li>Clasificación de perfiles y urgencia mediante IA Gemini.</li>
+                            <li>Categorización del problema (Acceso Campus, Preinscripción, etc.).</li>
+                            <li>Generación de "Dato de Valor" personalizado.</li>
+                        </ol>
+                    </li>
+                    <li><strong>Output (Salida):</strong> Número de ticket único, registro en Google Sheets y respuesta
+                        inmediata.</li>
+                    <li><strong>Herramientas:</strong> Make, Gemini, Google Sheets, Vanilla JS/CSS.</li>
+                </ul>
             </section>
 
             <div id="footer-root"></div>

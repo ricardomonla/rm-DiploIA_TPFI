@@ -4,7 +4,7 @@
 ---
 
 ## 👤 Información del Estudiante
-*   **Alumno:** Ricardo Monla
+*   **Alumno:** Ricardo MONLA
 *   **Área de Aplicación:** Dirección de TIC - Facultad X
 *   **Fecha:** Enero 2026
 

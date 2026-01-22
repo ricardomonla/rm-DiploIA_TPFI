@@ -3,6 +3,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     renderSidebar();
     renderFooter();
+
+    // Trigger de impresión automática para el portal
+    if (window.location.search.includes('print=true')) {
+        setTimeout(() => {
+            window.print();
+        }, 800);
+    }
 });
 
 function renderSidebar() {
@@ -49,7 +56,6 @@ function renderSidebar() {
                 <a href="consignas.html" class="sidebar-nav-item">Consignas TP Final</a>
                 <a href="e01.html" class="sidebar-nav-item">Entregable E01</a>
                 <a href="e02.html" class="sidebar-nav-item">Entregable E02</a>
-                <a href="e03.html" class="sidebar-nav-item">Entregable E03</a>
             </nav>
             ${tocContent}
         </aside>

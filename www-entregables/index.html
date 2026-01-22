@@ -14,38 +14,92 @@
     <main class="main-content">
         <div class="container">
             <header>
-                <img src="assets/img/logo_utn.png" alt="UTN Logo" class="logo">
-                <div class="header-text">
-                    <h1>dtic-GEMA</h1>
-                    <p>La Evolución de una Entidad de Asistencia Inteligente</p>
+                <div class="header-text" style="text-align: left;">
+                    <h1 style="font-size: 2rem;">Portal de Entrega: TP Final Integrador</h1>
+                    <p style="font-size: 1.1rem; color: var(--accent-color); font-weight: 600;">Proyecto dtic-GEMA:
+                        Sistema Inteligente de Gestión TIC</p>
                 </div>
             </header>
 
             <section>
-                <h2 id="bienvenida">Conoce a dtic-GEMA</h2>
-                <p>Este espacio documenta el nacimiento y desarrollo de <strong>dtic-GEMA</strong>. Ella no es solo un
-                    sistema: es una entidad diseñada para transformar la interacción administrativa en la UTN Facultad
-                    Regional La Rioja.</p>
+                <h2 id="bienvenida">La Humanización de dtic-GEMA</h2>
+                <p>Este portal ha sido diseñado no solo como un repositorio de documentos, sino como la ventana a una
+                    nueva forma de entender la asistencia técnica. <strong>dtic-GEMA</strong> es la representación
+                    humana y empática de la automatización inteligente.</p>
+
+                <p>Ella ha nacido para liberar al talento humano de las tareas repetitivas, permitiendo que la Dirección
+                    de TIC recupere su tiempo creativo y estratégico, manteniendo siempre un tono cercano, seguro y
+                    eficiente con cada integrante de la facultad.</p>
 
                 <div class="highlight-box">
-                    <h3 id="estrategia-proyecto">Estrategia del Proyecto</h3>
-                    <p>Ella integra una **Interfaz Chatbot** personalizada que se comunica con su **Orquestador Make**,
-                        el cual gestiona la lógica de negocio y consume servicios de **IA Gemini** para que dtic-GEMA
-                        pueda ofrecer una respuesta inteligente y automatizada.</p>
+                    <h3 id="proposito">Propósito del Portal</h3>
+                    <p>Este espacio constituye la entrega oficial del <strong>Trabajo Práctico Final Integrador
+                            (TPFI)</strong> para la Diplomatura en IA. Aquí se consolidan las fases de investigación,
+                        diseño técnico y los componentes operativos que dan vida a la entidad GEMA.</p>
                 </div>
 
-                <h3 id="lista-entregables">Lista de Entregables</h3>
-                <ul>
-                    <li><strong><a href="consignas.html">Consigna TP Final</a>:</strong> Requerimientos y objetivos
-                        solicitados
-                        para la diplomatura.</li>
-                    <li><strong><a href="e01.html">E01 - Relevamiento y Diseño de Proceso</a>:</strong> Identificación
-                        de puntos de dolor, matriz de impacto y diseño del flujo.</li>
-                    <li><strong><a href="e02.html">E02 - Ficha Técnica de la Solución</a>:</strong> Arquitectura
-                        detallada y lógica de datos.</li>
-                    <li><strong><a href="e03.html">E03 - Blueprint del Escenario Make.com</a>:</strong> Diagrama de
-                        flujo y descarga del componente técnico.</li>
-                </ul>
+                <h3 id="consignas">📋 Consignas y Requerimientos</h3>
+                <div class="deliverable-item"
+                    style="display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid var(--border-color);">
+                    <div>
+                        <strong>Consigna TP Final</strong>
+                        <p style="margin: 0; font-size: 0.85rem; color: #666;">Objetivos y bases oficiales de la
+                            diplomatura.</p>
+                    </div>
+                    <a href="consignas.html" class="btn btn-outline" style="padding: 5px 15px; font-size: 0.8rem;">Ver
+                        Detalles</a>
+                </div>
+
+                <h3 id="lista-entregables" style="margin-top: 30px;">🚀 Entregables del Proyecto (TPFI)</h3>
+
+                <!-- E01 -->
+                <div class="deliverable-item"
+                    style="display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid var(--border-color);">
+                    <div style="flex: 1;">
+                        <span
+                            style="background: var(--primary-color); color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem;">E01</span>
+                        <strong style="margin-left: 10px;">Relevamiento y Diseño</strong>
+                        <p style="margin: 5px 0 0 45px; font-size: 0.85rem; color: #666;">Fase 1 y 2.1: Análisis de
+                            procesos, puntos de dolor y flujo natural.</p>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <a href="e01.html" class="btn" style="padding: 5px 15px; font-size: 0.8rem;">Abrir</a>
+                        <button onclick="window.open('e01.html?print=true')" class="btn btn-outline"
+                            style="padding: 5px 15px; font-size: 0.8rem;">PDF</button>
+                    </div>
+                </div>
+
+                <!-- E02 -->
+                <div class="deliverable-item"
+                    style="display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid var(--border-color);">
+                    <div style="flex: 1;">
+                        <span
+                            style="background: var(--primary-color); color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem;">E02</span>
+                        <strong style="margin-left: 10px;">Ficha Técnica y Resultados</strong>
+                        <p style="margin: 5px 0 0 45px; font-size: 0.85rem; color: #666;">Fase 2.2 a 5: Blueprint de
+                            Make, Prompts e implementación de IA.</p>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <a href="e02.html" class="btn" style="padding: 5px 15px; font-size: 0.8rem;">Abrir</a>
+                        <button onclick="window.open('e02.html?print=true')" class="btn btn-outline"
+                            style="padding: 5px 15px; font-size: 0.8rem;">PDF</button>
+                    </div>
+                </div>
+
+                <!-- E03 (Data/Blueprint) -->
+                <div class="deliverable-item"
+                    style="display: flex; justify-content: space-between; align-items: center; padding: 15px 0;">
+                    <div style="flex: 1;">
+                        <span
+                            style="background: var(--accent-color); color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem;">DATA</span>
+                        <strong style="margin-left: 10px;">Componente Técnico (JSON)</strong>
+                        <p style="margin: 5px 0 0 55px; font-size: 0.85rem; color: #666;">Blueprint oficial para
+                            importación en Make.com.</p>
+                    </div>
+                    <a href="assets/data/blueprint_gema.json" download class="btn"
+                        style="padding: 5px 15px; font-size: 0.8rem; background: var(--accent-color);">Descargar
+                        Blueprint</a>
+                </div>
             </section>
 
             <div id="footer-root"></div>
