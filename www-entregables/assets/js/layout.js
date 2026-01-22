@@ -46,6 +46,7 @@ function renderSidebar() {
     // HTML del Sidebar
     const sidebarHTML = `
         <aside class="sidebar no-print">
+            <div class="sidebar-version" style="position: absolute; top: 10px; right: 10px; font-size: 0.65rem; background: var(--accent-color); color: white; padding: 2px 6px; border-radius: 4px; font-weight: bold; opacity: 0.8;">v1.0</div>
             <div class="sidebar-profile">
                 <div class="avatar-container">
                     <video src="${pathBase}assets/img/avatar/dtic-GEMA_01.mp4" class="sidebar-avatar" autoplay muted playsinline></video>
@@ -78,7 +79,7 @@ function renderFooter() {
     // Estandarización del Footer
     footerRoot.innerHTML = `
         <footer>
-            <p>dtic-GEMA | Lic. Ricardo Monla | DiploIA TP Final | Enero 2026</p>
+            <p>dtic-GEMA v1.0 | Lic. Ricardo Monla | DiploIA TP Final | Enero 2026</p>
         </footer>
     `;
 }
