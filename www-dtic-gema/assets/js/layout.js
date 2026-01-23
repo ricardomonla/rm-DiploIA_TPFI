@@ -4,9 +4,9 @@
 
 const NAV_LINKS = [
     { title: 'Chat en Vivo', icon: 'message-square', path: 'index.html' },
-    { title: 'Consignas TP', icon: 'file-text', path: 'servicios/consignas.html' },
-    { title: 'Entregable E01', icon: 'clipboard-list', path: 'servicios/e01.html' },
-    { title: 'Entregable E02', icon: 'shield-check', path: 'servicios/e02.html' }
+    { title: 'Consignas TP', icon: 'file-text', path: 'pags/consignas.html' },
+    { title: 'Entregable E01', icon: 'clipboard-list', path: 'pags/e01.html' },
+    { title: 'Entregable E02', icon: 'shield-check', path: 'pags/e02.html' }
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -19,7 +19,7 @@ function initLayout() {
     if (!appWrapper) return;
 
     // Detectar profundidad del path para ajustar rutas relativas
-    const isInSubDir = window.location.pathname.includes('/servicios/');
+    const isInSubDir = window.location.pathname.includes('/pags/');
     const base = isInSubDir ? '../' : '';
 
     // Renderizar Sidebar si no existe (algunos archivos podrían tenerlo hardcodeado al inicio)
@@ -39,7 +39,7 @@ function renderSidebar(sidebar, base) {
     sidebar.innerHTML = `
         <div class="sidebar-brand">
             <div class="avatar-wrapper" style="margin: 0 auto 10px;">
-                <video src="${base}assets/media/gema-01.mp4" autoplay muted playsinline class="header-avatar" id="headerAvatar"></video>
+                <video src="${base}assets/video/avatar/gema-01.mp4" autoplay muted playsinline class="header-avatar" id="headerAvatar"></video>
             </div>
             <h2 style="color: var(--text-main); font-size: 1.1rem;">dtic-GEMA</h2>
             <span style="color: var(--text-muted); font-size: 0.7rem; text-transform: uppercase;">v1.1</span>

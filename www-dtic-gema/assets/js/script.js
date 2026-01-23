@@ -12,7 +12,7 @@ const headerAvatar = document.getElementById('headerAvatar');
 const MAKE_WEBHOOK_URL = 'https://hook.us2.make.com/yl26qec8u2lric3yr17krrtiaxws5rkr';
 
 // Ruta de avatares comprimidos
-const AVATAR_PATH = 'assets/media/';
+const AVATAR_PATH = 'assets/video/avatar/';
 const AVATAR_FILES = ['gema-00.mp4', 'gema-01.mp4', 'gema-02.mp4', 'gema-03.mp4', 'gema-04.mp4', 'gema-05.mp4'];
 
 function updateHeaderAvatar() {
@@ -143,7 +143,7 @@ function appendMessage(role, text) {
 
     // Avatar HTML
     const avatarHTML = role === 'bot'
-        ? `<div class="avatar-msg"><img src="assets/media/gema-avatar.png" alt="GEMA"></div>`
+        ? `<div class="avatar-msg"><img src="assets/img/avatar/gema-avatar.png" alt="GEMA"></div>`
         : '';
 
     // Markdown simple
