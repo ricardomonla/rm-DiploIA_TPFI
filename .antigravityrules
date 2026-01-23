@@ -13,8 +13,15 @@
 - **Previsualización:** Abrir archivos `.md` en modo vista previa por defecto.
 
 ## ⚡ Comandos de Automatización (Prefijo "OK")
-- **"OK guarda":** Realizar `git commit` y `push` de los cambios actuales.
-- **"OK procede":** Ejecutar plan de implementación y finalizar con un "OK guarda".
-- **"OK ya terminamos" / "OK continuamos despues":**
-    1. Generar/actualizar `seguimiento.md` en `data/memoria/`.
-    2. Ejecutar flujo "OK guarda".
+- **"OK guarda":** Realizar `git commit` y `push` de los cambios actuales con un mensaje descriptivo en español.
+- **"OK procede":** Ejecutar las tareas del plan de implementación y finalizar con un "OK guarda".
+- **"OK versiona":**
+    1. Incrementar la versión en `README.md` y archivos de configuración.
+    2. Crear una etiqueta (tag) de Git con la nueva versión.
+- **"OK ya terminamos":**
+    1. Ejecutar "OK versiona".
+    2. Generar/actualizar `seguimiento.md` en `data/memoria/`.
+    3. Ejecutar "OK guarda".
+- **"OK continuamos despues":**
+    1. Resumir brevemente el progreso en los pensamientos internos.
+    2. Ejecutar "OK guarda" para asegurar que el trabajo actual esté a salvo.
