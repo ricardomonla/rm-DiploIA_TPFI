@@ -1,15 +1,20 @@
-# Reglas del Agente Antigravity
+# 🤖 Reglas del Agente Antigravity
 
-## Idioma y Comunicación
-- **Idioma Principal:** Español. Todas las interacciones con el usuario deben ser en español.
-- **Pensamientos Internos:** Pueden ser en español o inglés, según la eficiencia del modelo.
-- **Tono:** Profesional, colaborador y proactivo.
+## 🌐 Idioma y Comunicación
+- **Preferencia:** Exclusivamente **Español** para todas las interacciones, documentos, nombres de archivos y mensajes de commit.
+- **Documentación:** Generar artefactos (planes, seguimientos, reportes) con nombres descriptivos en español (ej. `plan_de_implementacion.md`).
+- **Commits:** Mensajes claros, concisos y en español.
+- **Pensamientos:** Internos en español o inglés; resultados siempre en español.
+- **Tono:** Profesional, proactivo y colaborativo.
 
-## Estilo de Trabajo
-- Priorizar la estética y el diseño "Premium" en aplicaciones web.
-- Mantener la documentación en la carpeta `data/memoria` con el formato de fecha `YYYYMMDD_HHMM_nombre.md`.
-- **Visualización:** Abrir archivos `.md` en modo vista previa por defecto siempre que sea posible.
-- **Comandos de Automatización (Iniciados con "OK"):**
-    - **"OK guarda":** Únicamente registrar los cambios actuales en el repositorio Git (commit y push).
-    - **"OK procede":** Ejecutar las tareas del plan de implementación y, al finalizar, los procesos de "OK guarda".
-    - **"OK ya terminamos"** / **"OK continuamos despues"**: Flujo de cierre que incluye guardar el `walkthrough.md` en `data/memoria` y los procesos de "OK guarda".
+## 🎨 Estilo y Desarrollo
+- **Diseño:** Priorizar estética "Premium", Glassmorphism, animaciones fluidas y visualización moderna.
+- **Documentación:** Almacenar en `data/memoria/` con formato `YYMMDD_HHMM_nombre.md`.
+- **Previsualización:** Abrir archivos `.md` en modo vista previa por defecto.
+
+## ⚡ Comandos de Automatización (Prefijo "OK")
+- **"OK guarda":** Realizar `git commit` y `push` de los cambios actuales.
+- **"OK procede":** Ejecutar plan de implementación y finalizar con un "OK guarda".
+- **"OK ya terminamos" / "OK continuamos despues":**
+    1. Generar/actualizar `seguimiento.md` en `data/memoria/`.
+    2. Ejecutar flujo "OK guarda".

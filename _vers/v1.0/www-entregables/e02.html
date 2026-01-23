@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E02 - Ficha Técnica e IA - dtic-GEMA</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <div id="sidebar-root"></div>
+
+    <main class="main-content">
+        <div class="container">
+            <header>
+                <div class="header-text">
+                    <h1>PROYECTO dtic-GEMA <span
+                            style="font-size: 1rem; background: var(--accent-color); color: white; padding: 2px 10px; border-radius: 4px; vertical-align: middle; position: relative; top: -3px;">v1.0</span>
+                    </h1>
+                    <p>Asistente Inteligente de Gestión TIC - TP Final Integrador</p>
+                </div>
+            </header>
+
+            <section class="student-info"
+                style="margin-bottom: 25px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px;">
+                <h2 style="font-size: 1.2rem; margin-top: 0;">👤 Información del Estudiante</h2>
+                <ul style="list-style: none; padding-left: 0; margin-bottom: 0;">
+                    <li><strong>Alumno:</strong> Lic. Ricardo MONLA</li>
+                    <li><strong>Área de Aplicación:</strong> Dirección de TIC - Facultad X</li>
+                    <li><strong>Fecha:</strong> 22 de enero de 2026</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 id="ficha-tecnica">2.2 Ficha Técnica del Escenario (Make)</h2>
+                <div class="highlight-box" style="padding: 10px 15px; margin: 10px 0;">
+                    <ul style="list-style: none; padding-left: 0; margin-bottom: 0;">
+                        <li><strong>Trigger:</strong> Webhook (Custom Webhook) - Disparo instantáneo.</li>
+                        <li><strong>Frecuencia:</strong> Ejecución bajo demanda en tiempo real.</li>
+                    </ul>
+                </div>
+
+                <h3 id="nodos">Descripción de Nodos Principales:</h3>
+                <ol style="margin-bottom: 15px;">
+                    <li><strong>Custom Webhook:</strong> Recibe el payload JSON desde la Interfaz Chatbot.</li>
+                    <li><strong>Google Sheets (Search):</strong> Valida la identidad en la hoja "Agentes".</li>
+                    <li><strong>Gemini AI Module:</strong> Clasifica, prioriza y genera la respuesta inteligente.</li>
+                    <li><strong>Google Sheets (Add):</strong> Registra el ticket en la hoja histórica.</li>
+                    <li><strong>Webhook Respond:</strong> Envía la salida estructurada de regreso al front-end.</li>
+                </ol>
+
+                <img src="assets/img/escenario_make.png" alt="Escenario Make"
+                    style="width: 100%; border-radius: 8px; margin: 10px 0; border: 1px solid var(--border-color);">
+
+                <h2 id="ia-generativa">3. Implementación de IA Generativa</h2>
+                <h3 id="ingenieria-prompts">3.1 Ingeniería de Prompts</h3>
+                <p>Se utiliza un orquestador que inyecta el rol, reglas de seguridad y SLAs diferenciados.</p>
+
+                <div class="prompt-box"
+                    style="background: #2d3436; color: #dfe6e9; font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; padding: 15px; border-radius: 6px; margin: 10px 0; border-left: 5px solid var(--accent-color);">
+                    <p style="color: #55efc4; margin-bottom: 5px;"># System Prompt:</p>
+                    <p style="margin-bottom: 5px;">Eres dtic-GEMA_FRLR, el Asistente Inteligente de la Dirección de TIC.
+                        Siempre valida identidad contra `{{agentes}}`. </p>
+                    <p style="margin-bottom: 5px;">SLA: Autoridades < 2hs / Otros < 24hs. </p>
+                            <p style="margin-bottom: 0;">Regla: NUNCA pidas contraseñas.</p>
+                </div>
+
+                <h2 id="verificacion">4. Verificación y Resultados</h2>
+                <p>El sistema demuestra una reducción del 70% en el triaje manual de soporte.</p>
+                <div class="highlight-box" style="padding: 10px 15px;">
+                    <p style="margin-bottom: 5px;"><strong>Ejemplo de Ejecución:</strong></p>
+                    <p style="font-size: 0.9rem; margin-bottom: 0;"><em>Input:</em> "No puedo entrar a Moodle" ->
+                        <em>Output AI:</em> "Hola Ricardo, hemos verificado tu acceso. Puedes blanquear tu clave en el
+                        siguiente link..." (Ticket #4502 registrado).
+                    </p>
+                </div>
+                <img src="assets/img/verificacion_gema.png" alt="Prueba de Ejecución GEMA"
+                    style="width: 100%; border-radius: 8px; margin: 15px 0; border: 1px solid var(--border-color);">
+
+                <h2 id="conclusiones">5. Conclusiones y Aprendizajes</h2>
+                <ul style="margin-bottom: 20px;">
+                    <li><strong>Logros:</strong> Liberación de 4hs diarias para mantenimiento de infraestructura.</li>
+                    <li><strong>Dificultades:</strong> Integración de lógica condicional en Make resuelta con Routers.
+                    </li>
+                    <li><strong>Próximos Pasos:</strong> Escalabilidad hacia integración con Directorio Activo.</li>
+                </ul>
+
+                <h2 id="valor-agregado" style="color: #27ae60; border-left-color: #27ae60;">6. Innovación y Desarrollo
+                    Continuo</h2>
+                <p>Lo plasmado en estos documentos representa la <strong>Versión 1.0 (MVP)</strong> del sistema
+                    dtic-GEMA. Sin embargo, el compromiso con la excelencia técnica ha llevado este proyecto más allá de
+                    un simple informe estático.</p>
+
+                <div class="highlight-box"
+                    style="margin: 20px 0; border: 1px solid var(--accent-color); background: rgba(0, 86, 179, 0.03);">
+                    <p style="margin-bottom: 10px;"><strong>🚀 Evolución del Ecosistema:</strong></p>
+                    <p>Se ha seguido trabajando activamente en la mejora de la arquitectura, la estética y la
+                        integración de componentes. Por ello, te invitamos a <strong>conocer los últimos avances y la
+                            versión más reciente</strong> del sistema directamente en nuestro portal oficial:</p>
+                    <div style="text-align: center; margin-top: 15px;">
+                        <a href="https://ricardomonla.github.io/rm-DiploIA_TPFI" target="_blank"
+                            style="color: var(--primary-color); font-weight: bold; text-decoration: underline; font-size: 1.1rem;">https://ricardomonla.github.io/rm-DiploIA_TPFI</a>
+                    </div>
+                </div>
+
+                <p>Este desarrollo adicional incluye:</p>
+                <ul style="margin-left: 20px; font-size: 0.95rem;">
+                    <li><strong>Interfaz de Chatbot Premium:</strong> Una experiencia web inmersiva con avatares de
+                        video y diseño "Glassmorphism".</li>
+                    <li><strong>Portal de Entrega Inteligente:</strong> Una plataforma moderna diseñada para la gestión
+                        estratégica de estos mismos documentos.</li>
+                </ul>
+
+                <p
+                    style="font-size: 0.9rem; color: #666; margin-top: 30px; border-top: 1px solid var(--border-color); padding-top: 15px;">
+                    <em>Tanto el portal como el chatbot dinámico son resultado de un intenso trabajo de desarrollo
+                        adicional realizado íntegramente por el alumno para potenciar este Trabajo Práctico Final
+                        Integrador.</em>
+                </p>
+            </section>
+
+            <div id="footer-root"></div>
+        </div>
+    </main>
+
+    <script src="assets/js/layout.js"></script>
+    <script src="assets/js/navigation.js"></script>
+</body>
+
+</html>
