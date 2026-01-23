@@ -1,1 +1,0 @@
-Como siempre,  en español, guarda este plan en data/memoria incluye tambien las tasks y cuando terminemos de diseñar lo continuamos al desarrollo y codificacion.

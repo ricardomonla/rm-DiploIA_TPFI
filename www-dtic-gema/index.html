@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GEMA Chat - UTN FRLR</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Lucide Icons for premium feel -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <div class="app-wrapper">
+        <!-- Sidebar Unificado -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="avatar-wrapper" style="margin: 0 auto 10px;">
+                    <video src="assets/media/gema-01.mp4" autoplay muted playsinline class="header-avatar"
+                        id="headerAvatar"></video>
+                </div>
+                <h2 style="color: var(--text-main); font-size: 1.1rem;">dtic-GEMA</h2>
+                <span style="color: var(--text-muted); font-size: 0.7rem; text-transform: uppercase;">v1.1</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item active">
+                    <i data-lucide="message-square"></i>
+                    Chat en Vivo
+                </a>
+                <a href="servicios/consignas.html" class="nav-item">
+                    <i data-lucide="file-text"></i>
+                    Consignas TP
+                </a>
+                <a href="servicios/e01.html" class="nav-item">
+                    <i data-lucide="clipboard-list"></i>
+                    Entregable E01
+                </a>
+                <a href="servicios/e02.html" class="nav-item">
+                    <i data-lucide="shield-check"></i>
+                    Entregable E02
+                </a>
+            </nav>
+
+            <div
+                style="margin-top: auto; padding-top: 20px; border-top: 1px solid var(--border-glass); font-size: 0.75rem; color: var(--text-muted); text-align: center;">
+                Lic. Ricardo Monla<br>UTN FRLR © 2026
+            </div>
+        </aside>
+
+        <!-- Contenido Principal -->
+        <div class="main-content">
+            <div class="chat-container">
+                <!-- Header -->
+                <header class="chat-header">
+                    <div class="brand">
+                        <div class="brand-text">
+                            <h1>Portal Inteligente GEMA</h1>
+                            <span>Asistencia Estratégica TIC</span>
+                        </div>
+                    </div>
+                    <div class="header-actions">
+                        <div class="status-badge">
+                            <div class="status-dot"></div>
+                            Sistema Activo
+                        </div>
+                        <button id="clearChat" class="icon-btn" title="Limpiar Chat">
+                            <i data-lucide="trash-2"></i>
+                        </button>
+                    </div>
+                </header>
+
+                <div class="user-info-bar">
+                    <div class="input-group">
+                        <i data-lucide="mail"></i>
+                        <input type="email" id="userEmail" placeholder="Email" value="alumno1@frlr.utn.edu.ar">
+                    </div>
+                    <div class="input-group">
+                        <i data-lucide="id-card"></i>
+                        <input type="text" id="userDNI" placeholder="DNI" value="12345678">
+                    </div>
+                </div>
+
+                <!-- Messages Area -->
+                <main class="chat-messages" id="chatMessages">
+                    <div class="message bot">
+                        <div class="avatar-msg">
+                            <img src="assets/media/gema-avatar.png" alt="GEMA">
+                        </div>
+                        <div class="msg-content">
+                            ¡Hola! Soy **GEMA**, el Asistente Estratégico de la Dirección de TIC. ¿En qué puedo ayudarte
+                            hoy?
+                            <span class="timestamp">Justo ahora</span>
+                        </div>
+                    </div>
+                </main>
+
+                <!-- Input Area -->
+                <footer class="chat-input-area">
+                    <div class="suggested-questions" id="suggestedQuestions"></div>
+                    <div class="typing-container" id="typingIndicator">
+                        <div class="typing-dots">
+                            <span></span><span></span><span></span>
+                        </div>
+                        GEMA está redactando una respuesta...
+                    </div>
+                    <form class="input-wrapper" id="chatForm">
+                        <input type="text" id="userInput" placeholder="Escribe tu consulta aquí..." autocomplete="off">
+                        <button type="submit" class="send-btn">
+                            <i data-lucide="send"></i>
+                        </button>
+                    </form>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/layout.js"></script>
+    <script src="assets/js/script.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

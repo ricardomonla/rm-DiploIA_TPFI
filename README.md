@@ -2,12 +2,12 @@
 
 **Sistema de Gestión Estratégica Mediante Automatización - UTN FRLR**
 
-- **Publicación:** [Portal de Acceso Online](https://ricardomonla.github.io/rm-DiploIA_TPFI/)
+- **Publicación:** [Portal de Acceso Online](https://ricardomonla.github.io/rm-DiploIA_TPFI/www-dtic-gema/index.html)
 - **Frontend:** Interfaz de Chatbot Web Premium (Vanilla JS / CSS Glassmorphism).
 - **Automatización:** Webhooks y flujo lógico en **Make.com**.
-- **IA:** Engine de procesamiento basado en **Google Gemini**.
+- **IA:** Engine de procesamiento basado en **Google Gemini** con módulo de datos de valor ("Sabías que...").
 - **Persistencia:** Base de datos relacional en **Google Sheets**.
-- **Documentación:** Portal de entregables web optimizado para impresión.
+- **Documentación:** Portal de entregables web integrado en v1.1.
 
 ## 📂 Estructura del Proyecto
 

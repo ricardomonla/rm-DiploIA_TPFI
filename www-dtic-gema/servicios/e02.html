@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E02 - Ficha Técnica e IA - dtic-GEMA</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <div class="app-wrapper">
+        <div class="main-content">
+            <div class="report-container">
+                <header class="report-header">
+                    <div>
+                        <h1>E02: Ficha Técnica e IA</h1>
+                        <p style="color: var(--text-muted); margin-top: 5px;">Fase 2.2 a 5 - Implementación y Resultados
+                        </p>
+                    </div>
+                    <div style="text-align: right;">
+                        <span
+                            style="background: var(--primary-gradient); color: white; padding: 4px 12px; border-radius: 6px; font-weight: bold; font-size: 0.8rem;">v1.1</span>
+                    </div>
+                </header>
+
+                <h2 id="ficha-tecnica">2.2 Ficha Técnica del Escenario (Make)</h2>
+                <div class="highlight-box" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div>
+                        <strong style="color: #4facfe;">Trigger (Disparador):</strong><br>
+                        Webhook instantáneo desde el Chatbot.
+                    </div>
+                    <div>
+                        <strong style="color: #4facfe;">Frecuencia:</strong><br>
+                        Ejecución en tiempo real bajo demanda.
+                    </div>
+                </div>
+
+                <h3>Descripción de Nodos:</h3>
+                <p>El flujo en Make constituye la columna vertebral del sistema GEMA:</p>
+                <ul style="border-left: 2px solid var(--accent-color); padding-left: 25px; margin-left: 10px;">
+                    <li><strong>Custom Webhook:</strong> Punto de entrada para el payload del chatbot.</li>
+                    <li><strong>Google Sheets (Search):</strong> Validación de seguridad y rol de usuario.</li>
+                    <li><strong>Gemini 1.5 Flash:</strong> Motor de IA para clasificación y respuesta.</li>
+                    <li><strong>Google Sheets (Log):</strong> Registro persistente del ticket generado.</li>
+                    <li><strong>Webhook Response:</strong> Feedback inmediato al usuario.</li>
+                </ul>
+
+                <div
+                    style="margin: 30px 0; border-radius: 15px; overflow: hidden; border: 1px solid var(--border-glass);">
+                    <img src="../assets/media/escenario_make_v02.png" alt="Escenario técnico en Make"
+                        style="width: 100%; display: block; filter: saturate(1.2);">
+                    <div
+                        style="background: rgba(0,0,0,0.4); padding: 10px 20px; font-size: 0.85rem; color: var(--text-muted);">
+                        Captura de la arquitectura lógica en Make.com
+                    </div>
+                </div>
+
+                <h2 id="ia-generativa">3. Implementación de IA Generativa</h2>
+                <h3>3.1 Ingeniería de Prompts (Prompt Maestro)</h3>
+                <div
+                    style="background: #1e293b; padding: 25px; border-radius: 12px; border-left: 4px solid #4facfe; font-family: 'Fira Code', monospace; font-size: 0.9rem; color: #e2e8f0;">
+                    <span style="color: #94a3b8; display: block; margin-bottom: 10px;">// System Role Instruction</span>
+                    Eres dtic-GEMA_FRLR. Tu objetivo es asistir técnicamente con tono empático.
+                    <br><br>
+                    <span style="color: #4facfe;">1. Validación:</span> Siempre usa {{nombre_agente}} de la base.<br>
+                    <span style="color: #4facfe;">2. Clasificación:</span> Prioriza Autoridades (SLA < 2h).<br>
+                        <span style="color: #4facfe;">3. Seguridad:</span> NUNCA pidas contraseñas.<br>
+                        <span style="color: #4facfe;">4. Valor:</span> Inyecta un dato curioso sobre {{carrera}}.
+                </div>
+
+                <h2 id="verificacion">4. Verificación y Resultados</h2>
+                <p>Las pruebas de carga y triaje han demostrado una eficiencia superior al 70% en la categorización de
+                    incidentes de Nivel 1. El técnico humano ahora interviene solo en la etapa final de resolución.</p>
+
+                <div
+                    style="margin: 30px 0; border-radius: 15px; overflow: hidden; border: 1px solid var(--border-glass);">
+                    <img src="../assets/media/arquitectura_gema_es.png" alt="Flujo de interacción IA"
+                        style="width: 100%; display: block;">
+                </div>
+
+                <h2 id="conclusiones">5. Conclusiones y Futuro</h2>
+                <p>La arquitectura desacoplada de GEMA permite una evolución constante. En esta v1.1, se ha priorizado
+                    la humanización de las respuestas y la integración de un portal unificado que facilita el acceso a
+                    la información estratégica de la Dirección de TIC.</p>
+
+                <footer
+                    style="margin-top: 50px; padding-top: 20px; border-top: 1px solid var(--border-glass); text-align: center; font-size: 0.8rem; color: var(--text-muted);">
+                    Documento de Implementación Técnica - dtic-GEMA v1.1
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/layout.js"></script>
+</body>
+
+</html>
