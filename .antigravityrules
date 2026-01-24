@@ -20,7 +20,7 @@
 - **"OK versiona":**
     1. Incrementar la versión en `README.md` y archivos de configuración.
     2. Crear una etiqueta (tag) de Git con la nueva versión.
-- **"OK ya terminamos":**
+- **"OK terminamos":**
     1. Ejecutar "OK versiona".
     2. Generar/actualizar `seguimiento.md` en `data/memoria/`.
     3. Ejecutar "OK guarda".

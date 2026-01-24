@@ -5,6 +5,7 @@
 let PROJECT_DATA = {};
 let MENU_DATA = [];
 let CONTENT_DATA = {};
+let LATEST_VERSION = 'v1.0'; // Fallback
 
 document.addEventListener('DOMContentLoaded', async () => {
     loadDependencies();
@@ -25,16 +26,35 @@ function loadDependencies() {
 async function loadData() {
     try {
         const t = Date.now();
+        // Primero obtener la versión más reciente
+        await fetchLatestVersion(t);
+
         const [project, menu, content] = await Promise.all([
             fetch(`assets/data/project.json?t=${t}`).then(r => r.json()),
             fetch(`assets/data/menu.json?t=${t}`).then(r => r.json()),
             fetch(`assets/data/content.json?t=${t}`).then(r => r.json())
         ]);
-        PROJECT_DATA = project;
+
+        // Sincronizar versión global
+        PROJECT_DATA = { ...project, version: LATEST_VERSION };
         MENU_DATA = menu;
         CONTENT_DATA = content;
     } catch (e) {
         console.error('Error cargando datos:', e);
+    }
+}
+
+async function fetchLatestVersion(t) {
+    try {
+        const response = await fetch(`assets/data/changelog.json?t=${t || Date.now()}`);
+        if (response.ok) {
+            const data = await response.json();
+            if (data && data.length > 0) {
+                LATEST_VERSION = data[0].version;
+            }
+        }
+    } catch (e) {
+        console.error('Error al detectar versión:', e);
     }
 }
 
@@ -181,7 +201,7 @@ function renderDynamicContent(id) {
                 <div id="pdfBtnContainer"></div>
             </div>
             <div style="text-align: right;">
-                <span class="version-badge" style="background: var(--primary-gradient); color: white; padding: 4px 12px; border-radius: 6px; font-weight: bold; font-size: 0.8rem;">${data.version}</span>
+                <span class="version-badge" style="background: var(--primary-gradient); color: white; padding: 4px 12px; border-radius: 6px; font-weight: bold; font-size: 0.8rem;">${LATEST_VERSION}</span>
             </div>
         </header>
 
@@ -291,7 +311,7 @@ function injectPDFButton(version) {
     btn.id = 'btnPDF';
     btn.className = 'nav-item active';
     btn.style.cssText = 'font-size: 0.8rem; padding: 6px 12px; border: none; cursor: pointer; width: auto; display: inline-flex; margin-top: 15px;';
-    btn.innerHTML = `<i data-lucide="file-down"></i> Descargar PDF (${version})`;
+    btn.innerHTML = `<i data-lucide="file-down"></i> Descargar PDF (${LATEST_VERSION})`;
 
     container.innerHTML = '';
     container.appendChild(btn);
