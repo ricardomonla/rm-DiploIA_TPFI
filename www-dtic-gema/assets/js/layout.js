@@ -6,6 +6,7 @@ let PROJECT_DATA = {};
 let MENU_DATA = [];
 let CONTENT_DATA = {};
 let LATEST_VERSION = 'v1.0'; // Fallback
+let avatarDebounceTimer = null;
 
 document.addEventListener('DOMContentLoaded', async () => {
     loadDependencies();
@@ -118,10 +119,13 @@ function renderMenuItem(item, index) {
                 <div class="sub-menu">
                     ${item.children.map((child, subIndex) => `
                         <div class="nav-group-sub">
-                            <a href="#${child.id}" class="nav-item sub" data-video="${child.avatarVideo}">
-                                <i data-lucide="${child.icon || 'file'}"></i>
-                                ${child.title}
-                            </a>
+                            <div class="nav-item-wrapper" style="display: flex; align-items: center; justify-content: space-between;">
+                                <a href="#${child.id}" class="nav-item sub" data-video="${child.avatarVideo}" style="flex: 1;">
+                                    <i data-lucide="${child.icon || 'file'}"></i>
+                                    ${child.title}
+                                </a>
+                                ${child.subsections ? `<i data-lucide="chevron-down" class="chevron sub-chevron" onclick="this.closest('.nav-group-sub').classList.toggle('open'); event.stopPropagation();"></i>` : ''}
+                            </div>
                             ${child.subsections ? `
                                 <div class="sub-sub-menu">
                                     ${child.subsections.map(subSub => `
@@ -190,14 +194,22 @@ function expandParents(element) {
 }
 
 function updateAvatar(videoName) {
-    const video = document.getElementById('headerAvatar');
-    if (video && videoName) {
-        const newSrc = `assets/video/avatar/${videoName}`;
-        if (!video.src.includes(newSrc)) {
-            video.src = newSrc;
-            video.play();
+    if (avatarDebounceTimer) clearTimeout(avatarDebounceTimer);
+
+    avatarDebounceTimer = setTimeout(() => {
+        const video = document.getElementById('headerAvatar');
+        if (video && videoName) {
+            const newSrc = `assets/video/avatar/${videoName}`;
+            if (!video.src.includes(newSrc)) {
+                video.style.opacity = '0.7';
+                setTimeout(() => {
+                    video.src = newSrc;
+                    video.style.opacity = '1';
+                    video.play();
+                }, 150);
+            }
         }
-    }
+    }, 400); // Rango de tiempo para evitar cambios rápidos
 }
 
 function showChatbot() {
