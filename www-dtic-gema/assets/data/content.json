@@ -64,7 +64,7 @@
         ]
     },
     "e01": {
-        "title": "E01: Relevamiento y Diseño",
+        "title": "Relevamiento y Diseño",
         "subtitle": "Fase 1 y 2.1 - Análisis de Procesos y Flujo",
         "version": "v1.1",
         "studentInfo": {
@@ -77,13 +77,13 @@
             {
                 "id": "fase1",
                 "type": "section",
-                "title": "1. FASE 1: Relevamiento y Análisis del Proceso",
+                "title": "FASE 1: Relevamiento y Análisis del Proceso",
                 "body": "La Dirección de TIC de la Facultad X es el área encargada de la infraestructura, sistemas y soporte técnico de la institución. Debido a que la mayor parte de estas tareas son llevadas a cabo por un solo integrante, la carga operativa es crítica, requiriendo un equilibrio constante entre el mantenimiento de servidores y la atención directa a usuarios."
             },
             {
                 "id": "dolores",
                 "type": "section",
-                "title": "1.2 Identificación de Puntos de Dolor",
+                "title": "Identificación de Puntos de Dolor",
                 "blocks": [
                     {
                         "type": "highlight",
@@ -105,7 +105,7 @@
             {
                 "id": "priorizacion",
                 "type": "section",
-                "title": "1.3 Priorización y Selección del \"Quick Win\"",
+                "title": "Priorización y Selección del \"Quick Win\"",
                 "table": {
                     "headers": [
                         "Punto de Dolor",
@@ -148,8 +148,8 @@
             {
                 "id": "fase2",
                 "type": "section",
-                "title": "2. FASE 2: Diseño de la Solución No Code",
-                "subtitle": "2.1 Diseño del Flujo (Lenguaje Natural)",
+                "title": "FASE 2: Diseño de la Solución No Code",
+                "subtitle": "Diseño del Flujo (Lenguaje Natural)",
                 "list": [
                     "<strong>Input:</strong> El usuario ingresa Email institucional y DNI en la Interfaz Chatbot Premium.",
                     "<strong>Process:</strong> <ul><li>Validación de identidad en base de datos Sheets.</li><li>Clasificación de perfiles y urgencia mediante IA Gemini.</li><li>Categorización inteligente del problema y generación de \"Dato de Valor\".</li></ul>",
@@ -159,14 +159,14 @@
         ]
     },
     "e02": {
-        "title": "E02: Ficha Técnica e IA",
+        "title": "Ficha Técnica e IA",
         "subtitle": "Fase 2.2 a 5 - Implementación y Resultados",
         "version": "v1.1",
         "content": [
             {
                 "id": "tecnico",
                 "type": "section",
-                "title": "2.2 Ficha Técnica del Escenario (Make)",
+                "title": "Ficha Técnica del Escenario (Make)",
                 "grid": [
                     [
                         "<strong style='color: #4facfe;'>Trigger (Disparador):</strong>",
@@ -198,14 +198,14 @@
             {
                 "id": "ia",
                 "type": "section",
-                "title": "3. Implementación de IA Generativa",
-                "subtitle": "3.1 Ingeniería de Prompts (Prompt Maestro)",
+                "title": "Implementación de IA Generativa",
+                "subtitle": "Ingeniería de Prompts (Prompt Maestro)",
                 "code": "// System Role Instruction\nEres dtic-GEMA_FRLR. Tu objetivo es asistir técnicamente con tono empático.\n\n1. Validación: Siempre usa {{nombre_agente}} de la base.\n2. Clasificación: Prioriza Autoridades (SLA < 2h).\n3. Seguridad: NUNCA pidas contraseñas.\n4. Valor: Inyecta un dato curioso sobre {{carrera}}."
             },
             {
                 "id": "resultados",
                 "type": "section",
-                "title": "4. Verificación y Resultados",
+                "title": "Verificación y Resultados",
                 "body": "Las pruebas de carga y triaje han demostrado una eficiencia superior al 70% en la categorización de incidentes de Nivel 1. El técnico humano ahora interviene solo en la etapa final de resolución."
             },
             {
@@ -216,7 +216,7 @@
             {
                 "id": "futuro",
                 "type": "section",
-                "title": "5. Conclusiones y Futuro",
+                "title": "Conclusiones y Futuro",
                 "body": "La arquitectura desacoplada de GEMA permite una evolución constante. En esta v1.1, se ha priorizado la humanización de las respuestas y la integración de un portal unificado que facilita el acceso a la información estratégica de la Dirección de TIC."
             }
         ]

@@ -97,7 +97,7 @@ function renderSidebar(sidebar) {
     lucide.createIcons();
 }
 
-function renderMenuItem(item, index) {
+function renderMenuItem(item, parentIndex) {
     if (item.type === 'direct') {
         const isActive = (!window.location.hash && item.id === 'chatbot') || window.location.hash === `#${item.id}`;
         return `
@@ -109,40 +109,57 @@ function renderMenuItem(item, index) {
     }
 
     if (item.type === 'parent') {
+        // parentIndex se usa para la numeración principal (ej. 1)
         return `
             <div class="nav-group">
-                <div class="nav-item parent" onclick="this.parentElement.classList.toggle('open')">
+                <div class="nav-item parent" onclick="handleParentClick(this, '${item.children[0].id}')">
                     <i data-lucide="${item.icon}"></i>
+                    <span class="bullet-main" style="margin-right: 8px; font-weight: bold; color: #4facfe;">${parentIndex}</span>
                     ${item.title}
                     <i data-lucide="chevron-down" class="chevron"></i>
                 </div>
                 <div class="sub-menu">
-                    ${item.children.map((child, subIndex) => `
+                    ${item.children.map((child, subIndex) => {
+            const childNumber = `${parentIndex}.${subIndex + 1}`;
+            return `
                         <div class="nav-group-sub">
                             <div class="nav-item-wrapper" onclick="this.closest('.nav-group-sub').classList.toggle('open');" style="display: flex; align-items: center; justify-content: space-between; cursor: pointer;">
                                 <a href="#${child.id}" class="nav-item sub" data-video="${child.avatarVideo}" style="flex: 1; pointer-events: auto;">
-                                    <i data-lucide="${child.icon || 'file'}"></i>
+                                    <span class="bullet" style="margin-right: 8px; font-weight: bold; color: #4facfe;">${childNumber}</span>
                                     ${child.title}
                                 </a>
                                 ${child.subsections ? `<i data-lucide="chevron-down" class="chevron sub-chevron"></i>` : ''}
                             </div>
                             ${child.subsections ? `
                                 <div class="sub-sub-menu">
-                                    ${child.subsections.map(subSub => `
+                                    ${child.subsections.map((subSub, subSubIndex) => `
                                         <a href="#${child.id}/${subSub.id}" class="nav-item sub-sub">
-                                            <span class="bullet">${subSub.title.split(' ')[0]}</span>
-                                            ${subSub.title.split(' ').slice(1).join(' ')}
+                                            <span class="bullet" style="margin-right: 8px; opacity: 0.6;">${childNumber}.${subSubIndex + 1}</span>
+                                            ${subSub.title}
                                         </a>
                                     `).join('')}
                                 </div>
                             ` : ''}
                         </div>
-                    `).join('')}
+                    `}).join('')}
                 </div>
             </div>
         `;
     }
     return '';
+}
+
+function handleParentClick(element, firstChildId) {
+    const group = element.parentElement;
+    const wasOpen = group.classList.contains('open');
+
+    // Toggle expansión
+    group.classList.toggle('open');
+
+    // Navegación Proactiva: Si no estaba abierto, ir al primer hijo
+    if (!wasOpen) {
+        window.location.hash = firstChildId;
+    }
 }
 
 function handleRouting() {
@@ -228,6 +245,16 @@ function renderDynamicContent(id, sectionId) {
     const data = CONTENT_DATA[id];
     if (!data) return;
 
+    // Calcular numeración proactiva comparando con MENU_DATA
+    let pageNumber = "";
+    MENU_DATA.forEach((parent, pIdx) => {
+        if (parent.children) {
+            parent.children.forEach((child, cIdx) => {
+                if (child.id === id) pageNumber = `${pIdx + 1}.${cIdx + 1}`;
+            });
+        }
+    });
+
     const chatContainer = document.querySelector('.chat-container');
     if (chatContainer) chatContainer.style.display = 'none';
 
@@ -246,7 +273,7 @@ function renderDynamicContent(id, sectionId) {
                 <div class="project-mini-header" style="font-size: 0.75rem; color: #4facfe; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; font-weight: bold;">
                     ${PROJECT_DATA.institution} | ${PROJECT_DATA.projectName}
                 </div>
-                <h1>${data.title}</h1>
+                <h1><span style="color: #4facfe; margin-right: 15px;">${pageNumber}</span>${data.title}</h1>
                 <p style="color: var(--text-muted); margin-top: 5px;">${data.subtitle}</p>
                 <div id="pdfBtnContainer"></div>
             </div>
@@ -258,7 +285,7 @@ function renderDynamicContent(id, sectionId) {
         ${data.studentInfo ? renderStudentInfo(data.studentInfo) : ''}
         
         <div class="dynamic-body">
-            ${data.content.map(block => renderBlock(block)).join('')}
+            ${data.content.map((block, bIdx) => renderBlock(block, pageNumber, bIdx + 1)).join('')}
         </div>
 
         <footer style="margin-top: 50px; padding-top: 20px; border-top: 1px solid var(--border-glass); text-align: center; font-size: 0.8rem; color: var(--text-muted);">
@@ -294,17 +321,18 @@ function renderStudentInfo(info) {
     `;
 }
 
-function renderBlock(block) {
+function renderBlock(block, pageNumber, blockIndex) {
+    const sectionNumber = pageNumber ? `${pageNumber}.${blockIndex}` : "";
     switch (block.type) {
         case 'section':
             return `
                 <section ${block.id ? `id="${block.id}"` : ''}>
-                    <h2>${block.title}</h2>
+                    <h2><span style="color: #4facfe; opacity: 0.7; margin-right: 12px; font-size: 0.9em;">${sectionNumber}</span>${block.title}</h2>
                     ${block.subtitle ? `<h3>${block.subtitle}</h3>` : ''}
                     ${block.body ? `<p>${block.body}</p>` : ''}
                     ${block.list ? `<ul class="process-list">${block.list.map(li => `<li>${li}</li>`).join('')}</ul>` : ''}
                     ${block.table ? renderTable(block.table) : ''}
-                    ${block.blocks ? block.blocks.map(b => renderBlock(b)).join('') : ''}
+                    ${block.blocks ? block.blocks.map((b, i) => renderBlock(b, sectionNumber, i + 1)).join('') : ''}
                     ${block.footer_motto ? `<div style="margin-top: 20px; font-style: italic; color: var(--text-muted); font-size: 0.9rem;">${block.footer_motto}</div>` : ''}
                 </section>
             `;
