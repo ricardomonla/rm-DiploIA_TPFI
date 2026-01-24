@@ -1,4 +1,4 @@
-# dtic-GEMA v1.3: UX Premium y Coherencia Jerárquica
+# dtic-GEMA v1.4: Evolución Estructural e Identidad Consolidadas
 
 **Sistema de Gestión Estratégica Mediante Automatización - Facultad X**
 

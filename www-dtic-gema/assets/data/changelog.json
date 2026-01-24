@@ -1,5 +1,19 @@
 [
     {
+        "version": "v1.4",
+        "title": "Evolución Estructural, Identidad y Entregables Dinámicos",
+        "date": "24 de Enero, 2026",
+        "changes": [
+            "Reingeniería del Sidebar: Arquitectura modular de 3 bloques (Header, Nav, Footer).",
+            "Navegación Inteligente: Ruteo proactivo y numeración dinámica automática (Padre <=> Hijo).",
+            "Identidad Facultad X: Desvinculación institucional y personalización del branding global.",
+            "Restauración de Avatar Premium: Recuperación del video interactivo GEMA dinámico.",
+            "Motor de Entregables Dinámicos: Generación en tiempo real de PDF Fase 1 y 2 con estética académica clásica e inyección de avatar.",
+            "Registro de Protocolos de Agente: Implementación de comandos OK versiona, OK guarda y flujo de memoria técnica.",
+            "Saneamiento de Repositorio: Consolidación de historial en ZIP y eliminación de redundancias técnicas."
+        ]
+    },
+    {
         "version": "v1.3",
         "title": "UX Premium, PDF y Memoria Histórica",
         "date": "24 (mediodía) de Enero, 2026",

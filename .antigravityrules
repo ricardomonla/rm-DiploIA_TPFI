@@ -19,13 +19,14 @@
 - **"OK procede":**
     1. Detectar la versión actual en la que se está trabajando (ej. v1.4.1).
     2. Guardar una copia del **Master Plan** aprobado en `data/memoria/[vActual]/v[X.Y.Z]_[nombre_aprobado].md`.
-    3. Ejecutar las tareas técnicas definidas y finalizar con un "OK guarda".
+    3. Ejecutar las tareas técnicas definidas y finalizar con un "OK guarda". (Nota: En planes de versionado, "OK procede" dispara automáticamente "OK versiona").
 - **"OK versiona":**
     1. **Restricción:** El incremento de versión en archivos core (`project.json`, `README.md`, `package.json`) y la actualización de la UI (`LATEST_VERSION`) se realiza **exclusivamente** mediante este comando. Nunca de forma automática.
-    2. Tomar como fuente principal el archivo `data/changelog.json`.
-    3. Incrementar la versión en `README.md`, archivos de configuración y generar/actualizar `CHANGELOG.md` basándose en dicha fuente.
-    4. Actualizar el archivo `www-dtic-gema/assets/data/changelog.json` para que refleje los cambios de la fuente superior.
-    5. Crear una etiqueta (tag) de Git con la nueva versión.
+    2. **Recopilación:** Leer sistemáticamente todos los archivos contenidos en la carpeta `data/memoria/[vActual]/` para identificar y sintetizar todos los hitos, cambios técnicos y decisiones relevantes que deben formar parte del detalle de la nueva versión.
+    3. Tomar como fuente principal el archivo `data/changelog.json`.
+    4. Incrementar la versión en `README.md`, archivos de configuración y generar/actualizar `CHANGELOG.md` basándose en dicha fuente.
+    5. Actualizar el archivo `www-dtic-gema/assets/data/changelog.json` para que refleje los cambios de la fuente superior.
+    6. Crear una etiqueta (tag) de Git con la nueva versión.
 - **"OK terminamos":**
     1. Realizar el cierre de la versión actual: Generar el `seguimiento.md` consolidado dentro de la carpeta `data/memoria/[vActual]/`.
     2. Ejecutar "OK versiona" para oficializar el incremento.
