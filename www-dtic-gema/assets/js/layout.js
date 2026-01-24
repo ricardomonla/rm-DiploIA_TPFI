@@ -108,7 +108,8 @@ function renderMenuItem(item, index) {
     }
 
     if (item.type === 'parent') {
-        const hasActiveChild = item.children.some(child => window.location.hash === `#${child.id}`);
+        const currentHash = window.location.hash.split('/')[0];
+        const hasActiveChild = item.children.some(child => currentHash === `#${child.id}`);
         return `
             <div class="nav-group ${hasActiveChild ? 'open' : ''}">
                 <div class="nav-item parent" onclick="this.parentElement.classList.toggle('open')">
@@ -117,12 +118,26 @@ function renderMenuItem(item, index) {
                     <i data-lucide="chevron-down" class="chevron"></i>
                 </div>
                 <div class="sub-menu">
-                    ${item.children.map((child, subIndex) => `
-                        <a href="#${child.id}" class="nav-item sub ${window.location.hash === `#${child.id}` ? 'active' : ''}" data-video="${child.avatarVideo}">
-                            <span class="bullet">${index}.${subIndex + 1}</span>
-                            ${child.title}
-                        </a>
-                    `).join('')}
+                    ${item.children.map((child, subIndex) => {
+            const isDocActive = currentHash === `#${child.id}`;
+            return `
+                        <div class="nav-group-sub ${isDocActive ? 'open' : ''}">
+                            <a href="#${child.id}" class="nav-item sub ${isDocActive ? 'active' : ''}" data-video="${child.avatarVideo}">
+                                <i data-lucide="${child.icon || 'file'}"></i>
+                                ${child.title}
+                            </a>
+                            ${child.subsections ? `
+                                <div class="sub-sub-menu">
+                                    ${child.subsections.map(subSub => `
+                                        <a href="#${child.id}/${subSub.id}" class="nav-item sub-sub ${window.location.hash === `#${child.id}/${subSub.id}` ? 'active' : ''}">
+                                            <span class="bullet">${subSub.title.split(' ')[0]}</span>
+                                            ${subSub.title.split(' ').slice(1).join(' ')}
+                                        </a>
+                                    `).join('')}
+                                </div>
+                            ` : ''}
+                        </div>
+                    `}).join('')}
                 </div>
             </div>
         `;
@@ -131,23 +146,32 @@ function renderMenuItem(item, index) {
 }
 
 function handleRouting() {
-    const hash = window.location.hash.replace('#', '') || 'chatbot';
-    const mainContent = document.querySelector('.main-content');
+    const fullHash = window.location.hash.replace('#', '');
+    const segments = fullHash.split('/');
+    const pageId = segments[0] || 'chatbot';
+    const sectionId = segments[1];
 
     // Actualizar estados de navegación
     document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-    const activeLink = document.querySelector(`a[href="#${hash}"]`);
-    if (activeLink) {
-        activeLink.classList.add('active');
-        // Actualizar Avatar Reactivo
-        const videoSrc = activeLink.getAttribute('data-video');
-        updateAvatar(videoSrc);
+
+    // Marcar link principal o documento
+    const activeLink = document.querySelector(`a[href="#${pageId}"]`);
+    if (activeLink) activeLink.classList.add('active');
+
+    // Marcar sub-sección si existe
+    if (sectionId) {
+        const subSubLink = document.querySelector(`a[href="#${pageId}/${sectionId}"]`);
+        if (subSubLink) subSubLink.classList.add('active');
     }
 
-    if (hash === 'chatbot') {
+    // Actualizar Avatar
+    const videoSrc = activeLink?.getAttribute('data-video');
+    if (videoSrc) updateAvatar(videoSrc);
+
+    if (pageId === 'chatbot') {
         showChatbot();
     } else {
-        renderDynamicContent(hash);
+        renderDynamicContent(pageId, sectionId);
     }
 }
 
@@ -174,7 +198,7 @@ function showChatbot() {
     if (existingReport) existingReport.remove();
 }
 
-function renderDynamicContent(id) {
+function renderDynamicContent(id, sectionId) {
     const data = CONTENT_DATA[id];
     if (!data) return;
 
@@ -218,7 +242,16 @@ function renderDynamicContent(id) {
 
     injectPDFButton(data.version);
     lucide.createIcons();
-    window.scrollTo(0, 0);
+
+    // Scroll a sección si existe
+    if (sectionId) {
+        const target = document.getElementById(sectionId);
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    } else {
+        window.scrollTo(0, 0);
+    }
 }
 
 function renderStudentInfo(info) {
@@ -239,7 +272,7 @@ function renderBlock(block) {
     switch (block.type) {
         case 'section':
             return `
-                <section>
+                <section ${block.id ? `id="${block.id}"` : ''}>
                     <h2>${block.title}</h2>
                     ${block.subtitle ? `<h3>${block.subtitle}</h3>` : ''}
                     ${block.body ? `<p>${block.body}</p>` : ''}

@@ -18,8 +18,9 @@
 - **"OK guarda":** Realizar `git commit` y `push` de los cambios actuales con un mensaje descriptivo en español.
 - **"OK procede":** Ejecutar las tareas del plan de implementación y finalizar con un "OK guarda".
 - **"OK versiona":**
-    1. Incrementar la versión en `README.md` y archivos de configuración.
-    2. Crear una etiqueta (tag) de Git con la nueva versión.
+    1. Tomar como fuente principal el archivo `www-dtic-gema/assets/data/changelog.json`.
+    2. Incrementar la versión en `README.md`, archivos de configuración y generar/actualizar `CHANGELOG.md` basándose en dicha fuente.
+    3. Crear una etiqueta (tag) de Git con la nueva versión.
 - **"OK terminamos":**
     1. Ejecutar "OK versiona".
     2. Generar/actualizar `seguimiento.md` en `data/memoria/`.

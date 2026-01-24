@@ -15,24 +15,74 @@
         "children": [
             {
                 "id": "consignas",
-                "title": "Consignas",
+                "title": "1.1 Consignas",
                 "icon": "file-text",
                 "path": "consignas",
-                "avatarVideo": "gema-02.mp4"
+                "avatarVideo": "gema-02.mp4",
+                "subsections": [
+                    {
+                        "id": "objetivo",
+                        "title": "1.1.1 Objetivo General"
+                    },
+                    {
+                        "id": "entregables",
+                        "title": "1.1.2 Entregables"
+                    },
+                    {
+                        "id": "evaluacion",
+                        "title": "1.1.3 Evaluación"
+                    }
+                ]
             },
             {
                 "id": "e01",
-                "title": "Entregable E01",
+                "title": "1.2 Entregable E01",
                 "icon": "clipboard-list",
                 "path": "e01",
-                "avatarVideo": "gema-04.mp4"
+                "avatarVideo": "gema-04.mp4",
+                "subsections": [
+                    {
+                        "id": "fase1",
+                        "title": "1.2.1 Relevamiento (Fase 1)"
+                    },
+                    {
+                        "id": "dolores",
+                        "title": "1.2.2 Puntos de Dolor"
+                    },
+                    {
+                        "id": "priorizacion",
+                        "title": "1.2.3 Priorización"
+                    },
+                    {
+                        "id": "fase2",
+                        "title": "1.2.4 Diseño (Fase 2)"
+                    }
+                ]
             },
             {
                 "id": "e02",
-                "title": "Entregable E02",
+                "title": "1.3 Entregable E02",
                 "icon": "shield-check",
                 "path": "e02",
-                "avatarVideo": "gema-05.mp4"
+                "avatarVideo": "gema-05.mp4",
+                "subsections": [
+                    {
+                        "id": "tecnico",
+                        "title": "1.3.1 Ficha Técnica Make"
+                    },
+                    {
+                        "id": "ia",
+                        "title": "1.3.2 Implementación IA"
+                    },
+                    {
+                        "id": "resultados",
+                        "title": "1.3.3 Resultados"
+                    },
+                    {
+                        "id": "futuro",
+                        "title": "1.3.4 Conclusiones"
+                    }
+                ]
             }
         ]
     }
