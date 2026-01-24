@@ -198,31 +198,37 @@
             {
                 "id": "tecnico",
                 "type": "section",
-                "title": "Arquitectura Lógica del Flujo",
+                "title": "Ecosistema de Automatización (Make.com)",
+                "subtitle": "Interacción entre el Portal dtic-GEMA y el motor Cloud",
                 "grid": [
                     [
                         "<strong style='color: #4facfe;'>Receptor:</strong>",
-                        "Webhook de entrada que captura la consulta del usuario."
+                        "Webhook que captura el payload JSON del Portal dtic-GEMA (chatbot)."
                     ],
                     [
                         "<strong style='color: #4facfe;'>Validador:</strong>",
-                        "Módulo Google Sheets que valida la identidad en el Padrón."
+                        "Módulo Google Sheets Search que consulta el padrón de agentes."
                     ],
                     [
                         "<strong style='color: #4facfe;'>Derivador:</strong>",
-                        "Router inteligente que bifurca el flujo según la validación."
+                        "Router lógico que bifurca el flujo según hallazgo en el registro."
                     ]
                 ],
                 "list": [
-                    "<strong>Escriba (Rama A):</strong> Registro directo de auditoría si el usuario es conocido.",
-                    "<strong>Orquestador (Rama B):</strong> Intervención de Gemini IA para usuarios no registrados.",
-                    "<strong>Emisor:</strong> Nodo de respuesta final que entrega la salida al portal."
+                    "<strong>Orquestador:</strong> Cerebro Gemini 1.5 Flash que procesa la lógica AI (Rama B).",
+                    "<strong>Escriba:</strong> Registro Google Sheets de persistencia histórica (Rama A).",
+                    "<strong>Emisor:</strong> Webhook Response que envía la solución al Portal dtic-GEMA."
                 ]
             },
             {
                 "type": "image",
-                "src": "assets/img/diagrama_make_v1.5.4.png",
-                "caption": "Arquitectura Ramificada: Detalle del Derivador (Router) y procesamiento dual."
+                "src": "assets/img/diagrama_arquitectura_v1.5.5.png",
+                "caption": "Morfología de Nodos: Anatomía del flujo de acción dentro de Make.com."
+            },
+            {
+                "type": "image",
+                "src": "assets/img/ecosistema_integral_v1.5.5.png",
+                "caption": "Ecosistema dtic-GEMA: Danza integral entre portal, orquestador cloud y servicios de datos."
             },
             {
                 "id": "ia",
