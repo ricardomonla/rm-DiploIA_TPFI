@@ -322,7 +322,8 @@ function renderDynamicContent(id, sectionId) {
 
     // Solo inyectar botón de exportación PDF en la sección de Entregas Finales
     if (id === 'entregas') {
-        injectPDFButton(data.version);
+        // Inyectar botón de PDF (Removido en v1.5 por generación estática)
+        // injectPDFButton(data.version);
     }
     lucide.createIcons();
 
@@ -405,24 +406,16 @@ function renderBlock(block, pageNumber, blockIndex) {
                 </div>
             `;
         case 'action_item':
-            const isJS = block.action.type === 'js';
             return `
                 <div class="action-item-card">
                     <div class="action-item-content">
                         <h4>${block.title}</h4>
                         ${block.body ? `<p>${block.body}</p>` : ''}
                     </div>
-                    ${isJS ? `
-                        <button onclick="${block.action.onclick}" class="nav-item active action-btn" style="border:none; cursor:pointer;">
-                            <i data-lucide="${block.action.icon}"></i>
-                            ${block.action.label}
-                        </button>
-                    ` : `
-                        <a href="${block.action.link}" class="nav-item active action-btn" ${block.action.target ? `target="${block.action.target}"` : ''}>
-                            <i data-lucide="${block.action.icon}"></i>
-                            ${block.action.label}
-                        </a>
-                    `}
+                    <a href="${block.action.link}" class="nav-item active action-btn" ${block.action.target ? `target="${block.action.target}"` : ''}>
+                        <i data-lucide="${block.action.icon}"></i>
+                        ${block.action.label}
+                    </a>
                 </div>
             `;
         default: return '';
@@ -442,70 +435,6 @@ function renderTable(table) {
     `;
 }
 
-function injectPDFButton(version) {
-    const container = document.getElementById('pdfBtnContainer');
-    if (!container) return;
-
-    const btn = document.createElement('button');
-    btn.id = 'btnPDF';
-    btn.className = 'nav-item active';
-    btn.style.cssText = 'font-size: 0.8rem; padding: 6px 12px; border: none; cursor: pointer; width: auto; display: inline-flex; margin-top: 15px;';
-    btn.innerHTML = `<i data-lucide="file-down"></i> Descargar PDF (${LATEST_VERSION})`;
-
-    container.innerHTML = '';
-    container.appendChild(btn);
-    btn.addEventListener('click', generatePDF);
-}
-
-async function generatePDF(forcePageId = null, forceFileName = null) {
-    // Si se pide una página específica, navegar a ella primero (opcional, o renderizar modo oculto)
-    if (forcePageId && typeof forcePageId === 'string') {
-        const [pId, sId] = forcePageId.split('/');
-        renderDynamicContent(pId, sId);
-    }
-
-    const container = document.querySelector('.report-container');
-    if (!container) return;
-
-    // 1. Inyectar Cabecera Académica (Avatar GEMA)
-    const headerHTML = `
-        <div id="pdfHeader" class="pdf-only-header" style="display:none; text-align: center; margin-bottom: 30px; border-bottom: 2px solid #003366; padding-bottom: 20px;">
-            <img src="assets/img/avatar/gema-avatar.png" style="width: 80px; height: 80px; margin-bottom: 10px;">
-            <h2 style="color: #003366; margin: 0; font-size: 1.6rem; text-transform: uppercase;">Proyecto dtic-GEMA</h2>
-            <p style="color: #666; font-size: 0.9rem; margin: 5px 0;">Asistencia Estratégica TIC - Facultad X</p>
-        </div>
-    `;
-    container.insertAdjacentHTML('afterbegin', headerHTML);
-
-    const pdfHeader = document.getElementById('pdfHeader');
-    const title = document.querySelector('h1')?.innerText || 'entregable';
-    const fileName = forceFileName || `${title.toLowerCase().replace(/[: ]/g, '_')}_gema.pdf`;
-
-    // 2. Activar Modo PDF (Clásico)
-    container.classList.add('pdf-mode');
-    pdfHeader.style.display = 'block';
-
-    const options = {
-        margin: [15, 15, 15, 15],
-        filename: fileName,
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true, logging: false, letterRendering: true },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-    };
-
-    try {
-        await html2pdf().set(options).from(container).save();
-    } catch (err) {
-        console.error('PDF Error:', err);
-        alert('Error al generar PDF. Use Ctrl+P.');
-    } finally {
-        // 3. Revertir cambios
-        pdfHeader.remove();
-        container.classList.remove('pdf-mode');
-        lucide.createIcons();
-    }
-}
 
 function setupChangelog() {
     document.addEventListener('click', (e) => {

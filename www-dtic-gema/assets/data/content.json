@@ -268,23 +268,23 @@
                     {
                         "type": "action_item",
                         "title": "PDF Fase 1: Relevamiento",
-                        "body": "Genera el informe de procesos y puntos de dolor detectados.",
+                        "body": "Informe de procesos y puntos de dolor detectados (Versión Estática).",
                         "action": {
-                            "label": "Generar PDF Fase 1",
-                            "onclick": "generatePDF('fase1', 'Reporte_Fase_1_Relevamiento.pdf')",
-                            "icon": "file-play",
-                            "type": "js"
+                            "label": "Descargar PDF Fase 1",
+                            "link": "assets/docs/Reporte_Fase_1_Relevamiento.pdf",
+                            "icon": "file-down",
+                            "target": "_blank"
                         }
                     },
                     {
                         "type": "action_item",
                         "title": "PDF Fase 2: Diseño",
-                        "body": "Genera la ficha técnica y lógica de implementación IA.",
+                        "body": "Ficha técnica y lógica de implementación IA (Versión Estática).",
                         "action": {
-                            "label": "Generar PDF Fase 2",
-                            "onclick": "generatePDF('fase2', 'Reporte_Fase_2_Diseño.pdf')",
-                            "icon": "file-play",
-                            "type": "js"
+                            "label": "Descargar PDF Fase 2",
+                            "link": "assets/docs/Reporte_Fase_2_Diseño.pdf",
+                            "icon": "file-down",
+                            "target": "_blank"
                         }
                     },
                     {

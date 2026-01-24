@@ -14,6 +14,7 @@
 - `www-dtic-gema/`: Interfaz maestra unificada (Chatbot + Reportes + PDF).
 - `data/`: Base de datos maestro (Changelog, Menú).
 - `data/memoria/`: Historial técnico de planificación y ejecución.
+- `app-reglas.md`: Protocolos de automatización y reglas de IA del proyecto.
 
 ## 🛠️ Guía Rápida de Uso
 
