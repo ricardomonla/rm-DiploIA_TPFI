@@ -198,30 +198,31 @@
             {
                 "id": "tecnico",
                 "type": "section",
-                "title": "Ficha Técnica del Proceso Inteligente",
+                "title": "Arquitectura Lógica del Flujo",
                 "grid": [
                     [
                         "<strong style='color: #4facfe;'>Receptor:</strong>",
-                        "Escucha activa y recepción del requerimiento desde la interfaz (Webhook)."
+                        "Webhook de entrada que captura la consulta del usuario."
                     ],
                     [
                         "<strong style='color: #4facfe;'>Validador:</strong>",
-                        "Filtro de seguridad: verificación de identidad y privilegios en tiempo real."
+                        "Módulo Google Sheets que valida la identidad en el Padrón."
                     ],
                     [
-                        "<strong style='color: #4facfe;'>Orquestador:</strong>",
-                        "Cerebro con IA (Gemini 1.5 Flash) que procesa, clasifica y genera la solución."
+                        "<strong style='color: #4facfe;'>Derivador:</strong>",
+                        "Router inteligente que bifurca el flujo según la validación."
                     ]
                 ],
                 "list": [
-                    "<strong>Escriba:</strong> Registro y persistencia del ticket en la bitácora histórica para trazabilidad.",
-                    "<strong>Emisor:</strong> Entrega canalizada de la respuesta estructurada hacia el portal GEMA."
+                    "<strong>Escriba (Rama A):</strong> Registro directo de auditoría si el usuario es conocido.",
+                    "<strong>Orquestador (Rama B):</strong> Intervención de Gemini IA para usuarios no registrados.",
+                    "<strong>Emisor:</strong> Nodo de respuesta final que entrega la salida al portal."
                 ]
             },
             {
                 "type": "image",
-                "src": "assets/img/diagrama_make_v1.5.png",
-                "caption": "Arquitectura Conceptual: El viaje de la consulta a través de los nodos de acción."
+                "src": "assets/img/diagrama_make_v1.5.4.png",
+                "caption": "Arquitectura Ramificada: Detalle del Derivador (Router) y procesamiento dual."
             },
             {
                 "id": "ia",
