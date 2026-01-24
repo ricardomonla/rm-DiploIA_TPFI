@@ -108,28 +108,24 @@ function renderMenuItem(item, index) {
     }
 
     if (item.type === 'parent') {
-        const currentHash = window.location.hash.split('/')[0];
-        const hasActiveChild = item.children.some(child => currentHash === `#${child.id}`);
         return `
-            <div class="nav-group ${hasActiveChild ? 'open' : ''}">
+            <div class="nav-group">
                 <div class="nav-item parent" onclick="this.parentElement.classList.toggle('open')">
                     <i data-lucide="${item.icon}"></i>
                     ${item.title}
                     <i data-lucide="chevron-down" class="chevron"></i>
                 </div>
                 <div class="sub-menu">
-                    ${item.children.map((child, subIndex) => {
-            const isDocActive = currentHash === `#${child.id}`;
-            return `
-                        <div class="nav-group-sub ${isDocActive ? 'open' : ''}">
-                            <a href="#${child.id}" class="nav-item sub ${isDocActive ? 'active' : ''}" data-video="${child.avatarVideo}">
+                    ${item.children.map((child, subIndex) => `
+                        <div class="nav-group-sub">
+                            <a href="#${child.id}" class="nav-item sub" data-video="${child.avatarVideo}">
                                 <i data-lucide="${child.icon || 'file'}"></i>
                                 ${child.title}
                             </a>
                             ${child.subsections ? `
                                 <div class="sub-sub-menu">
                                     ${child.subsections.map(subSub => `
-                                        <a href="#${child.id}/${subSub.id}" class="nav-item sub-sub ${window.location.hash === `#${child.id}/${subSub.id}` ? 'active' : ''}">
+                                        <a href="#${child.id}/${subSub.id}" class="nav-item sub-sub">
                                             <span class="bullet">${subSub.title.split(' ')[0]}</span>
                                             ${subSub.title.split(' ').slice(1).join(' ')}
                                         </a>
@@ -137,7 +133,7 @@ function renderMenuItem(item, index) {
                                 </div>
                             ` : ''}
                         </div>
-                    `}).join('')}
+                    `).join('')}
                 </div>
             </div>
         `;
@@ -151,17 +147,25 @@ function handleRouting() {
     const pageId = segments[0] || 'chatbot';
     const sectionId = segments[1];
 
-    // Actualizar estados de navegación
+    // 1. Limpiar estados previos
     document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.nav-group, .nav-group-sub').forEach(el => el.classList.remove('open'));
 
-    // Marcar link principal o documento
+    // 2. Marcar link principal o documento
     const activeLink = document.querySelector(`a[href="#${pageId}"]`);
-    if (activeLink) activeLink.classList.add('active');
+    if (activeLink) {
+        activeLink.classList.add('active');
+        // Abrir ancestros
+        expandParents(activeLink);
+    }
 
-    // Marcar sub-sección si existe
+    // 3. Marcar sub-sección si existe
     if (sectionId) {
         const subSubLink = document.querySelector(`a[href="#${pageId}/${sectionId}"]`);
-        if (subSubLink) subSubLink.classList.add('active');
+        if (subSubLink) {
+            subSubLink.classList.add('active');
+            expandParents(subSubLink);
+        }
     }
 
     // Actualizar Avatar
@@ -172,6 +176,16 @@ function handleRouting() {
         showChatbot();
     } else {
         renderDynamicContent(pageId, sectionId);
+    }
+}
+
+function expandParents(element) {
+    let parent = element.parentElement;
+    while (parent && !parent.classList.contains('sidebar-nav')) {
+        if (parent.classList.contains('nav-group') || parent.classList.contains('nav-group-sub')) {
+            parent.classList.add('open');
+        }
+        parent = parent.parentElement;
     }
 }
 
