@@ -1,5 +1,18 @@
 [
     {
+        "version": "v1.3",
+        "title": "UX Premium, PDF y Memoria Histórica",
+        "date": "24 (mediodía) de Enero, 2026",
+        "changes": [
+            "Implementación de Numeración Dinámica Inteligente (Menú <=> Contenidos).",
+            "Navegación Proactiva: Redirección automática al primer hijo en categorías padre.",
+            "Arquitectura de Sidebar Flex-3-Bloques con Sticky Footer y Scroll Independiente.",
+            "Integración de Sistema de Exportación PDF (html2pdf.js) en todos los reportes.",
+            "Optimización GEMA: Debouncing de animaciones (400ms) y Avatar premium (100px).",
+            "Protocolo de Memoria Técnica organizado por Versiones (data/memoria/vX.Y/)."
+        ]
+    },
+    {
         "version": "v1.2",
         "title": "Arquitectura de Datos Dinámica",
         "date": "24 de Enero, 2026",

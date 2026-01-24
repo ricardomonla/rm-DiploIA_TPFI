@@ -1,27 +1,25 @@
-# dtic-GEMA v1.2: Sistema Inteligente de Gestión TIC
+# dtic-GEMA v1.3: UX Premium y Coherencia Jerárquica
 
 **Sistema de Gestión Estratégica Mediante Automatización - UTN FRLR**
 
 - **Publicación:** [Portal de Acceso Online](https://ricardomonla.github.io/rm-DiploIA_TPFI/www-dtic-gema/index.html)
-- **Frontend:** Interfaz de Chatbot Web Premium (Vanilla JS / CSS Glassmorphism).
-- **Automatización:** Webhooks y flujo lógico en **Make.com**.
-- **IA:** Engine de procesamiento basado en **Google Gemini** con módulo de datos de valor ("Sabías que...").
-- **Persistencia:** Base de datos relacional en **Google Sheets**.
-- **Documentación:** Portal de entregables web integrado en v1.1.
+- **Frontend:** Interfaz SPA Unificada (Vanilla JS / CSS Glassmorphism).
+- **Exportación portabilidad:** Sistema integrado de descarga PDF académico.
+- **Jerarquía:** Navegación proactiva con numeración dinámica inteligente.
+- **IA:** Engine de procesamiento basado en **Google Gemini 1.5 Flash**.
+- **Memoria:** Registro técnico cronológico por versiones.
 
 ## 📂 Estructura del Proyecto
 
-- `www-chatbot/`: Interfaz principal del usuario.
-- `www-entregables/`: Portal de informes y ficha técnica (E01, E02).
-- `docs/`: Documentación estática y planes de implementación.
-- `_hist/`: Archivo histórico de versiones anteriores (v0.1, v0.2).
+- `www-dtic-gema/`: Interfaz maestra unificada (Chatbot + Reportes + PDF).
+- `data/`: Base de datos maestro (Changelog, Menú).
+- `data/memoria/`: Historial técnico de planificación y ejecución.
 
 ## 🛠️ Guía Rápida de Uso
 
-1.  **Backend (Make):** Asegúrate de que el Webhook de Make esté activo y configurado para recibir datos.
-2.  **Interfaz (Chatbot):** Abre `www-chatbot/index.html` en tu navegador.
-3.  **Interacción:** Envía consultas desde el chat. Los datos viajarán al Webhook y se registrarán en la hoja de Sheets `dtic-GEMA_BD`.
-4.  **Reportes:** Accede a `www-entregables/index.html` para generar los PDFs de los trabajos prácticos.
+1.  **Interactividad:** La barra lateral permite navegar y colapsar secciones con un solo click unificado.
+2.  **Reportes PDF:** Utiliza el botón "Descargar PDF" en los entregables para obtener la documentación oficial.
+3.  **Avatar:** GEMA reacciona según la sección visitada para una experiencia inmersiva.
 
 ---
 ---
