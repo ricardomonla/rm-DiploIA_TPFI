@@ -15,15 +15,17 @@
 ## ⚡ Comandos de Automatización y Protocolo (Prefijo "OK")
 - **Master Plan:** Es el documento único que consolida todos los requerimientos, iteraciones e instrucciones discutidas durante la fase de planificación. Debe ser acumulativo y final antes de cualquier ejecución técnica.
 - **Regla de Oro:** NO realizar ningún cambio técnico (edición de código, creación de archivos, comandos de sistema, etc.) hasta que el **Master Plan** esté consolidado, aprobado y se reciba la orden específica: **"OK procede"**.
-- **"OK guarda":** Realizar `git commit` y `push` de los cambios actuales con un mensaje descriptivo en español.
-- **"OK procede":** Ejecutar las tareas del plan de implementación y finalizar con un "OK guarda".
+- **"OK procede":**
+    1. Guardar una copia del **Master Plan** actual en `data/memoria/YYMMDD_HHMM_plan_nombre.md` (respetando la nomenclatura de fecha y nombre descriptivo).
+    2. Ejecutar las tareas técnicas definidas y finalizar con un "OK guarda".
 - **"OK versiona":**
-    1. Tomar como fuente principal el archivo `www-dtic-gema/assets/data/changelog.json`.
+    1. Tomar como fuente principal el archivo `data/changelog.json`.
     2. Incrementar la versión en `README.md`, archivos de configuración y generar/actualizar `CHANGELOG.md` basándose en dicha fuente.
-    3. Crear una etiqueta (tag) de Git con la nueva versión.
+    3. Actualizar el archivo `www-dtic-gema/assets/data/changelog.json` para que refleje los cambios de la fuente superior.
+    4. Crear una etiqueta (tag) de Git con la nueva versión.
 - **"OK terminamos":**
     1. Ejecutar "OK versiona".
-    2. Generar/actualizar `seguimiento.md` en `data/memoria/`.
+    2. Generar o actualizar `seguimiento.md` en `data/memoria/` consolidando el historial de todos los cambios, planes aplicados y el estado final del proyecto.
     3. Ejecutar "OK guarda".
 - **"OK continuamos despues":**
     1. Resumir brevemente el progreso en los pensamientos internos.
