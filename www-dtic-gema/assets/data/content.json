@@ -198,37 +198,27 @@
             {
                 "id": "tecnico",
                 "type": "section",
-                "title": "Ecosistema de Automatización (Make.com)",
-                "subtitle": "Interacción entre el Portal dtic-GEMA y el motor Cloud",
-                "grid": [
-                    [
-                        "<strong style='color: #4facfe;'>Receptor:</strong>",
-                        "Webhook que captura el payload JSON del Portal dtic-GEMA (chatbot)."
-                    ],
-                    [
-                        "<strong style='color: #4facfe;'>Validador:</strong>",
-                        "Módulo Google Sheets Search que consulta el padrón de agentes."
-                    ],
-                    [
-                        "<strong style='color: #4facfe;'>Derivador:</strong>",
-                        "Router lógico que bifurca el flujo según hallazgo en el registro."
-                    ]
-                ],
+                "title": "Ingeniería dtic-GEMA_Make",
+                "subtitle": "Catálogo Exhaustivo de Nodos y Orquestación Cloud",
+                "body": "La arquitectura del ecosistema dtic-GEMA_Make se basa en un flujo de trabajo ramificado y resiliente alojado en Make.com, donde cada nodo cumple una función crítica de acción y transformación de datos.",
                 "list": [
-                    "<strong>Orquestador:</strong> Cerebro Gemini 1.5 Flash que procesa la lógica AI (Rama B).",
-                    "<strong>Escriba:</strong> Registro Google Sheets de persistencia histórica (Rama A).",
-                    "<strong>Emisor:</strong> Webhook Response que envía la solución al Portal dtic-GEMA."
+                    "<strong>1. Receptor (Webhooks):</strong> El oído digital del sistema. Captura en tiempo real el payload JSON enviado desde la interfaz del Portal dtic-GEMA, iniciando el ciclo de asistencia.",
+                    "<strong>2. Validador (Google Sheets - Search Rows):</strong> El filtro de seguridad. Realiza una búsqueda exhaustiva en el padrón de agentes para validar la identidad, el rol y los permisos del usuario antes de proceder.",
+                    "<strong>3. Derivador (Router):</strong> El centro de mando lógico. Evalúa el resultado del Validador y bifurca la consulta: si el usuario es conocido, procede al registro; si es nuevo o requiere análisis, activa la inteligencia artificial.",
+                    "<strong>4. Escriba (Google Sheets - Add Row):</strong> El registrador oficial. Garantiza la persistencia técnica de cada interacción, documentando el ticket de soporte en la bitácora histórica para auditoría y KPIs.",
+                    "<strong>5. Orquestador (Gemini 1.5 Flash):</strong> El cerebro cognitivo. Genera respuestas contextuales, empáticas y precisas, integrando las reglas de negocio y el rol del asistente de la IA Generativa.",
+                    "<strong>6. Emisor (Webhooks - Response):</strong> El canal de salida. Empaqueta la solución final y la inyecta de regreso en el Portal dtic-GEMA (chatbot), cerrando el viaje de la consulta de forma instantánea."
                 ]
             },
             {
                 "type": "image",
-                "src": "assets/img/diagrama_arquitectura_v1.5.5.png",
-                "caption": "Morfología de Nodos: Anatomía del flujo de acción dentro de Make.com."
+                "src": "assets/img/anatomia_nodos_v1.5.6.png",
+                "caption": "Anatomía de Nodos: Mapa técnico detallado del motor de automatización dtic-GEMA_Make."
             },
             {
                 "type": "image",
-                "src": "assets/img/ecosistema_integral_v1.5.5.png",
-                "caption": "Ecosistema dtic-GEMA: Danza integral entre portal, orquestador cloud y servicios de datos."
+                "src": "assets/img/ecosistema_dtic_gema_make.png",
+                "caption": "Ecosistema Integral: Interacción fluida entre el Portal, el motor Make y los servicios Cloud."
             },
             {
                 "id": "ia",
