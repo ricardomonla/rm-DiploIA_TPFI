@@ -1,0 +1,39 @@
+[
+    {
+        "id": "chatbot",
+        "title": "Chat en Vivo",
+        "icon": "message-square",
+        "type": "direct",
+        "avatarVideo": "gema-01.mp4"
+    },
+    {
+        "id": "tfi",
+        "title": "Trabajo Final Integrador",
+        "icon": "graduation-cap",
+        "type": "parent",
+        "avatarVideo": "gema-03.mp4",
+        "children": [
+            {
+                "id": "consignas",
+                "title": "Consignas",
+                "icon": "file-text",
+                "path": "consignas",
+                "avatarVideo": "gema-02.mp4"
+            },
+            {
+                "id": "e01",
+                "title": "Entregable E01",
+                "icon": "clipboard-list",
+                "path": "e01",
+                "avatarVideo": "gema-04.mp4"
+            },
+            {
+                "id": "e02",
+                "title": "Entregable E02",
+                "icon": "shield-check",
+                "path": "e02",
+                "avatarVideo": "gema-05.mp4"
+            }
+        ]
+    }
+]

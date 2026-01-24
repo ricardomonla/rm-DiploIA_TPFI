@@ -12,7 +12,9 @@
 - **Documentación:** Almacenar en `data/memoria/` con formato `YYMMDD_HHMM_nombre.md`.
 - **Previsualización:** Abrir archivos `.md` en modo vista previa por defecto.
 
-## ⚡ Comandos de Automatización (Prefijo "OK")
+## ⚡ Comandos de Automatización y Protocolo (Prefijo "OK")
+- **Master Plan:** Es el documento único que consolida todos los requerimientos, iteraciones e instrucciones discutidas durante la fase de planificación. Debe ser acumulativo y final antes de cualquier ejecución técnica.
+- **Regla de Oro:** NO realizar ningún cambio técnico (edición de código, creación de archivos, comandos de sistema, etc.) hasta que el **Master Plan** esté consolidado, aprobado y se reciba la orden específica: **"OK procede"**.
 - **"OK guarda":** Realizar `git commit` y `push` de los cambios actuales con un mensaje descriptivo en español.
 - **"OK procede":** Ejecutar las tareas del plan de implementación y finalizar con un "OK guarda".
 - **"OK versiona":**

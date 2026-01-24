@@ -7,6 +7,8 @@
             "Externalización del historial de versiones a un archivo JSON independiente.",
             "Implementación de carga asíncrona (Fetch API) para mayor eficiencia.",
             "Optimización del sistema de navegación global dinámico.",
+            "Detección automática de la versión más reciente desde el JSON.",
+            "Sistema de cache-busting dinámico para garantizar datos frescos.",
             "Mejora en la mantenibilidad del portal dtic-GEMA."
         ]
     },

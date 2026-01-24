@@ -1,0 +1,213 @@
+{
+    "consignas": {
+        "title": "Consignas TP Final",
+        "subtitle": "Diplomatura en IA para No Programadores",
+        "version": "v1.1",
+        "content": [
+            {
+                "type": "section",
+                "title": "🎯 Objetivo General",
+                "body": "Integrar los conocimientos adquiridos sobre herramientas No-Code (Make), Inteligencia Artificial Generativa y metodologías de relevamiento de procesos para desarrollar un Producto Mínimo Viable (MVP) que resuelva una problemática real de negocio o personal mediante la automatización."
+            },
+            {
+                "type": "highlight",
+                "title": "📦 Entregables Requeridos",
+                "items": [
+                    "<strong>Entregable 1:</strong> Documento de relevamiento, análisis de puntos de dolor y priorización de Quick Win.",
+                    "<strong>Entregable 2:</strong> Ficha técnica del escenario en Make e implementación de IA.",
+                    "<strong>Entregable 3:</strong> Blueprint oficial (.JSON) del escenario funcional."
+                ]
+            },
+            {
+                "type": "section",
+                "title": "📊 Criterios de Evaluación",
+                "table": {
+                    "headers": [
+                        "Pilar",
+                        "Peso",
+                        "En GEMA"
+                    ],
+                    "rows": [
+                        [
+                            "Selección de Quick Win",
+                            "20%",
+                            "Gestión de Tickets TIC"
+                        ],
+                        [
+                            "Diseño del Flujo",
+                            "30%",
+                            "Webhook -> IA -> Sheets"
+                        ],
+                        [
+                            "Implementación Make",
+                            "30%",
+                            "Escenario v1.1 Activo"
+                        ],
+                        [
+                            "Uso de IA Generativa",
+                            "20%",
+                            "Gemini 1.5 Flash Sync"
+                        ]
+                    ]
+                }
+            },
+            {
+                "type": "footer_action",
+                "text": "Puedes descargar el PDF oficial de la consigna para más detalles:",
+                "link": "assets/docs/consigna_tp.pdf",
+                "label": "Descargar Consigna Completa",
+                "icon": "download"
+            }
+        ]
+    },
+    "e01": {
+        "title": "E01: Relevamiento y Diseño",
+        "subtitle": "Fase 1 y 2.1 - Análisis de Procesos y Flujo",
+        "version": "v1.1",
+        "studentInfo": {
+            "alumno": "Lic. Ricardo MONLA",
+            "area": "Dirección de TIC - Facultad X",
+            "fecha": "22 de enero de 2026",
+            "proyecto": "dtic-GEMA Integrador"
+        },
+        "content": [
+            {
+                "type": "section",
+                "title": "1. FASE 1: Relevamiento y Análisis del Proceso",
+                "body": "La Dirección de TIC de la Facultad X es el área encargada de la infraestructura, sistemas y soporte técnico de la institución. Debido a que la mayor parte de estas tareas son llevadas a cabo por un solo integrante, la carga operativa es crítica, requiriendo un equilibrio constante entre el mantenimiento de servidores y la atención directa a usuarios."
+            },
+            {
+                "type": "section",
+                "title": "1.2 Identificación de Puntos de Dolor",
+                "blocks": [
+                    {
+                        "type": "highlight",
+                        "title": "Punto de Dolor 1: Gestión de Accesos (Moodle)",
+                        "body": "Alumnos y docentes informan dificultades constantes para matricularse o pérdida de accesos. Esto genera unos 20 tickets diarios que consumen aproximadamente 4 horas de trabajo manual en verificaciones y blanqueos."
+                    },
+                    {
+                        "type": "highlight",
+                        "title": "Punto de Dolor 2: Soporte a la Preinscripción",
+                        "body": "Postulantes bloqueados por datos preexistentes en el sistema académico. Requiere una validación de identidad (DNI+Email) constante antes de cualquier acción técnica."
+                    },
+                    {
+                        "type": "highlight",
+                        "title": "Punto de Dolor 3: Administración de Servidores",
+                        "body": "El monitoreo manual de logs y backups compite directamente con el tiempo de soporte, creando cuellos de botella en tareas críticas de infraestructura."
+                    }
+                ]
+            },
+            {
+                "type": "section",
+                "title": "1.3 Priorización y Selección del \"Quick Win\"",
+                "table": {
+                    "headers": [
+                        "Punto de Dolor",
+                        "Impacto",
+                        "Esfuerzo",
+                        "Volumen",
+                        "Decisión"
+                    ],
+                    "rows": [
+                        [
+                            "Gestión de Consultas",
+                            "Alto",
+                            "Bajo",
+                            "Alto",
+                            "<strong style='color: #4facfe;'>Seleccionado</strong>"
+                        ],
+                        [
+                            "Bitácora de Tareas",
+                            "Medio",
+                            "Bajo",
+                            "Medio",
+                            "Tarea Interna"
+                        ],
+                        [
+                            "Admin. de Servidores",
+                            "Alto",
+                            "Alto",
+                            "Medio",
+                            "Tarea Crítica"
+                        ]
+                    ]
+                },
+                "footer_motto": "* Justificación: Automatizar el 80% de las dudas recurrentes permite recuperar casi 4 horas diarias de productividad técnica."
+            },
+            {
+                "type": "image",
+                "src": "assets/img/arquitectura_gema_flow.png",
+                "caption": "Visualización del ecosistema integrado v1.1"
+            },
+            {
+                "type": "section",
+                "title": "2. FASE 2: Diseño de la Solución No Code",
+                "subtitle": "2.1 Diseño del Flujo (Lenguaje Natural)",
+                "list": [
+                    "<strong>Input:</strong> El usuario ingresa Email institucional y DNI en la Interfaz Chatbot Premium.",
+                    "<strong>Process:</strong> <ul><li>Validación de identidad en base de datos Sheets.</li><li>Clasificación de perfiles y urgencia mediante IA Gemini.</li><li>Categorización inteligente del problema y generación de \"Dato de Valor\".</li></ul>",
+                    "<strong>Output:</strong> Ticket único de seguimiento, registro en Sheets y respuesta humanizada inmediata."
+                ]
+            }
+        ]
+    },
+    "e02": {
+        "title": "E02: Ficha Técnica e IA",
+        "subtitle": "Fase 2.2 a 5 - Implementación y Resultados",
+        "version": "v1.1",
+        "content": [
+            {
+                "type": "section",
+                "title": "2.2 Ficha Técnica del Escenario (Make)",
+                "grid": [
+                    [
+                        "<strong style='color: #4facfe;'>Trigger (Disparador):</strong>",
+                        "Webhook instantáneo desde el Chatbot."
+                    ],
+                    [
+                        "<strong style='color: #4facfe;'>Frecuencia:</strong>",
+                        "Ejecución en tiempo real bajo demanda."
+                    ]
+                ]
+            },
+            {
+                "type": "section",
+                "title": "Descripción de Nodos:",
+                "body": "El flujo en Make constituye la columna vertebral del sistema GEMA:",
+                "list": [
+                    "<strong>Custom Webhook:</strong> Punto de entrada para el payload del chatbot.",
+                    "<strong>Google Sheets (Search):</strong> Validación de seguridad y rol de usuario.",
+                    "<strong>Gemini 1.5 Flash:</strong> Motor de IA para clasificación y respuesta.",
+                    "<strong>Google Sheets (Log):</strong> Registro persistente del ticket generado.",
+                    "<strong>Webhook Response:</strong> Feedback inmediato al usuario."
+                ]
+            },
+            {
+                "type": "image",
+                "src": "assets/img/escenario_make.png",
+                "caption": "Captura de la arquitectura lógica en Make.com"
+            },
+            {
+                "type": "section",
+                "title": "3. Implementación de IA Generativa",
+                "subtitle": "3.1 Ingeniería de Prompts (Prompt Maestro)",
+                "code": "// System Role Instruction\nEres dtic-GEMA_FRLR. Tu objetivo es asistir técnicamente con tono empático.\n\n1. Validación: Siempre usa {{nombre_agente}} de la base.\n2. Clasificación: Prioriza Autoridades (SLA < 2h).\n3. Seguridad: NUNCA pidas contraseñas.\n4. Valor: Inyecta un dato curioso sobre {{carrera}}."
+            },
+            {
+                "type": "section",
+                "title": "4. Verificación y Resultados",
+                "body": "Las pruebas de carga y triaje han demostrado una eficiencia superior al 70% en la categorización de incidentes de Nivel 1. El técnico humano ahora interviene solo en la etapa final de resolución."
+            },
+            {
+                "type": "image",
+                "src": "assets/img/arquitectura_gema.png",
+                "caption": "Flujo de interacción IA"
+            },
+            {
+                "type": "section",
+                "title": "5. Conclusiones y Futuro",
+                "body": "La arquitectura desacoplada de GEMA permite una evolución constante. En esta v1.1, se ha priorizado la humanización de las respuestas y la integración de un portal unificado que facilita el acceso a la información estratégica de la Dirección de TIC."
+            }
+        ]
+    }
+}
