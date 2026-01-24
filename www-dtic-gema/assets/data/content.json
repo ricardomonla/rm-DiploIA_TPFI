@@ -1,72 +1,97 @@
 {
     "consignas": {
-        "title": "Consignas TP Final",
+        "title": "Consignas",
         "subtitle": "Diplomatura en IA para No Programadores",
-        "version": "v1.1",
+        "version": "v1.3",
         "content": [
+            {
+                "id": "intro",
+                "type": "section",
+                "title": "Bienvenido al Trabajo Práctico Final",
+                "body": "En esta sección encontrarás las bases, objetivos y criterios de evaluación para el desarrollo de tu proyecto integrador. Navega por las sub-secciones para ver los detalles técnicos solicitados."
+            },
             {
                 "id": "objetivo",
                 "type": "section",
-                "title": "🎯 Objetivo General",
-                "body": "Integrar los conocimientos adquiridos sobre herramientas No-Code (Make), Inteligencia Artificial Generativa y metodologías de relevamiento de procesos para desarrollar un Producto Mínimo Viable (MVP) que resuelva una problemática real de negocio o personal mediante la automatización."
+                "title": "Objetivo General",
+                "body": "Integrar los conocimientos adquiridos sobre herramientas No-Code (Make), Inteligencia Artificial Generativa y metodologías de relevamiento de procesos para desarrollar un Producto Mínimo Viable (MVP) que resuelva una problemática real de negocio o personal mediante la automatización. El objetivo es pasar de la identificación de un 'punto de dolor' a una solución funcional (Quick Win) sin escribir código tradicional."
             },
             {
-                "id": "entregables",
-                "type": "highlight",
-                "title": "📦 Entregables Requeridos",
-                "items": [
-                    "<strong>Entregable 1:</strong> Documento de relevamiento, análisis de puntos de dolor y priorización de Quick Win.",
-                    "<strong>Entregable 2:</strong> Ficha técnica del escenario en Make e implementación de IA.",
-                    "<strong>Entregable 3:</strong> Blueprint oficial (.JSON) del escenario funcional."
+                "id": "estructura",
+                "type": "section",
+                "title": "Estructura del Trabajo",
+                "body": "El proceso se divide en dos fases fundamentales que guían desde el problema hasta la solución:",
+                "blocks": [
+                    {
+                        "type": "highlight",
+                        "title": "FASE 1: Relevamiento y Análisis del proceso a mejorar",
+                        "body": "Relevamiento de procesos e identificación de Puntos de Dolor, priorización y selección del Quick Win, y diseño del flujo de la solución."
+                    },
+                    {
+                        "type": "highlight",
+                        "title": "FASE 2: Diseño e implementación de la solución No Code",
+                        "body": "Elaboración de la ficha técnica (Trigger, Frecuencia, Nodos) y construcción del escenario funcional en Make.com."
+                    }
                 ]
             },
             {
                 "id": "evaluacion",
                 "type": "section",
-                "title": "📊 Criterios de Evaluación",
+                "title": "Criterios de Evaluación",
                 "table": {
                     "headers": [
-                        "Pilar",
+                        "Pilar Conceptual",
                         "Peso",
-                        "En GEMA"
+                        "Criterio de Evaluación"
                     ],
                     "rows": [
                         [
                             "Selección de Quick Win",
                             "20%",
-                            "Gestión de Tickets TIC"
+                            "Capacidad para identificar un verdadero Quick Win. Se valorará que el proceso aporte valor real."
                         ],
                         [
                             "Diseño del Flujo",
                             "30%",
-                            "Webhook -> IA -> Sheets"
+                            "Claridad en la definición de Inputs y Outputs. Correcta aplicación de la lógica."
                         ],
                         [
-                            "Implementación Make",
+                            "Implementación Técnica",
                             "30%",
-                            "Escenario v1.1 Activo"
+                            "Correcta conexión de módulos, mapeo de datos y ejecución sin errores."
                         ],
                         [
                             "Uso de IA Generativa",
                             "20%",
-                            "Gemini 1.5 Flash Sync"
+                            "Integración con sentido dentro del flujo y calidad del prompt implícito."
                         ]
                     ]
                 }
             },
             {
+                "id": "tips",
+                "type": "section",
+                "title": "Tips para el éxito",
+                "list": [
+                    "<strong>Menos es más:</strong> Recuerda el concepto de MVP. Es preferible una automatización pequeña (3 o 4 nodos) que funcione perfectamente.",
+                    "<strong>Apóyate en la IA:</strong> Utiliza ChatGPT o Gemini como Asistente de Desarrollo para resolver errores JSON o configurar módulos.",
+                    "<strong>No Code, pero SÍ Lógica:</strong> Asegúrate de entender la lógica de los datos que fluyen de un módulo a otro."
+                ]
+            },
+            {
                 "type": "footer_action",
-                "text": "Puedes descargar el PDF oficial de la consigna para más detalles:",
+                "text": "Este contenido refleja fielmente el documento original de las consignas. Puedes descargarlo aquí:",
                 "link": "assets/docs/consigna_tp.pdf",
-                "label": "Descargar Consigna Completa",
-                "icon": "download"
+                "label": "Descargar PDF Original",
+                "icon": "external-link",
+                "target": "_blank"
             }
         ]
     },
-    "e01": {
-        "title": "Relevamiento y Diseño",
-        "subtitle": "Fase 1 y 2.1 - Análisis de Procesos y Flujo",
-        "version": "v1.1",
+    "fase1": {
+        "title": "FASE 1: Relevamiento",
+        "subtitle": "Identificación de Puntos de Dolor y Diseño del Flujo",
+        "version": "v1.3",
         "studentInfo": {
             "alumno": "Lic. Ricardo MONLA",
             "area": "Dirección de TIC - Facultad X",
@@ -75,10 +100,16 @@
         },
         "content": [
             {
-                "id": "fase1",
+                "id": "intro_f1",
                 "type": "section",
-                "title": "FASE 1: Relevamiento y Análisis del Proceso",
-                "body": "La Dirección de TIC de la Facultad X es el área encargada de la infraestructura, sistemas y soporte técnico de la institución. Debido a que la mayor parte de estas tareas son llevadas a cabo por un solo integrante, la carga operativa es crítica, requiriendo un equilibrio constante entre el mantenimiento de servidores y la atención directa a usuarios."
+                "title": "Introducción al Relevamiento",
+                "body": "La Fase 1 se centra en el diagnóstico situacional y la identificación de oportunidades de mejora mediante automatización. Aquí se detallan los 'puntos de dolor' detectados en la Dirección de TIC."
+            },
+            {
+                "id": "contexto",
+                "type": "section",
+                "title": "Contexto Institucional",
+                "body": "La Dirección de TIC de la Facultad X es el área encargada de la infraestructura, sistemas y soporte técnico de la institución. Cabe destacar que, debido a la estructura actual, la mayor parte de estas tareas son llevadas a cabo por un solo integrante, lo que genera una carga operativa crítica al tener que equilibrar el mantenimiento de servidores, redes y el soporte directo a usuarios."
             },
             {
                 "id": "dolores",
@@ -88,24 +119,24 @@
                     {
                         "type": "highlight",
                         "title": "Punto de Dolor 1: Gestión de Accesos (Moodle)",
-                        "body": "Alumnos y docentes informan dificultades constantes para matricularse o pérdida de accesos. Esto genera unos 20 tickets diarios que consumen aproximadamente 4 horas de trabajo manual en verificaciones y blanqueos."
+                        "body": "Alumnos y docentes informan dificultades constantes para matricularse o pérdida de accesos en el Campus Virtual. Carga operativa excesiva para verificar matriculaciones manuales y blanquear contraseñas. Aproximadamente 20 tickets diarios que consumen de 10 a 15 min por ticket, sumando casi 4 horas de trabajo manual diario."
                     },
                     {
                         "type": "highlight",
                         "title": "Punto de Dolor 2: Soporte a la Preinscripción",
-                        "body": "Postulantes bloqueados por datos preexistentes en el sistema académico. Requiere una validación de identidad (DNI+Email) constante antes de cualquier acción técnica."
+                        "body": "Postulantes bloqueados por datos preexistentes o usuarios olvidados en el sistema académico. Requiere una validación de identidad (DNI+Email) constante antes de cualquier acción técnica."
                     },
                     {
                         "type": "highlight",
                         "title": "Punto de Dolor 3: Administración de Servidores",
-                        "body": "El monitoreo manual de logs y backups compite directamente con el tiempo de soporte, creando cuellos de botella en tareas críticas de infraestructura."
+                        "body": "El monitoreo manual de logs, backups y el control de soluciones técnicas en servidores compite directamente con el tiempo de soporte, creando cuellos de botella en tareas críticas de infraestructura."
                     }
                 ]
             },
             {
                 "id": "priorizacion",
                 "type": "section",
-                "title": "Priorización y Selección del \"Quick Win\"",
+                "title": "Priorización del Quick Win",
                 "table": {
                     "headers": [
                         "Punto de Dolor",
@@ -120,7 +151,7 @@
                             "Alto",
                             "Bajo",
                             "Alto",
-                            "<strong style='color: #4facfe;'>Seleccionado</strong>"
+                            "<strong style='color: #4facfe;'>Seleccionado (Quick Win)</strong>"
                         ],
                         [
                             "Bitácora de Tareas",
@@ -138,31 +169,32 @@
                         ]
                     ]
                 },
-                "footer_motto": "* Justificación: Automatizar el 80% de las dudas recurrentes permite recuperar casi 4 horas diarias de productividad técnica."
+                "footer_motto": "* Justificación: Automatizar el 80% de las dudas recurrentes permite recuperar casi 4 horas diarias de productividad técnica para enfocarse en la infraestructura."
             },
             {
-                "type": "image",
-                "src": "assets/img/arquitectura_gema_flow.png",
-                "caption": "Visualización del ecosistema integrado v1.1"
-            },
-            {
-                "id": "fase2",
+                "id": "flujo",
                 "type": "section",
-                "title": "FASE 2: Diseño de la Solución No Code",
-                "subtitle": "Diseño del Flujo (Lenguaje Natural)",
+                "title": "Diseño del Flujo (Lenguaje Natural)",
                 "list": [
-                    "<strong>Input:</strong> El usuario ingresa Email institucional y DNI en la Interfaz Chatbot Premium.",
-                    "<strong>Process:</strong> <ul><li>Validación de identidad en base de datos Sheets.</li><li>Clasificación de perfiles y urgencia mediante IA Gemini.</li><li>Categorización inteligente del problema y generación de \"Dato de Valor\".</li></ul>",
-                    "<strong>Output:</strong> Ticket único de seguimiento, registro en Sheets y respuesta humanizada inmediata."
-                ]
+                    "<strong>Input (Entrada):</strong> El usuario ingresa su Email institucional y DNI en la Interfaz Chatbot Web.",
+                    "<strong>Process (Proceso):</strong> <ul><li>Validación de identidad en base de datos <code>dtic-GEMA_BD</code>.</li><li>Clasificación de perfiles y urgencia mediante IA Gemini.</li><li>Categorización inteligente del problema (Acceso Campus, Preinscripción, etc.).</li><li>Generación de 'Dato de Valor' personalizado.</li></ul>",
+                    "<strong>Output (Salida):</strong> Número de ticket único, registro persistente en Google Sheets y respuesta humanizada inmediata."
+                ],
+                "body": "<strong>Herramientas involucradas:</strong> Make, Gemini 1.5 Flash, Google Sheets, Vanilla JS/CSS."
             }
         ]
     },
-    "e02": {
-        "title": "Ficha Técnica e IA",
-        "subtitle": "Fase 2.2 a 5 - Implementación y Resultados",
-        "version": "v1.1",
+    "fase2": {
+        "title": "FASE 2: Diseño",
+        "subtitle": "Configuración Técnica y Lógica de Automatización",
+        "version": "v1.3",
         "content": [
+            {
+                "id": "intro_f2",
+                "type": "section",
+                "title": "Introducción a la Implementación",
+                "body": "La Fase 2 detalla la construcción técnica del MVP en Make.com, incluyendo la configuración de nodos, la estrategia de prompts y los resultados obtenidos."
+            },
             {
                 "id": "tecnico",
                 "type": "section",
@@ -170,54 +202,116 @@
                 "grid": [
                     [
                         "<strong style='color: #4facfe;'>Trigger (Disparador):</strong>",
-                        "Webhook instantáneo desde el Chatbot."
+                        "Webhook (Custom Webhook) - Disparo instantáneo desde el Chatbot."
                     ],
                     [
                         "<strong style='color: #4facfe;'>Frecuencia:</strong>",
-                        "Ejecución en tiempo real bajo demanda."
+                        "Ejecución bajo demanda en tiempo real."
                     ]
-                ]
-            },
-            {
-                "type": "section",
-                "title": "Descripción de Nodos:",
-                "body": "El flujo en Make constituye la columna vertebral del sistema GEMA:",
+                ],
                 "list": [
-                    "<strong>Custom Webhook:</strong> Punto de entrada para el payload del chatbot.",
-                    "<strong>Google Sheets (Search):</strong> Validación de seguridad y rol de usuario.",
-                    "<strong>Gemini 1.5 Flash:</strong> Motor de IA para clasificación y respuesta.",
-                    "<strong>Google Sheets (Log):</strong> Registro persistente del ticket generado.",
-                    "<strong>Webhook Response:</strong> Feedback inmediato al usuario."
+                    "<strong>Custom Webhook:</strong> Recibe el payload JSON desde la interfaz del usuario.",
+                    "<strong>Google Sheets (Search Row):</strong> Valida la identidad y el rol del usuario en la hoja 'Agentes'.",
+                    "<strong>Gemini 1.5 Flash:</strong> Motor de IA que clasifica, prioriza y genera la respuesta personalizada.",
+                    "<strong>Google Sheets (Log Row):</strong> Registra el ticket de forma persistente en la hoja histórica.",
+                    "<strong>Webhook Response:</strong> Envía la salida estructurada de regreso al front-end."
                 ]
             },
             {
                 "type": "image",
                 "src": "assets/img/escenario_make.png",
-                "caption": "Captura de la arquitectura lógica en Make.com"
+                "caption": "Captura de la arquitectura lógica y nodos configurados en Make.com"
             },
             {
                 "id": "ia",
                 "type": "section",
                 "title": "Implementación de IA Generativa",
-                "subtitle": "Ingeniería de Prompts (Prompt Maestro)",
-                "code": "// System Role Instruction\nEres dtic-GEMA_FRLR. Tu objetivo es asistir técnicamente con tono empático.\n\n1. Validación: Siempre usa {{nombre_agente}} de la base.\n2. Clasificación: Prioriza Autoridades (SLA < 2h).\n3. Seguridad: NUNCA pidas contraseñas.\n4. Valor: Inyecta un dato curioso sobre {{carrera}}."
+                "subtitle": "Estrategia de Prompts y Orquestación",
+                "body": "Se utiliza un orquestador que inyecta el rol del asistente, reglas de seguridad y SLAs diferenciados.",
+                "code": "// System Prompt de GEMA\nEres dtic-GEMA_FRLR, el Asistente Inteligente de la Dirección de TIC. Asiste con tono profesional y empático.\n1. Validación: Siempre valida identidad contra {{agentes}}.\n2. Priorización: SLA Autoridades < 2hs / Otros < 24hs.\n3. Seguridad: NUNCA pidas contraseñas.\n4. Valor: Inyecta un dato curioso sobre la carrera del usuario."
             },
             {
                 "id": "resultados",
                 "type": "section",
                 "title": "Verificación y Resultados",
-                "body": "Las pruebas de carga y triaje han demostrado una eficiencia superior al 70% en la categorización de incidentes de Nivel 1. El técnico humano ahora interviene solo en la etapa final de resolución."
+                "body": "El sistema demuestra una reducción del 70% en el triaje manual de soporte. El técnico humano ahora interviene solo en la etapa final de resolución.",
+                "list": [
+                    "Liberación de 4hs diarias para mantenimiento de infraestructura crítica.",
+                    "Integración exitosa de lógica condicional en Make resuelta con Routers.",
+                    "Escalabilidad asegurada para integración futura con Directorio Activo."
+                ]
             },
             {
                 "type": "image",
                 "src": "assets/img/arquitectura_gema.png",
-                "caption": "Flujo de interacción IA"
+                "caption": "Flujo de interacción y arquitectura de datos del sistema"
+            }
+        ]
+    },
+    "entregables": {
+        "title": "Entregables",
+        "subtitle": "Gestión de Requerimientos y Historial de Versiones",
+        "version": "v1.3",
+        "content": [
+            {
+                "id": "intro_entregas",
+                "type": "section",
+                "title": "Cierre de Proyecto y Archivos",
+                "body": "En esta sección se consolidan los documentos finales para la aprobación del TFI y el acceso al historial de entregas."
             },
             {
-                "id": "futuro",
+                "id": "generacion",
                 "type": "section",
-                "title": "Conclusiones y Futuro",
-                "body": "La arquitectura desacoplada de GEMA permite una evolución constante. En esta v1.1, se ha priorizado la humanización de las respuestas y la integración de un portal unificado que facilita el acceso a la información estratégica de la Dirección de TIC."
+                "title": "Generación de Entregables (v1.3)",
+                "body": "Utiliza este portal para generar los documentos oficiales actualizados con la estética académica requerida.",
+                "blocks": [
+                    {
+                        "type": "action_item",
+                        "title": "PDF Fase 1: Relevamiento",
+                        "body": "Genera el informe de procesos y puntos de dolor detectados.",
+                        "action": {
+                            "label": "Generar PDF Fase 1",
+                            "onclick": "generatePDF('fase1', 'Reporte_Fase_1_Relevamiento.pdf')",
+                            "icon": "file-play",
+                            "type": "js"
+                        }
+                    },
+                    {
+                        "type": "action_item",
+                        "title": "PDF Fase 2: Diseño",
+                        "body": "Genera la ficha técnica y lógica de implementación IA.",
+                        "action": {
+                            "label": "Generar PDF Fase 2",
+                            "onclick": "generatePDF('fase2', 'Reporte_Fase_2_Diseño.pdf')",
+                            "icon": "file-play",
+                            "type": "js"
+                        }
+                    },
+                    {
+                        "type": "action_item",
+                        "title": "Blueprint: Arquitectura Make",
+                        "body": "Accede al archivo JSON descargado de Make.com (Debe residir en assets/docs/blueprint.json).",
+                        "action": {
+                            "label": "Descargar Blueprint",
+                            "link": "assets/docs/blueprint.json",
+                            "icon": "code",
+                            "target": "_blank"
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "historial",
+                "type": "section",
+                "title": "Historial Consolidado",
+                "body": "Acceso al respaldo de la entrega oficial inicial.",
+                "footer_action": {
+                    "text": "Entrega unificada (Hito del 22/01/2026):",
+                    "link": "../data/entregas/260122_entrega_completa.zip",
+                    "label": "Descargar ZIP Histórico",
+                    "icon": "archive",
+                    "target": "_blank"
+                }
             }
         ]
     }

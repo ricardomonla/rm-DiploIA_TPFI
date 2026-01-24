@@ -1,89 +1,101 @@
 [
     {
-        "id": "chatbot",
-        "title": "Chat en Vivo",
-        "icon": "message-square",
-        "type": "direct",
-        "avatarVideo": "gema-01.mp4"
+        "id": "consignas",
+        "title": "Consignas",
+        "icon": "file-text",
+        "path": "consignas",
+        "type": "parent",
+        "avatarVideo": "gema-02.mp4",
+        "children": [
+            {
+                "id": "objetivo",
+                "title": "Objetivo General"
+            },
+            {
+                "id": "estructura",
+                "title": "Estructura"
+            },
+            {
+                "id": "evaluacion",
+                "title": "Criterios"
+            },
+            {
+                "id": "tips",
+                "title": "Tips de Éxito"
+            }
+        ]
     },
     {
-        "id": "tfi",
-        "title": "Trabajo Final Integrador",
-        "icon": "graduation-cap",
+        "id": "fase1",
+        "title": "FASE 1: Relevamiento",
+        "icon": "clipboard-list",
+        "path": "fase1",
+        "type": "parent",
+        "avatarVideo": "gema-04.mp4",
+        "children": [
+            {
+                "id": "contexto",
+                "title": "Contexto Institucional"
+            },
+            {
+                "id": "dolores",
+                "title": "Puntos de Dolor"
+            },
+            {
+                "id": "priorizacion",
+                "title": "Priorización"
+            },
+            {
+                "id": "flujo",
+                "title": "Diseño del Flujo"
+            }
+        ]
+    },
+    {
+        "id": "fase2",
+        "title": "FASE 2: Diseño",
+        "icon": "shield-check",
+        "path": "fase2",
+        "type": "parent",
+        "avatarVideo": "gema-05.mp4",
+        "children": [
+            {
+                "id": "tecnico",
+                "title": "Ficha Técnica Make"
+            },
+            {
+                "id": "ia",
+                "title": "Implementación IA"
+            },
+            {
+                "id": "resultados",
+                "title": "Resultados Finales"
+            }
+        ]
+    },
+    {
+        "id": "entregables",
+        "title": "Entregables",
+        "icon": "file-down",
+        "path": "entregas",
         "type": "parent",
         "avatarVideo": "gema-03.mp4",
         "children": [
             {
-                "id": "consignas",
-                "title": "Consignas",
-                "icon": "file-text",
-                "path": "consignas",
-                "avatarVideo": "gema-02.mp4",
-                "subsections": [
-                    {
-                        "id": "objetivo",
-                        "title": "Objetivo General"
-                    },
-                    {
-                        "id": "entregables",
-                        "title": "Entregables"
-                    },
-                    {
-                        "id": "evaluacion",
-                        "title": "Evaluación"
-                    }
-                ]
+                "id": "requerimientos",
+                "title": "Requerimientos de Entrega"
             },
             {
-                "id": "e01",
-                "title": "Entregable E01",
-                "icon": "clipboard-list",
-                "path": "e01",
-                "avatarVideo": "gema-04.mp4",
-                "subsections": [
-                    {
-                        "id": "fase1",
-                        "title": "Relevamiento (Fase 1)"
-                    },
-                    {
-                        "id": "dolores",
-                        "title": "Puntos de Dolor"
-                    },
-                    {
-                        "id": "priorizacion",
-                        "title": "Priorización"
-                    },
-                    {
-                        "id": "fase2",
-                        "title": "Diseño (Fase 2)"
-                    }
-                ]
-            },
-            {
-                "id": "e02",
-                "title": "Entregable E02",
-                "icon": "shield-check",
-                "path": "e02",
-                "avatarVideo": "gema-05.mp4",
-                "subsections": [
-                    {
-                        "id": "tecnico",
-                        "title": "Ficha Técnica Make"
-                    },
-                    {
-                        "id": "ia",
-                        "title": "Implementación IA"
-                    },
-                    {
-                        "id": "resultados",
-                        "title": "Resultados"
-                    },
-                    {
-                        "id": "futuro",
-                        "title": "Conclusiones"
-                    }
-                ]
+                "id": "historial",
+                "title": "Historial de Entregas"
             }
         ]
+    },
+    {
+        "id": "chatbot",
+        "title": "Chatbot",
+        "icon": "message-square",
+        "type": "direct",
+        "avatarVideo": "gema-01.mp4"
     }
 ]

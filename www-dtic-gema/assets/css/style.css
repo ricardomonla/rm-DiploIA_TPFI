@@ -92,6 +92,91 @@ body {
     border-radius: 10px;
 }
 
+/* Sidebar Modular v1.4.x */
+.sidebar-header {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 1px solid var(--border-glass);
+    margin-bottom: 20px;
+}
+
+.logo-container {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: var(--primary-gradient);
+    padding: 3px;
+    position: relative;
+    box-shadow: 0 0 25px rgba(79, 172, 254, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+.avatar-sidebar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #000;
+}
+
+.status-dot-sidebar {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 15px;
+    height: 15px;
+    background: #10b981;
+    border: 3px solid #1e293b;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #10b981;
+}
+
+.version-tag {
+    background: rgba(79, 172, 254, 0.1);
+    color: #4facfe;
+    font-size: 0.7rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(79, 172, 254, 0.3);
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.sidebar-footer {
+    padding: 20px;
+    border-top: 1px solid var(--border-glass);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+
+.footer-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.footer-info strong {
+    font-size: 0.85rem;
+    color: var(--text-main);
+}
+
+.footer-info span {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+.footer-icon {
+    width: 20px;
+    height: 20px;
+    color: #4facfe;
+    opacity: 0.6;
+}
+
 .nav-item {
     padding: 12px 20px;
     border-radius: 12px;
@@ -698,6 +783,43 @@ input {
     margin: 25px 0;
 }
 
+.action-item-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-glass);
+    padding: 20px 30px;
+    border-radius: 16px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+.action-item-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateX(5px);
+    border-color: rgba(79, 172, 254, 0.3);
+}
+
+.action-item-content h4 {
+    color: var(--text-main);
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+}
+
+.action-item-content p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 0 !important;
+}
+
+.action-btn {
+    width: auto !important;
+    padding: 10px 25px !important;
+    font-size: 0.9rem !important;
+    flex-shrink: 0;
+}
+
 /* Scrollbar global */
 ::-webkit-scrollbar {
     width: 8px;
@@ -811,6 +933,63 @@ input {
     footer {
         color: #64748b !important;
     }
+}
+
+/* Modo Reporte Clásico (PDF v1.4.5) */
+.report-container.pdf-mode {
+    background: #ffffff !important;
+    color: #1e293b !important;
+    box-shadow: none !important;
+    border: 1px solid #e2e8f0 !important;
+    padding: 40px !important;
+    backdrop-filter: none !important;
+    border-radius: 0 !important;
+}
+
+.report-container.pdf-mode h1,
+.report-container.pdf-mode h2 {
+    color: #003366 !important;
+    border-left: 5px solid #003366;
+    padding-left: 15px;
+}
+
+.report-container.pdf-mode h3 {
+    color: #2e7d32 !important;
+    /* Verde académico de captura */
+    border-left: 5px solid #2e7d32;
+    padding-left: 15px;
+}
+
+.report-container.pdf-mode p,
+.report-container.pdf-mode li {
+    color: #334155 !important;
+    text-align: justify;
+}
+
+.report-container.pdf-mode .highlight-box {
+    background: #f8fafc !important;
+    border: 1.5px solid #003366 !important;
+    color: #1e293b !important;
+}
+
+.report-container.pdf-mode .matrix-table {
+    border: 1px solid #cbd5e1 !important;
+}
+
+.report-container.pdf-mode .matrix-table th {
+    background: #f1f5f9 !important;
+    color: #003366 !important;
+    border-bottom: 2px solid #003366 !important;
+}
+
+.report-container.pdf-mode .nav-item.active {
+    display: none !important;
+    /* Ocultar botones de acción en el PDF */
+}
+
+.report-container.pdf-mode .status-badge {
+    color: #003366 !important;
+    border-color: #003366 !important;
 }
 
 /* Restored pulse-avatar animation */

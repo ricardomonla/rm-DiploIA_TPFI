@@ -36,10 +36,13 @@ async function loadData() {
             fetch(`assets/data/content.json?t=${t}`).then(r => r.json())
         ]);
 
-        // Sincronizar versión global
-        PROJECT_DATA = { ...project, version: LATEST_VERSION };
-        MENU_DATA = menu;
+        // Sincronizar versión: El Changelog manda.
+        PROJECT_DATA = {
+            ...project,
+            version: LATEST_VERSION || project.version
+        };
         CONTENT_DATA = content;
+        MENU_DATA = menu;
     } catch (e) {
         console.error('Error cargando datos:', e);
     }
@@ -79,40 +82,48 @@ async function initLayout() {
 }
 
 function renderSidebar(sidebar) {
+    const avatarPath = "assets/img/gema-avatar.png"; // Assuming a default avatar path for the new header structure
     sidebar.innerHTML = `
-        <div class="sidebar-brand">
-            <div class="avatar-wrapper" style="margin: 0 auto 10px;">
-                <video src="assets/video/avatar/gema-01.mp4" autoplay muted playsinline class="header-avatar" id="headerAvatar"></video>
+        <div class="sidebar-header">
+            <div class="logo-container">
+                <video src="assets/video/avatar/gema-01.mp4" autoplay muted playsinline class="avatar-sidebar" id="headerAvatar" onclick="updateAvatar('gema-01.mp4')"></video>
+                <div class="status-dot-sidebar"></div>
             </div>
-            <h2 style="color: var(--text-main); font-size: 1.1rem;">${PROJECT_DATA.projectName}</h2>
-            <span class="version-badge" id="mainVersionBadge" style="color: #4facfe; font-size: 0.7rem; text-transform: uppercase; cursor: pointer; font-weight: bold; border: 1px solid rgba(79, 172, 254, 0.3); padding: 2px 8px; border-radius: 10px; background: rgba(79, 172, 254, 0.1);">${PROJECT_DATA.version}</span>
+            <div class="version-tag">${PROJECT_DATA.version}</div>
         </div>
         <nav class="sidebar-nav">
             ${MENU_DATA.map((item, index) => renderMenuItem(item, index + 1)).join('')}
         </nav>
-        <div class="sidebar-footer" style="padding: 20px; border-top: 1px solid var(--border-glass); font-size: 0.75rem; color: var(--text-muted); text-align: center; flex-shrink: 0;">
-            ${PROJECT_DATA.student.name}<br>${PROJECT_DATA.institution} © 2026
+        <div class="sidebar-footer">
+            <div class="footer-info">
+                <strong>${PROJECT_DATA.projectName}</strong>
+                <span>Facultad X</span>
+            </div>
+            <i data-lucide="shield-check" class="footer-icon"></i>
         </div>
     `;
     lucide.createIcons();
 }
 
 function renderMenuItem(item, parentIndex) {
+    const videoAttr = item.avatarVideo ? `data-video="${item.avatarVideo}"` : '';
+
     if (item.type === 'direct') {
         const isActive = (!window.location.hash && item.id === 'chatbot') || window.location.hash === `#${item.id}`;
         return `
-            <a href="#${item.id}" class="nav-item ${isActive ? 'active' : ''}" data-video="${item.avatarVideo}">
+            <a href="#${item.id}" class="nav-item ${isActive ? 'active' : ''}" ${videoAttr}>
                 <i data-lucide="${item.icon}"></i>
+                <span class="bullet-main" style="margin-right: 8px; font-weight: bold; color: inherit;">${parentIndex}</span>
                 ${item.title}
             </a>
         `;
     }
 
     if (item.type === 'parent') {
-        // parentIndex se usa para la numeración principal (ej. 1)
+        const firstChildId = item.children && item.children.length > 0 ? item.children[0].id : '';
         return `
             <div class="nav-group">
-                <div class="nav-item parent" onclick="handleParentClick(this, '${item.children[0].id}')">
+                <div class="nav-item parent" onclick="handleParentClick(this, '${item.id}', '${firstChildId}')">
                     <i data-lucide="${item.icon}"></i>
                     <span class="bullet-main" style="margin-right: 8px; font-weight: bold; color: #4facfe;">${parentIndex}</span>
                     ${item.title}
@@ -121,10 +132,12 @@ function renderMenuItem(item, parentIndex) {
                 <div class="sub-menu">
                     ${item.children.map((child, subIndex) => {
             const childNumber = `${parentIndex}.${subIndex + 1}`;
+            const childVideo = child.avatarVideo || item.avatarVideo || '';
+            const childVideoAttr = childVideo ? `data-video="${childVideo}"` : '';
             return `
                         <div class="nav-group-sub">
                             <div class="nav-item-wrapper" onclick="this.closest('.nav-group-sub').classList.toggle('open');" style="display: flex; align-items: center; justify-content: space-between; cursor: pointer;">
-                                <a href="#${child.id}" class="nav-item sub" data-video="${child.avatarVideo}" style="flex: 1; pointer-events: auto;">
+                                <a href="#${item.id}/${child.id}" class="nav-item sub" ${childVideoAttr} style="flex: 1; pointer-events: auto;">
                                     <span class="bullet" style="margin-right: 8px; font-weight: bold; color: #4facfe;">${childNumber}</span>
                                     ${child.title}
                                 </a>
@@ -133,7 +146,7 @@ function renderMenuItem(item, parentIndex) {
                             ${child.subsections ? `
                                 <div class="sub-sub-menu">
                                     ${child.subsections.map((subSub, subSubIndex) => `
-                                        <a href="#${child.id}/${subSub.id}" class="nav-item sub-sub">
+                                        <a href="#${item.id}/${child.id}/${subSub.id}" class="nav-item sub-sub">
                                             <span class="bullet" style="margin-right: 8px; opacity: 0.6;">${childNumber}.${subSubIndex + 1}</span>
                                             ${subSub.title}
                                         </a>
@@ -149,55 +162,67 @@ function renderMenuItem(item, parentIndex) {
     return '';
 }
 
-function handleParentClick(element, firstChildId) {
+function handleParentClick(element, parentId, firstChildId) {
     const group = element.parentElement;
     const wasOpen = group.classList.contains('open');
 
     // Toggle expansión
     group.classList.toggle('open');
 
-    // Navegación Proactiva: Si no estaba abierto, ir al primer hijo
-    if (!wasOpen) {
-        window.location.hash = firstChildId;
-    }
+    // Navegación: Ir al padre (Punto principal)
+    window.location.hash = parentId;
 }
 
 function handleRouting() {
     const fullHash = window.location.hash.replace('#', '');
     const segments = fullHash.split('/');
-    const pageId = segments[0] || 'chatbot';
+    const pageId = segments[0] || 'consignas';
     const sectionId = segments[1];
 
     // 1. Limpiar estados previos
     document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
     document.querySelectorAll('.nav-group, .nav-group-sub').forEach(el => el.classList.remove('open'));
 
-    // 2. Marcar link principal o documento
-    const activeLink = document.querySelector(`a[href="#${pageId}"]`);
+    // 2. Marcar link activo (buscando el hash exacto o el ID base)
+    let activeLink = document.querySelector(`a[href="#${fullHash}"]`);
+    if (!activeLink && pageId) {
+        // Buscar el ítem padre si no hay link directo a la subsección
+        activeLink = document.querySelector(`a[href="#${pageId}"]`);
+    }
+
+    // Caso especial: Si es una sección raíz (padre), el activeLink podría ser el div.parent
+    if (!activeLink && pageId) {
+        const parentItem = Array.from(document.querySelectorAll('.nav-item.parent')).find(el => {
+            const onclick = el.getAttribute('onclick');
+            return onclick && onclick.includes(`'${pageId}'`);
+        });
+        if (parentItem) activeLink = parentItem;
+    }
+
     if (activeLink) {
         activeLink.classList.add('active');
-        // Abrir ancestros
+        // Abrir ancestros para que el menú refleje la posición
         expandParents(activeLink);
+
+        // Si el link activo es un padre o está dentro de un grupo, asegurar que esté abierto
+        const group = activeLink.closest('.nav-group');
+        if (group) group.classList.add('open');
     }
 
-    // 3. Marcar sub-sección si existe
-    if (sectionId) {
-        const subSubLink = document.querySelector(`a[href="#${pageId}/${sectionId}"]`);
-        if (subSubLink) {
-            subSubLink.classList.add('active');
-            expandParents(subSubLink);
-        }
-    }
-
-    // Actualizar Avatar
+    // Actualizar Avatar (buscando el atributo data-video en el link activo)
     const videoSrc = activeLink?.getAttribute('data-video');
-    if (videoSrc) updateAvatar(videoSrc);
+    if (videoSrc && videoSrc !== 'undefined') {
+        updateAvatar(videoSrc);
+    }
 
     if (pageId === 'chatbot') {
         showChatbot();
     } else {
         renderDynamicContent(pageId, sectionId);
     }
+
+    // Sincronizar título de la pestaña con la institución
+    document.title = `GEMA Chat - ${PROJECT_DATA.institution}`;
 }
 
 function expandParents(element) {
@@ -247,9 +272,11 @@ function renderDynamicContent(id, sectionId) {
 
     // Calcular numeración proactiva comparando con MENU_DATA
     let pageNumber = "";
-    MENU_DATA.forEach((parent, pIdx) => {
-        if (parent.children) {
-            parent.children.forEach((child, cIdx) => {
+    MENU_DATA.forEach((item, pIdx) => {
+        if (item.id === id) {
+            pageNumber = `${pIdx + 1}`;
+        } else if (item.children) {
+            item.children.forEach((child, cIdx) => {
                 if (child.id === id) pageNumber = `${pIdx + 1}.${cIdx + 1}`;
             });
         }
@@ -278,7 +305,7 @@ function renderDynamicContent(id, sectionId) {
                 <div id="pdfBtnContainer"></div>
             </div>
             <div style="text-align: right;">
-                <span class="version-badge" style="background: var(--primary-gradient); color: white; padding: 4px 12px; border-radius: 6px; font-weight: bold; font-size: 0.8rem;">${LATEST_VERSION}</span>
+                <span class="version-badge" style="background: var(--primary-gradient); color: white; padding: 4px 12px; border-radius: 6px; font-weight: bold; font-size: 0.8rem;">${PROJECT_DATA.version}</span>
             </div>
         </header>
 
@@ -293,7 +320,10 @@ function renderDynamicContent(id, sectionId) {
         </footer>
     `;
 
-    injectPDFButton(data.version);
+    // Solo inyectar botón de exportación PDF en la sección de Entregas Finales
+    if (id === 'entregas') {
+        injectPDFButton(data.version);
+    }
     lucide.createIcons();
 
     // Scroll a sección si existe
@@ -333,6 +363,7 @@ function renderBlock(block, pageNumber, blockIndex) {
                     ${block.list ? `<ul class="process-list">${block.list.map(li => `<li>${li}</li>`).join('')}</ul>` : ''}
                     ${block.table ? renderTable(block.table) : ''}
                     ${block.blocks ? block.blocks.map((b, i) => renderBlock(b, sectionNumber, i + 1)).join('') : ''}
+                    ${block.footer_action ? renderBlock({ ...block.footer_action, type: 'footer_action' }) : ''}
                     ${block.footer_motto ? `<div style="margin-top: 20px; font-style: italic; color: var(--text-muted); font-size: 0.9rem;">${block.footer_motto}</div>` : ''}
                 </section>
             `;
@@ -367,10 +398,31 @@ function renderBlock(block, pageNumber, blockIndex) {
             return `
                 <div style="margin-top: 40px; text-align: center;">
                     <p style="text-align: center; color: var(--text-muted);">${block.text}</p>
-                    <a href="${block.link}" class="nav-item active" style="display: inline-flex; width: auto; margin-top: 10px;">
+                    <a href="${block.link}" class="nav-item active" style="display: inline-flex; width: auto; margin-top: 10px;" ${block.target ? `target="${block.target}"` : ''}>
                         <i data-lucide="${block.icon}"></i>
                         ${block.label}
                     </a>
+                </div>
+            `;
+        case 'action_item':
+            const isJS = block.action.type === 'js';
+            return `
+                <div class="action-item-card">
+                    <div class="action-item-content">
+                        <h4>${block.title}</h4>
+                        ${block.body ? `<p>${block.body}</p>` : ''}
+                    </div>
+                    ${isJS ? `
+                        <button onclick="${block.action.onclick}" class="nav-item active action-btn" style="border:none; cursor:pointer;">
+                            <i data-lucide="${block.action.icon}"></i>
+                            ${block.action.label}
+                        </button>
+                    ` : `
+                        <a href="${block.action.link}" class="nav-item active action-btn" ${block.action.target ? `target="${block.action.target}"` : ''}>
+                            <i data-lucide="${block.action.icon}"></i>
+                            ${block.action.label}
+                        </a>
+                    `}
                 </div>
             `;
         default: return '';
@@ -405,30 +457,52 @@ function injectPDFButton(version) {
     btn.addEventListener('click', generatePDF);
 }
 
-async function generatePDF() {
-    const element = document.querySelector('.report-container');
-    const title = document.querySelector('h1')?.innerText || 'entregable';
-    const btn = document.getElementById('btnPDF');
-    const originalText = btn.innerHTML;
+async function generatePDF(forcePageId = null, forceFileName = null) {
+    // Si se pide una página específica, navegar a ella primero (opcional, o renderizar modo oculto)
+    if (forcePageId && typeof forcePageId === 'string') {
+        const [pId, sId] = forcePageId.split('/');
+        renderDynamicContent(pId, sId);
+    }
 
-    btn.innerHTML = '<i data-lucide="loader"></i> Generando...';
-    lucide.createIcons();
+    const container = document.querySelector('.report-container');
+    if (!container) return;
+
+    // 1. Inyectar Cabecera Académica (Avatar GEMA)
+    const headerHTML = `
+        <div id="pdfHeader" class="pdf-only-header" style="display:none; text-align: center; margin-bottom: 30px; border-bottom: 2px solid #003366; padding-bottom: 20px;">
+            <img src="assets/img/avatar/gema-avatar.png" style="width: 80px; height: 80px; margin-bottom: 10px;">
+            <h2 style="color: #003366; margin: 0; font-size: 1.6rem; text-transform: uppercase;">Proyecto dtic-GEMA</h2>
+            <p style="color: #666; font-size: 0.9rem; margin: 5px 0;">Asistencia Estratégica TIC - Facultad X</p>
+        </div>
+    `;
+    container.insertAdjacentHTML('afterbegin', headerHTML);
+
+    const pdfHeader = document.getElementById('pdfHeader');
+    const title = document.querySelector('h1')?.innerText || 'entregable';
+    const fileName = forceFileName || `${title.toLowerCase().replace(/[: ]/g, '_')}_gema.pdf`;
+
+    // 2. Activar Modo PDF (Clásico)
+    container.classList.add('pdf-mode');
+    pdfHeader.style.display = 'block';
 
     const options = {
-        margin: [10, 10, 10, 10],
-        filename: `${title.toLowerCase().replace(/[: ]/g, '_')}_gema.pdf`,
+        margin: [15, 15, 15, 15],
+        filename: fileName,
         image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true, logging: false },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        html2canvas: { scale: 2, useCORS: true, logging: false, letterRendering: true },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
     };
 
     try {
-        await html2pdf().set(options).from(element).save();
+        await html2pdf().set(options).from(container).save();
     } catch (err) {
         console.error('PDF Error:', err);
         alert('Error al generar PDF. Use Ctrl+P.');
     } finally {
-        btn.innerHTML = originalText;
+        // 3. Revertir cambios
+        pdfHeader.remove();
+        container.classList.remove('pdf-mode');
         lucide.createIcons();
     }
 }

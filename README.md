@@ -1,6 +1,6 @@
 # dtic-GEMA v1.3: UX Premium y Coherencia Jerárquica
 
-**Sistema de Gestión Estratégica Mediante Automatización - UTN FRLR**
+**Sistema de Gestión Estratégica Mediante Automatización - Facultad X**
 
 - **Publicación:** [Portal de Acceso Online](https://ricardomonla.github.io/rm-DiploIA_TPFI/www-dtic-gema/index.html)
 - **Frontend:** Interfaz SPA Unificada (Vanilla JS / CSS Glassmorphism).
