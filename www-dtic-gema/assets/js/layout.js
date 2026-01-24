@@ -11,9 +11,20 @@ const NAV_LINKS = [
 
 
 document.addEventListener('DOMContentLoaded', () => {
+    loadDependencies();
     initLayout();
     lucide.createIcons();
 });
+
+function loadDependencies() {
+    // Cargar html2pdf.js dinámicamente si no está presente
+    if (!document.getElementById('html2pdf_script')) {
+        const script = document.createElement('script');
+        script.id = 'html2pdf_script';
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+        document.head.appendChild(script);
+    }
+}
 
 function initLayout() {
     const appWrapper = document.querySelector('.app-wrapper');
@@ -33,6 +44,62 @@ function initLayout() {
 
     renderSidebar(sidebar, base);
     setupChangelog();
+
+    // Inyectar botón de PDF en páginas de reporte
+    if (document.querySelector('.report-container')) {
+        injectPDFButton();
+    }
+}
+
+function injectPDFButton() {
+    const reportHeader = document.querySelector('.report-header');
+    if (!reportHeader) return;
+
+    const btnWrapper = document.createElement('div');
+    btnWrapper.style.marginTop = '15px';
+    btnWrapper.innerHTML = `
+        <button id="btnPDF" class="nav-item active" style="font-size: 0.8rem; padding: 6px 12px; border: none; cursor: pointer; width: auto; display: inline-flex;">
+            <i data-lucide="file-down"></i>
+            Descargar PDF (v1.2)
+        </button>
+    `;
+
+    // Insertar después de la descripción en el header
+    const headerLeft = reportHeader.querySelector('div:first-child');
+    if (headerLeft) {
+        headerLeft.appendChild(btnWrapper);
+    }
+
+    btnWrapper.querySelector('#btnPDF').addEventListener('click', generatePDF);
+}
+
+async function generatePDF() {
+    const element = document.querySelector('.report-container');
+    const title = document.querySelector('h1')?.innerText || 'entregable';
+
+    // Feedback visual
+    const btn = document.getElementById('btnPDF');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<i data-lucide="loader"></i> Generando...';
+    lucide.createIcons();
+
+    const options = {
+        margin: [10, 10, 10, 10],
+        filename: `${title.toLowerCase().replace(/ /g, '_')}_gema.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true, logging: false },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+
+    try {
+        await html2pdf().set(options).from(element).save();
+    } catch (err) {
+        console.error('PDF Error:', err);
+        alert('Hubo un error al generar el PDF. Por favor, intente con Imprimir (Ctrl+P)');
+    } finally {
+        btn.innerHTML = originalText;
+        lucide.createIcons();
+    }
 }
 
 function renderSidebar(sidebar, base) {
