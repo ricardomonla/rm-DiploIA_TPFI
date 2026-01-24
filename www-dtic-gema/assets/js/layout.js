@@ -90,7 +90,7 @@ function renderSidebar(sidebar) {
         <nav class="sidebar-nav">
             ${MENU_DATA.map((item, index) => renderMenuItem(item, index + 1)).join('')}
         </nav>
-        <div style="margin-top: auto; padding-top: 20px; border-top: 1px solid var(--border-glass); font-size: 0.75rem; color: var(--text-muted); text-align: center;">
+        <div class="sidebar-footer" style="padding: 20px; border-top: 1px solid var(--border-glass); font-size: 0.75rem; color: var(--text-muted); text-align: center; flex-shrink: 0;">
             ${PROJECT_DATA.student.name}<br>${PROJECT_DATA.institution} © 2026
         </div>
     `;
@@ -119,12 +119,12 @@ function renderMenuItem(item, index) {
                 <div class="sub-menu">
                     ${item.children.map((child, subIndex) => `
                         <div class="nav-group-sub">
-                            <div class="nav-item-wrapper" style="display: flex; align-items: center; justify-content: space-between;">
-                                <a href="#${child.id}" class="nav-item sub" data-video="${child.avatarVideo}" style="flex: 1;">
+                            <div class="nav-item-wrapper" onclick="this.closest('.nav-group-sub').classList.toggle('open');" style="display: flex; align-items: center; justify-content: space-between; cursor: pointer;">
+                                <a href="#${child.id}" class="nav-item sub" data-video="${child.avatarVideo}" style="flex: 1; pointer-events: auto;">
                                     <i data-lucide="${child.icon || 'file'}"></i>
                                     ${child.title}
                                 </a>
-                                ${child.subsections ? `<i data-lucide="chevron-down" class="chevron sub-chevron" onclick="this.closest('.nav-group-sub').classList.toggle('open'); event.stopPropagation();"></i>` : ''}
+                                ${child.subsections ? `<i data-lucide="chevron-down" class="chevron sub-chevron"></i>` : ''}
                             </div>
                             ${child.subsections ? `
                                 <div class="sub-sub-menu">
