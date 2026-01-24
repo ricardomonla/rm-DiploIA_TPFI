@@ -1,0 +1,36 @@
+[
+    {
+        "version": "v1.2",
+        "title": "Arquitectura de Datos Dinámica",
+        "date": "24 de Enero, 2026",
+        "changes": [
+            "Externalización del historial de versiones a un archivo JSON independiente.",
+            "Implementación de carga asíncrona (Fetch API) para mayor eficiencia.",
+            "Optimización del sistema de navegación global dinámico.",
+            "Mejora en la mantenibilidad del portal dtic-GEMA."
+        ]
+    },
+    {
+        "version": "v1.1",
+        "title": "Unificación y Optimización",
+        "date": "23 de Enero, 2026",
+        "changes": [
+            "Unificación de portales (Chatbot + Entregables).",
+            "Sistema de navegación dinámico (layout.js).",
+            "Optimización de videos del avatar (reducción del 70% en peso).",
+            "Estética Glassmorphism Premium consistente.",
+            "Saneamiento de assets e imágenes redundantes."
+        ]
+    },
+    {
+        "version": "v1.0",
+        "title": "Lanzamiento Inicial",
+        "date": "22 de Enero, 2026",
+        "changes": [
+            "Chatbot inteligente GEMA con Gemini AI.",
+            "Integración nativa con Make.com.",
+            "Avatar interactivo basado en video.",
+            "Documentación técnica E01 y E02."
+        ]
+    }
+]

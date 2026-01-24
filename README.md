@@ -1,4 +1,4 @@
-# dtic-GEMA v1.1: Sistema Inteligente de Gestión TIC
+# dtic-GEMA v1.2: Sistema Inteligente de Gestión TIC
 
 **Sistema de Gestión Estratégica Mediante Automatización - UTN FRLR**
 

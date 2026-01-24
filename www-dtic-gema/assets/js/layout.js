@@ -9,6 +9,7 @@ const NAV_LINKS = [
     { title: 'Entregable E02', icon: 'shield-check', path: 'pags/e02.html' }
 ];
 
+
 document.addEventListener('DOMContentLoaded', () => {
     initLayout();
     lucide.createIcons();
@@ -22,7 +23,7 @@ function initLayout() {
     const isInSubDir = window.location.pathname.includes('/pags/');
     const base = isInSubDir ? '../' : '';
 
-    // Renderizar Sidebar si no existe (algunos archivos podrían tenerlo hardcodeado al inicio)
+    // Renderizar Sidebar si no existe
     let sidebar = document.querySelector('.sidebar');
     if (!sidebar) {
         sidebar = document.createElement('aside');
@@ -31,6 +32,7 @@ function initLayout() {
     }
 
     renderSidebar(sidebar, base);
+    setupChangelog();
 }
 
 function renderSidebar(sidebar, base) {
@@ -42,7 +44,7 @@ function renderSidebar(sidebar, base) {
                 <video src="${base}assets/video/avatar/gema-01.mp4" autoplay muted playsinline class="header-avatar" id="headerAvatar"></video>
             </div>
             <h2 style="color: var(--text-main); font-size: 1.1rem;">dtic-GEMA</h2>
-            <span style="color: var(--text-muted); font-size: 0.7rem; text-transform: uppercase;">v1.1</span>
+            <span class="version-badge" style="color: #4facfe; font-size: 0.7rem; text-transform: uppercase; cursor: pointer; font-weight: bold; border: 1px solid rgba(79, 172, 254, 0.3); padding: 2px 8px; border-radius: 10px; background: rgba(79, 172, 254, 0.1);">v1.2</span>
         </div>
         <nav class="sidebar-nav">
             ${NAV_LINKS.map(link => {
@@ -61,4 +63,76 @@ function renderSidebar(sidebar, base) {
             Lic. Ricardo Monla<br>UTN FRLR © 2026
         </div>
     `;
+}
+
+function setupChangelog() {
+    // Usar delegación de eventos para mayor robustez
+    document.addEventListener('click', (e) => {
+        if (e.target.closest('.version-badge')) {
+            openChangelogModal();
+        }
+    });
+}
+
+async function openChangelogModal() {
+    // Si ya hay un modal abierto, no abrir otro
+    if (document.querySelector('.modal-overlay')) return;
+
+    // Detectar profundidad del path para ajustar rutas relativas
+    const isInSubDir = window.location.pathname.includes('/pags/');
+    const base = isInSubDir ? '../' : '';
+
+    try {
+        const response = await fetch(`${base}assets/data/changelog.json`);
+        if (!response.ok) throw new Error('No se pudo cargar el historial');
+        const changelogData = await response.json();
+
+        const modal = document.createElement('div');
+        modal.className = 'modal-overlay';
+        modal.innerHTML = `
+            <div class="changelog-modal">
+                <div class="changelog-header">
+                    <h2>Historial de Versiones</h2>
+                    <button class="close-modal"><i data-lucide="x"></i></button>
+                </div>
+                <div class="changelog-list">
+                    ${changelogData.map((item, index) => `
+                        <div class="changelog-item">
+                            <details ${index === 0 ? 'open' : ''}>
+                                <summary>
+                                    <span>${item.version} - ${item.title}</span>
+                                </summary>
+                                <div class="changelog-content">
+                                    <p style="font-size: 0.75rem; margin-bottom: 10px; color: #4facfe;">${item.date}</p>
+                                    <ul>
+                                        ${item.changes.map(change => `<li>${change}</li>`).join('')}
+                                    </ul>
+                                </div>
+                            </details>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(modal);
+        lucide.createIcons();
+
+        // Animar entrada
+        setTimeout(() => modal.classList.add('active'), 10);
+
+        const close = () => {
+            modal.classList.remove('active');
+            setTimeout(() => modal.remove(), 300);
+        };
+
+        modal.querySelector('.close-modal').addEventListener('click', close);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) close();
+        });
+
+    } catch (error) {
+        console.error('Changelog Error:', error);
+        alert('Lo sentimos, no se pudo cargar el historial de versiones en este momento.');
+    }
 }
