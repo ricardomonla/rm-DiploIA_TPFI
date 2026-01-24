@@ -198,29 +198,30 @@
             {
                 "id": "tecnico",
                 "type": "section",
-                "title": "Ficha Técnica del Escenario (Make)",
+                "title": "Ficha Técnica del Proceso Inteligente",
                 "grid": [
                     [
-                        "<strong style='color: #4facfe;'>Trigger (Disparador):</strong>",
-                        "Webhook (Custom Webhook) - Disparo instantáneo desde el Chatbot."
+                        "<strong style='color: #4facfe;'>Receptor:</strong>",
+                        "Escucha activa y recepción del requerimiento desde la interfaz (Webhook)."
                     ],
                     [
-                        "<strong style='color: #4facfe;'>Frecuencia:</strong>",
-                        "Ejecución bajo demanda en tiempo real."
+                        "<strong style='color: #4facfe;'>Validador:</strong>",
+                        "Filtro de seguridad: verificación de identidad y privilegios en tiempo real."
+                    ],
+                    [
+                        "<strong style='color: #4facfe;'>Orquestador:</strong>",
+                        "Cerebro con IA (Gemini 1.5 Flash) que procesa, clasifica y genera la solución."
                     ]
                 ],
                 "list": [
-                    "<strong>Custom Webhook:</strong> Recibe el payload JSON desde la interfaz del usuario.",
-                    "<strong>Google Sheets (Search Row):</strong> Valida la identidad y el rol del usuario en la hoja 'Agentes'.",
-                    "<strong>Gemini 1.5 Flash:</strong> Motor de IA que clasifica, prioriza y genera la respuesta personalizada.",
-                    "<strong>Google Sheets (Log Row):</strong> Registra el ticket de forma persistente en la hoja histórica.",
-                    "<strong>Webhook Response:</strong> Envía la salida estructurada de regreso al front-end."
+                    "<strong>Escriba:</strong> Registro y persistencia del ticket en la bitácora histórica para trazabilidad.",
+                    "<strong>Emisor:</strong> Entrega canalizada de la respuesta estructurada hacia el portal GEMA."
                 ]
             },
             {
                 "type": "image",
-                "src": "assets/img/escenario_make.png",
-                "caption": "Captura de la arquitectura lógica y nodos configurados en Make.com"
+                "src": "assets/img/diagrama_make_v1.5.png",
+                "caption": "Arquitectura Conceptual: El viaje de la consulta a través de los nodos de acción."
             },
             {
                 "id": "ia",
@@ -233,12 +234,14 @@
             {
                 "id": "resultados",
                 "type": "section",
-                "title": "Verificación y Resultados",
-                "body": "El sistema demuestra una reducción del 70% en el triaje manual de soporte. El técnico humano ahora interviene solo en la etapa final de resolución.",
+                "title": "El Viaje de la Consulta: Eficiencia Reflejada",
+                "body": "La implementación de esta arquitectura de acción no solo es una mejora técnica, sino un cambio en la calidad del servicio. El flujo se divide en cinco hitos críticos:",
                 "list": [
-                    "Liberación de 4hs diarias para mantenimiento de infraestructura crítica.",
-                    "Integración exitosa de lógica condicional en Make resuelta con Routers.",
-                    "Escalabilidad asegurada para integración futura con Directorio Activo."
+                    "<strong>1. Recepción (Receptor):</strong> Captura instantánea del problema del usuario sin intermediarios.",
+                    "<strong>2. Seguridad (Validador):</strong> El 'patovica' digital asegura que solo personal autorizado acceda al soporte premium.",
+                    "<strong>3. Inteligencia (Orquestador):</strong> Gemini 1.5 Flash transforma datos crudos en soluciones empáticas y precisas.",
+                    "<strong>4. Trazabilidad (Escriba):</strong> Nada se pierde; cada interacción queda guardada para auditoría y mejora continua.",
+                    "<strong>5. Resolución (Emisor):</strong> Cierre del ciclo con la entrega inmediata de la solución en la pantalla del usuario."
                 ]
             },
             {
