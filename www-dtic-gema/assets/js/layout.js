@@ -86,7 +86,7 @@ function renderSidebar(sidebar) {
     sidebar.innerHTML = `
         <div class="sidebar-header">
             <div class="logo-container">
-                <video src="assets/video/avatar/gema-01.mp4" autoplay muted playsinline class="avatar-sidebar" id="headerAvatar" onclick="updateAvatar('gema-01.mp4')"></video>
+                <video src="assets/video/avatar/gema-01.mp4" autoplay muted playsinline class="avatar-sidebar" id="headerAvatar" onclick="openAvatarTheater()"></video>
                 <div class="status-dot-sidebar"></div>
             </div>
             <div class="version-tag" id="mainVersionBadge">${PROJECT_DATA.version}</div>
@@ -480,4 +480,50 @@ async function openChangelogModal() {
             setTimeout(() => modal.remove(), 300);
         });
     } catch (e) { console.error(e); }
+}
+
+let theaterIndex = 0;
+const theaterCycle = ['gema-00.mp4', 'gema-01.mp4', 'gema-02.mp4', 'gema-03.mp4', 'gema-04.mp4', 'gema-05.mp4'];
+
+function openAvatarTheater() {
+    if (document.querySelector('.theater-overlay')) return;
+
+    const overlay = document.createElement('div');
+    overlay.className = 'theater-overlay';
+    overlay.innerHTML = `
+        <div class="theater-container">
+            <button class="close-theater"><i data-lucide="x"></i></button>
+            <div class="theater-video-wrapper">
+                <video id="theaterVideo" src="assets/video/avatar/${theaterCycle[theaterIndex]}" autoplay playsinline class="theater-video"></video>
+            </div>
+            <div class="theater-info">
+                <h2>Modo Teatro GEMA</h2>
+                <p>Monitorización en tiempo real de estados y expresiones coreográficas de la IA.</p>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(overlay);
+    lucide.createIcons();
+
+    const video = overlay.querySelector('#theaterVideo');
+
+    // Lógica de Ciclo Infinito
+    video.onended = () => {
+        theaterIndex = (theaterIndex + 1) % theaterCycle.length;
+        video.src = `assets/video/avatar/${theaterCycle[theaterIndex]}`;
+        video.play();
+    };
+
+    // Controles de Cierre
+    const closeTheater = () => {
+        overlay.classList.remove('active');
+        setTimeout(() => overlay.remove(), 400);
+    };
+
+    setTimeout(() => overlay.classList.add('active'), 10);
+
+    overlay.querySelector('.close-theater').onclick = closeTheater;
+    overlay.onclick = (e) => { if (e.target === overlay) closeTheater(); };
+    window.onkeydown = (e) => { if (e.key === 'Escape') closeTheater(); };
 }
