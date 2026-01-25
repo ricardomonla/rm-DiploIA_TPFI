@@ -12,7 +12,7 @@ def get_app_version():
                 return data[0].get('version', 'v1.x')
     except Exception as e:
         print(f"Error leyendo versión: {e}")
-    return "v1.5.8"
+    return "v1.5.9"
 
 class GEMAReport(FPDF):
     def __init__(self, version="v1.x"):
@@ -23,17 +23,17 @@ class GEMAReport(FPDF):
     def header(self):
         avatar_path = "www-dtic-gema/assets/img/avatar/gema-avatar.png"
         if os.path.exists(avatar_path):
-            self.image(avatar_path, 10, 8, 15) # Avatar más discreto
+            self.image(avatar_path, 10, 8, 12) # Avatar mini para ganar espacio
         
-        self.set_font('helvetica', 'B', 10)
-        self.set_text_color(100, 100, 100)
+        self.set_font('helvetica', 'B', 9) # Fuente más pequeña
+        self.set_text_color(120, 120, 120)
         self.set_y(8)
-        self.cell(0, 10, f'dtic-GEMA | Alumno: Lic. Ricardo Monla | Versión: {self.app_version}', align='R')
+        self.cell(0, 10, f'dtic-GEMA | Lic. Ricardo Monla | Versión: {self.app_version}', align='R')
         
-        self.set_draw_color(220, 220, 220)
+        self.set_draw_color(230, 230, 230)
         self.set_line_width(0.1)
-        self.line(10, 22, 200, 22)
-        self.set_y(25)
+        self.line(10, 20, 200, 20)
+        self.set_y(22)
 
     def footer(self):
         self.set_y(-15)
@@ -55,17 +55,18 @@ def add_to_gallery(pdf, src, caption):
     pdf.ln(2)
 
 def render_evolution_brief(pdf):
-    # Nota de evolución al estilo v1.0 pero compacta para el inicio
+    # Nota de evolución con URL oficial
     pdf.set_fill_color(248, 250, 252)
-    pdf.set_draw_color(0, 51, 102)
-    pdf.set_line_width(0.3)
-    pdf.set_font('helvetica', 'B', 9)
+    pdf.set_draw_color(79, 172, 254)
+    pdf.set_line_width(0.2)
+    pdf.set_font('helvetica', 'B', 8)
     pdf.set_text_color(0, 51, 102)
-    pdf.cell(0, 6, " ! NOTA DE VIGENCIA SISTÉMICA", border='LTR', ln=True, fill=True)
-    pdf.set_font('helvetica', 'I', 9)
+    pdf.cell(0, 5, " ! NOTA DE VIGENCIA SISTÉMICA", border='LTR', ln=True, fill=True)
+    pdf.set_font('helvetica', 'I', 8)
     pdf.set_text_color(50, 50, 50)
-    pdf.multi_cell(0, 5, "Este documento es una captura estática. El ecosistema dtic-GEMA es dinámico y se actualiza en tiempo real en el portal web oficial.", border='LBR')
-    pdf.ln(5)
+    msg = "Este documento es estático. El ecosistema vivo se actualiza en: https://ricardomonla.github.io/rm-DiploIA_TPFI/"
+    pdf.multi_cell(0, 4, msg, border='LBR')
+    pdf.ln(3)
 
 def render_table(pdf, table):
     pdf.set_font('helvetica', 'B', 9)
@@ -109,21 +110,21 @@ def generate_pdf(phase_id, filename, version):
     pdf = GEMAReport(version=version)
     pdf.add_page()
     
-    # Título Principal
-    pdf.set_font('helvetica', 'B', 16)
+    # Título Principal (Compacto)
+    pdf.set_font('helvetica', 'B', 14)
     pdf.set_text_color(0, 51, 102)
-    pdf.cell(0, 10, clean_html(phase.get('title', '')), ln=True)
-    pdf.set_font('helvetica', 'I', 11)
-    pdf.cell(0, 8, clean_html(phase.get('subtitle', '')), ln=True)
-    pdf.ln(5)
+    pdf.cell(0, 8, clean_html(phase.get('title', '')), ln=True)
+    pdf.set_font('helvetica', 'I', 10)
+    pdf.cell(0, 6, clean_html(phase.get('subtitle', '')), ln=True)
+    pdf.ln(2)
 
-    # Info Estudiante y Nota de Evolución (Solo Fase 1)
+    # Info Estudiante (Compacto)
     if 'studentInfo' in phase:
         info = phase['studentInfo']
-        pdf.set_font('helvetica', 'B', 10)
+        pdf.set_font('helvetica', 'B', 9)
         pdf.set_text_color(0, 0, 0)
-        pdf.cell(0, 6, f"Alumno: {clean_html(info.get('alumno'))} | Fecha: {clean_html(info.get('fecha'))}", ln=True)
-        pdf.ln(2)
+        pdf.cell(0, 5, f"Alumno: {clean_html(info.get('alumno'))} | Fecha: {clean_html(info.get('fecha'))}", ln=True)
+        pdf.ln(1)
         if phase_id == 'fase1': render_evolution_brief(pdf)
 
     # Motor de Procesamiento de Bloques (REGLA DE ORO)
@@ -131,19 +132,19 @@ def generate_pdf(phase_id, filename, version):
         type = item.get('type')
         
         if type == 'section':
-            pdf.set_font('helvetica', 'B', 12)
+            pdf.set_font('helvetica', 'B', 11) # Reducción
             pdf.set_text_color(0, 51, 102)
-            pdf.cell(0, 10, clean_html(item.get('title', '')), ln=True)
+            pdf.cell(0, 8, clean_html(item.get('title', '')), ln=True)
             if item.get('subtitle'):
-                pdf.set_font('helvetica', 'B', 10)
+                pdf.set_font('helvetica', 'B', 9)
                 pdf.set_text_color(46, 125, 50)
-                pdf.cell(0, 7, clean_html(item.get('subtitle')), ln=True)
+                pdf.cell(0, 6, clean_html(item.get('subtitle')), ln=True)
             
             if item.get('body'):
-                pdf.set_font('helvetica', '', 10)
+                pdf.set_font('helvetica', '', 9) # Reducción
                 pdf.set_text_color(30, 41, 59)
-                pdf.multi_cell(0, 5, clean_html(item.get('body')))
-            pdf.ln(3)
+                pdf.multi_cell(0, 4.5, clean_html(item.get('body')))
+            pdf.ln(2)
 
             # Bloques anidados (REGLA DE ORO)
             if 'blocks' in item:
@@ -186,13 +187,13 @@ def generate_pdf(phase_id, filename, version):
         for i, img in enumerate(pdf.gallery):
             img_path = os.path.join("www-dtic-gema", img['src'])
             if os.path.exists(img_path):
-                if pdf.get_y() > 200: pdf.add_page()
-                pdf.ln(5)
-                # Escala óptima para 2-3 figuras por página
-                pdf.image(img_path, x=45, w=120) 
+                if pdf.get_y() > 220: pdf.add_page()
+                pdf.ln(2)
+                # Escala óptima para 2 figuras por página (w=110)
+                pdf.image(img_path, x=50, w=110) 
                 pdf.set_font('helvetica', 'I', 8)
-                pdf.cell(0, 8, f"Figura {i+1}: {clean_html(img['caption'])}", align='C', ln=True)
-                pdf.ln(5)
+                pdf.cell(0, 10, f"Figura {i+1}: {clean_html(img['caption'])}", align='C', ln=True)
+                pdf.ln(2)
 
     pdf.output(f"www-dtic-gema/assets/docs/{filename}")
     print(f"Generado: {filename}")
@@ -200,5 +201,5 @@ def generate_pdf(phase_id, filename, version):
 if __name__ == "__main__":
     v = get_app_version()
     os.makedirs("www-dtic-gema/assets/docs", exist_ok=True)
-    generate_pdf('fase1', 'Reporte_Fase_1_Relevamiento.pdf', v)
-    generate_pdf('fase2', 'Reporte_Fase_2_Diseño.pdf', v)
+    generate_pdf('fase1', 'Entregable_Fase_1_Relevamiento.pdf', v)
+    generate_pdf('fase2', 'Entregable_Fase_2_Diseño.pdf', v)
