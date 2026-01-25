@@ -12,188 +12,193 @@ def get_app_version():
                 return data[0].get('version', 'v1.x')
     except Exception as e:
         print(f"Error leyendo versión: {e}")
-    return "v1.5.7"
+    return "v1.5.8"
 
 class GEMAReport(FPDF):
     def __init__(self, version="v1.x"):
         super().__init__()
         self.app_version = version
-        self.gallery = [] # Almacén para imágenes diferidas
+        self.gallery = []
 
     def header(self):
-        # Inyección del Avatar de GEMA (más pequeño para optimizar espacio)
         avatar_path = "www-dtic-gema/assets/img/avatar/gema-avatar.png"
         if os.path.exists(avatar_path):
-            self.image(avatar_path, 10, 8, 18)
+            self.image(avatar_path, 10, 8, 15) # Avatar más discreto
         
-        self.set_font('helvetica', 'B', 11)
-        self.set_text_color(0, 51, 102) # Azul #003366
-        self.cell(20) # Espacio para el avatar
-        self.cell(0, 10, f'PROYECTO dtic-GEMA | Alumno: Lic. Ricardo Monla | Versión: {self.app_version}', 
-                  new_x=XPos.LMARGIN, new_y=YPos.NEXT, align='R')
+        self.set_font('helvetica', 'B', 10)
+        self.set_text_color(100, 100, 100)
+        self.set_y(8)
+        self.cell(0, 10, f'dtic-GEMA | Alumno: Lic. Ricardo Monla | Versión: {self.app_version}', align='R')
         
-        # Línea de cabecera sutil
-        self.set_draw_color(200, 200, 200)
-        self.set_line_width(0.2)
-        self.line(10, 28, 200, 28)
-        self.ln(10)
+        self.set_draw_color(220, 220, 220)
+        self.set_line_width(0.1)
+        self.line(10, 22, 200, 22)
+        self.set_y(25)
 
     def footer(self):
         self.set_y(-15)
         self.set_font('helvetica', 'I', 8)
-        self.set_text_color(128, 128, 128)
+        self.set_text_color(150, 150, 150)
         self.cell(0, 10, f'Página {self.page_no()}', align='C')
 
 def clean_html(text):
-    if not isinstance(text, str):
-        return str(text)
+    if not isinstance(text, str): return str(text)
     text = re.sub(r'<br\s*/?>', '\n', text)
     text = re.sub(r'<[^>]*>', '', text)
     return text
 
 def add_to_gallery(pdf, src, caption):
-    # Guardamos para el final
     pdf.gallery.append({'src': src, 'caption': caption})
-    # Dejamos referencia en el texto
-    pdf.set_font('helvetica', 'I', 10)
-    pdf.set_text_color(79, 172, 254) # Azul vibrante de la marca
-    pdf.ln(2)
-    pdf.multi_cell(0, 6, f"> [Referencia Visual: Ver Figura {len(pdf.gallery)} en la Galería de Imágenes al final del documento]", align='L')
-    pdf.ln(4)
-
-def render_gallery(pdf):
-    if not pdf.gallery:
-        return
-    
-    pdf.add_page()
-    pdf.set_font('helvetica', 'B', 16)
+    pdf.set_font('helvetica', 'I', 9)
     pdf.set_text_color(0, 51, 102)
-    pdf.cell(0, 15, "GALERÍA DE IMÁGENES TÉCNICAS", new_x=XPos.LMARGIN, new_y=YPos.NEXT, align='C')
+    pdf.cell(0, 6, f"> [Vincular: Ver Figura {len(pdf.gallery)} en la Galería al final]", ln=True)
+    pdf.ln(2)
+
+def render_evolution_brief(pdf):
+    # Nota de evolución al estilo v1.0 pero compacta para el inicio
+    pdf.set_fill_color(248, 250, 252)
+    pdf.set_draw_color(0, 51, 102)
+    pdf.set_line_width(0.3)
+    pdf.set_font('helvetica', 'B', 9)
+    pdf.set_text_color(0, 51, 102)
+    pdf.cell(0, 6, " ! NOTA DE VIGENCIA SISTÉMICA", border='LTR', ln=True, fill=True)
+    pdf.set_font('helvetica', 'I', 9)
+    pdf.set_text_color(50, 50, 50)
+    pdf.multi_cell(0, 5, "Este documento es una captura estática. El ecosistema dtic-GEMA es dinámico y se actualiza en tiempo real en el portal web oficial.", border='LBR')
     pdf.ln(5)
 
-    for i, item in enumerate(pdf.gallery):
-        img_path = os.path.join("www-dtic-gema", item['src'])
-        if os.path.exists(img_path):
-            # Salto de página si la imagen no cabe
-            if pdf.get_y() > 180:
-                pdf.add_page()
-            
-            pdf.ln(5)
-            # Imágenes un poco más pequeñas (w=150) para no saturar
-            pdf.image(img_path, x=30, w=150)
-            pdf.ln(2)
-            pdf.set_font('helvetica', 'B', 9)
-            pdf.set_text_color(0, 51, 102)
-            pdf.cell(0, 5, f"Figura {i+1}: {clean_html(item['caption'])}", new_x=XPos.LMARGIN, new_y=YPos.NEXT, align='C')
-            pdf.ln(10)
-
-def render_evolution_note(pdf):
-    pdf.add_page()
-    pdf.set_y(100)
-    pdf.set_fill_color(245, 247, 250)
-    pdf.rect(10, 100, 190, 80, 'F')
-    
-    pdf.set_font('helvetica', 'B', 14)
+def render_table(pdf, table):
+    pdf.set_font('helvetica', 'B', 9)
+    pdf.set_fill_color(241, 245, 249)
     pdf.set_text_color(0, 51, 102)
-    pdf.cell(0, 20, "Evolución del Ecosistema dtic-GEMA", new_x=XPos.LMARGIN, new_y=YPos.NEXT, align='C')
     
-    pdf.set_font('helvetica', '', 11)
+    col_width = 190 / len(table['headers'])
+    for h in table['headers']:
+        pdf.cell(col_width, 10, clean_html(h), border=1, align='C', fill=True)
+    pdf.ln()
+    
+    pdf.set_font('helvetica', '', 8)
     pdf.set_text_color(30, 41, 59)
-    pdf.set_x(20)
-    nota = (
-        "Este documento representa una versión estática y puntual del proyecto. "
-        "Debido a la naturaleza evolutiva de la IA y la automatización, el ecosistema "
-        "dtic-GEMA se encuentra en constante actualización.\n\n"
-        "Para acceder a la última arquitectura, interactuar con GEMA y consultar "
-        "las versiones más recientes de los entregables, por favor ingrese al portal oficial."
-    )
-    pdf.multi_cell(170, 7, nota, align='C')
-    
-    pdf.ln(15)
-    pdf.set_font('helvetica', 'B', 10)
-    pdf.set_text_color(79, 172, 254)
-    pdf.cell(0, 10, "[ Acceder al Portal Online ]", align='C')
+    for row in table['rows']:
+        row_y = pdf.get_y()
+        max_h = 0
+        lines_data = []
+        for cell in row:
+            lines = pdf.multi_cell(col_width, 5, clean_html(cell), dry_run=True, output="LINES")
+            h = len(lines) * 5
+            max_h = max(max_h, h)
+            lines_data.append(clean_html(cell))
+        
+        if row_y + max_h > 270:
+            pdf.add_page()
+            row_y = pdf.get_y()
+
+        for i, cell_text in enumerate(lines_data):
+            pdf.set_xy(10 + (i * col_width), row_y)
+            pdf.multi_cell(col_width, max_h / (max_h/5 if max_h>0 else 1), cell_text, border=1)
+        pdf.set_y(row_y + max_h)
+    pdf.ln(5)
 
 def generate_pdf(phase_id, filename, version):
     with open('www-dtic-gema/assets/data/content.json', 'r', encoding='utf-8') as f:
         data = json.load(f)
     
     phase = data.get(phase_id, {})
-    if not phase:
-        return
+    if not phase: return
 
     pdf = GEMAReport(version=version)
     pdf.add_page()
     
-    # Título de la Fase
-    pdf.set_font('helvetica', 'B', 18)
+    # Título Principal
+    pdf.set_font('helvetica', 'B', 16)
     pdf.set_text_color(0, 51, 102)
-    pdf.cell(0, 10, clean_html(phase.get('title', '')), new_x=XPos.LMARGIN, new_y=YPos.NEXT, align='L')
-    
-    pdf.set_font('helvetica', 'I', 12)
-    pdf.set_text_color(50, 50, 50)
-    pdf.cell(0, 10, clean_html(phase.get('subtitle', '')), new_x=XPos.LMARGIN, new_y=YPos.NEXT, align='L')
+    pdf.cell(0, 10, clean_html(phase.get('title', '')), ln=True)
+    pdf.set_font('helvetica', 'I', 11)
+    pdf.cell(0, 8, clean_html(phase.get('subtitle', '')), ln=True)
     pdf.ln(5)
 
-    # Información del Estudiante (Sincronizada con Header)
+    # Info Estudiante y Nota de Evolución (Solo Fase 1)
     if 'studentInfo' in phase:
         info = phase['studentInfo']
-        pdf.set_fill_color(240, 245, 250)
-        pdf.set_font('helvetica', 'B', 11)
-        pdf.cell(0, 8, " Información del Proyecto", new_x=XPos.LMARGIN, new_y=YPos.NEXT, align='L', fill=True)
-        pdf.set_font('helvetica', '', 10)
+        pdf.set_font('helvetica', 'B', 10)
         pdf.set_text_color(0, 0, 0)
-        pdf.cell(0, 7, f" Alumno: {clean_html(info.get('alumno', 'Lic. Ricardo MONLA'))}", new_x=XPos.LMARGIN, new_y=YPos.NEXT, align='L')
-        pdf.cell(0, 7, f" Versión del Ecosistema: {version}", new_x=XPos.LMARGIN, new_y=YPos.NEXT, align='L')
-        pdf.cell(0, 7, f" Fecha: {clean_html(info.get('fecha', 'Enero 2026'))}", new_x=XPos.LMARGIN, new_y=YPos.NEXT, align='L')
-        pdf.ln(10)
+        pdf.cell(0, 6, f"Alumno: {clean_html(info.get('alumno'))} | Fecha: {clean_html(info.get('fecha'))}", ln=True)
+        pdf.ln(2)
+        if phase_id == 'fase1': render_evolution_brief(pdf)
 
-    # Contenido de la Fase
+    # Motor de Procesamiento de Bloques (REGLA DE ORO)
     for item in phase.get('content', []):
         type = item.get('type')
         
         if type == 'section':
-            pdf.set_font('helvetica', 'B', 14)
+            pdf.set_font('helvetica', 'B', 12)
             pdf.set_text_color(0, 51, 102)
-            pdf.cell(0, 10, clean_html(item.get('title', '')), new_x=XPos.LMARGIN, new_y=YPos.NEXT, align='L')
-            pdf.ln(2)
-
+            pdf.cell(0, 10, clean_html(item.get('title', '')), ln=True)
             if item.get('subtitle'):
-                pdf.set_font('helvetica', 'B', 11)
+                pdf.set_font('helvetica', 'B', 10)
                 pdf.set_text_color(46, 125, 50)
-                pdf.cell(0, 8, clean_html(item.get('subtitle')), new_x=XPos.LMARGIN, new_y=YPos.NEXT, align='L')
-
+                pdf.cell(0, 7, clean_html(item.get('subtitle')), ln=True)
+            
             if item.get('body'):
-                pdf.set_font('helvetica', '', 11)
+                pdf.set_font('helvetica', '', 10)
                 pdf.set_text_color(30, 41, 59)
-                pdf.multi_cell(0, 6, clean_html(item.get('body')))
-                pdf.ln(5)
+                pdf.multi_cell(0, 5, clean_html(item.get('body')))
+            pdf.ln(3)
+
+            # Bloques anidados (REGLA DE ORO)
+            if 'blocks' in item:
+                for block in item['blocks']:
+                    if block['type'] == 'highlight':
+                        pdf.set_fill_color(240, 245, 250)
+                        pdf.set_font('helvetica', 'B', 10)
+                        pdf.cell(0, 7, f" {clean_html(block['title'])}", fill=True, ln=True)
+                        pdf.set_font('helvetica', '', 9)
+                        pdf.multi_cell(0, 5, clean_html(block['body']))
+                        pdf.ln(3)
+                    elif block['type'] == 'image':
+                        add_to_gallery(pdf, block['src'], block['caption'])
+            
+            if 'grid' in item:
+                pdf.set_font('helvetica', '', 9)
+                for row_grid in item['grid']:
+                    pdf.set_x(15)
+                    pdf.multi_cell(180, 5, f"> {clean_html(row_grid[0])} {clean_html(row_grid[1])}")
+                pdf.ln(3)
 
             if 'list' in item:
-                pdf.set_font('helvetica', '', 10)
+                pdf.set_font('helvetica', '', 9)
                 pdf.set_text_color(30, 41, 59)
                 for line in item['list']:
                     pdf.set_x(15)
-                    pdf.multi_cell(180, 6, f"* {clean_html(line)}")
-                pdf.ln(5)
+                    pdf.multi_cell(180, 5, f"* {clean_html(line)}")
+                pdf.ln(3)
 
-            if 'table' in item:
-                # Simplificamos lógica de tabla para brevedad en esta refactorización
-                pass 
+            if 'table' in item: render_table(pdf, item['table'])
 
         elif type == 'image':
             add_to_gallery(pdf, item.get('src'), item.get('caption'))
 
-    # Secciones Finales
-    render_gallery(pdf)
-    render_evolution_note(pdf)
+    # Galería Final
+    if pdf.gallery:
+        pdf.add_page()
+        pdf.set_font('helvetica', 'B', 14)
+        pdf.cell(0, 15, "GALERÍA DE FIGURAS TÉCNICAS", align='C', ln=True)
+        for i, img in enumerate(pdf.gallery):
+            img_path = os.path.join("www-dtic-gema", img['src'])
+            if os.path.exists(img_path):
+                if pdf.get_y() > 200: pdf.add_page()
+                pdf.ln(5)
+                # Escala óptima para 2-3 figuras por página
+                pdf.image(img_path, x=45, w=120) 
+                pdf.set_font('helvetica', 'I', 8)
+                pdf.cell(0, 8, f"Figura {i+1}: {clean_html(img['caption'])}", align='C', ln=True)
+                pdf.ln(5)
 
-    output_path = f"www-dtic-gema/assets/docs/{filename}"
-    pdf.output(output_path)
-    print(f"Reporte generado: {output_path}")
+    pdf.output(f"www-dtic-gema/assets/docs/{filename}")
+    print(f"Generado: {filename}")
 
 if __name__ == "__main__":
-    current_version = get_app_version()
+    v = get_app_version()
     os.makedirs("www-dtic-gema/assets/docs", exist_ok=True)
-    generate_pdf('fase1', 'Reporte_Fase_1_Relevamiento.pdf', current_version)
-    generate_pdf('fase2', 'Reporte_Fase_2_Diseño.pdf', current_version)
+    generate_pdf('fase1', 'Reporte_Fase_1_Relevamiento.pdf', v)
+    generate_pdf('fase2', 'Reporte_Fase_2_Diseño.pdf', v)
