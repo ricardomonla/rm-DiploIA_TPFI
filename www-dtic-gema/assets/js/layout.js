@@ -412,7 +412,7 @@ function renderBlock(block, pageNumber, blockIndex) {
                         <h4>${block.title}</h4>
                         ${block.body ? `<p>${block.body}</p>` : ''}
                     </div>
-                    <a href="${block.action.link}" class="nav-item active action-btn" ${block.action.target ? `target="${block.action.target}"` : ''}>
+                    <a href="${block.action.link || block.action.src}" class="nav-item active action-btn" ${block.action.target ? `target="${block.action.target}"` : ''}>
                         <i data-lucide="${block.action.icon}"></i>
                         ${block.action.label}
                     </a>
