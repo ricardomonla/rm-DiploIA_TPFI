@@ -89,7 +89,7 @@ function renderSidebar(sidebar) {
                 <video src="assets/video/avatar/gema-01.mp4" autoplay muted playsinline class="avatar-sidebar" id="headerAvatar" onclick="updateAvatar('gema-01.mp4')"></video>
                 <div class="status-dot-sidebar"></div>
             </div>
-            <div class="version-tag">${PROJECT_DATA.version}</div>
+            <div class="version-tag" id="mainVersionBadge">${PROJECT_DATA.version}</div>
         </div>
         <nav class="sidebar-nav">
             ${MENU_DATA.map((item, index) => renderMenuItem(item, index + 1)).join('')}
@@ -305,7 +305,7 @@ function renderDynamicContent(id, sectionId) {
                 <div id="pdfBtnContainer"></div>
             </div>
             <div style="text-align: right;">
-                <span class="version-badge" style="background: var(--primary-gradient); color: white; padding: 4px 12px; border-radius: 6px; font-weight: bold; font-size: 0.8rem;">${PROJECT_DATA.version}</span>
+                <span class="version-badge version-tag-interactive" style="background: var(--primary-gradient); color: white; padding: 4px 12px; border-radius: 6px; font-weight: bold; font-size: 0.8rem; cursor: pointer;">${PROJECT_DATA.version}</span>
             </div>
         </header>
 
@@ -438,7 +438,7 @@ function renderTable(table) {
 
 function setupChangelog() {
     document.addEventListener('click', (e) => {
-        if (e.target.closest('#mainVersionBadge')) {
+        if (e.target.closest('#mainVersionBadge') || e.target.closest('.version-tag-interactive')) {
             openChangelogModal();
         }
     });

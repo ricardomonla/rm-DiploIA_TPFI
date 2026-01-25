@@ -143,6 +143,13 @@ body {
     border: 1px solid rgba(79, 172, 254, 0.3);
     font-weight: bold;
     letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.version-tag:hover {
+    background: rgba(79, 172, 254, 0.2);
+    box-shadow: 0 0 10px rgba(79, 172, 254, 0.2);
 }
 
 .sidebar-footer {
