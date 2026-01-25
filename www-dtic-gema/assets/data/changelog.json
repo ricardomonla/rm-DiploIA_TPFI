@@ -1,5 +1,19 @@
 [
     {
+        "version": "v1.5",
+        "title": "Ecosistema SPA, Excelencia Editorial e Inmersión GEMA",
+        "date": "24 de Enero (Noche), 2026",
+        "changes": [
+            "Arquitectura SPA Premium: Transición total a Single Page Application con ruteo dinámico fluido.",
+            "Modo Teatro GEMA: Experiencia inmersiva en primer plano con ciclo infinito de animaciones IA (gema-00 a gema-05).",
+            "Excelencia Editorial PDF: Restauración de la Integridad de Contenidos (Regla de Oro) y layout premium de Entregables.",
+            "Identidad Unificada: Consolidación del branding dtic-GEMA y personalización académica avanzada.",
+            "Visor de Changelog Interactivo: Restauración de la transparencia técnica mediante acceso directo al historial desde la UI.",
+            "Optimización de Entregables: Compactación de Fase 1 (one-sheet), inyección de URL viva y galería balanceada.",
+            "Protocolo de Memoria v1.5.2: Sistematización del rastro histórico aditivo y seguro."
+        ]
+    },
+    {
         "version": "v1.4",
         "title": "Evolución Estructural, Identidad y Entregables Dinámicos",
         "date": "24 de Enero, 2026",

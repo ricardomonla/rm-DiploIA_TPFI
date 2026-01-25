@@ -1,4 +1,4 @@
-# dtic-GEMA v1.4: Evolución Estructural e Identidad Consolidadas
+# dtic-GEMA v1.5: Ecosistema SPA, Excelencia Editorial e Inmersión
 
 **Sistema de Gestión Estratégica Mediante Automatización - Facultad X**
 
