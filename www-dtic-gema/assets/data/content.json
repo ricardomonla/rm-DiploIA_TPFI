@@ -198,27 +198,32 @@
             {
                 "id": "tecnico",
                 "type": "section",
-                "title": "Ingeniería dtic-GEMA_Make",
-                "subtitle": "Catálogo Exhaustivo de Nodos y Orquestación Cloud",
-                "body": "La arquitectura del ecosistema dtic-GEMA_Make se basa en un flujo de trabajo ramificado y resiliente alojado en Make.com, donde cada nodo cumple una función crítica de acción y transformación de datos.",
+                "title": "Arquitectura de 3 Capas: dtic-GEMA_Make",
+                "subtitle": "Ecosistema de Interacción, Mediación y Automatización",
+                "body": "La arquitectura del ecosistema dtic-GEMA_Make se organiza en tres niveles jerárquicos que permiten una gestión modular y escalable de los requerimientos técnicos:",
                 "list": [
-                    "<strong>1. Receptor (Webhooks):</strong> El oído digital del sistema. Captura en tiempo real el payload JSON enviado desde la interfaz del Portal dtic-GEMA, iniciando el ciclo de asistencia.",
-                    "<strong>2. Validador (Google Sheets - Search Rows):</strong> El filtro de seguridad. Realiza una búsqueda exhaustiva en el padrón de agentes para validar la identidad, el rol y los permisos del usuario antes de proceder.",
-                    "<strong>3. Derivador (Router):</strong> El centro de mando lógico. Evalúa el resultado del Validador y bifurca la consulta: si el usuario es conocido, procede al registro; si es nuevo o requiere análisis, activa la inteligencia artificial.",
-                    "<strong>4. Escriba (Google Sheets - Add Row):</strong> El registrador oficial. Garantiza la persistencia técnica de cada interacción, documentando el ticket de soporte en la bitácora histórica para auditoría y KPIs.",
-                    "<strong>5. Orquestador (Gemini 1.5 Flash):</strong> El cerebro cognitivo. Genera respuestas contextuales, empáticas y precisas, integrando las reglas de negocio y el rol del asistente de la IA Generativa.",
-                    "<strong>6. Emisor (Webhooks - Response):</strong> El canal de salida. Empaqueta la solución final y la inyecta de regreso en el Portal dtic-GEMA (chatbot), cerrando el viaje de la consulta de forma instantánea."
+                    "<strong>CAPA 1: Interacción Humana (UX):</strong> El nivel superior donde el usuario final (docente, alumno o agente) presenta su consulta a través de la interfaz web, iniciando el ciclo de asistencia.",
+                    "<strong>CAPA 2: Mediación (Portal dtic-GEMA):</strong> El puente inteligente que actúa como traductor entre la necesidad humana y la lógica de datos, encapsulando la seguridad y la transferencia hacia la nube.",
+                    "<strong>CAPA 3: Automatización (Make.com):</strong> El motor de ejecución donde residen los nodos lógicos (Receptor, Validador, Derivador, Orquestador) que procesan la información y generan la solución."
                 ]
             },
             {
                 "type": "image",
-                "src": "assets/img/anatomia_nodos_v1.5.6.png",
-                "caption": "Anatomía de Nodos: Mapa técnico detallado del motor de automatización dtic-GEMA_Make."
+                "src": "assets/img/ciclo_vida_completo_gema.png",
+                "caption": "Ciclo de Vida Completo: Mapa de arquitectura por capas (Interacción, Mediación y Automatización)."
             },
             {
-                "type": "image",
-                "src": "assets/img/ecosistema_dtic_gema_make.png",
-                "caption": "Ecosistema Integral: Interacción fluida entre el Portal, el motor Make y los servicios Cloud."
+                "id": "ingenieriaNodes",
+                "type": "section",
+                "title": "Ingeniería del Motor Make",
+                "subtitle": "Detalle de Nodos en la Capa de Automatización",
+                "list": [
+                    "<strong>1. Receptor:</strong> Captura instantánea del payload JSON desde el Portal.",
+                    "<strong>2. Validador (Search Rows):</strong> Filtro de seguridad que verifica identidad en la base de datos.",
+                    "<strong>3. Derivador (Router):</strong> El centro lógico que bifurca el flujo mediante lógica condicional.",
+                    "<strong>4. Orquestador (Gemini IA):</strong> Elaboración de respuesta humanizada (Solo en camino [SI]).",
+                    "<strong>5. Responder:</strong> Cierre de ciclo e inyección de la solución de vuelta al portal."
+                ]
             },
             {
                 "id": "ia",
@@ -238,7 +243,7 @@
                     "<strong>2. Seguridad (Validador):</strong> El 'patovica' digital asegura que solo personal autorizado acceda al soporte premium.",
                     "<strong>3. Inteligencia (Orquestador):</strong> Gemini 1.5 Flash transforma datos crudos en soluciones empáticas y precisas.",
                     "<strong>4. Trazabilidad (Escriba):</strong> Nada se pierde; cada interacción queda guardada para auditoría y mejora continua.",
-                    "<strong>5. Resolución (Emisor):</strong> Cierre del ciclo con la entrega inmediata de la solución en la pantalla del usuario."
+                    "<strong>5. Resolución (hablante):</strong> Cierre del ciclo con la entrega inmediata de la solución en la pantalla del usuario."
                 ]
             },
             {

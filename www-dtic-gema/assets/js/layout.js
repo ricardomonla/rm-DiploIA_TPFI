@@ -256,14 +256,24 @@ function updateAvatar(videoName) {
 
 function showChatbot() {
     const mainContent = document.querySelector('.main-content');
-    // Si ya estamos en el chatbot (index.html real), no ocultar nada, 
-    // pero en el modo SPA, el index.html es la base.
-    // Asumiendo que el HTML del chatbot está en el DOM pero oculto o visible según el hash
     const chatContainer = document.querySelector('.chat-container');
     const existingReport = document.querySelector('.report-container');
 
     if (chatContainer) chatContainer.style.display = 'flex';
     if (existingReport) existingReport.remove();
+
+    // Inyectar botón de volver en el header del chat para coherencia UX
+    const headerActions = document.querySelector('.header-actions');
+    if (headerActions && !document.getElementById('chatReturnBtn')) {
+        const returnBtn = document.createElement('a');
+        returnBtn.id = 'chatReturnBtn';
+        returnBtn.href = '#entregas/historial';
+        returnBtn.className = 'nav-prev-btn';
+        returnBtn.style = 'margin-right:15px; display: flex; align-items: center; gap: 5px; color: var(--text-muted); text-decoration: none; font-size: 0.8rem;';
+        returnBtn.innerHTML = '<i data-lucide="arrow-left" style="width:14px;"></i> Volver a Entregables';
+        headerActions.prepend(returnBtn);
+        lucide.createIcons();
+    }
 }
 
 function renderDynamicContent(id, sectionId) {
@@ -312,7 +322,9 @@ function renderDynamicContent(id, sectionId) {
         ${data.studentInfo ? renderStudentInfo(data.studentInfo) : ''}
         
         <div class="dynamic-body">
+            ${renderNavigation(id, 'top')}
             ${data.content.map((block, bIdx) => renderBlock(block, pageNumber, bIdx + 1)).join('')}
+            ${renderNavigation(id, 'bottom')}
         </div>
 
         <footer style="margin-top: 50px; padding-top: 20px; border-top: 1px solid var(--border-glass); text-align: center; font-size: 0.8rem; color: var(--text-muted);">
@@ -336,6 +348,64 @@ function renderDynamicContent(id, sectionId) {
     } else {
         window.scrollTo(0, 0);
     }
+}
+
+function getFlatNavigation() {
+    // Solo navegamos entre hitos de Nivel 1 (Principales)
+    return MENU_DATA.map(item => ({
+        id: item.id,
+        title: item.title,
+        path: item.path || item.id
+    }));
+}
+
+function renderNavigation(currentId, position) {
+    const nav = getFlatNavigation();
+    if (nav.length === 0) return '';
+
+    let idx = nav.findIndex(n => n.id === currentId || n.path === currentId);
+    if (idx === -1) return '';
+
+    const prev = nav[idx - 1];
+    const next = nav[idx + 1];
+
+    if (position === 'top' && prev) {
+        const link = prev.parentId ? `#${prev.parentId}/${prev.id}` : `#${prev.id}`;
+        return `
+            <div class="nav-auto-top">
+                <a href="${link}" class="nav-sutil-btn prev" onclick="handleNavClick(event, '${prev.id}')">
+                    <i data-lucide="chevron-left"></i>
+                    <span>Volver a <strong>${prev.title}</strong></span>
+                </a>
+            </div>
+        `;
+    }
+
+    if (position === 'bottom' && next) {
+        const link = next.parentId ? `#${next.parentId}/${next.id}` : `#${next.id}`;
+        return `
+            <div class="nav-auto-bottom">
+                <a href="${link}" class="nav-sutil-btn next" onclick="handleNavClick(event, '${next.id}')">
+                    <span>Continuar a <strong>${next.title}</strong></span>
+                    <i data-lucide="chevron-right"></i>
+                </a>
+            </div>
+        `;
+    }
+    return '';
+}
+
+function handleNavClick(event, targetId) {
+    // 1. Dejar que el hash cambie naturalmente
+    // 2. Buscar el elemento en el sidebar y forzar su estado visual activo
+    setTimeout(() => {
+        const sidebarLink = document.querySelector(`a[href*="${targetId}"]`);
+        if (sidebarLink) {
+            sidebarLink.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            // Forzar expansión de padres si es necesario
+            expandParents(sidebarLink);
+        }
+    }, 100);
 }
 
 function renderStudentInfo(info) {
