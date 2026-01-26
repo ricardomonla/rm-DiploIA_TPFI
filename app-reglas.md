@@ -13,11 +13,14 @@ Este archivo define las directivas heurísticas y el sistema de comandos para la
 ## 3. 📝 Gestión de Memoria Técnica (Rastro Histórico)
 - **Ubicación:** `data/memoria/[vActual]/`.
 - **Formato:** `v[X.Y.Z]_[descripcion_breve].md`.
-- **Regla de Persistencia:** Las actualizaciones de contenido son **aditivas**. Queda prohibido eliminar información histórica sin permiso explícito.
+- **Regla de Integridad (Aditividad):** Las actualizaciones son **estrictamente aditivas**. Queda prohibido resumir, simplificar o modificar contenidos de texto existentes sin una orden expresa. El objetivo es preservar el rastro histórico íntegro.
 
 ## 4. ⚡ Protocolo de Comandos "OK" (Sistema de Control)
 
 ### 🟢 "OK procede" (Disparador de Ejecución)
+> [!IMPORTANT]
+> **Mandato Plan-First:** Ninguna tarea técnica o cambio en el código puede ejecutarse sin un Plan de Implementación aprobado previamente. Solo tras el comando "OK procede" se inicia la ejecución técnica.
+
 1. Detectar versión actual de trabajo.
 2. Guardar copia del **Master Plan** en `data/memoria/[vActual]/v[X.Y.Z]_[nombre].md`.
 3. **Ejecución Técnica:** Realizar los cambios aprobados.
