@@ -76,6 +76,7 @@ def render_evolution_brief(pdf, position='start'):
     if position == 'end':
         pdf.ln(10)
         
+    pdf.set_x(10) # Asegurar margen izquierdo
     pdf.set_font('helvetica', 'B', 10)
     pdf.set_text_color(3, 105, 161)
     pdf.cell(0, 8, "  ! PROTOCOLO DE MEJORA CONTINUA", border='LTR', ln=True, fill=True)
@@ -85,18 +86,12 @@ def render_evolution_brief(pdf, position='start'):
     msg = f"Este documento representa una captura estática del proyecto. El ecosistema vivo y actualizado se encuentra en: "
     pdf.multi_cell(0, 5, msg, border='LR')
     
-    # Fila del link con hipervínculo real, usando multi_cell para evitar desbordes
-    pdf.set_font('helvetica', 'B', 9)
+    # Fila del link con hipervínculo real, usando ancho fijo para evitar errores de fpdf2
+    pdf.set_x(10) 
+    pdf.set_font('helvetica', 'B', 8)
     pdf.set_text_color(2, 132, 199)
-    # Sangría sutil para el link
-    pdf.set_x(pdf.get_x() + 2)
-    pdf.multi_cell(188, 7, url, border='B', ln=True, link=url)
-    
-    # Cerrar el recuadro lateral (ya que multi_cell 0 no dibuja bordes laterales si no es full width)
-    # Pero como usamos 188 y multi_cell dibuja segun el ancho, ajustamos:
-    curr_y = pdf.get_y()
-    pdf.line(10, curr_y - 7, 10, curr_y) # Borde izquierdo
-    pdf.line(200, curr_y - 7, 200, curr_y) # Borde derecho
+    # LBR cierra los bordes laterales y el fondo (B)
+    pdf.multi_cell(190, 7, f"  {url}", border='LBR', new_x=XPos.LMARGIN, new_y=YPos.NEXT, link=url)
     
     pdf.ln( position == 'start' and 5 or 0)
 

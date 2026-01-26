@@ -256,7 +256,7 @@
                         "body": "Informe de procesos y puntos de dolor detectados (Versión Estática).",
                         "action": {
                             "label": "Descargar PDF Fase 1",
-                            "link": "assets/docs/dtic-GEMA_v1.5_Entregable1_20260126_1812.pdf",
+                            "link": "assets/docs/dtic-GEMA_v1.5_Entregable1_20260126_1817.pdf",
                             "icon": "file-down",
                             "target": "_blank"
                         }
@@ -267,7 +267,7 @@
                         "body": "Ficha técnica y lógica de implementación IA (Versión Estática).",
                         "action": {
                             "label": "Descargar PDF Fase 2",
-                            "link": "assets/docs/dtic-GEMA_v1.5_Entregable2_20260126_1812.pdf",
+                            "link": "assets/docs/dtic-GEMA_v1.5_Entregable2_20260126_1817.pdf",
                             "icon": "file-down",
                             "target": "_blank"
                         }
