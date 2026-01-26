@@ -64,19 +64,32 @@ def add_to_gallery(pdf, src, caption):
     pdf.cell(0, 6, f"> [Vincular: Ver Figura {len(pdf.gallery)} en la Galería al final]", ln=True)
     pdf.ln(2)
 
-def render_evolution_brief(pdf):
-    # Nota de evolución con URL oficial
-    pdf.set_fill_color(248, 250, 252)
-    pdf.set_draw_color(79, 172, 254)
-    pdf.set_line_width(0.2)
-    pdf.set_font('helvetica', 'B', 8)
-    pdf.set_text_color(0, 51, 102)
-    pdf.cell(0, 5, " ! NOTA DE VIGENCIA SISTÉMICA", border='LTR', ln=True, fill=True)
-    pdf.set_font('helvetica', 'I', 8)
-    pdf.set_text_color(50, 50, 50)
-    msg = "Este documento es estático. El ecosistema vivo se actualiza en: https://ricardomonla.github.io/rm-DiploIA_TPFI/"
-    pdf.multi_cell(0, 4, msg, border='LBR')
-    pdf.ln(3)
+def render_evolution_brief(pdf, position='start'):
+    # Nota de evolución con URL oficial e hipervínculo
+    url = "https://ricardomonla.github.io/rm-DiploIA_TPFI/"
+    
+    # Colores más disruptivos (Fondo cian muy suave, borde azul profesional)
+    pdf.set_fill_color(224, 242, 254) 
+    pdf.set_draw_color(14, 165, 233)
+    pdf.set_line_width(0.3)
+    
+    if position == 'end':
+        pdf.ln(10)
+        
+    pdf.set_font('helvetica', 'B', 10)
+    pdf.set_text_color(3, 105, 161)
+    pdf.cell(0, 8, "  ! NOTA DE VIGENCIA SISTÉMICA", border='LTR', ln=True, fill=True)
+    
+    pdf.set_font('helvetica', '', 9)
+    pdf.set_text_color(30, 41, 59)
+    msg = f"Este documento representa una captura estática del proyecto. El ecosistema vivo y actualizado se encuentra en: "
+    pdf.multi_cell(0, 5, msg, border='LR')
+    
+    # Fila del link con hipervínculo real y destacado
+    pdf.set_font('helvetica', 'B', 9)
+    pdf.set_text_color(2, 132, 199)
+    pdf.cell(0, 7, f"  {url}", border='LBR', ln=True, link=url)
+    pdf.ln( position == 'start' and 5 or 0)
 
 def render_table(pdf, table):
     pdf.set_font('helvetica', 'B', 9)
@@ -134,8 +147,8 @@ def generate_pdf(phase_id, filename, version):
         pdf.set_font('helvetica', 'B', 9)
         pdf.set_text_color(0, 0, 0)
         pdf.cell(0, 5, f"Alumno: {clean_html(info.get('alumno'))} | Fecha: {clean_html(info.get('fecha'))}", ln=True)
-        pdf.ln(1)
-        if phase_id == 'fase1': render_evolution_brief(pdf)
+        pdf.ln(2)
+        if phase_id == 'fase1': render_evolution_brief(pdf, 'start')
 
     # Motor de Procesamiento de Bloques (REGLA DE ORO)
     for item in phase.get('content', []):
@@ -188,6 +201,10 @@ def generate_pdf(phase_id, filename, version):
 
         elif type == 'image':
             add_to_gallery(pdf, item.get('src'), item.get('caption'))
+
+    # Nota de vigencia al final para la Fase 2
+    if phase_id == 'fase2':
+        render_evolution_brief(pdf, 'end')
 
     # Galería Final
     if pdf.gallery:
