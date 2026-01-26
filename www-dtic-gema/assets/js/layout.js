@@ -5,7 +5,7 @@
 let PROJECT_DATA = {};
 let MENU_DATA = [];
 let CONTENT_DATA = {};
-let LATEST_VERSION = 'v1.6';
+let LATEST_VERSION = 'v1.5';
 let avatarDebounceTimer = null;
 
 document.addEventListener('DOMContentLoaded', async () => {

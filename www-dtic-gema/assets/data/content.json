@@ -222,9 +222,9 @@
                     "<strong>1. Receptor (Webhook):</strong> Captura instantánea del payload JSON desde el Portal sin intermediarios.",
                     "<strong>2. Validador (Search Rows):</strong> Filtro de seguridad que verifica la identidad en la base de datos para asegurar soporte premium.",
                     "<strong>3. Derivador (Router):</strong> El centro lógico que bifurca el flujo mediante lógica condicional determinista.",
-                    "<strong>4. Orquestador (Gemini AI):</strong> Gemini 1.5 Flash transforma datos crudos en soluciones empáticas y precisas.",
+                    "<strong>4. IA Gemini (Gemini AI):</strong> Gemini 1.5 Flash transforma datos crudos en soluciones empáticas y precisas.",
                     "<strong>5. Escriba (Add Row):</strong> Nada se pierde; cada interacción queda guardada para auditoría y mejora continua.",
-                    "<strong>6. Hablante (Webhook Response):</strong> Cierre de ciclo e inyección inmediata de la solución en la pantalla del usuario."
+                    "<strong>6. Responder (Webhook Response):</strong> Cierre de ciclo e inyección inmediata de la solución en la pantalla del usuario."
                 ]
             },
             {
