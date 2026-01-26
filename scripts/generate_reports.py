@@ -1,6 +1,7 @@
 import json
 import os
 import re
+import datetime
 from fpdf import FPDF
 from fpdf.enums import XPos, YPos
 
@@ -198,8 +199,42 @@ def generate_pdf(phase_id, filename, version):
     pdf.output(f"www-dtic-gema/assets/docs/{filename}")
     print(f"Generado: {filename}")
 
+def update_content_json(phase_id, new_filename):
+    path = 'www-dtic-gema/assets/data/content.json'
+    with open(path, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+    
+    # Buscar en la sección entregables para actualizar el link
+    if 'entregables' in data:
+        for item in data['entregables'].get('content', []):
+            if item.get('type') == 'section' and 'blocks' in item:
+                for block in item['blocks']:
+                    if block.get('type') == 'action_item':
+                        # Comparar el título para saber qué fase es
+                        title = block.get('title', '').lower()
+                        if ('fase 1' in title and 'fase1' == phase_id) or \
+                           ('fase 2' in title and 'fase2' == phase_id):
+                            block['action']['link'] = f"assets/docs/{new_filename}"
+                            print(f"Enlace actualizado en content.json para {phase_id}: {new_filename}")
+
+    with open(path, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
+
 if __name__ == "__main__":
     v = get_app_version()
+    # Generar timestamp único para esta corrida
+    ts = datetime.datetime.now().strftime("%Y%m%d_%H%M")
+    
     os.makedirs("www-dtic-gema/assets/docs", exist_ok=True)
-    generate_pdf('fase1', 'Entregable_Fase_1_Relevamiento.pdf', v)
-    generate_pdf('fase2', 'Entregable_Fase_2_Diseño.pdf', v)
+    
+    # Saneamiento previo (opcional, para no llenar de basura, pero el timestamp evita el cache)
+    # Por ahora dejaremos los archivos anteriores por seguridad, el portal apuntará a los nuevos.
+    
+    f1_name = f"Entregable_Fase_1_Relevamiento_{ts}.pdf"
+    f2_name = f"Entregable_Fase_2_Diseño_{ts}.pdf"
+    
+    generate_pdf('fase1', f1_name, v)
+    update_content_json('fase1', f1_name)
+    
+    generate_pdf('fase2', f2_name, v)
+    update_content_json('fase2', f2_name)

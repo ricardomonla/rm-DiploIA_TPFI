@@ -256,7 +256,7 @@
                         "body": "Informe de procesos y puntos de dolor detectados (Versión Estática).",
                         "action": {
                             "label": "Descargar PDF Fase 1",
-                            "link": "assets/docs/Entregable_Fase_1_Relevamiento.pdf",
+                            "link": "assets/docs/Entregable_Fase_1_Relevamiento_20260126_1739.pdf",
                             "icon": "file-down",
                             "target": "_blank"
                         }
@@ -267,7 +267,7 @@
                         "body": "Ficha técnica y lógica de implementación IA (Versión Estática).",
                         "action": {
                             "label": "Descargar PDF Fase 2",
-                            "link": "assets/docs/Entregable_Fase_2_Diseño.pdf",
+                            "link": "assets/docs/Entregable_Fase_2_Diseño_20260126_1739.pdf",
                             "icon": "file-down",
                             "target": "_blank"
                         }
