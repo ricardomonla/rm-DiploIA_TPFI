@@ -36,7 +36,13 @@ Este archivo define las directivas heurísticas y el sistema de comandos para la
 2. Síntesis de Changelog desde archivos de memoria.
 3. Crear etiqueta Git: `vX.Y`.
 
-### 💾 "OK guarda" (Persistencia de Sesión)
+### � "OK nuevo plan" (Reinicio de Ciclo)
+1. **Inicialización:** Crear un nuevo archivo de memoria técnica en `data/memoria/[vActual]/`.
+2. **Iteración de Tareas:** Listar los ítems pendientes de la versión anterior (a resolver) y los nuevos objetivos.
+3. **Reinicio de Tabla:** Limpiar la tabla de "Éxitos y Fracasos" para la nueva iteración técnica.
+4. **Foco:** Establece el contexto para la fase de planificación del nuevo hito.
+
+### �💾 "OK guarda" (Persistencia de Sesión)
 1. Registro universal de cambios (`git add .`).
 2. Commit descriptivo en español.
 3. Push al repositorio remoto.
