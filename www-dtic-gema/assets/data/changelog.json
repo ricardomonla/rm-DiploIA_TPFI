@@ -1,5 +1,16 @@
 [
     {
+        "version": "v1.6",
+        "title": "Minimalismo Lógico y Navegación Dinámica (En Proceso)",
+        "date": "26 de Enero, 2026",
+        "changes": [
+            "Navegación Nivel 1: Simplificación radical del sidebar para una experiencia libre de ruidos.",
+            "Motor de Resolución de Slugs: Sincronización absoluta entre URLs y contenidos dinámicos.",
+            "Refinado Ronda 5: Implementación de la arquitectura oficial minimalista en Fase 2.",
+            "Consolidación v1.6.x: Depuración de contenidos y saneamiento integral de archivos obsoletos."
+        ]
+    },
+    {
         "version": "v1.5",
         "title": "Ecosistema SPA, Excelencia Editorial e Inmersión GEMA",
         "date": "24 de Enero (Noche), 2026",

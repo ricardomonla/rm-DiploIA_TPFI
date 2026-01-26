@@ -2,7 +2,7 @@
     "consignas": {
         "title": "Consignas",
         "subtitle": "Diplomatura en IA para No Programadores",
-        "version": "v1.6.4",
+        "version": "v1.6",
         "content": [
             {
                 "id": "intro",
@@ -91,7 +91,7 @@
     "fase1": {
         "title": "FASE 1: Relevamiento",
         "subtitle": "Identificación de Puntos de Dolor y Diseño del Flujo",
-        "version": "v1.6.4",
+        "version": "v1.6",
         "studentInfo": {
             "alumno": "Lic. Ricardo MONLA",
             "area": "Dirección de TIC - Facultad X",
@@ -187,7 +187,7 @@
     "fase2": {
         "title": "FASE 2: Diseño",
         "subtitle": "Configuración Técnica y Lógica de Automatización",
-        "version": "v1.6.4",
+        "version": "v1.6",
         "content": [
             {
                 "id": "intro_f2",
@@ -204,25 +204,27 @@
                 "list": [
                     "<strong>CAPA 1: Interacción Humana (UX):</strong> El nivel superior donde el usuario final (docente, alumno o agente) presenta su consulta a través de la interfaz web, iniciando el ciclo de asistencia.",
                     "<strong>CAPA 2: Mediación (Portal dtic-GEMA):</strong> El puente inteligente que actúa como traductor entre la necesidad humana y la lógica de datos, encapsulando la seguridad y la transferencia hacia la nube.",
-                    "<strong>CAPA 3: Automatización (Make.com):</strong> El motor de ejecución donde residen los nodos lógicos (Receptor, Validador, Derivador, Orquestador) que procesan la información y generan la solución."
+                    "<strong>CAPA 3: Automatización (Make.com):</strong> El motor de ejecución donde residen los nodos lógicos que procesan la información y generan la solución."
                 ]
             },
             {
                 "type": "image",
-                "src": "assets/img/ciclo_vida_completo_gema.png",
-                "caption": "Ciclo de Vida Completo: Mapa de arquitectura por capas (Interacción, Mediación y Automatización)."
+                "src": "assets/img/ciclo_oficial_v1.6.4.png",
+                "caption": "Arquitectura Oficial dtic-GEMA: Mapa del ecosistema por capas."
             },
             {
                 "id": "ingenieriaNodes",
                 "type": "section",
-                "title": "Ingeniería del Motor Make",
-                "subtitle": "Detalle de Nodos en la Capa de Automatización",
+                "title": "Ingeniería del Motor de Automatización",
+                "subtitle": "Detalle de Nodos y Flujo de Eficiencia en Make",
+                "body": "La implementación de esta arquitectura no solo es una mejora técnica, sino un cambio en la calidad del servicio. El flujo se divide en seis hitos críticos coordinados en el escenario:",
                 "list": [
-                    "<strong>1. Receptor:</strong> Captura instantánea del payload JSON desde el Portal.",
-                    "<strong>2. Validador (Search Rows):</strong> Filtro de seguridad que verifica identidad en la base de datos.",
-                    "<strong>3. Derivador (Router):</strong> El centro lógico que bifurca el flujo mediante lógica condicional.",
-                    "<strong>4. Orquestador (Gemini IA):</strong> Elaboración de respuesta humanizada (Solo en camino [SI]).",
-                    "<strong>5. Responder:</strong> Cierre de ciclo e inyección de la solución de vuelta al portal."
+                    "<strong>1. Receptor (Webhook):</strong> Captura instantánea del payload JSON desde el Portal sin intermediarios.",
+                    "<strong>2. Validador (Search Rows):</strong> Filtro de seguridad que verifica la identidad en la base de datos para asegurar soporte premium.",
+                    "<strong>3. Derivador (Router):</strong> El centro lógico que bifurca el flujo mediante lógica condicional determinista.",
+                    "<strong>4. Orquestador (Gemini AI):</strong> Gemini 1.5 Flash transforma datos crudos en soluciones empáticas y precisas.",
+                    "<strong>5. Escriba (Add Row):</strong> Nada se pierde; cada interacción queda guardada para auditoría y mejora continua.",
+                    "<strong>6. Hablante (Webhook Response):</strong> Cierre de ciclo e inyección inmediata de la solución en la pantalla del usuario."
                 ]
             },
             {
@@ -231,32 +233,14 @@
                 "title": "Implementación de IA Generativa",
                 "subtitle": "Estrategia de Prompts y Orquestación",
                 "body": "Se utiliza un orquestador que inyecta el rol del asistente, reglas de seguridad y SLAs diferenciados.",
-                "code": "// System Prompt de GEMA\nEres dtic-GEMA_FRLR, el Asistente Inteligente de la Dirección de TIC. Asiste con tono profesional y empático.\n1. Validación: Siempre valida identidad contra {{agentes}}.\n2. Priorización: SLA Autoridades < 2hs / Otros < 24hs.\n3. Seguridad: NUNCA pidas contraseñas.\n4. Valor: Inyecta un dato curioso sobre la carrera del usuario."
-            },
-            {
-                "id": "resultados",
-                "type": "section",
-                "title": "El Viaje de la Consulta: Eficiencia Reflejada",
-                "body": "La implementación de esta arquitectura de acción no solo es una mejora técnica, sino un cambio en la calidad del servicio. El flujo se divide en cinco hitos críticos:",
-                "list": [
-                    "<strong>1. Recepción (Receptor):</strong> Captura instantánea del problema del usuario sin intermediarios.",
-                    "<strong>2. Seguridad (Validador):</strong> El 'patovica' digital asegura que solo personal autorizado acceda al soporte premium.",
-                    "<strong>3. Inteligencia (Orquestador):</strong> Gemini 1.5 Flash transforma datos crudos en soluciones empáticas y precisas.",
-                    "<strong>4. Trazabilidad (Escriba):</strong> Nada se pierde; cada interacción queda guardada para auditoría y mejora continua.",
-                    "<strong>5. Resolución (hablante):</strong> Cierre del ciclo con la entrega inmediata de la solución en la pantalla del usuario."
-                ]
-            },
-            {
-                "type": "image",
-                "src": "assets/img/arquitectura_gema.png",
-                "caption": "Flujo de interacción y arquitectura de datos del sistema"
+                "code": "// System Prompt de GEMA\\nEres dtic-GEMA_FRLR, el Asistente Inteligente de la Dirección de TIC. Asiste con tono profesional y empático.\\n1. Validación: Siempre valida identidad contra {{agentes}}.\\n2. Priorización: SLA Autoridades < 2hs / Otros < 24hs.\\n3. Seguridad: NUNCA pidas contraseñas.\\n4. Valor: Inyecta un dato curioso sobre la carrera del usuario."
             }
         ]
     },
     "entregables": {
         "title": "Entregables",
         "subtitle": "Gestión de Requerimientos y Historial de Versiones",
-        "version": "v1.6.4",
+        "version": "v1.6",
         "content": [
             {
                 "id": "intro_entregas",
@@ -267,8 +251,8 @@
             {
                 "id": "generacion",
                 "type": "section",
-                "title": "Generación de Entregables (v1.3)",
-                "body": "Utiliza este portal para generar los documentos oficiales actualizados con la estética académica requerida.",
+                "title": "Generación de Entregables (v1.6)",
+                "body": "Utiliza este portal para acceder a los documentos oficiales actualizados con la estética académica requerida.",
                 "blocks": [
                     {
                         "type": "action_item",
