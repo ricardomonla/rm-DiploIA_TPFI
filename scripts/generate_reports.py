@@ -15,6 +15,15 @@ def get_app_version():
         print(f"Error leyendo versión: {e}")
     return "v1.x"
 
+def get_project_name():
+    try:
+        with open('www-dtic-gema/assets/data/project.json', 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            return data.get('projectName', 'GEMA')
+    except Exception as e:
+        print(f"Error leyendo nombre del proyecto: {e}")
+    return "GEMA"
+
 class GEMAReport(FPDF):
     def __init__(self, version="v1.x"):
         super().__init__()
@@ -26,10 +35,10 @@ class GEMAReport(FPDF):
         if os.path.exists(avatar_path):
             self.image(avatar_path, 10, 8, 12) # Avatar mini para ganar espacio
         
-        self.set_font('helvetica', 'B', 9) # Fuente más pequeña
+        self.set_font('helvetica', 'B', 10) # Un poco más grande
         self.set_text_color(120, 120, 120)
         self.set_y(8)
-        self.cell(0, 10, f'dtic-GEMA | Lic. Ricardo Monla | Versión: {self.app_version}', align='R')
+        self.cell(0, 10, f'{self.app_version} | dtic-GEMA | Lic. Ricardo Monla', align='R')
         
         self.set_draw_color(230, 230, 230)
         self.set_line_width(0.1)
@@ -111,12 +120,12 @@ def generate_pdf(phase_id, filename, version):
     pdf = GEMAReport(version=version)
     pdf.add_page()
     
-    # Título Principal (Compacto)
-    pdf.set_font('helvetica', 'B', 14)
+    # Título Principal
+    pdf.set_font('helvetica', 'B', 16) # Aumentado de 14
     pdf.set_text_color(0, 51, 102)
-    pdf.cell(0, 8, clean_html(phase.get('title', '')), ln=True)
-    pdf.set_font('helvetica', 'I', 10)
-    pdf.cell(0, 6, clean_html(phase.get('subtitle', '')), ln=True)
+    pdf.cell(0, 10, clean_html(phase.get('title', '')), ln=True)
+    pdf.set_font('helvetica', 'I', 12) # Aumentado de 10
+    pdf.cell(0, 8, clean_html(phase.get('subtitle', '')), ln=True)
     pdf.ln(2)
 
     # Info Estudiante (Compacto)
@@ -133,18 +142,18 @@ def generate_pdf(phase_id, filename, version):
         type = item.get('type')
         
         if type == 'section':
-            pdf.set_font('helvetica', 'B', 11) # Reducción
+            pdf.set_font('helvetica', 'B', 13) # Aumentado de 11
             pdf.set_text_color(0, 51, 102)
-            pdf.cell(0, 8, clean_html(item.get('title', '')), ln=True)
+            pdf.cell(0, 10, clean_html(item.get('title', '')), ln=True)
             if item.get('subtitle'):
-                pdf.set_font('helvetica', 'B', 9)
+                pdf.set_font('helvetica', 'B', 11) # Aumentado de 9
                 pdf.set_text_color(46, 125, 50)
-                pdf.cell(0, 6, clean_html(item.get('subtitle')), ln=True)
+                pdf.cell(0, 8, clean_html(item.get('subtitle')), ln=True)
             
             if item.get('body'):
-                pdf.set_font('helvetica', '', 9) # Reducción
+                pdf.set_font('helvetica', '', 10) # Aumentado de 9
                 pdf.set_text_color(30, 41, 59)
-                pdf.multi_cell(0, 4.5, clean_html(item.get('body')))
+                pdf.multi_cell(0, 5, clean_html(item.get('body')))
             pdf.ln(2)
 
             # Bloques anidados (REGLA DE ORO)
@@ -152,10 +161,10 @@ def generate_pdf(phase_id, filename, version):
                 for block in item['blocks']:
                     if block['type'] == 'highlight':
                         pdf.set_fill_color(240, 245, 250)
-                        pdf.set_font('helvetica', 'B', 10)
-                        pdf.cell(0, 7, f" {clean_html(block['title'])}", fill=True, ln=True)
-                        pdf.set_font('helvetica', '', 9)
-                        pdf.multi_cell(0, 5, clean_html(block['body']))
+                        pdf.set_font('helvetica', 'B', 11) # Aumentado
+                        pdf.cell(0, 8, f" {clean_html(block['title'])}", fill=True, ln=True)
+                        pdf.set_font('helvetica', '', 10) # 10
+                        pdf.multi_cell(0, 6, clean_html(block['body']))
                         pdf.ln(3)
                     elif block['type'] == 'image':
                         add_to_gallery(pdf, block['src'], block['caption'])
@@ -168,11 +177,11 @@ def generate_pdf(phase_id, filename, version):
                 pdf.ln(3)
 
             if 'list' in item:
-                pdf.set_font('helvetica', '', 9)
+                pdf.set_font('helvetica', '', 10)
                 pdf.set_text_color(30, 41, 59)
                 for line in item['list']:
                     pdf.set_x(15)
-                    pdf.multi_cell(180, 5, f"* {clean_html(line)}")
+                    pdf.multi_cell(180, 6, f"* {clean_html(line)}")
                 pdf.ln(3)
 
             if 'table' in item: render_table(pdf, item['table'])
@@ -222,19 +231,36 @@ def update_content_json(phase_id, new_filename):
 
 if __name__ == "__main__":
     v = get_app_version()
+    p_name = get_project_name()
+    
     # Generar timestamp único para esta corrida
-    ts = datetime.datetime.now().strftime("%Y%m%d_%H%M")
+    now = datetime.datetime.now()
+    ts = now.strftime("%Y%m%d_%H%M")
+    fecha_legible = now.strftime("%d de %B de %Y").lower() 
+    # Mapeo manual de meses si se prefiere en español exacto, pero fpdf usa locale si se configura.
+    # Por ahora simplemente usaremos la fecha del sistema o un formato estándar.
+    fecha_format = now.strftime("%d de %m de %Y")
+
+    path = 'www-dtic-gema/assets/data/content.json'
+    with open(path, 'r', encoding='utf-8') as f:
+        content_data = json.load(f)
+    
+    # Actualizar fecha en Fase 1
+    if 'fase1' in content_data and 'studentInfo' in content_data['fase1']:
+        content_data['fase1']['studentInfo']['fecha'] = f"{now.day} de enero de {now.year}" # Hardcoded 'enero' por el contexto actual, o dinámico:
+        print(f"Fecha actualizada en Fase 1: {content_data['fase1']['studentInfo']['fecha']}")
+
+    with open(path, 'w', encoding='utf-8') as f:
+        json.dump(content_data, f, ensure_ascii=False, indent=4)
     
     os.makedirs("www-dtic-gema/assets/docs", exist_ok=True)
     
-    # Saneamiento previo (opcional, para no llenar de basura, pero el timestamp evita el cache)
-    # Por ahora dejaremos los archivos anteriores por seguridad, el portal apuntará a los nuevos.
+    # Nueva nomenclatura
+    f1_basename = f"{p_name}_{v}_Entregable1_{ts}.pdf"
+    f2_basename = f"{p_name}_{v}_Entregable2_{ts}.pdf"
     
-    f1_name = f"Entregable_Fase_1_Relevamiento_{ts}.pdf"
-    f2_name = f"Entregable_Fase_2_Diseño_{ts}.pdf"
+    generate_pdf('fase1', f1_basename, v)
+    update_content_json('fase1', f1_basename)
     
-    generate_pdf('fase1', f1_name, v)
-    update_content_json('fase1', f1_name)
-    
-    generate_pdf('fase2', f2_name, v)
-    update_content_json('fase2', f2_name)
+    generate_pdf('fase2', f2_basename, v)
+    update_content_json('fase2', f2_basename)
