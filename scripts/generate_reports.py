@@ -78,17 +78,26 @@ def render_evolution_brief(pdf, position='start'):
         
     pdf.set_font('helvetica', 'B', 10)
     pdf.set_text_color(3, 105, 161)
-    pdf.cell(0, 8, "  ! NOTA DE VIGENCIA SISTÉMICA", border='LTR', ln=True, fill=True)
+    pdf.cell(0, 8, "  ! PROTOCOLO DE MEJORA CONTINUA", border='LTR', ln=True, fill=True)
     
     pdf.set_font('helvetica', '', 9)
     pdf.set_text_color(30, 41, 59)
     msg = f"Este documento representa una captura estática del proyecto. El ecosistema vivo y actualizado se encuentra en: "
     pdf.multi_cell(0, 5, msg, border='LR')
     
-    # Fila del link con hipervínculo real y destacado
+    # Fila del link con hipervínculo real, usando multi_cell para evitar desbordes
     pdf.set_font('helvetica', 'B', 9)
     pdf.set_text_color(2, 132, 199)
-    pdf.cell(0, 7, f"  {url}", border='LBR', ln=True, link=url)
+    # Sangría sutil para el link
+    pdf.set_x(pdf.get_x() + 2)
+    pdf.multi_cell(188, 7, url, border='B', ln=True, link=url)
+    
+    # Cerrar el recuadro lateral (ya que multi_cell 0 no dibuja bordes laterales si no es full width)
+    # Pero como usamos 188 y multi_cell dibuja segun el ancho, ajustamos:
+    curr_y = pdf.get_y()
+    pdf.line(10, curr_y - 7, 10, curr_y) # Borde izquierdo
+    pdf.line(200, curr_y - 7, 200, curr_y) # Borde derecho
+    
     pdf.ln( position == 'start' and 5 or 0)
 
 def render_table(pdf, table):
