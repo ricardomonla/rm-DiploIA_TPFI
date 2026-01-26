@@ -1,13 +1,17 @@
 [
     {
         "version": "v1.6",
-        "title": "Unificación de Verdad, Dinamismo PDF y Excelencia Editorial",
+        "title": "Arquitectura Dinámica, Navegación Minimalista y Excelencia Documental",
         "date": "26 de Enero, 2026",
         "changes": [
-            "Sincronización Anti-Caché: Implementación de timestamps dinámicos en entregables PDF.",
-            "Fuente de Verdad Unificada: Eliminación de hardcoding; la versión ahora es puramente dinámica desde el Changelog.",
-            "Excelencia Editorial: Rediseño del Protocolo de Mejora Continua con hipervínculos y ajuste de fuentes académicas.",
-            "Rectificación Técnica: Sincronización final de terminología de nodos (IA Gemini / Responder)."
+            "Arquitectura de 3 Capas: Implementación de la imagen maestra 'Ciclo de Vida GEMA' (Ronda 5) con lógica de bifurcación IA (Gemini AI) y Responder.",
+            "Navegación Minimalista: Simplificación del sidebar a Nivel 1 para máxima estabilidad y eliminación de conflictos de eventos.",
+            "Motor de Resolución de Slugs: Sincronización absoluta entre URLs, IDs de contenido y resaltado visual en el sidebar.",
+            "Unificación de Fuente de Verdad: Eliminación total de versiones hardcodeadas; el proyecto ahora se autogestiona desde el Changelog.",
+            "Dinamismo PDF: Implementación de timestamps anti-caché y nomenclatura estandarizada [Proyecto]_[Versión]_[Entregable]_[TS].",
+            "Excelencia Editorial: Rediseño del 'Protocolo de Mejora Continua' con hipervínculos funcionales y optimización de fuentes académicas (16pt/13pt/10pt).",
+            "Sincronización de Datos: Corrección masiva de claves (src -> link) y soporte dual en el motor de renderizado SPA.",
+            "Automatización Cronológica: Actualización dinámica de fechas en entregables directamente desde el script de generación."
         ]
     },
     {
