@@ -6,7 +6,7 @@ from fpdf.enums import XPos, YPos
 
 def get_app_version():
     try:
-        with open('data/changelog.json', 'r', encoding='utf-8') as f:
+        with open('www-dtic-gema/assets/data/changelog.json', 'r', encoding='utf-8') as f:
             data = json.load(f)
             if data and len(data) > 0:
                 return data[0].get('version', 'v1.x')
