@@ -12,7 +12,7 @@ def get_app_version():
                 return data[0].get('version', 'v1.x')
     except Exception as e:
         print(f"Error leyendo versión: {e}")
-    return "v1.5.9"
+    return "v1.x"
 
 class GEMAReport(FPDF):
     def __init__(self, version="v1.x"):

@@ -5,7 +5,7 @@
 let PROJECT_DATA = {};
 let MENU_DATA = [];
 let CONTENT_DATA = {};
-let LATEST_VERSION = 'v1.5';
+let LATEST_VERSION = '';
 let avatarDebounceTimer = null;
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -39,7 +39,7 @@ async function loadData() {
         // Sincronizar versión: El Changelog manda.
         PROJECT_DATA = {
             ...project,
-            version: LATEST_VERSION || project.version
+            version: LATEST_VERSION || project.version || 'v1.x'
         };
         CONTENT_DATA = content;
         MENU_DATA = menu;
@@ -56,9 +56,12 @@ async function fetchLatestVersion(t) {
             if (data && data.length > 0) {
                 LATEST_VERSION = data[0].version;
             }
+        } else {
+            LATEST_VERSION = 'v1.default';
         }
     } catch (e) {
         console.error('Error al detectar versión:', e);
+        LATEST_VERSION = 'v1.error';
     }
 }
 

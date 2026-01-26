@@ -2,7 +2,6 @@
     "consignas": {
         "title": "Consignas",
         "subtitle": "Diplomatura en IA para No Programadores",
-        "version": "v1.6",
         "content": [
             {
                 "id": "intro",
@@ -91,7 +90,6 @@
     "fase1": {
         "title": "FASE 1: Relevamiento",
         "subtitle": "Identificación de Puntos de Dolor y Diseño del Flujo",
-        "version": "v1.6",
         "studentInfo": {
             "alumno": "Lic. Ricardo MONLA",
             "area": "Dirección de TIC - Facultad X",
@@ -187,7 +185,6 @@
     "fase2": {
         "title": "FASE 2: Diseño",
         "subtitle": "Configuración Técnica y Lógica de Automatización",
-        "version": "v1.6",
         "content": [
             {
                 "id": "intro_f2",
@@ -240,7 +237,6 @@
     "entregables": {
         "title": "Entregables",
         "subtitle": "Gestión de Requerimientos y Historial de Versiones",
-        "version": "v1.6",
         "content": [
             {
                 "id": "intro_entregas",
@@ -251,7 +247,7 @@
             {
                 "id": "generacion",
                 "type": "section",
-                "title": "Generación de Entregables (v1.6)",
+                "title": "Generación de Entregables",
                 "body": "Utiliza este portal para acceder a los documentos oficiales actualizados con la estética académica requerida.",
                 "blocks": [
                     {
