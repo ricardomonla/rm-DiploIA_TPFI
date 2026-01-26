@@ -5,7 +5,7 @@
 let PROJECT_DATA = {};
 let MENU_DATA = [];
 let CONTENT_DATA = {};
-let LATEST_VERSION = 'v1.0'; // Fallback
+let LATEST_VERSION = 'v1.6.4';
 let avatarDebounceTimer = null;
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -107,133 +107,22 @@ function renderSidebar(sidebar) {
 
 function renderMenuItem(item, parentIndex) {
     const videoAttr = item.avatarVideo ? `data-video="${item.avatarVideo}"` : '';
+    const slug = item.path || item.id;
 
-    if (item.type === 'direct') {
-        const isActive = (!window.location.hash && item.id === 'chatbot') || window.location.hash === `#${item.id}`;
-        return `
-            <a href="#${item.id}" class="nav-item ${isActive ? 'active' : ''}" ${videoAttr}>
-                <i data-lucide="${item.icon}"></i>
-                <span class="bullet-main" style="margin-right: 8px; font-weight: bold; color: inherit;">${parentIndex}</span>
-                ${item.title}
-            </a>
-        `;
-    }
+    // Simplificación drástica: El sidebar solo muestra hitos de Nivel 1
+    // La navegación interna se maneja mediante botones en el contenido principal
+    const isActive = (!window.location.hash && slug === 'consignas') ||
+        window.location.hash.startsWith(`#${slug}`);
 
-    if (item.type === 'parent') {
-        const firstChildId = item.children && item.children.length > 0 ? item.children[0].id : '';
-        return `
-            <div class="nav-group">
-                <div class="nav-item parent" onclick="handleParentClick(this, '${item.id}', '${firstChildId}')">
-                    <i data-lucide="${item.icon}"></i>
-                    <span class="bullet-main" style="margin-right: 8px; font-weight: bold; color: #4facfe;">${parentIndex}</span>
-                    ${item.title}
-                    <i data-lucide="chevron-down" class="chevron"></i>
-                </div>
-                <div class="sub-menu">
-                    ${item.children.map((child, subIndex) => {
-            const childNumber = `${parentIndex}.${subIndex + 1}`;
-            const childVideo = child.avatarVideo || item.avatarVideo || '';
-            const childVideoAttr = childVideo ? `data-video="${childVideo}"` : '';
-            return `
-                        <div class="nav-group-sub">
-                            <div class="nav-item-wrapper" onclick="this.closest('.nav-group-sub').classList.toggle('open');" style="display: flex; align-items: center; justify-content: space-between; cursor: pointer;">
-                                <a href="#${item.id}/${child.id}" class="nav-item sub" ${childVideoAttr} style="flex: 1; pointer-events: auto;">
-                                    <span class="bullet" style="margin-right: 8px; font-weight: bold; color: #4facfe;">${childNumber}</span>
-                                    ${child.title}
-                                </a>
-                                ${child.subsections ? `<i data-lucide="chevron-down" class="chevron sub-chevron"></i>` : ''}
-                            </div>
-                            ${child.subsections ? `
-                                <div class="sub-sub-menu">
-                                    ${child.subsections.map((subSub, subSubIndex) => `
-                                        <a href="#${item.id}/${child.id}/${subSub.id}" class="nav-item sub-sub">
-                                            <span class="bullet" style="margin-right: 8px; opacity: 0.6;">${childNumber}.${subSubIndex + 1}</span>
-                                            ${subSub.title}
-                                        </a>
-                                    `).join('')}
-                                </div>
-                            ` : ''}
-                        </div>
-                    `}).join('')}
-                </div>
-            </div>
-        `;
-    }
-    return '';
+    return `
+        <a href="#${slug}" class="nav-item ${isActive ? 'active' : ''}" ${videoAttr}>
+            <i data-lucide="${item.icon}"></i>
+            <span class="bullet-main" style="margin-right: 8px; font-weight: bold; color: inherit;">${parentIndex}</span>
+            ${item.title}
+        </a>
+    `;
 }
 
-function handleParentClick(element, parentId, firstChildId) {
-    const group = element.parentElement;
-    const wasOpen = group.classList.contains('open');
-
-    // Toggle expansión
-    group.classList.toggle('open');
-
-    // Navegación: Ir al padre (Punto principal)
-    window.location.hash = parentId;
-}
-
-function handleRouting() {
-    const fullHash = window.location.hash.replace('#', '');
-    const segments = fullHash.split('/');
-    const pageId = segments[0] || 'consignas';
-    const sectionId = segments[1];
-
-    // 1. Limpiar estados previos
-    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-    document.querySelectorAll('.nav-group, .nav-group-sub').forEach(el => el.classList.remove('open'));
-
-    // 2. Marcar link activo (buscando el hash exacto o el ID base)
-    let activeLink = document.querySelector(`a[href="#${fullHash}"]`);
-    if (!activeLink && pageId) {
-        // Buscar el ítem padre si no hay link directo a la subsección
-        activeLink = document.querySelector(`a[href="#${pageId}"]`);
-    }
-
-    // Caso especial: Si es una sección raíz (padre), el activeLink podría ser el div.parent
-    if (!activeLink && pageId) {
-        const parentItem = Array.from(document.querySelectorAll('.nav-item.parent')).find(el => {
-            const onclick = el.getAttribute('onclick');
-            return onclick && onclick.includes(`'${pageId}'`);
-        });
-        if (parentItem) activeLink = parentItem;
-    }
-
-    if (activeLink) {
-        activeLink.classList.add('active');
-        // Abrir ancestros para que el menú refleje la posición
-        expandParents(activeLink);
-
-        // Si el link activo es un padre o está dentro de un grupo, asegurar que esté abierto
-        const group = activeLink.closest('.nav-group');
-        if (group) group.classList.add('open');
-    }
-
-    // Actualizar Avatar (buscando el atributo data-video en el link activo)
-    const videoSrc = activeLink?.getAttribute('data-video');
-    if (videoSrc && videoSrc !== 'undefined') {
-        updateAvatar(videoSrc);
-    }
-
-    if (pageId === 'chatbot') {
-        showChatbot();
-    } else {
-        renderDynamicContent(pageId, sectionId);
-    }
-
-    // Sincronizar título de la pestaña con la institución
-    document.title = `GEMA Chat - ${PROJECT_DATA.institution}`;
-}
-
-function expandParents(element) {
-    let parent = element.parentElement;
-    while (parent && !parent.classList.contains('sidebar-nav')) {
-        if (parent.classList.contains('nav-group') || parent.classList.contains('nav-group-sub')) {
-            parent.classList.add('open');
-        }
-        parent = parent.parentElement;
-    }
-}
 
 function updateAvatar(videoName) {
     if (avatarDebounceTimer) clearTimeout(avatarDebounceTimer);
@@ -262,17 +151,31 @@ function showChatbot() {
     if (chatContainer) chatContainer.style.display = 'flex';
     if (existingReport) existingReport.remove();
 
-    // Inyectar botón de volver en el header del chat para coherencia UX
+    // Inyectar botón de volver dinámico en el header del chat
     const headerActions = document.querySelector('.header-actions');
-    if (headerActions && !document.getElementById('chatReturnBtn')) {
-        const returnBtn = document.createElement('a');
-        returnBtn.id = 'chatReturnBtn';
-        returnBtn.href = '#entregas/historial';
-        returnBtn.className = 'nav-prev-btn';
-        returnBtn.style = 'margin-right:15px; display: flex; align-items: center; gap: 5px; color: var(--text-muted); text-decoration: none; font-size: 0.8rem;';
-        returnBtn.innerHTML = '<i data-lucide="arrow-left" style="width:14px;"></i> Volver a Entregables';
-        headerActions.prepend(returnBtn);
-        lucide.createIcons();
+    if (headerActions) {
+        // Limpiar botones previos
+        const oldBtn = document.getElementById('chatReturnBtn');
+        if (oldBtn) oldBtn.remove();
+
+        const nav = getFlatNavigation();
+        const idx = nav.findIndex(n => n.id === 'chatbot');
+        const prev = nav[idx - 1];
+
+        if (prev) {
+            const returnBtn = document.createElement('a');
+            returnBtn.id = 'chatReturnBtn';
+            returnBtn.href = `#${prev.id}`;
+            returnBtn.className = 'nav-sutil-btn prev';
+            returnBtn.style = 'margin-right: 20px; text-decoration: none; display: flex; align-items: center; gap: 8px; font-size: 0.85rem;';
+            returnBtn.onclick = (e) => handleNavClick(e, prev.id);
+            returnBtn.innerHTML = `
+                <i data-lucide="chevron-left" style="width: 16px; height: 16px;"></i>
+                <span>Volver a <strong>${prev.title}</strong></span>
+            `;
+            headerActions.prepend(returnBtn);
+            lucide.createIcons();
+        }
     }
 }
 
@@ -346,67 +249,12 @@ function renderDynamicContent(id, sectionId) {
             target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     } else {
+        const mainContent = document.querySelector('.main-content');
+        if (mainContent) mainContent.scrollTop = 0;
         window.scrollTo(0, 0);
     }
 }
 
-function getFlatNavigation() {
-    // Solo navegamos entre hitos de Nivel 1 (Principales)
-    return MENU_DATA.map(item => ({
-        id: item.id,
-        title: item.title,
-        path: item.path || item.id
-    }));
-}
-
-function renderNavigation(currentId, position) {
-    const nav = getFlatNavigation();
-    if (nav.length === 0) return '';
-
-    let idx = nav.findIndex(n => n.id === currentId || n.path === currentId);
-    if (idx === -1) return '';
-
-    const prev = nav[idx - 1];
-    const next = nav[idx + 1];
-
-    if (position === 'top' && prev) {
-        const link = prev.parentId ? `#${prev.parentId}/${prev.id}` : `#${prev.id}`;
-        return `
-            <div class="nav-auto-top">
-                <a href="${link}" class="nav-sutil-btn prev" onclick="handleNavClick(event, '${prev.id}')">
-                    <i data-lucide="chevron-left"></i>
-                    <span>Volver a <strong>${prev.title}</strong></span>
-                </a>
-            </div>
-        `;
-    }
-
-    if (position === 'bottom' && next) {
-        const link = next.parentId ? `#${next.parentId}/${next.id}` : `#${next.id}`;
-        return `
-            <div class="nav-auto-bottom">
-                <a href="${link}" class="nav-sutil-btn next" onclick="handleNavClick(event, '${next.id}')">
-                    <span>Continuar a <strong>${next.title}</strong></span>
-                    <i data-lucide="chevron-right"></i>
-                </a>
-            </div>
-        `;
-    }
-    return '';
-}
-
-function handleNavClick(event, targetId) {
-    // 1. Dejar que el hash cambie naturalmente
-    // 2. Buscar el elemento en el sidebar y forzar su estado visual activo
-    setTimeout(() => {
-        const sidebarLink = document.querySelector(`a[href*="${targetId}"]`);
-        if (sidebarLink) {
-            sidebarLink.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            // Forzar expansión de padres si es necesario
-            expandParents(sidebarLink);
-        }
-    }, 100);
-}
 
 function renderStudentInfo(info) {
     return `

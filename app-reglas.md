@@ -2,47 +2,45 @@
 
 Este archivo define las directivas heurísticas y el sistema de comandos para la interacción con el repositorio **rm-DiploIA_TPFI**.
 
-## 1. 🌐 Núcleo de Comunicación (Español-Fisrt)
+## 1. 🌐 Núcleo de Comunicación (Español-First)
 - **Idioma Obligatorio:** Español para toda salida (Mensajes, Artefactos, Documentación, Commits).
 - **Interpretación Heurística:** Priorizar la intención del usuario sobre el literalismo técnico. Tono: Profesional/Consultor.
 
 ## 2. 🏛️ Estándares de Arquitectura y Estética
 - **UI/UX:** Estética "Premium", Glassmorphism y micro-animaciones fluidas.
 - **Identidad:** Branding "Facultad X". Desvincular de marcas institucionales específicas.
+- **Rondas de Diseño:** Las imágenes complejas (ej: Arquitectura) se iteran en "Rondas". La versión elegida se documenta en la memoria y se implementa en `assets/img/`.
+- **Cache-Busting:** Al realizar cambios en lógica JS crítica, se debe incrementar el parámetro `?v=x.x.x` en `index.html`.
 
-## 3. 📝 Gestión de Memoria Técnica (Rastro Histórico)
+## 3. 📝 Gestión de Memoria Técnica (Protocolo Iterativo)
 - **Ubicación:** `data/memoria/[vActual]/`.
 - **Formato:** `v[X.Y.Z]_[descripcion_breve].md`.
-- **Regla de Integridad (Aditividad):** Las actualizaciones son **estrictamente aditivas**. Queda prohibido resumir, simplificar o modificar contenidos de texto existentes sin una orden expresa. El objetivo es preservar el rastro histórico íntegro.
+- **Regla de Integridad (Aditividad):** Las actualizaciones son **estrictamente aditivas**. Queda prohibido resumir o modificar contenidos previos para preservar el rastro histórico íntegro.
+- **Registro de Éxitos y Fracasos:** Cada ciclo debe incluir una tabla con el historial de intentos:
+    - **Campos:** Iteración (n°), Táctica (qué se hizo), Resultado (Éxito/Fraso/Parcial), Aprendizaje (por qué).
+    - **Persistencia:** No borrar iteraciones fallidas; son la base de la conclusión final.
 
-## 4. ⚡ Protocolo de Comandos "OK" (Sistema de Control)
+## 4. ⚙️ Motor de Navegación (navigation.js)
+- **Nivel 1 Principal:** El sidebar debe permanecer minimalista, mostrando solo hitos de Nivel 1 para evitar conflictos de eventos.
+- **Resolución de Slugs:** Siempre se debe utilizar `MENU_DATA` para mapear los *Paths* (URL) a los *IDs* de contenido real, garantizando sincronización absoluta.
+- **Navegación Secuencial:** Los botones "Continuar/Volver" deben disparar el evento `hashchange` para el control centralizado.
+
+## 5. ⚡ Protocolo de Comandos "OK" (Sistema de Control)
 
 ### 🟢 "OK procede" (Disparador de Ejecución)
-> [!IMPORTANT]
-> **Mandato Plan-First:** Ninguna tarea técnica o cambio en el código puede ejecutarse sin un Plan de Implementación aprobado previamente. Solo tras el comando "OK procede" se inicia la ejecución técnica.
-
-1. Detectar versión actual de trabajo.
-2. Guardar copia del **Master Plan** en `data/memoria/[vActual]/v[X.Y.Z]_[nombre].md`.
-3. **Ejecución Técnica:** Realizar los cambios aprobados.
-4. **Sincronización Mandatoria:** Actualizar el archivo de memoria v[X.Y.Z] marcando las tareas como completadas `[x]` al finalizar.
+- **Mandato Plan-First:** Ningún cambio en el código sin un Plan de Implementación aprobado.
+- **Sincronización:** Actualizar el archivo de memoria v[X.Y.Z] marcando tareas `[x]` al finalizar.
 
 ### 🟡 "OK versiona" (Sello de Versión)
-1. **Restricción:** Único comando autorizado para incrementar versionado oficial en archivos core (`project.json`, `README.md`, `package.json`).
-2. **Recopilación:** Leer sistemáticamente todos los archivos en `data/memoria/[vActual]/` para síntesis del Changelog.
-3. Actualizar `data/changelog.json` y sincronizar con `www-dtic-gema/assets/data/changelog.json`.
-4. Crear etiqueta (tag) Git: `vX.Y`.
-
-### 🔴 "OK terminamos" (Cierre de Ciclo)
-1. Generar `seguimiento_final_v[X.Y].md` en la carpeta de memoria.
-2. Ejecutar "OK versiona".
-3. Inicializar carpeta para la siguiente sub-versión.
-4. Ejecutar "OK guarda".
+1. Incrementar versionado oficial.
+2. Síntesis de Changelog desde archivos de memoria.
+3. Crear etiqueta Git: `vX.Y`.
 
 ### 💾 "OK guarda" (Persistencia de Sesión)
 1. Registro universal de cambios (`git add .`).
 2. Commit descriptivo en español.
 3. Push al repositorio remoto.
 
-### ⏳ "OK continuamos despues" (Punto de Control)
-1. Resumen de estado en pensamientos internos.
-2. Ejecutar "OK guarda".
+---
+> [!NOTE]
+> Este archivo es el único punto de verdad para las reglas del agente. Referencias previas en `.agent/rules.md` quedan deprecadas.
