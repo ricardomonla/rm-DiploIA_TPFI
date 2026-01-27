@@ -1,5 +1,18 @@
 [
     {
+        "version": "v1.7",
+        "title": "Optimización Líquida, Transiciones Cinemáticas y Eficiencia de Assets",
+        "date": "27 de Enero, 2026",
+        "changes": [
+            "Optimización Extrema de Assets: Reducción del avatar de 7.5MB a 14KB (WebP) logrando una carga 99.8% más rápida.",
+            "Sistema de Doble Buffer de Video: Eliminación total de parpadeos negros en las transiciones del avatar (Sidebar y Teatro).",
+            "Efecto Portal Cinemático: Transformación del Modo Teatro en un lobby interactivo con CTA 'Hablar con GEMA' y navegación fluida.",
+            "Hardening de app-run.sh: Implementación de validación de identidad robusta, colores ANSI y gestión dinámica de puertos.",
+            "Protocolo de Versionado Total: Automatización de la sincronización entre Project, Changelog y README para consistencia absoluta.",
+            "Limpieza y Saneamiento: Eliminación de residuos temporales y optimización de flujos de generación interna."
+        ]
+    },
+    {
         "version": "v1.6",
         "title": "Arquitectura Dinámica, Navegación Minimalista y Excelencia Documental",
         "date": "26 de Enero, 2026",

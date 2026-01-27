@@ -11,7 +11,9 @@ Este archivo es el **Único Punto de Verdad (SSOT)** para la interacción entre 
 - **`VAR_PATH_MEMORIA`**: `data/memoria/`
 - **`VAR_PATH_ASSETS`**: `www-dtic-gema/assets/`
 - **`VAR_BRANDING_ID`**: `Glassmorphism / Facultad X`
-- **`VAR_VERSION_FILE`**: `project.json`
+- **`VAR_VERSION_FILE`**: `www-dtic-gema/assets/data/project.json`
+- **`VAR_CHANGELOG_FILE`**: `www-dtic-gema/assets/data/changelog.json`
+- **`VAR_README_FILE`**: `README.md`
 - **`VAR_RUN_CMD`**: `./app-run.sh`
 
 ---
@@ -52,9 +54,10 @@ Los comandos "OK" son órdenes de acción directas y minimalistas.
 2. Cambiar estado a `[x] Completado` y disparar **`OK guarda`**.
 
 ### 🏷️ `PROC-SELL-VERS` (Versionado de Entrega)
-1. Incrementar valor en **`VAR_VERSION_FILE`**.
-2. Sincronizar versión en los puntos de visualización de UI definibles por la aplicación.
-3. Aplicar técnicas de cache-busting (ej: query strings) en **`VAR_MAIN_HTML`** dentro de **`VAR_WEB_ROOT`**.
+1. **Metadata**: Incrementar valor de versión en **`VAR_VERSION_FILE`**.
+2. **Historial**: Inyectar el resumen del hito cerrado desde **`VAR_PATH_MEMORIA`** en **`VAR_CHANGELOG_FILE`**.
+3. **Docs**: Sincronizar el encabezado y novedades principales en el archivo apuntado por **`VAR_README_FILE`**.
+4. **UI**: Sincronizar versión en los puntos de visualización de UI y aplicar técnicas de cache-busting en **`VAR_MAIN_HTML`**.
 
 ### 🏃 `PROC-RUN-APP` (Ejecución de Script)
 1. Lanzar **`VAR_RUN_CMD`** pasando los argumentos opcionales.

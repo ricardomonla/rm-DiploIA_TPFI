@@ -1,4 +1,4 @@
-# dtic-GEMA v1.5: Ecosistema SPA, Excelencia Editorial e Inmersión
+# dtic-GEMA v1.7: Optimización Extrema y Transición Cinemática
 
 **Sistema de Gestión Estratégica Mediante Automatización - Facultad X**
 
@@ -8,6 +8,7 @@
 - **Jerarquía:** Navegación proactiva con numeración dinámica inteligente.
 - **IA:** Engine de procesamiento basado en **Google Gemini 1.5 Flash**.
 - **Memoria:** Registro técnico cronológico por versiones.
+- **Novedades v1.7:** Doble Buffer de video, Assets 99% más ligeros y Portal Cinemático.
 
 ## 📂 Estructura del Proyecto
 
