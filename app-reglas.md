@@ -1,52 +1,60 @@
-# 🤖 Configuración y Protocolos del Agente (IA-Optimized)
+# 🛡️ Protocolo y Configuración del Agente (v1.7.1)
 
-Este archivo define las directivas heurísticas y el sistema de comandos para la interacción con el repositorio **rm-DiploIA_TPFI**.
+Este archivo es el **Único Punto de Verdad (SSOT)** para la interacción entre el Usuario y el Agente en el repositorio **rm-DiploIA_TPFI**.
 
-## 1. 🌐 Núcleo de Comunicación (Español-First)
-- **Idioma Obligatorio:** Español para toda salida (Mensajes, Artefactos, Documentación, Commits).
-- **Interpretación Heurística:** Priorizar la intención del usuario sobre el literalismo técnico. Tono: Profesional/Consultor.
+## 1. 📋 REGLAS FUNDAMENTALES (Restricciones Innegociables)
+- **🌐 Español-First**: Idioma obligatorio para toda salida (Mensajes, Artefactos, Código, Commits, Memoria).
+- **🎨 Estética Premium**: Diseños basados en Glassmorphism, micro-animaciones fluidas y branding "Facultad X".
+- **📝 Memoria Aditiva**: Las actualizaciones son estrictamente aditivas. Prohibido resumir o borrar rastro histórico.
+- **🚀 Plan-First**: Prohibido realizar cambios técnicos en el código sin un Plan de Implementación (`implementation_plan.md`) aprobado.
 
-## 2. 🏛️ Estándares de Arquitectura y Estética
-- **UI/UX:** Estética "Premium", Glassmorphism y micro-animaciones fluidas.
-- **Identidad:** Branding "Facultad X". Desvincular de marcas institucionales específicas.
-- **Rondas de Diseño:** Las imágenes complejas (ej: Arquitectura) se iteran en "Rondas". La versión elegida se documenta en la memoria y se implementa en `assets/img/`.
-- **Cache-Busting:** Al realizar cambios en lógica JS crítica, se debe incrementar el parámetro `?v=x.x.x` en `index.html`.
+## ⚡ 2. SISTEMA DE COMANDOS "OK" (Action Triggers)
+Los comandos "OK" son órdenes de acción precisas que disparan procedimientos.
 
-## 3. 📝 Gestión de Memoria Técnica (Protocolo Iterativo)
-- **Ubicación:** `data/memoria/[vActual]/`.
-- **Formato:** `v[X.Y.Z]_[descripcion_breve].md`.
-- **Regla de Integridad (Aditividad):** Las actualizaciones son **estrictamente aditivas**. Queda prohibido resumir o modificar contenidos previos para preservar el rastro histórico íntegro.
-- **Registro de Éxitos y Fracasos:** Cada ciclo debe incluir una tabla con el historial de intentos:
-    - **Campos:** Iteración (n°), Táctica (qué se hizo), Resultado (Éxito/Fraso/Parcial), Aprendizaje (por qué).
-    - **Persistencia:** No borrar iteraciones fallidas; son la base de la conclusión final.
+| Comando | ID Procedimiento | Comandos Anidados | Acción Principal |
+| :--- | :--- | :--- | :--- |
+| **🟢 "OK inicia hito"** | `PROC-INIC-HITO` | - | Inicializa un nuevo hito técnico y su memoria. |
+| **🔵 "OK ejecuta hito"** | `PROC-EJEC-TECN` | - | Ejecuta los cambios técnicos aprobados en el plan. |
+| **🔴 "OK cierra hito"** | `PROC-CIER-HITO` | `OK guarda` | Finaliza el hito actual (Documentación y Git). |
+| **🟡 "OK versiona"** | `PROC-SELL-VERS` | - | **Sello Manual**: Incremento acumulativo de versión. |
+| **💾 "OK guarda"** | `PROC-PERS-GIT` | - | Persistencia Git inmediata (Add, Commit, Push). |
 
-## 4. ⚙️ Motor de Navegación (navigation.js)
-- **Nivel 1 Principal:** El sidebar debe permanecer minimalista, mostrando solo hitos de Nivel 1 para evitar conflictos de eventos.
-- **Resolución de Slugs:** Siempre se debe utilizar `MENU_DATA` para mapear los *Paths* (URL) a los *IDs* de contenido real, garantizando sincronización absoluta.
-- **Navegación Secuencial:** Los botones "Continuar/Volver" deben disparar el evento `hashchange` para el control centralizado.
+## ⚙️ 3. PROCEDIMIENTOS OPERATIVOS (Operational Procedures)
 
-## 5. ⚡ Protocolo de Comandos "OK" (Sistema de Control)
+### 📂 `PROC-INIC-HITO` (Inicialización)
+1. Crear/Actualizar carpeta en `data/memoria/vX.Y/`.
+2. Crear archivo `vX.Y.Z_nombre_hito.md` con contexto y objetivos en español.
+3. Inicializar tabla de iteraciones (Iteración 0).
 
-### 🟢 "OK procede" (Disparador de Ejecución)
-- **Mandato Plan-First:** Ningún cambio en el código sin un Plan de Implementación aprobado.
-- **Sincronización:** Actualizar el archivo de memoria v[X.Y.Z] marcando tareas `[x]` al finalizar.
+### 🛠️ `PROC-EJEC-TECN` (Ejecución)
+1. Re-leer `implementation_plan.md` y `task.md`.
+2. Aplicar cambios en archivos según el plan aprobado.
+3. Marcar tareas como completadas `[x]` en `task.md` y memoria técnica.
 
-### 🟡 "OK versiona" (Sello de Versión)
-1. Incrementar versionado oficial.
-2. Síntesis de Changelog desde archivos de memoria.
-3. Crear etiqueta Git: `vX.Y`.
+### 🏁 `PROC-CIER-HITO` (Cierre)
+1. Validar que todas las tareas del hito estén en `[x]`.
+2. Generar/Finalizar el `walkthrough.md` consolidado.
+3. Cambiar estado de memoria técnica a `[x] Completado`.
+4. Disparar comando anidado: **`OK guarda`**. (El versionado es manual).
 
-### � "OK nuevo plan" (Reinicio de Ciclo)
-1. **Inicialización:** Crear un nuevo archivo de memoria técnica en `data/memoria/[vActual]/`.
-2. **Iteración de Tareas:** Listar los ítems pendientes de la versión anterior (a resolver) y los nuevos objetivos.
-3. **Reinicio de Tabla:** Limpiar la tabla de "Éxitos y Fracasos" para la nueva iteración técnica.
-4. **Foco:** Establece el contexto para la fase de planificación del nuevo hito.
+### 🏷️ `PROC-SELL-VERS` (Versionado Acumulativo)
+> [!NOTE]
+> Acción manual para evitar el versionado excesivo. Se ejecuta por orden explícita.
+1. Actualizar `version` en `project.json` e `index.html`.
+2. Aplicar cache-busting (parámetro `?v=X.Y.Z`).
+3. Sincronizar número de versión en la interfaz visual del portal.
 
-### �💾 "OK guarda" (Persistencia de Sesión)
-1. Registro universal de cambios (`git add .`).
-2. Commit descriptivo en español.
-3. Push al repositorio remoto.
+### 🌐 `PROC-PERS-GIT` (Persistencia)
+1. Ejecutar `git add .`.
+2. Crear commit descriptivo en español citando el hito actual y la acción realizada.
+3. Ejecutar `git push` al origen.
+
+## 🧠 4. HEURÍSTICAS DE EFICIENCIA (Agent-Only Heuristics)
+- **🔍 Check de Pre-Vuelo**: Validar que la respuesta sea 100% en español y contenga el "OK" correspondiente.
+- **🔄 Sincronización proactiva**: Al recibir "OK inicia hito", consultar si hay tareas pendientes del hito anterior.
+- **🛠️ Prioridad de Datos**: Editar `content.json` siempre antes que `script.js` para cambios de contenido.
+- **🚫 Bloqueo de Idioma**: Respetar el entorno de trabajo 100% hispanoparlante sin excepciones.
 
 ---
-> [!NOTE]
-> Este archivo es el único punto de verdad para las reglas del agente. Referencias previas en `.agent/rules.md` quedan deprecadas.
+> [!IMPORTANT]
+> El cumplimiento de este protocolo garantiza la estabilidad y calidad del proyecto.
