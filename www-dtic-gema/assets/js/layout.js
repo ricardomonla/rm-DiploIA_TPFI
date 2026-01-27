@@ -85,11 +85,12 @@ async function initLayout() {
 }
 
 function renderSidebar(sidebar) {
-    const avatarPath = "assets/img/gema-avatar.png"; // Assuming a default avatar path for the new header structure
+    const avatarPath = "assets/img/avatar/gema-avatar-web.webp"; // Assuming a default avatar path for the new header structure
     sidebar.innerHTML = `
         <div class="sidebar-header">
             <div class="logo-container">
-                <video src="assets/video/avatar/gema-01.mp4" autoplay muted playsinline class="avatar-sidebar" id="headerAvatar" onclick="openAvatarTheater()"></video>
+                <video src="assets/video/avatar/gema-01.mp4" autoplay muted playsinline class="avatar-sidebar active" id="avatarPrimary" poster="assets/img/avatar/gema-avatar-web.webp" onclick="openAvatarTheater()"></video>
+                <video src="" muted playsinline class="avatar-sidebar inactive" id="avatarSecondary" poster="assets/img/avatar/gema-avatar-web.webp" style="position: absolute; top: 0; left: 0; opacity: 0;" onclick="openAvatarTheater()"></video>
                 <div class="status-dot-sidebar"></div>
             </div>
             <div class="version-tag" id="mainVersionBadge">${PROJECT_DATA.version}</div>
@@ -131,19 +132,38 @@ function updateAvatar(videoName) {
     if (avatarDebounceTimer) clearTimeout(avatarDebounceTimer);
 
     avatarDebounceTimer = setTimeout(() => {
-        const video = document.getElementById('headerAvatar');
-        if (video && videoName) {
-            const newSrc = `assets/video/avatar/${videoName}`;
-            if (!video.src.includes(newSrc)) {
-                video.style.opacity = '0.7';
-                setTimeout(() => {
-                    video.src = newSrc;
-                    video.style.opacity = '1';
-                    video.play();
-                }, 150);
-            }
-        }
-    }, 400); // Rango de tiempo para evitar cambios rápidos
+        const primary = document.getElementById('avatarPrimary');
+        const secondary = document.getElementById('avatarSecondary');
+        if (!primary || !secondary || !videoName) return;
+
+        const newSrc = `assets/video/avatar/${videoName}`;
+
+        // Determinar cuál es el video actualmente visible
+        const current = primary.classList.contains('active') ? primary : secondary;
+        const next = primary.classList.contains('active') ? secondary : primary;
+
+        if (current.src.includes(videoName)) return;
+
+        // 1. Preparar el video oculto
+        next.src = newSrc;
+        next.load();
+
+        // 2. Esperar a que el video esté listo
+        next.oncanplaythrough = () => {
+            next.oncanplaythrough = null; // Limpiar evento
+            next.play();
+
+            // 3. Cross-fade suave
+            next.style.opacity = '1';
+            current.style.opacity = '0';
+
+            // 4. Intercambiar clases
+            next.classList.remove('inactive');
+            next.classList.add('active');
+            current.classList.remove('active');
+            current.classList.add('inactive');
+        };
+    }, 250);
 }
 
 function showChatbot() {
@@ -151,7 +171,10 @@ function showChatbot() {
     const chatContainer = document.querySelector('.chat-container');
     const existingReport = document.querySelector('.report-container');
 
-    if (chatContainer) chatContainer.style.display = 'flex';
+    if (chatContainer) {
+        chatContainer.style.display = 'flex';
+        // Desactivar temporalmente el delay de inicialización si fuera necesario
+    }
     if (existingReport) existingReport.remove();
 
     // Inyectar botón de volver dinámico en el header del chat
@@ -414,12 +437,20 @@ function openAvatarTheater() {
     overlay.innerHTML = `
         <div class="theater-container">
             <button class="close-theater"><i data-lucide="x"></i></button>
-            <div class="theater-video-wrapper">
-                <video id="theaterVideo" src="assets/video/avatar/${theaterCycle[theaterIndex]}" autoplay playsinline class="theater-video"></video>
+            <div class="theater-video-wrapper" style="position: relative;">
+                <video id="theaterPrimary" src="assets/video/avatar/${theaterCycle[theaterIndex]}" autoplay playsinline class="theater-video active"></video>
+                <video id="theaterSecondary" src="" muted playsinline class="theater-video inactive" style="position: absolute; top: 0; left: 0; opacity: 0;"></video>
             </div>
             <div class="theater-info">
                 <h2>Modo Teatro GEMA</h2>
                 <p>Monitorización en tiempo real de estados y expresiones coreográficas de la IA.</p>
+            </div>
+            <!-- Nuevo CTA Cinemático v1.7.6 -->
+            <div class="theater-actions">
+                <button id="startChatBtn" class="nav-item active" style="width: auto; padding: 15px 40px; font-size: 1.1rem; gap: 15px; border-radius: 50px; background: var(--secondary-gradient); border: 1px solid rgba(255,255,255,0.2); cursor: pointer;">
+                    <i data-lucide="message-square"></i>
+                    Hablar con GEMA
+                </button>
             </div>
         </div>
     `;
@@ -427,13 +458,50 @@ function openAvatarTheater() {
     document.body.appendChild(overlay);
     lucide.createIcons();
 
-    const video = overlay.querySelector('#theaterVideo');
+    const primary = overlay.querySelector('#theaterPrimary');
+    const secondary = overlay.querySelector('#theaterSecondary');
 
-    // Lógica de Ciclo Infinito
-    video.onended = () => {
+    const swapTheaterVideo = () => {
+        const current = primary.classList.contains('active') ? primary : secondary;
+        const next = primary.classList.contains('active') ? secondary : primary;
+
         theaterIndex = (theaterIndex + 1) % theaterCycle.length;
-        video.src = `assets/video/avatar/${theaterCycle[theaterIndex]}`;
-        video.play();
+        const nextSrc = `assets/video/avatar/${theaterCycle[theaterIndex]}`;
+
+        // 1. Cargar el siguiente en el buffer oculto
+        next.src = nextSrc;
+        next.load();
+
+        next.oncanplaythrough = () => {
+            next.oncanplaythrough = null;
+            next.play();
+
+            // 2. Cross-fade
+            next.style.opacity = '1';
+            current.style.opacity = '0';
+
+            // 3. Swap classes
+            next.classList.remove('inactive');
+            next.classList.add('active');
+            current.classList.remove('active');
+            current.classList.add('inactive');
+
+            // 4. Re-vincular evento al nuevo actual
+            next.onended = swapTheaterVideo;
+        };
+    };
+
+    primary.onended = swapTheaterVideo;
+
+    // Lógica del CTA Transicional v1.7.6
+    const startChatBtn = overlay.querySelector('#startChatBtn');
+    startChatBtn.onclick = () => {
+        overlay.classList.remove('active');
+        setTimeout(() => {
+            overlay.remove();
+            window.location.hash = '#chatbot';
+            handleRouting(); // Forzar actualización de ruta
+        }, 400);
     };
 
     // Controles de Cierre

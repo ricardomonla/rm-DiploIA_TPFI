@@ -143,7 +143,7 @@ function appendMessage(role, text) {
 
     // Avatar HTML
     const avatarHTML = role === 'bot'
-        ? `<div class="avatar-msg"><img src="assets/img/avatar/gema-avatar.png" alt="GEMA"></div>`
+        ? `<div class="avatar-msg"><img src="assets/img/avatar/gema-avatar-web.webp" alt="GEMA"></div>`
         : '';
 
     // Markdown simple
