@@ -245,6 +245,24 @@
                 "body": "En esta sección se consolidan los documentos finales para la aprobación del TFI y el acceso al historial de entregas."
             },
             {
+                "id": "evaluacion_status",
+                "type": "section",
+                "title": "Cronograma y Estado de Evaluación",
+                "subtitle": "Información extraída del Campus Virtual (UTN.BA)",
+                "blocks": [
+                    {
+                        "type": "highlight",
+                        "title": "Plazos de Entrega",
+                        "body": "<strong>Ventana de Entrega:</strong> Desde el 30/01 al 05/02.<br><strong>Cierre Definitivo:</strong> Jueves, 5 de Febrero de 2026, 23:59."
+                    },
+                    {
+                        "type": "highlight",
+                        "title": "Estado de la Entrega (v1.6)",
+                        "body": "<strong>Estado:</strong> <span style='color: #4facfe;'>Enviado para calificar</span><br><strong>Última Modificación:</strong> Martes, 27 de Enero de 2026, 10:53.<br><strong>Antelación:</strong> La tarea fue enviada 9 días y 13 horas antes del límite."
+                    }
+                ]
+            },
+            {
                 "id": "generacion",
                 "type": "section",
                 "title": "Generación de Entregables",
@@ -289,14 +307,31 @@
                 "id": "historial",
                 "type": "section",
                 "title": "Historial Consolidado",
-                "body": "Acceso al respaldo de la entrega oficial inicial.",
-                "footer_action": {
-                    "text": "Entrega unificada (Hito del 22/01/2026):",
-                    "link": "../data/entregas/260122_entrega_completa.zip",
-                    "label": "Descargar ZIP Histórico",
-                    "icon": "archive",
-                    "target": "_blank"
-                }
+                "body": "Acceso al repositorio de versiones entregadas. El orden es cronológico inverso (Actual → Inicial).",
+                "blocks": [
+                    {
+                        "type": "action_item",
+                        "title": "Entrega v1.6: Arquitectura Avanzada",
+                        "body": "<strong>Estado: Pendiente de evaluación.</strong><br>Hito del 27/01/2026. Esta versión representa el estado actual del proyecto y reemplaza a todas las anteriores para la calificación final.",
+                        "action": {
+                            "label": "Descargar v1.6 (Actual)",
+                            "link": "assets/entregas/270127_entrega_v1.6.zip",
+                            "icon": "archive",
+                            "target": "_blank"
+                        }
+                    },
+                    {
+                        "type": "action_item",
+                        "title": "Entrega v1.0: Lanzamiento",
+                        "body": "<strong>Estado: No evaluado (Superado).</strong><br>Hito del 22/01/2026. Se entregó con antelación, pero ya no será evaluado dado que el envío más reciente (v1.6) lo sustituye.",
+                        "action": {
+                            "label": "Descargar v1.0 (Histórico)",
+                            "link": "assets/entregas/260122_entrega_v1.0.zip",
+                            "icon": "archive",
+                            "target": "_blank"
+                        }
+                    }
+                ]
             }
         ]
     }
