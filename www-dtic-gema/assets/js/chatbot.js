@@ -1,23 +1,11 @@
 /**
- * chatbot.js - Lógica de Interacción y Comunicación GEMA v1.8.1
+ * chatbot.js - Lógica de Interacción GEMA v1.8.1 (Dynamic DOM Support)
  */
 
-const chatForm = document.getElementById('chatForm');
-const userInput = document.getElementById('userInput');
-const chatMessages = document.getElementById('chatMessages');
-const typingIndicator = document.getElementById('typingIndicator');
-const clearChatBtn = document.getElementById('clearChat');
-const suggestedQuestionsContainer = document.getElementById('suggestedQuestions');
-const headerAvatar = document.getElementById('headerAvatar');
-
-// URL del Webhook de Make.com
+// Configuración
 const MAKE_WEBHOOK_URL = 'https://hook.us2.make.com/yl26qec8u2lric3yr17krrtiaxws5rkr';
-
-// Ruta de avatares comprimidos
 const AVATAR_PATH = 'assets/video/avatar/';
 const AVATAR_FILES = ['gema-00.mp4', 'gema-01.mp4', 'gema-02.mp4', 'gema-03.mp4', 'gema-04.mp4', 'gema-05.mp4'];
-
-// Preguntas sugeridas iniciales
 const SUGGESTIONS = [
     "¿Cómo saco mi certificado?",
     "¿Dónde está mi legajo?",
@@ -25,118 +13,171 @@ const SUGGESTIONS = [
     "¿Cómo cambio mi contraseña?"
 ];
 
-// Inicialización
-document.addEventListener('DOMContentLoaded', () => {
-    renderSuggestions();
+// Estado global del chat (no persistente por ahora)
+let chatInitialized = false;
 
-    // Botón de limpiar chat
-    if (clearChatBtn) {
-        clearChatBtn.addEventListener('click', () => {
-            const hasMessages = chatMessages.children.length > 1;
-            if (hasMessages) {
-                chatMessages.innerHTML = '';
-                appendMessage('bot', '¡Entendido! He despejado nuestra conversación. ¿En qué más puedo apoyarte ahora?');
-            }
-        });
+// Observador para detectar cuando el chat se inyecta en el DOM
+const observer = new MutationObserver((mutations) => {
+    const chatForm = document.getElementById('chatForm');
+    if (chatForm && !chatInitialized) {
+        initChatbot(chatForm);
     }
 });
 
-function updateHeaderAvatar() {
-    if (!headerAvatar) return;
-    const randomAvatar = AVATAR_FILES[Math.floor(Math.random() * AVATAR_FILES.length)];
-    headerAvatar.src = AVATAR_PATH + randomAvatar;
-    headerAvatar.play();
+// Iniciar observación
+document.addEventListener('DOMContentLoaded', () => {
+    const mainContent = document.querySelector('.main-content') || document.body;
+    observer.observe(mainContent, { childList: true, subtree: true });
+
+    // Intento inicial por si ya está cargado
+    const chatForm = document.getElementById('chatForm');
+    if (chatForm) initChatbot(chatForm);
+});
+
+function initChatbot(formElement) {
+    if (chatInitialized) return;
+    chatInitialized = true;
+    console.log("Chatbot v1.8.1: Initializing...");
+
+    const userInput = document.getElementById('userInput');
+    const clearChatBtn = document.getElementById('clearChat');
+    const suggestedQuestionsContainer = document.getElementById('suggestedQuestions');
+
+    // Señal visual de sistema activo
+    if (userInput) userInput.placeholder = "GEMA v1.8.1 Activa";
+
+    // Renderizar sugerencias
+    renderSuggestions(suggestedQuestionsContainer, formElement, userInput);
+
+    // Listener de Limpiar Chat
+    if (clearChatBtn) {
+        clearChatBtn.replaceWith(clearChatBtn.cloneNode(true)); // Limpiar listeners viejos
+        document.getElementById('clearChat').addEventListener('click', clearChat);
+    }
+
+    // Listener de Envío
+    formElement.addEventListener('submit', (e) => handleChatSubmit(e, userInput, formElement));
 }
 
-function renderSuggestions() {
-    if (!suggestedQuestionsContainer) return;
-    suggestedQuestionsContainer.innerHTML = '';
+function handleChatSubmit(e, userInput, form) {
+    e.preventDefault();
+    if (!userInput) return;
+
+    const message = userInput.value.trim();
+    if (!message) return;
+
+    // UI Updates
+    appendMessage('user', message);
+    userInput.value = '';
+
+    const suggestions = document.getElementById('suggestedQuestions');
+    if (suggestions) suggestions.style.display = 'none';
+
+    updateHeaderAvatar();
+    showTyping(true);
+    appendSystemMessage("Conectando con GEMA...");
+
+    // Timeout Logic
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => {
+        controller.abort();
+        appendSystemMessage("Tiempo de espera agotado (15s).");
+        showTyping(false);
+    }, 15000);
+
+    // Prepare Payload
+    const emailInput = document.getElementById('userEmail');
+    const dniInput = document.getElementById('userDNI');
+    const email = emailInput ? emailInput.value : '';
+    const dni = dniInput ? dniInput.value : '';
+
+    if (!email.includes('@')) {
+        clearTimeout(timeoutId);
+        showTyping(false);
+        appendMessage('bot', "Por favor, ingresa un email válido.");
+        return;
+    }
+
+    // Fetch
+    fetch(MAKE_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            email, dni, descripcion: message, fuente: "Chatbot GEMA v1.8.1-Dynamic"
+        }),
+        signal: controller.signal
+    })
+        .then(async response => {
+            clearTimeout(timeoutId);
+            if (response.ok) {
+                const contentType = response.headers.get("content-type");
+                if (contentType && contentType.includes("application/json")) {
+                    const data = await response.json();
+                    const botMsg = data.mensaje || data.response || data.text || "Consulta recibida.";
+                    appendMessage('bot', botMsg);
+                } else {
+                    const text = await response.text();
+                    appendMessage('bot', text || "Mensaje recibido.");
+                }
+                updateHeaderAvatar();
+            } else {
+                appendSystemMessage(`Error servidor: ${response.status}`);
+                appendMessage('bot', "Error en el servidor de IA.");
+            }
+        })
+        .catch(error => {
+            clearTimeout(timeoutId);
+            if (error.name === 'AbortError') return; // Handled by timeout
+            console.error(error);
+            appendSystemMessage(`Error de red: ${error.message}`);
+            appendMessage('bot', "Problema de conexión.");
+        })
+        .finally(() => {
+            showTyping(false);
+        });
+}
+
+function renderSuggestions(container, form, input) {
+    if (!container) return;
+    container.innerHTML = '';
     SUGGESTIONS.forEach(text => {
         const chip = document.createElement('div');
         chip.className = 'suggestion-chip';
         chip.textContent = text;
         chip.onclick = () => {
-            userInput.value = text;
-            chatForm.dispatchEvent(new Event('submit'));
+            if (input) input.value = text;
+            form.dispatchEvent(new Event('submit'));
         };
-        suggestedQuestionsContainer.appendChild(chip);
+        container.appendChild(chip);
     });
 }
 
-if (chatForm) {
-    chatForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const message = userInput.value.trim();
-        if (!message) return;
+function clearChat() {
+    const chatMessages = document.getElementById('chatMessages');
+    if (chatMessages && chatMessages.children.length > 1) {
+        chatMessages.innerHTML = '';
+        appendMessage('bot', 'Conversación reiniciada.');
+    }
+}
 
-        // 1. Añadir mensaje del usuario a la UI
-        appendMessage('user', message);
-        userInput.value = '';
-        if (suggestedQuestionsContainer) suggestedQuestionsContainer.style.display = 'none';
-        updateHeaderAvatar();
+function updateHeaderAvatar() {
+    const headerAvatar = document.getElementById('headerAvatar');
+    if (!headerAvatar) return;
+    try {
+        const randomAvatar = AVATAR_FILES[Math.floor(Math.random() * AVATAR_FILES.length)];
+        headerAvatar.src = AVATAR_PATH + randomAvatar;
+        headerAvatar.play().catch(() => { });
+    } catch (e) { }
+}
 
-        // 2. Mostrar indicador de carga
-        showTyping(true);
-
-        try {
-            const email = document.getElementById('userEmail').value;
-            const dni = document.getElementById('userDNI').value;
-
-            // Validación básica
-            if (!email.includes('@')) {
-                appendMessage('bot', '¡Ups! Parece que el correo electrónico no es válido. Por favor, asegúrate de usar tu cuenta institucional para que pueda ayudarte mejor.');
-                showTyping(false);
-                return;
-            }
-
-            const response = await fetch(MAKE_WEBHOOK_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    email: email,
-                    dni: dni,
-                    descripcion: message,
-                    fuente: "Chatbot GEMA v1.8.1-dev"
-                })
-            });
-
-            if (response.ok) {
-                const contentType = response.headers.get("content-type");
-                if (contentType && contentType.includes("application/json")) {
-                    const data = await response.json();
-                    let botMsg = data.mensaje || data.response || data.text || data.output;
-
-                    if (typeof data === 'object' && !botMsg) {
-                        if (data.id || data.ticket) {
-                            botMsg = `¡Listo! He generado el ticket **#${data.id || data.ticket}**. El equipo de TIC lo revisará a la brevedad.`;
-                        } else {
-                            botMsg = "He recibido tu solicitud y ya está en proceso. ¡Pronto tendrás novedades!";
-                        }
-                    }
-                    appendMessage('bot', botMsg || "He procesado tu consulta correctamente.");
-                } else {
-                    const text = await response.text();
-                    if (text.trim() === "Accepted") {
-                        appendMessage('bot', "¡Excelente! Tu consulta ya ingresó al sistema **dtic-GEMA**. Estaré atenta a su avance.");
-                    } else {
-                        appendMessage('bot', text || "He recibido tu mensaje. ¡Me pongo a trabajar en ello ahora mismo!");
-                    }
-                }
-                updateHeaderAvatar();
-            } else {
-                appendMessage('bot', "Lo siento mucho, parece que algo no salió bien en mis servidores (Error " + response.status + "). ¿Podrías intentar enviarlo de nuevo?");
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            appendMessage('bot', "No logro conectar con mi central. Por favor, verifica tu internet o aguarda un momento. ¡Gracias por tu paciencia!");
-        } finally {
-            showTyping(false);
-        }
-    });
+function appendSystemMessage(text) {
+    appendMessage('bot', `<em>🤖 ${text}</em>`);
 }
 
 function appendMessage(role, text) {
+    const chatMessages = document.getElementById('chatMessages');
     if (!chatMessages) return;
+
     const msgDiv = document.createElement('div');
     msgDiv.classList.add('message', role);
 
@@ -147,22 +188,12 @@ function appendMessage(role, text) {
         ? `<div class="avatar-msg"><img src="assets/img/avatar/gema-avatar-web.webp" alt="GEMA"></div>`
         : '';
 
-    let formattedText = text
-        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-        .replace(/`(.*?)`/g, '<code>$1</code>');
-
-    msgDiv.innerHTML = `
-        ${avatarHTML}
-        <div class="msg-content">
-            ${formattedText}
-            <span class="timestamp">${timeString}</span>
-        </div>
-    `;
-
+    msgDiv.innerHTML = `${avatarHTML}<div class="msg-content">${text}<span class="timestamp">${timeString}</span></div>`;
     chatMessages.appendChild(msgDiv);
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
 function showTyping(show) {
+    const typingIndicator = document.getElementById('typingIndicator');
     if (typingIndicator) typingIndicator.style.display = show ? 'flex' : 'none';
 }
