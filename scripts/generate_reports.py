@@ -245,8 +245,8 @@ if __name__ == "__main__":
         content_data['fase1']['studentInfo']['fecha'] = fecha_es
 
     # 2. Generar nombres de archivos
-    f1_name = f"{p_name}_{v}_Entregable1_{ts}.pdf"
-    f2_name = f"{p_name}_{v}_Entregable2_{ts}.pdf"
+    f1_name = f"{p_name}_{v}_Fase1_{ts}.pdf"
+    f2_name = f"{p_name}_{v}_Fase2_{ts}.pdf"
     
     # 3. Generar PDFs y Sincronizar (en memoria)
     os.makedirs(os.path.join("www-dtic-gema", "assets", "docs"), exist_ok=True)
