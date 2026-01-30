@@ -75,7 +75,7 @@ function handleChatSubmit(e, userInput, form) {
 
     updateHeaderAvatar();
     showTyping(true);
-    appendSystemMessage("Conectando con GEMA...");
+    appendSystemMessage("GEMA está pensando la respuesta...");
 
     // Timeout Logic
     const controller = new AbortController();
