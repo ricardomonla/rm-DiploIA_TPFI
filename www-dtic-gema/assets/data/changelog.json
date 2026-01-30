@@ -1,5 +1,15 @@
 [
     {
+        "version": "v1.8.1-dev",
+        "title": "Fase de Testeo y Estabilización Chatbot",
+        "date": "30 de Enero, 2026",
+        "changes": [
+            "Implementación de Suite de Testeo via Script (test-chatbot.sh) para validación de backend.",
+            "Inicio de pruebas funcionales en navegador para depuración de comunicación Webhook.",
+            "Preparación de la rama dev_1.8.x para separación de entornos."
+        ]
+    },
+    {
         "version": "v1.7",
         "title": "Optimización Líquida, Transiciones Cinemáticas y Eficiencia de Assets",
         "date": "27 de Enero, 2026",
