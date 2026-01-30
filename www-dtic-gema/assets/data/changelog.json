@@ -1,12 +1,13 @@
 [
     {
-        "version": "v1.8.1-dev",
-        "title": "Fase de Testeo y Estabilización Chatbot",
+        "version": "v1.8.0",
+        "title": "Chatbot Inteligente Robustez & SPA",
         "date": "30 de Enero, 2026",
         "changes": [
-            "Implementación de Suite de Testeo via Script (test-chatbot.sh) para validación de backend.",
-            "Inicio de pruebas funcionales en navegador para depuración de comunicación Webhook.",
-            "Preparación de la rama dev_1.8.x para separación de entornos."
+            "feat(chatbot): respuestas humanizadas y formateo de tickets.",
+            "fix(chatbot): carga dinámica en SPA (MutationObserver) y manejo de errores.",
+            "refactor: arquitectura aislada en chatbot.js para mayor estabilidad.",
+            "test: suite de pruebas curl y validación integral de comunicación."
         ]
     },
     {
