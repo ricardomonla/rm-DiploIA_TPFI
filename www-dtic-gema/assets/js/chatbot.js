@@ -113,7 +113,22 @@ function handleChatSubmit(e, userInput, form) {
                 const contentType = response.headers.get("content-type");
                 if (contentType && contentType.includes("application/json")) {
                     const data = await response.json();
-                    const botMsg = data.mensaje || data.response || data.text || "Consulta recibida.";
+                    let botMsg = "";
+
+                    // Extraer mensaje base
+                    const rawMsg = data.mensaje || data.response || data.text || "";
+
+                    if (data.ticket_id) {
+                        // Caso: Ticket creado
+                        botMsg = `¡Listo! He generado el ticket **#${data.ticket_id}**.\n\n${rawMsg}`;
+                    } else if (rawMsg.toLowerCase().includes("ticket")) {
+                        // Caso: Mención de ticket sin ID explícito
+                        botMsg = `¡Perfecto! ${rawMsg}`;
+                    } else {
+                        // Caso: Respuesta genérica o vacía
+                        botMsg = rawMsg || "¡Entendido! He procesado tu solicitud.";
+                    }
+
                     appendMessage('bot', botMsg);
                 } else {
                     const text = await response.text();
