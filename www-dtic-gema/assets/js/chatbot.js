@@ -110,28 +110,28 @@ function handleChatSubmit(e, userInput, form) {
         .then(async response => {
             clearTimeout(timeoutId);
             if (response.ok) {
-                const contentType = response.headers.get("content-type");
-                if (contentType && contentType.includes("application/json")) {
-                    const data = await response.json();
-                    let botMsg = "";
+                const text = await response.text();
+                let data = {};
+                let isJson = false;
 
-                    // Extraer mensaje base
+                try {
+                    data = JSON.parse(text);
+                    isJson = true;
+                } catch (e) { /* No es JSON */ }
+
+                if (isJson) {
+                    let botMsg = "";
                     const rawMsg = data.mensaje || data.response || data.text || "";
 
                     if (data.ticket_id) {
-                        // Caso: Ticket creado
                         botMsg = `¡Listo! He generado el ticket **#${data.ticket_id}**.\n\n${rawMsg}`;
-                    } else if (rawMsg.toLowerCase().includes("ticket")) {
-                        // Caso: Mención de ticket sin ID explícito
+                    } else if (rawMsg.toLowerCase().includes("ticket") || rawMsg.toLowerCase().includes("exitosamente")) {
                         botMsg = `¡Perfecto! ${rawMsg}`;
                     } else {
-                        // Caso: Respuesta genérica o vacía
                         botMsg = rawMsg || "¡Entendido! He procesado tu solicitud.";
                     }
-
                     appendMessage('bot', botMsg);
                 } else {
-                    const text = await response.text();
                     appendMessage('bot', text || "Mensaje recibido.");
                 }
                 updateHeaderAvatar();
