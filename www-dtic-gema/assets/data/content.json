@@ -93,7 +93,7 @@
         "studentInfo": {
             "alumno": "Lic. Ricardo MONLA",
             "area": "Dirección de TIC - Facultad X",
-            "fecha": "26 de enero de 2026",
+            "fecha": "30 de enero de 2026",
             "proyecto": "dtic-GEMA Integrador"
         },
         "content": [
@@ -274,7 +274,7 @@
                         "body": "Informe de procesos y puntos de dolor detectados (Versión Estática).",
                         "action": {
                             "label": "Descargar PDF Fase 1",
-                            "link": "assets/docs/dtic-GEMA_v1.6_Entregable1_20260126_1819.pdf",
+                            "link": "assets/docs/dtic-GEMA_1.8_Entregable1_20260130_1248.pdf",
                             "icon": "file-down",
                             "target": "_blank"
                         }
@@ -285,7 +285,7 @@
                         "body": "Ficha técnica y lógica de implementación IA (Versión Estática).",
                         "action": {
                             "label": "Descargar PDF Fase 2",
-                            "link": "assets/docs/dtic-GEMA_v1.6_Entregable2_20260126_1819.pdf",
+                            "link": "assets/docs/dtic-GEMA_1.8_Entregable2_20260130_1248.pdf",
                             "icon": "file-down",
                             "target": "_blank"
                         }
