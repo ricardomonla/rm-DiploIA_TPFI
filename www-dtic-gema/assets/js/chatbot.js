@@ -13,6 +13,16 @@ const SUGGESTIONS = [
     "¿Cómo cambio mi contraseña?"
 ];
 
+// Gestión de Sesión v1.9
+const getSessionId = () => {
+    let sid = localStorage.getItem('gema_session_id');
+    if (!sid) {
+        sid = 'sess_' + Math.random().toString(36).substr(2, 9);
+        localStorage.setItem('gema_session_id', sid);
+    }
+    return sid;
+};
+
 // Estado global del chat (no persistente por ahora)
 let chatInitialized = false;
 
@@ -44,7 +54,7 @@ function initChatbot(formElement) {
     const suggestedQuestionsContainer = document.getElementById('suggestedQuestions');
 
     // Señal visual de sistema activo
-    if (userInput) userInput.placeholder = "GEMA v1.8.1 Activa";
+    if (userInput) userInput.placeholder = "GEMA v1.9.1-IA Activa";
 
     // Renderizar sugerencias
     renderSuggestions(suggestedQuestionsContainer, formElement, userInput);
@@ -101,9 +111,16 @@ function handleChatSubmit(e, userInput, form) {
     // Fetch
     fetch(MAKE_WEBHOOK_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Format': 'structured'
+        },
         body: JSON.stringify({
-            email, dni, descripcion: message, fuente: "Chatbot GEMA v1.8.1-Dynamic"
+            email,
+            dni,
+            session_id: getSessionId(),
+            descripcion: message,
+            fuente: "Chatbot GEMA v1.9-Dev-IA"
         }),
         signal: controller.signal
     })
@@ -121,11 +138,12 @@ function handleChatSubmit(e, userInput, form) {
 
                 if (isJson) {
                     let botMsg = "";
-                    const rawMsg = data.mensaje || data.response || data.text || "";
+                    // Soporte para esquema v1.9 (data.response) y legacy (data.mensaje)
+                    const rawMsg = data.response || data.mensaje || data.text || "";
 
                     if (data.ticket_id) {
                         botMsg = `¡Listo! He generado el ticket **#${data.ticket_id}**.\n\n${rawMsg}`;
-                    } else if (rawMsg.toLowerCase().includes("ticket") || rawMsg.toLowerCase().includes("exitosamente")) {
+                    } else if (data.meta && data.meta.action_type === 'ticket') {
                         botMsg = `¡Perfecto! ${rawMsg}`;
                     } else {
                         botMsg = rawMsg || "¡Entendido! He procesado tu solicitud.";
