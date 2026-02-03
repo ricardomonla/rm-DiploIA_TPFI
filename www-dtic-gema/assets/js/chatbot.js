@@ -23,6 +23,42 @@ const getSessionId = () => {
     return sid;
 };
 
+// Estado Global v1.9
+let userProfile = null;
+
+// Callback de Google Identity
+window.handleCredentialResponse = (response) => {
+    try {
+        const payload = JSON.parse(atob(response.credential.split('.')[1]));
+        userProfile = {
+            name: payload.name,
+            email: payload.email,
+            verified: payload.email_verified
+        };
+        console.log("dtic-GEMA: Usuario autenticado", userProfile);
+        updateUIForAuthenticatedUser();
+        appendMessage('bot', `¡Hola **${userProfile.name}**! Qué bueno tenerte acá. Ahora que verifiqué tu identidad, ¿en qué te puedo ayudar?`);
+    } catch (e) {
+        console.error("Error al decodificar token", e);
+    }
+};
+
+function updateUIForAuthenticatedUser() {
+    const loginBtn = document.querySelector('.g_id_signin');
+    const manualEmail = document.getElementById('manualEmailGroup');
+    const manualDNI = document.getElementById('manualDNIGroup');
+    const userInfo = document.getElementById('userInfoDisplay');
+    const nameDisplay = document.getElementById('userNameDisplay');
+    const emailInput = document.getElementById('userEmail');
+
+    if (loginBtn) loginBtn.style.display = 'none';
+    if (manualEmail) manualEmail.style.display = 'none';
+    if (manualDNI) manualDNI.style.display = 'none';
+    if (userInfo) userInfo.style.display = 'flex';
+    if (nameDisplay) nameDisplay.textContent = userProfile.name;
+    if (emailInput) emailInput.value = userProfile.email;
+}
+
 // Estado global del chat (no persistente por ahora)
 let chatInitialized = false;
 
@@ -104,9 +140,20 @@ function handleChatSubmit(e, userInput, form) {
     if (!email.includes('@')) {
         clearTimeout(timeoutId);
         showTyping(false);
-        appendMessage('bot', "Por favor, ingresa un email válido.");
+        appendMessage('bot', "Por favor, ingresa un email válido o inicia sesión con Google.");
         return;
     }
+
+    // Payload v1.9.3 (Proactivo)
+    const payload = {
+        email,
+        dni,
+        session_id: getSessionId(),
+        user_name: userProfile ? userProfile.name : 'Usuario',
+        is_verified: !!userProfile,
+        descripcion: message,
+        fuente: "Chatbot GEMA v1.9-Dev-Proactive"
+    };
 
     // Fetch
     fetch(MAKE_WEBHOOK_URL, {
@@ -115,13 +162,7 @@ function handleChatSubmit(e, userInput, form) {
             'Content-Type': 'application/json',
             'X-Format': 'structured'
         },
-        body: JSON.stringify({
-            email,
-            dni,
-            session_id: getSessionId(),
-            descripcion: message,
-            fuente: "Chatbot GEMA v1.9-Dev-IA"
-        }),
+        body: JSON.stringify(payload),
         signal: controller.signal
     })
         .then(async response => {

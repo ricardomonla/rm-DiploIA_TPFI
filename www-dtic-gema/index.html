@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- Lucide Icons for premium feel -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Identity Services v1.9 -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 
 <body>
@@ -37,11 +39,24 @@
                 </header>
 
                 <div class="user-info-bar">
-                    <div class="input-group">
+                    <!-- Google Login Container -->
+                    <div id="g_id_onload"
+                        data-client_id="YOUR_GOOGLE_CLIENT_ID" 
+                        data-callback="handleCredentialResponse"
+                        data-auto_prompt="false">
+                    </div>
+                    <div class="g_id_signin" data-type="standard"></div>
+                    
+                    <div id="userInfoDisplay" style="display: none; align-items: center; gap: 10px; color: var(--accent);">
+                        <i data-lucide="user-check"></i>
+                        <span id="userNameDisplay">Usuario Verificado</span>
+                    </div>
+
+                    <div class="input-group" id="manualEmailGroup">
                         <i data-lucide="mail"></i>
                         <input type="email" id="userEmail" placeholder="Email" value="alumno1@frlr.utn.edu.ar">
                     </div>
-                    <div class="input-group">
+                    <div class="input-group" id="manualDNIGroup">
                         <i data-lucide="id-card"></i>
                         <input type="text" id="userDNI" placeholder="DNI" value="12345678">
                     </div>
