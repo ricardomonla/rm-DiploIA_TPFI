@@ -1,5 +1,14 @@
 [
     {
+        "version": "v1.9-dev",
+        "title": "Inicialización Ciclo 1.9-dev",
+        "date": "03 de Febrero, 2026",
+        "changes": [
+            "feat: creación de rama dtic-GEMA_1.9-dev para nuevos desarrollos.",
+            "refactor: actualización sistemática de versiones en metadatos y documentación."
+        ]
+    },
+    {
         "version": "v1.8",
         "title": "Chatbot Inteligente Robustez & SPA",
         "date": "30 de Enero, 2026",

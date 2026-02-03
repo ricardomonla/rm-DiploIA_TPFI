@@ -1,4 +1,4 @@
-# 🛡️ Protocolo y Configuración del Agente (v1.8.0)
+# 🛡️ Protocolo y Configuración del Agente (v1.9-dev)
 
 Este archivo es el **Único Punto de Verdad (SSOT)** local de la aplicación.
 Importa el protocolo base agnóstico desde: `../rm-OKIA/base-reglas.md`

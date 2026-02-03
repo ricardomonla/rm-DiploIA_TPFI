@@ -1,4 +1,4 @@
-# dtic-GEMA v1.7: Optimización Extrema y Transición Cinemática
+# dtic-GEMA v1.9-dev: Inicialización de Ciclo 1.9
 
 **Sistema de Gestión Estratégica Mediante Automatización - Facultad X**
 
