@@ -3,7 +3,7 @@
  */
 
 // Configuración
-const MAKE_WEBHOOK_URL = 'https://hook.us2.make.com/yl26qec8u2lric3yr17krrtiaxws5rkr';
+const MAKE_WEBHOOK_URL = 'https://hook.us2.make.com/tosnfu28xcpf5cty3p1y807ci7rpg4qd';
 const AVATAR_PATH = 'assets/video/avatar/';
 const AVATAR_FILES = ['gema-00.mp4', 'gema-01.mp4', 'gema-02.mp4', 'gema-03.mp4', 'gema-04.mp4', 'gema-05.mp4'];
 const SUGGESTIONS = [
@@ -37,11 +37,19 @@ window.handleCredentialResponse = (response) => {
         };
         console.log("dtic-GEMA: Usuario autenticado", userProfile);
         updateUIForAuthenticatedUser();
-        appendMessage('bot', `¡Hola **${userProfile.name}**! Qué bueno tenerte acá. Ahora que verifiqué tu identidad, ¿en qué te puedo ayudar?`);
+
+        // v1.9: Iniciar handshake proactivo
+        initHandshake();
     } catch (e) {
         console.error("Error al decodificar token", e);
     }
 };
+
+async function initHandshake() {
+    console.log("dtic-GEMA: Iniciando Handshake proactivo...");
+    // Simulamos un submit con el mensaje 'INIT'
+    sendToWebhook("INIT");
+}
 
 function updateUIForAuthenticatedUser() {
     const loginBtn = document.querySelector('.g_id_signin');
@@ -131,6 +139,12 @@ function handleChatSubmit(e, userInput, form) {
         showTyping(false);
     }, 15000);
 
+    sendToWebhook(message, controller, timeoutId);
+}
+
+function sendToWebhook(message, controller = null, timeoutId = null) {
+    if (!controller) controller = new AbortController();
+
     // Prepare Payload
     const emailInput = document.getElementById('userEmail');
     const dniInput = document.getElementById('userDNI');
@@ -138,7 +152,7 @@ function handleChatSubmit(e, userInput, form) {
     const dni = dniInput ? dniInput.value : '';
 
     if (!email.includes('@')) {
-        clearTimeout(timeoutId);
+        if (timeoutId) clearTimeout(timeoutId);
         showTyping(false);
         appendMessage('bot', "Por favor, ingresa un email válido o inicia sesión con Google.");
         return;
@@ -178,17 +192,14 @@ function handleChatSubmit(e, userInput, form) {
                 } catch (e) { /* No es JSON */ }
 
                 if (isJson) {
-                    let botMsg = "";
-                    // Soporte para esquema v1.9 (data.response) y legacy (data.mensaje)
-                    const rawMsg = data.response || data.mensaje || data.text || "";
+                    // Soporte para esquema proactivo v1.9 (data.response) y legacy (data.mensaje)
+                    const botMsg = data.response || data.mensaje || data.text || "Mensaje recibido.";
 
-                    if (data.ticket_id) {
-                        botMsg = `¡Listo! He generado el ticket **#${data.ticket_id}**.\n\n${rawMsg}`;
-                    } else if (data.meta && data.meta.action_type === 'ticket') {
-                        botMsg = `¡Perfecto! ${rawMsg}`;
-                    } else {
-                        botMsg = rawMsg || "¡Entendido! He procesado tu solicitud.";
+                    // Manejo de metadatos v1.9
+                    if (data.meta && data.meta.intent === 'status_check') {
+                        // Podríamos agregar un icono de lupa o similar acá
                     }
+
                     appendMessage('bot', botMsg);
                 } else {
                     appendMessage('bot', text || "Mensaje recibido.");
