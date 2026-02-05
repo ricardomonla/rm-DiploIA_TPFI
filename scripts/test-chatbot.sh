@@ -9,9 +9,9 @@ RED='\033[0;31m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
-MAKE_WEBHOOK_URL="https://hook.us2.make.com/yl26qec8u2lric3yr17krrtiaxws5rkr"
+MAKE_WEBHOOK_URL="https://hook.us2.make.com/tosnfu28xcpf5cty3p1y807ci7rpg4qd"
 
-echo -e "${BLUE}🚀 Iniciando Testeo de Integración GEMA (v1.8.1)${NC}"
+echo -e "${BLUE}🚀 Iniciando Testeo de Integración GEMA (v1.9)${NC}"
 echo "----------------------------------------------------"
 
 test_case() {
@@ -39,7 +39,7 @@ test_case() {
 test_case "Flujo Positivo (Email Válido)" '{
     "email": "alumno_test@frlr.utn.edu.ar",
     "dni": "99888777",
-    "descripcion": "Prueba de funcionamiento desde script de testeo v1.8.1",
+    "descripcion": "Prueba de funcionamiento desde script de testeo v1.9",
     "fuente": "Script Test GEMA"
 }'
 

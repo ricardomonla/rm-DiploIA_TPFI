@@ -35,6 +35,9 @@ window.handleCredentialResponse = (response) => {
             email: payload.email,
             verified: payload.email_verified
         };
+        // v1.9.4: Persistencia
+        localStorage.setItem('gema_user_profile', JSON.stringify(userProfile));
+
         console.log("dtic-GEMA: Usuario autenticado", userProfile);
         updateUIForAuthenticatedUser();
 
@@ -45,7 +48,41 @@ window.handleCredentialResponse = (response) => {
     }
 };
 
+// v1.9.4: Restaurar sesión persistente
+const restoreSession = () => {
+    const storedProfile = localStorage.getItem('gema_user_profile');
+    if (storedProfile) {
+        try {
+            userProfile = JSON.parse(storedProfile);
+            console.log("dtic-GEMA: Sesión restaurada", userProfile);
+            updateUIForAuthenticatedUser();
+            unlockChatInterface();
+        } catch (e) {
+            console.error("Error restaurando sesión", e);
+            localStorage.removeItem('gema_user_profile');
+        }
+    }
+};
+
+function unlockChatInterface() {
+    // 1. Mostrar Sugerencias
+    const suggestedQuestionsContainer = document.getElementById('suggestedQuestions');
+    const chatForm = document.getElementById('chatForm');
+    const userInput = document.getElementById('userInput');
+
+    if (suggestedQuestionsContainer && chatForm && userInput) {
+        renderSuggestions(suggestedQuestionsContainer, chatForm, userInput);
+    }
+
+    // 2. Actualizar mensaje de bienvenida (Opcional, o dejar el historial como está)
+    // appendMessage('bot', `¡Gracias ${userProfile.name}! Ahora sí, ¿en qué puedo ayudarte?`);
+
+    // 3. Habilitar input si estuviera deshabilitado (no es el caso actual pero buena práctica)
+}
+
 async function initHandshake() {
+    unlockChatInterface(); // Desbloquear UI
+
     console.log("dtic-GEMA: Iniciando Handshake proactivo...");
     // Simulamos un submit con el mensaje 'INIT'
     sendToWebhook("INIT");
@@ -53,19 +90,59 @@ async function initHandshake() {
 
 function updateUIForAuthenticatedUser() {
     const loginBtn = document.querySelector('.g_id_signin');
-    const manualEmail = document.getElementById('manualEmailGroup');
-    const manualDNI = document.getElementById('manualDNIGroup');
+    // const manualEmail = document.getElementById('manualEmailGroup'); // Ya no existen en el DOM visual
+    // const manualDNI = document.getElementById('manualDNIGroup'); // Ya no existen en el DOM visual
     const userInfo = document.getElementById('userInfoDisplay');
     const nameDisplay = document.getElementById('userNameDisplay');
+    const emailDisplay = document.getElementById('userEmailDisplay');
+
+    // Hidden inputs
     const emailInput = document.getElementById('userEmail');
+    const dniInput = document.getElementById('userDNI'); // Google no da DNI, quedará vacío o se pedirá después
 
     if (loginBtn) loginBtn.style.display = 'none';
-    if (manualEmail) manualEmail.style.display = 'none';
-    if (manualDNI) manualDNI.style.display = 'none';
+
+    // Mostrar info de sesión
     if (userInfo) userInfo.style.display = 'flex';
     if (nameDisplay) nameDisplay.textContent = userProfile.name;
+    if (emailDisplay) emailDisplay.textContent = userProfile.email;
+
     if (emailInput) emailInput.value = userProfile.email;
+    // dniInput.value se mantiene vacío o manual si hubiese lógica para ello
 }
+
+window.handleSignout = () => {
+    google.accounts.id.disableAutoSelect();
+    userProfile = null;
+    userProfile = null;
+    localStorage.removeItem('gema_session_id'); // Opcional: limpiar sesión local o mantenerla
+    localStorage.removeItem('gema_user_profile'); // v1.9.4: Limpiar perfil persistente
+
+    // Reset UI
+    const loginBtn = document.querySelector('.g_id_signin');
+    const userInfo = document.getElementById('userInfoDisplay');
+    const suggestions = document.getElementById('suggestedQuestions');
+    const userInput = document.getElementById('userInput');
+
+    if (loginBtn) loginBtn.style.display = 'block';
+    if (userInfo) userInfo.style.display = 'none';
+    if (suggestions) suggestions.innerHTML = ''; // Limpiar sugerencias
+    if (userInput) userInput.placeholder = "GEMA v1.9 Activa"; // Reset placeholder
+
+    // Reset Chat message
+    const chatMessages = document.getElementById('chatMessages');
+    if (chatMessages) {
+        chatMessages.innerHTML = ''; // Clear history
+
+        // Restore Initial Greeting
+        const initialMsg = `¡Hola! Soy **GEMA**, el Asistente Estratégico de la Dirección de TIC.
+        <br><br>
+        Antes de iniciar, necesito confirmar que sos una persona real. Por favor, <strong>inicia sesión con Google</strong> para continuar.`;
+
+        appendMessage('bot', initialMsg);
+    }
+    console.log("dtic-GEMA: Usuario deslogueado y chat reiniciado.");
+};
 
 // Estado global del chat (no persistente por ahora)
 let chatInitialized = false;
@@ -86,22 +163,29 @@ document.addEventListener('DOMContentLoaded', () => {
     // Intento inicial por si ya está cargado
     const chatForm = document.getElementById('chatForm');
     if (chatForm) initChatbot(chatForm);
+
+    restoreSession(); // v1.9.4
 });
 
 function initChatbot(formElement) {
     if (chatInitialized) return;
     chatInitialized = true;
-    console.log("Chatbot v1.8.1: Initializing...");
+    console.log("Chatbot v1.9: Initializing...");
 
     const userInput = document.getElementById('userInput');
     const clearChatBtn = document.getElementById('clearChat');
     const suggestedQuestionsContainer = document.getElementById('suggestedQuestions');
 
     // Señal visual de sistema activo
-    if (userInput) userInput.placeholder = "GEMA v1.9.1-IA Activa";
+    if (userInput) userInput.placeholder = "GEMA v1.9 Activa";
 
-    // Renderizar sugerencias
-    renderSuggestions(suggestedQuestionsContainer, formElement, userInput);
+    // Renderizar sugerencias SOLO si ya está logueado (raro en init, pero posible si persistimos sesión)
+    if (userProfile) {
+        renderSuggestions(suggestedQuestionsContainer, formElement, userInput);
+    } else {
+        // Asegurar que estén vacías si no hay login
+        if (suggestedQuestionsContainer) suggestedQuestionsContainer.innerHTML = '';
+    }
 
     // Listener de Limpiar Chat
     if (clearChatBtn) {
@@ -129,7 +213,7 @@ function handleChatSubmit(e, userInput, form) {
 
     updateHeaderAvatar();
     showTyping(true);
-    appendSystemMessage("GEMA está pensando la respuesta...");
+    const thinkingMsgHtml = appendSystemMessage("GEMA está pensando la respuesta...");
 
     // Timeout Logic
     const controller = new AbortController();
@@ -139,10 +223,10 @@ function handleChatSubmit(e, userInput, form) {
         showTyping(false);
     }, 15000);
 
-    sendToWebhook(message, controller, timeoutId);
+    sendToWebhook(message, controller, timeoutId, thinkingMsgHtml);
 }
 
-function sendToWebhook(message, controller = null, timeoutId = null) {
+function sendToWebhook(message, controller = null, timeoutId = null, thinkingMsg = null) {
     if (!controller) controller = new AbortController();
 
     // Prepare Payload
@@ -151,14 +235,41 @@ function sendToWebhook(message, controller = null, timeoutId = null) {
     const email = emailInput ? emailInput.value : '';
     const dni = dniInput ? dniInput.value : '';
 
-    if (!email.includes('@')) {
+    // v1.9-dev: Google Login Guard
+    if (!userProfile) {
         if (timeoutId) clearTimeout(timeoutId);
         showTyping(false);
-        appendMessage('bot', "Por favor, ingresa un email válido o inicia sesión con Google.");
+
+        // Si teníamos un mensaje de "pensando", lo actualizamos con la advertencia
+        if (thinkingMsg) {
+            updateMessageContent(thinkingMsg, "Antes de iniciar, necesito confirmar que sos una persona real. Por favor, inicia sesión con Google para continuar.");
+        } else {
+            appendMessage('bot', "Antes de iniciar, necesito confirmar que sos una persona real. Por favor, inicia sesión con Google para continuar.");
+        }
+
+        // Highlight Login Button (Visual Feedback)
+        const loginBtn = document.querySelector('.g_id_signin');
+        if (loginBtn) {
+            loginBtn.style.border = "2px solid #00f2ff";
+            loginBtn.style.boxShadow = "0 0 15px #00f2ff";
+            setTimeout(() => {
+                loginBtn.style.border = "";
+                loginBtn.style.boxShadow = "";
+            }, 3000);
+        }
         return;
     }
 
-    // Payload v1.9.3 (Proactivo)
+    if (!email.includes('@')) {
+        if (timeoutId) clearTimeout(timeoutId);
+        showTyping(false);
+        const errorText = "Por favor, ingresa un email válido o inicia sesión con Google.";
+        if (thinkingMsg) updateMessageContent(thinkingMsg, errorText);
+        else appendMessage('bot', errorText);
+        return;
+    }
+
+    // Payload v1.9.3 (Proactivo & Enriquecido)
     const payload = {
         email,
         dni,
@@ -166,7 +277,13 @@ function sendToWebhook(message, controller = null, timeoutId = null) {
         user_name: userProfile ? userProfile.name : 'Usuario',
         is_verified: !!userProfile,
         descripcion: message,
-        fuente: "Chatbot GEMA v1.9-Dev-Proactive"
+        fuente: "Chatbot GEMA v1.9-Dev-Proactive",
+        // Metadata para ruteo inteligente en Make
+        meta: {
+            intent: message === 'INIT' ? 'handshake' : 'user_query',
+            client_timestamp: new Date().toISOString(),
+            user_agent: navigator.userAgent
+        }
     };
 
     // Fetch
@@ -191,31 +308,44 @@ function sendToWebhook(message, controller = null, timeoutId = null) {
                     isJson = true;
                 } catch (e) { /* No es JSON */ }
 
+                let botMsg = "";
                 if (isJson) {
                     // Soporte para esquema proactivo v1.9 (data.response) y legacy (data.mensaje)
-                    const botMsg = data.response || data.mensaje || data.text || "Mensaje recibido.";
+                    botMsg = data.response || data.mensaje || data.text || "Mensaje recibido.";
 
                     // Manejo de metadatos v1.9
                     if (data.meta && data.meta.intent === 'status_check') {
                         // Podríamos agregar un icono de lupa o similar acá
                     }
-
-                    appendMessage('bot', botMsg);
                 } else {
-                    appendMessage('bot', text || "Mensaje recibido.");
+                    botMsg = text || "Mensaje recibido.";
                 }
+
+                // Actualizar el mensaje de "Pensando..." con la respuesta final
+                if (thinkingMsg) {
+                    updateMessageContent(thinkingMsg, botMsg);
+                } else {
+                    appendMessage('bot', botMsg);
+                }
+
                 updateHeaderAvatar();
             } else {
+                const errorMsg = "Error en el servidor de IA.";
                 appendSystemMessage(`Error servidor: ${response.status}`);
-                appendMessage('bot', "Error en el servidor de IA.");
+
+                if (thinkingMsg) updateMessageContent(thinkingMsg, errorMsg);
+                else appendMessage('bot', errorMsg);
             }
         })
         .catch(error => {
             clearTimeout(timeoutId);
             if (error.name === 'AbortError') return; // Handled by timeout
             console.error(error);
-            appendSystemMessage(`Error de red: ${error.message}`);
-            appendMessage('bot', "Problema de conexión.");
+            // appendSystemMessage(`Error de red: ${error.message}`); // Opcional mostrar error técnico
+
+            const connErrorMsg = "Problema de conexión.";
+            if (thinkingMsg) updateMessageContent(thinkingMsg, connErrorMsg);
+            else appendMessage('bot', connErrorMsg);
         })
         .finally(() => {
             showTyping(false);
@@ -256,12 +386,32 @@ function updateHeaderAvatar() {
 }
 
 function appendSystemMessage(text) {
-    appendMessage('bot', `<em>🤖 ${text}</em>`);
+    return appendMessage('bot', `<em>🤖 ${text}</em>`);
+}
+
+function updateMessageContent(msgElement, newText) {
+    if (!msgElement) return;
+    const contentDiv = msgElement.querySelector('.msg-content');
+    if (contentDiv) {
+        // Preservar timestamp si existe, o regenerarlo
+        const now = new Date();
+        const timeString = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+
+        // Detectar si el texto es HTML (ej. <em>) o texto plano
+        // Para seguridad simple asumimos texto plano salvo que empiece con <
+
+        // Animación suave de transición (opcional)
+        contentDiv.style.opacity = '0';
+        setTimeout(() => {
+            contentDiv.innerHTML = `${newText}<span class="timestamp">${timeString}</span>`;
+            contentDiv.style.opacity = '1';
+        }, 150);
+    }
 }
 
 function appendMessage(role, text) {
     const chatMessages = document.getElementById('chatMessages');
-    if (!chatMessages) return;
+    if (!chatMessages) return null;
 
     const msgDiv = document.createElement('div');
     msgDiv.classList.add('message', role);
@@ -276,6 +426,8 @@ function appendMessage(role, text) {
     msgDiv.innerHTML = `${avatarHTML}<div class="msg-content">${text}<span class="timestamp">${timeString}</span></div>`;
     chatMessages.appendChild(msgDiv);
     chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    return msgDiv;
 }
 
 function showTyping(show) {

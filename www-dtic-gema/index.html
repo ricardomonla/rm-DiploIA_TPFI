@@ -40,25 +40,27 @@
 
                 <div class="user-info-bar">
                     <!-- Google Login Container -->
-                    <div id="g_id_onload" data-client_id="YOUR_GOOGLE_CLIENT_ID"
+                    <div id="g_id_onload"
+                        data-client_id="53963989076-qn335h177qk4nqrqaac8h13l5hl4e3rb.apps.googleusercontent.com"
                         data-callback="handleCredentialResponse" data-auto_prompt="false">
                     </div>
                     <div class="g_id_signin" data-type="standard"></div>
 
                     <div id="userInfoDisplay"
-                        style="display: none; align-items: center; gap: 10px; color: var(--accent);">
-                        <i data-lucide="user-check"></i>
-                        <span id="userNameDisplay">Usuario Verificado</span>
+                        style="display: none; align-items: center; gap: 15px; color: var(--accent); font-size: 0.9em; background: rgba(0, 242, 255, 0.05); padding: 5px 15px; border-radius: 12px; border: 1px solid rgba(0, 242, 255, 0.1);">
+                        <i data-lucide="user-check" style="width: 16px; height: 16px;"></i>
+                        <span id="userNameDisplay" style="font-weight: 600;">Usuario</span>
+                        <span style="opacity: 0.5;">|</span>
+                        <span id="userEmailDisplay" style="opacity: 0.9;">email@ejemplo.com</span>
+                        <button id="logoutBtn" onclick="handleSignout()" title="Cerrar Sesión"
+                            style="background: none; border: none; color: var(--accent); cursor: pointer; padding: 0 5px;">
+                            <i data-lucide="log-out" style="width: 16px; height: 16px;"></i>
+                        </button>
                     </div>
 
-                    <div class="input-group" id="manualEmailGroup">
-                        <i data-lucide="mail"></i>
-                        <input type="email" id="userEmail" placeholder="Email" value="alumno1@frlr.utn.edu.ar">
-                    </div>
-                    <div class="input-group" id="manualDNIGroup">
-                        <i data-lucide="id-card"></i>
-                        <input type="text" id="userDNI" placeholder="DNI" value="12345678">
-                    </div>
+                    <!-- Hidden Inputs for Logic (Google populated) -->
+                    <input type="hidden" id="userEmail" value="">
+                    <input type="hidden" id="userDNI" value="">
                 </div>
 
                 <!-- Messages Area -->
@@ -68,8 +70,10 @@
                             <img src="assets/img/avatar/gema-avatar-web.webp" alt="GEMA">
                         </div>
                         <div class="msg-content">
-                            ¡Hola! Soy **GEMA**, el Asistente Estratégico de la Dirección de TIC. ¿En qué puedo ayudarte
-                            hoy?
+                            ¡Hola! Soy **GEMA**, el Asistente Estratégico de la Dirección de TIC.
+                            <br><br>
+                            Antes de iniciar, necesito confirmar que sos una persona real. Por favor, <strong>inicia
+                                sesión con Google</strong> para continuar.
                             <span class="timestamp">Justo ahora</span>
                         </div>
                     </div>
