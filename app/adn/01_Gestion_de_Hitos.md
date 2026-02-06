@@ -5,8 +5,11 @@
 
 ## Instrucciones Operativas
 
-*   **Actualización Automática:** No esperar a que el usuario lo solicite. Al completar una tarea significativa, actualizar inmediatamente el archivo del hito correspondiente en `app/hitos/` (anteriormente `data/memoria/`).
-*   **Formato de Tabla:** Utilizar **tablas separadas** bajo encabezados H3 (`###`) para cada sub-sección de "Estado del Hito":
+*   **Formato de Doble Capa:** Los documentos de hito deben dividirse en dos bloques principales:
+    1.  `## 1. Novedades y Estado del Hito`: Contiene las tablas dinámicas de progreso (`Aciertos`, `Pendientes`, `Próximos Pasos`). Es lo primero que lee el humano para saber "en qué estamos".
+    2.  `## 2. Detalles Técnicos y Contratos`: Contiene las definiciones estáticas (JSON, Diagramas, Lógica). Es la "Fuente de Verdad" para que el Sherpa/IA pueda programar sin ambigüedades.
+*   **Actualización Automática:** No esperar a que el usuario lo solicite. Al completar una tarea significativa, actualizar inmediatamente el hito.
+*   **Tablas de Estado:** Mantener el formato:
     -   `### Aciertos ✅` -> columnas: `| Hora | Detalle |`
     -   `### Pendientes ⏳` -> columnas: `| Prioridad | Tarea |`
     -   `### Próximos Pasos 🚀` -> columnas: `| Orden | Acción |`

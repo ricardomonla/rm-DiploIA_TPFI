@@ -308,15 +308,43 @@ function sendToWebhook(message, controller = null, timeoutId = null, thinkingMsg
                     isJson = true;
                 } catch (e) { /* No es JSON */ }
 
+                // --- SIMULACIÓN MOCK (Para pruebas locales sin Backend listo) ---
+                // Descomentar para probar:
+                /*
+                if (message === 'INIT') {
+                    data = {
+                        response: "¡Hola! He verificado tu identidad. Veo que tu último ticket #1234 sobre 'WiFi' sigue abierto. ¿Quieres consultarlo?",
+                        suggestions: ["Ver estado ticket #1234", "Nueva Consulta", "Hablar con Agente"]
+                    };
+                    isJson = true;
+                }
+                */
+                // ---------------------------------------------------------------
+
                 let botMsg = "";
                 if (isJson) {
-                    // Soporte para esquema proactivo v1.9 (data.response) y legacy (data.mensaje)
-                    botMsg = data.response || data.mensaje || data.text || "Mensaje recibido.";
-
-                    // Manejo de metadatos v1.9
-                    if (data.meta && data.meta.intent === 'status_check') {
-                        // Podríamos agregar un icono de lupa o similar acá
+                    // Soporte v1.9.3 Estricto: { response, suggestions }
+                    if (data.response) {
+                        botMsg = data.response;
                     }
+                    // Soporte Retrocompatibilidad/Legacy
+                    else if (data.mensaje) {
+                        botMsg = data.mensaje;
+                    } else if (data.text) {
+                        botMsg = data.text;
+                    } else {
+                        botMsg = "Recibido (Sin contenido legible)";
+                    }
+
+                    // Renderizado de Sugerencias Dinámicas
+                    if (data.suggestions && Array.isArray(data.suggestions)) {
+                        const suggestionsContainer = document.getElementById('suggestedQuestions');
+                        if (suggestionsContainer) {
+                            renderSuggestions(suggestionsContainer, document.getElementById('chatForm'), document.getElementById('userInput'), data.suggestions);
+                            suggestionsContainer.style.display = 'flex'; // Asegurar visibilidad
+                        }
+                    }
+
                 } else {
                     botMsg = text || "Mensaje recibido.";
                 }
@@ -352,10 +380,14 @@ function sendToWebhook(message, controller = null, timeoutId = null, thinkingMsg
         });
 }
 
-function renderSuggestions(container, form, input) {
+function renderSuggestions(container, form, input, customSuggestions = null) {
     if (!container) return;
     container.innerHTML = '';
-    SUGGESTIONS.forEach(text => {
+
+    // Usar sugerencias dinámicas del backend si existen, sino usar las default (fallback)
+    const listToRender = customSuggestions || SUGGESTIONS;
+
+    listToRender.forEach(text => {
         const chip = document.createElement('div');
         chip.className = 'suggestion-chip';
         chip.textContent = text;

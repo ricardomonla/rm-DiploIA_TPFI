@@ -1,0 +1,11 @@
+Tag,Palabras_Clave,Pregunta_Clave,Respuesta_Estandar,Enlace_Referencia
+CERTIFICADOS,"certificado, alumno regular, constancia, papeles","¿Cómo solicito un certificado de alumno regular?","Debes ingresarlo por autogestión en la sección Trámites.",https://autogestion.frlr.utn.edu.ar/tramites
+WIFI,"wifi, internet, contraseña, clave, red, eduroam","¿Cuál es la contraseña del WiFi?","La red es Eduroam. Debes configurar tu usuario con tu email institucional.",https://frlr.utn.edu.ar/servicios/wifi
+HORARIOS,"horarios, bedelia, atencion, mañana, tarde","¿Cuáles son los horarios de atención de Bedelía?","De Lunes a Viernes de 08:00 a 13:00 y de 16:00 a 21:00 hs.",https://frlr.utn.edu.ar/bedelia
+EXAMENES,"examenes, mesas, finales, fechas, rendir","¿Cuándo son las mesas de examen?","El calendario académico está disponible en la web oficial.",https://frlr.utn.edu.ar/academica/calendario
+CONTACTO,"contacto, correo, email, soporte, ayuda, telefono","¿Cómo me comunico con soporte técnico?","Envía un correo a soporte@frlr.utn.edu.ar o abre un ticket en esta plataforma.",https://frlr.utn.edu.ar/contacto
+AULAS,"aulas, salon, ubicacion, donde queda, aula magna","¿Dónde está el aula de Magna?","El Aula Magna se encuentra en el primer piso del edificio central.",https://frlr.utn.edu.ar/mapa
+BECAS,"becas, ayuda economica, postularse, requisitos, sae","¿Cómo me postulo a las becas?","Las convocatorias abren en Marzo. Revisa la SAE.",https://frlr.utn.edu.ar/sae/becas
+BIBLIOTECA,"biblioteca, libros, prestamo, renovar, catalogo","¿Cómo renuevo un libro?","Puedes hacerlo online desde el catálogo o presencialmente.",https://biblio.frlr.utn.edu.ar
+CLAVES,"claves, autogestion, recuperar, contraseña, acceso, olvido","¿Cómo recupero mi clave de autogestión?","Usa la opción 'Olvidé mi contraseña' en la pantalla de login.",https://autogestion.frlr.utn.edu.ar/recuperar
+INSCRIPCION,"inscripcion, cursado, materias, anotarse","¿Cómo me inscribo a cursado?","Las inscripciones son por autogestión en las fechas del calendario.",https://autogestion.frlr.utn.edu.ar/inscription

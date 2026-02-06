@@ -1,0 +1,11 @@
+ID_Ticket,Fecha,Email,Consulta_Usuario,Respuesta_IA,Intencion,Estado
+TKY-1001,2026-02-01,alumno_test@frlr.utn.edu.ar,Problemas con acceso al Campus Virtual,"Para resetear tu clave, ingresa a autogestion.frlr.utn.edu.ar",Soporte Técnico,Abierto
+TKY-1002,2026-01-15,juan.perez@frlr.utn.edu.ar,Certificado de alumno regular no llega,"El certificado se genera automáticamente en 24hs hábiles.",Trámite Administrativo,Cerrado
+TKY-1003,2026-02-04,maria.gomez@frlr.utn.edu.ar,Solicitud de aula para examen final,"La solicitud ha sido derivada a Bedelía para asignación.",Reserva de Espacio,En Progreso
+TKY-1004,2026-02-05,admin@frlr.utn.edu.ar,Fallo en impresora de Bedelía,"Técnico asignado para revisión mañana 09:00hs.",Soporte Técnico,Abierto
+TKY-1005,2026-02-03,carlos.lopez@frlr.utn.edu.ar,Consulta sobre correlativas,"Puedes consultar el plan de estudios en la web o en SysAcad.",Información Académica,Pendiente
+TKY-1006,2026-02-05,ana.martinez@frlr.utn.edu.ar,No puedo inscribirme a materias de 3er año,"Verifica tu estado de regularidad en las materias correlativas.",Trámite Administrativo,Abierto
+TKY-1007,2026-01-20,roberto.diax@frlr.utn.edu.ar,Problema con proyector Aula 5,"Proyector reemplazado por equipo de backup.",Soporte Técnico,Cerrado
+TKY-1008,2026-02-02,sofia.herrera@frlr.utn.edu.ar,Rectificación de nota parcial,"Solicitud enviada al departamento de Materias Básicas.",Trámite Administrativo,En Progreso
+TKY-1009,2026-02-05,lucas.rodriguez@frlr.utn.edu.ar,Solicitud de licencia por examen,"Debes presentar el certificado en Personal dentro de las 48hs.",RRHH,Abierto
+TKY-1010,2026-01-28,valeria.sosa@frlr.utn.edu.ar,Consulta fecha mesa de examen,"El calendario académico 2026 ya está publicado en la web.",Información Académica,Cerrado

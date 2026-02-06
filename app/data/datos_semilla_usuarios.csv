@@ -1,0 +1,11 @@
+Email,Dni,Legajo,Nombre,Rol,Verificado,Ultima_Conexion
+alumno_test@frlr.utn.edu.ar,99888777,25001,Tester,Alumno,TRUE,2026-02-05 17:30:00
+juan.perez@frlr.utn.edu.ar,12345678,25002,Juan Perez,Alumno,TRUE,2026-01-15 10:00:00
+maria.gomez@frlr.utn.edu.ar,87654321,1050,Maria Gomez,Docente,TRUE,2026-02-04 14:20:00
+admin@frlr.utn.edu.ar,11223344,1001,Admin Sistema,Administrativo,TRUE,2026-02-05 08:00:00
+carlos.lopez@frlr.utn.edu.ar,22334455,25003,Carlos Lopez,Alumno,FALSE,2026-02-03 09:15:00
+ana.martinez@frlr.utn.edu.ar,33445566,25004,Ana Martinez,Alumno,TRUE,2026-02-05 16:45:00
+roberto.diax@frlr.utn.edu.ar,44556677,1051,Roberto Diaz,Docente,TRUE,2026-01-20 11:30:00
+sofia.herrera@frlr.utn.edu.ar,55667788,25005,Sofia Herrera,Alumno,TRUE,2026-02-02 15:10:00
+lucas.rodriguez@frlr.utn.edu.ar,66778899,3001,Lucas Rodriguez,No Docente,TRUE,2026-02-05 12:00:00
+valeria.sosa@frlr.utn.edu.ar,77889900,25006,Valeria Sosa,Alumno,FALSE,2026-01-28 18:00:00
