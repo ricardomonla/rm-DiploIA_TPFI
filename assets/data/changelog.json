@@ -1,11 +1,14 @@
 [
     {
         "version": "v1.9-dev",
-        "title": "Inicialización Ciclo 1.9-dev",
-        "date": "03 de Febrero, 2026",
+        "title": "Inicialización Ciclo 1.9-dev (TPFI)",
+        "date": "07 de Febrero, 2026",
         "changes": [
-            "feat: creación de rama dtic-GEMA_1.9-dev para nuevos desarrollos.",
-            "refactor: actualización sistemática de versiones en metadatos y documentación."
+            "feat(1.9.1): Webhook Universal v2.0 con soporte robusto de errores.",
+            "feat(1.9.2): Identidad Google Obligatoria para personalización extrema.",
+            "feat(1.9.3): Handshake Proactivo y Contrato de Comunicación JSON estricto.",
+            "feat(1.9.4): RAG Flow v2 con 'Optimizador IA' para consultas de conocimiento.",
+            "docs(1.9.5): Integración oficial del contexto académico TPFI en el ADN del proyecto."
         ]
     },
     {

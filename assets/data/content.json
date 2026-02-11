@@ -93,7 +93,7 @@
         "studentInfo": {
             "alumno": "Lic. Ricardo MONLA",
             "area": "Dirección de TIC - Facultad X",
-            "fecha": "30 de enero de 2026",
+            "fecha": "7 de febrero de 2026",
             "proyecto": "dtic-GEMA Integrador"
         },
         "content": [
@@ -174,11 +174,11 @@
                 "type": "section",
                 "title": "Diseño del Flujo (Lenguaje Natural)",
                 "list": [
-                    "<strong>Input (Entrada):</strong> El usuario ingresa su Email institucional y DNI en la Interfaz Chatbot Web.",
-                    "<strong>Process (Proceso):</strong> <ul><li>Validación de identidad en base de datos <code>dtic-GEMA_BD</code>.</li><li>Clasificación de perfiles y urgencia mediante IA Gemini.</li><li>Categorización inteligente del problema (Acceso Campus, Preinscripción, etc.).</li><li>Generación de 'Dato de Valor' personalizado.</li></ul>",
-                    "<strong>Output (Salida):</strong> Número de ticket único, registro persistente en Google Sheets y respuesta humanizada inmediata."
+                    "<strong>Input (Entrada):</strong> El usuario inicia sesión con <strong>Google Identity</strong> para confirmar que es un humano (sin restricción de dominio) en la Interfaz Chatbot Web.",
+                    "<strong>Process (Proceso):</strong> <ul><li><strong>GEMA -> Make:</strong> El sistema envía las credenciales y el token a Make.com.</li><li><strong>Análisis:</strong> Make consulta las <em>Últimas Interacciones</em> en el historial para dar contexto.</li></ul>",
+                    "<strong>Output (Salida):</strong> El usuario recibe un análisis de su situación actual y puede <strong>reconsultar</strong> o iniciar un nuevo trámite."
                 ],
-                "body": "<strong>Herramientas involucradas:</strong> Make, Gemini 1.5 Flash, Google Sheets, Vanilla JS/CSS."
+                "body": "<strong>Herramientas involucradas:</strong> Make (Router/Iterador), Gemini 1.5 Flash, Google Sheets (Base de Conocimiento), Google Identity."
             }
         ]
     },
@@ -195,9 +195,9 @@
             {
                 "id": "tecnico",
                 "type": "section",
-                "title": "Arquitectura de 3 Capas: dtic-GEMA_Make",
+                "title": "Arquitectura de 3 Capas: dtic-GEMAe",
                 "subtitle": "Ecosistema de Interacción, Mediación y Automatización",
-                "body": "La arquitectura del ecosistema dtic-GEMA_Make se organiza en tres niveles jerárquicos que permiten una gestión modular y escalable de los requerimientos técnicos:",
+                "body": "La arquitectura del ecosistema dtic-GEMA se organiza en tres niveles jerárquicos que permiten una gestión modular y escalable de los requerimientos técnicos:",
                 "list": [
                     "<strong>CAPA 1: Interacción Humana (UX):</strong> El nivel superior donde el usuario final (docente, alumno o agente) presenta su consulta a través de la interfaz web, iniciando el ciclo de asistencia.",
                     "<strong>CAPA 2: Mediación (Portal dtic-GEMA):</strong> El puente inteligente que actúa como traductor entre la necesidad humana y la lógica de datos, encapsulando la seguridad y la transferencia hacia la nube.",
@@ -206,8 +206,13 @@
             },
             {
                 "type": "image",
-                "src": "assets/img/ciclo_vida_completo_dtic-gema.png",
-                "caption": "Arquitectura Oficial dtic-GEMA: Mapa del ecosistema por capas."
+                "src": "assets/img/arquitectura_3_capas_v1.9.png",
+                "caption": "Figura 1: Arquitectura Oficial dtic-GEMA (3 Capas)."
+            },
+            {
+                "type": "image",
+                "src": "assets/img/make_blueprint_v1.9.png",
+                "caption": "Figura 2: Blueprint de Automatización en Make (v1.9 Final)."
             },
             {
                 "id": "ingenieriaNodes",
@@ -216,12 +221,11 @@
                 "subtitle": "Detalle de Nodos y Flujo de Eficiencia en Make",
                 "body": "La implementación de esta arquitectura no solo es una mejora técnica, sino un cambio en la calidad del servicio. El flujo se divide en seis hitos críticos coordinados en el escenario:",
                 "list": [
-                    "<strong>1. Receptor (Webhook):</strong> Captura instantánea del payload JSON desde el Portal sin intermediarios.",
-                    "<strong>2. Validador (Search Rows):</strong> Filtro de seguridad que verifica la identidad en la base de datos para asegurar soporte premium.",
-                    "<strong>3. Derivador (Router):</strong> El centro lógico que bifurca el flujo mediante lógica condicional determinista.",
-                    "<strong>4. IA Gemini (Gemini AI):</strong> Gemini 1.5 Flash transforma datos crudos en soluciones empáticas y precisas.",
-                    "<strong>5. Escriba (Add Row):</strong> Nada se pierde; cada interacción queda guardada para auditoría y mejora continua.",
-                    "<strong>6. Responder (Webhook Response):</strong> Cierre de ciclo e inyección inmediata de la solución en la pantalla del usuario."
+                    "<strong>1. El Oído (Webhook):</strong> El proceso comienza cuando <code>dtic-GEMA_v1.9</code> recibe tu mensaje.",
+                    "<strong>2. El Cerebro (Router):</strong> Una decisión inteligente determina tu intención: ¿Es un saludo o una consulta específica?",
+                    "<strong>3. Camino A: El Saludo Contextual (Handshake):</strong><ul><li><em>Memoria:</em> El sistema busca en Google Sheets si ya tienes un ticket abierto.</li><li><em>Empatía (IA):</em> <strong>Gemini</strong> genera un saludo personalizado ('Hola Juan, veo que tu caso #123 sigue en curso...') o uno genérico de bienvenida.</li></ul>",
+                    "<strong>4. Camino B: La Sabiduría (RAG):</strong><ul><li><em>Traductor (IA):</em> <strong>Gemini</strong> convierte tu pregunta en 'Tags' de búsqueda precisos.</li><li><em>Buscador:</em> Localiza la información exacta en la Base de Conocimientos (Sheets).</li><li><em>Redactor (IA):</em> <strong>Gemini</strong> toma el dato crudo y te lo explica paso a paso con calidez humana.</li></ul>",
+                    "<strong>5. La Voz (Webhook Response):</strong> Finalmente, el sistema empaqueta la respuesta y te la entrega instantáneamente en el chat."
                 ]
             },
             {
@@ -229,8 +233,13 @@
                 "type": "section",
                 "title": "Implementación de IA Generativa",
                 "subtitle": "Estrategia de Prompts y Orquestación",
-                "body": "Se utiliza un orquestador que inyecta el rol del asistente, reglas de seguridad y SLAs diferenciados.",
-                "code": "// System Prompt de GEMA\\nEres dtic-GEMA_FRLR, el Asistente Inteligente de la Dirección de TIC. Asiste con tono profesional y empático.\\n1. Validación: Siempre valida identidad contra {{agentes}}.\\n2. Priorización: SLA Autoridades < 2hs / Otros < 24hs.\\n3. Seguridad: NUNCA pidas contraseñas.\\n4. Valor: Inyecta un dato curioso sobre la carrera del usuario."
+                "body": "La inteligencia de GEMA no es mágica; es una orquestación precisa de tres capas de prompting:",
+                "list": [
+                    "<strong>1. El Rol (System Prompt):</strong> Se define la <em>Persona</em> como un 'Sherpa Digital' de la Dirección de TIC. Su misión es guiar, no solo responder. Tono: Profesional pero cercano, empático y resolutivo.",
+                    "<strong>2. La Táctica (Chain of Thought):</strong> Se instruye al modelo para 'pensar paso a paso': Primero valida identidad, luego clasifica la urgencia y finalmente busca en la base de conocimientos antes de redactar.",
+                    "<strong>3. La Seguridad (Guardrails):</strong> Reglas inquebrantables inyectadas en cada interacción: <em>'Nunca inventes información (Alucinación 0)', 'Protege datos personales', 'Si no sabes, deriva a un humano'.</em>"
+                ],
+                "code": "// System Prompt Simplificado (v1.9)\\nRole: Eres GEMA, el Asistente de TIC.\\nTask: Resuelve la consulta usando SOLO el contexto provisto.\\nStyle: Empático, conciso y profesional.\\n\\n[Guardrails]\\n- NO inventes URLs.\\n- NO pidas contraseñas.\\n- SI el contexto es vacío, responde: 'No tengo esa información, te derivo a un humano'."
             }
         ]
     },
@@ -271,33 +280,36 @@
                     {
                         "type": "action_item",
                         "title": "PDF Fase 1: Relevamiento",
-                        "body": "Informe de procesos y puntos de dolor detectados (Versión Estática).",
+                        "body": "Informe de procesos y puntos de dolor detectados.",
                         "action": {
                             "label": "Descargar PDF Fase 1",
-                            "link": "assets/docs/dtic-GEMA_1.8_Entregable1_20260130_1248.pdf",
+                            "link": "assets/docs/dtic-GEMA_v1.9_Fase1_20260207_1848.pdf",
                             "icon": "file-down",
+                            "download": true,
                             "target": "_blank"
                         }
                     },
                     {
                         "type": "action_item",
                         "title": "PDF Fase 2: Diseño",
-                        "body": "Ficha técnica y lógica de implementación IA (Versión Estática).",
+                        "body": "Ficha técnica y lógica de implementación IA.",
                         "action": {
                             "label": "Descargar PDF Fase 2",
-                            "link": "assets/docs/dtic-GEMA_1.8_Entregable2_20260130_1248.pdf",
+                            "link": "assets/docs/dtic-GEMA_v1.9_Fase2_20260207_1848.pdf",
                             "icon": "file-down",
+                            "download": true,
                             "target": "_blank"
                         }
                     },
                     {
                         "type": "action_item",
                         "title": "Blueprint: Arquitectura Make",
-                        "body": "Accede al archivo JSON descargado de Make.com (Debe residir en assets/docs/blueprint.json).",
+                        "body": "Archivo de importación para replicar la lógica en Make.com (Requiere cuenta activa).",
                         "action": {
-                            "label": "Descargar Blueprint",
-                            "link": "assets/docs/blueprint.json",
+                            "label": "Descargar Blueprint v1.9",
+                            "link": "assets/docs/dtic-GEMA_v1.9_Blueprint.json",
                             "icon": "code",
+                            "download": true,
                             "target": "_blank"
                         }
                     }
@@ -306,30 +318,45 @@
             {
                 "id": "historial",
                 "type": "section",
-                "title": "Historial Consolidado",
-                "body": "Acceso al repositorio de versiones entregadas. El orden es cronológico inverso (Actual → Inicial).",
+                "title": "Historial Consolidado: El Camino a la Excelencia",
+                "body": "Documentación de la evolución del proyecto a través de las iteraciones de entrega y feedback.",
                 "blocks": [
                     {
+                        "type": "highlight",
+                        "title": "3️⃣ Tercera Presentación - v1.9 (05/02/2026)",
+                        "body": "<strong>Objetivo:</strong> Obtención de Nota 10.<br><strong>Estrategia:</strong> Elevación con enfoque en Inteligencia Artificial, reformulación de diagramas y nuevos módulos lógicos en Make (Resumen v1.9).<br><strong>Estado:</strong> Esperando confirmación de excelencia."
+                    },
+                    {
                         "type": "action_item",
-                        "title": "Entrega v1.6: Arquitectura Avanzada",
-                        "body": "<strong>Estado: Pendiente de evaluación.</strong><br>Hito del 27/01/2026. Esta versión representa el estado actual del proyecto y reemplaza a todas las anteriores para la calificación final.",
+                        "title": "Evidencia: Solicitud de Elevación v1.9",
+                        "body": "Documento formal de presentación de la nueva arquitectura.",
                         "action": {
-                            "label": "Descargar v1.6 (Actual)",
-                            "link": "assets/entregas/270127_entrega_v1.6.zip",
-                            "icon": "archive",
+                            "label": "Ver Evidencia v1.9",
+                            "link": "assets/docs/feedback/dtic-GEMA_Solicitud_Nota10.pdf",
+                            "icon": "file-check",
                             "target": "_blank"
                         }
                     },
                     {
+                        "type": "highlight",
+                        "title": "2️⃣ Segunda Presentación - v1.6 (03/02/2026)",
+                        "body": "<strong>Hito Clave:</strong> Devolución formal con calificación.<br><strong>Acción:</strong> Inicio del ciclo de refactorización profunda (v1.7 - v1.8) basado en este feedback."
+                    },
+                    {
                         "type": "action_item",
-                        "title": "Entrega v1.0: Lanzamiento",
-                        "body": "<strong>Estado: No evaluado (Superado).</strong><br>Hito del 22/01/2026. Se entregó con antelación, pero ya no será evaluado dado que el envío más reciente (v1.6) lo sustituye.",
+                        "title": "Evidencia: Primera Evaluación Formal",
+                        "body": "Feedback detallado del evaluador sobre la versión 1.6.",
                         "action": {
-                            "label": "Descargar v1.0 (Histórico)",
-                            "link": "assets/entregas/260122_entrega_v1.0.zip",
-                            "icon": "archive",
+                            "label": "Ver Feedback v1.6",
+                            "link": "assets/docs/feedback/dtic-GEMA_Feedback_v1.6.pdf",
+                            "icon": "file-text",
                             "target": "_blank"
                         }
+                    },
+                    {
+                        "type": "highlight",
+                        "title": "1️⃣ Primera Presentación (Iteración Inicial)",
+                        "body": "<strong>Estado:</strong> Entrega formativa.<br><strong>Resultado:</strong> Revisión preliminar para ajuste de arquitectura."
                     }
                 ]
             }

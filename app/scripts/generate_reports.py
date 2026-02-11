@@ -45,14 +45,14 @@ class GEMAReport(FPDF):
         self.gallery = []
 
     def header(self):
-        avatar_path = os.path.join("www-dtic-gema", "assets", "img", "avatar", "gema-avatar.png")
+        avatar_path = os.path.join("www-dtic-gema", "assets", "img", "avatar", "gema-avatar-opt.png")
         if os.path.exists(avatar_path):
             self.image(avatar_path, 10, 8, 12)
         
         self.set_font('helvetica', 'B', 10)
         self.set_text_color(120, 120, 120)
         self.set_y(8)
-        self.cell(0, 10, f'{self.app_version} | dtic-GEMA | Lic. Ricardo Monla', align='R')
+        self.cell(0, 10, f'dtic-GEMA {self.app_version} | Lic. Ricardo MONLA', align='R')
         
         self.set_draw_color(230, 230, 230)
         self.set_line_width(0.1)
@@ -75,7 +75,7 @@ def add_to_gallery(pdf, src, caption):
     pdf.gallery.append({'src': src, 'caption': caption})
     pdf.set_font('helvetica', 'I', 9)
     pdf.set_text_color(0, 51, 102)
-    pdf.cell(0, 6, f"> [Vincular: Ver Figura {len(pdf.gallery)} en la Galería al final]", ln=True)
+    pdf.cell(0, 6, f"> [Vincular: Ver Figura {len(pdf.gallery)} en la Galería al final]", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
     pdf.ln(2)
 
 def render_evolution_brief(pdf, position='start'):
@@ -90,7 +90,7 @@ def render_evolution_brief(pdf, position='start'):
     pdf.set_x(10)
     pdf.set_font('helvetica', 'B', 10)
     pdf.set_text_color(3, 105, 161)
-    pdf.cell(0, 8, "  ! PROTOCOLO DE MEJORA CONTINUA", border='LTR', ln=True, fill=True)
+    pdf.cell(0, 8, "  ! PROTOCOLO DE MEJORA CONTINUA", border='LTR', new_x=XPos.LMARGIN, new_y=YPos.NEXT, fill=True)
     
     pdf.set_font('helvetica', '', 9)
     pdf.set_text_color(30, 41, 59)
@@ -144,29 +144,35 @@ def generate_pdf(phase_id, filename, version, content_data):
     
     pdf.set_font('helvetica', 'B', 16)
     pdf.set_text_color(0, 51, 102)
-    pdf.cell(0, 10, clean_html(phase.get('title', '')), ln=True)
+    pdf.cell(0, 10, clean_html(phase.get('title', '')), new_x=XPos.LMARGIN, new_y=YPos.NEXT)
     pdf.set_font('helvetica', 'I', 12)
-    pdf.cell(0, 8, clean_html(phase.get('subtitle', '')), ln=True)
+    pdf.cell(0, 8, clean_html(phase.get('subtitle', '')), new_x=XPos.LMARGIN, new_y=YPos.NEXT)
     pdf.ln(2)
 
     if 'studentInfo' in phase:
         info = phase['studentInfo']
         pdf.set_font('helvetica', 'B', 9)
         pdf.set_text_color(0, 0, 0)
-        pdf.cell(0, 5, f"Alumno: {clean_html(info.get('alumno'))} | Fecha: {clean_html(info.get('fecha'))}", ln=True)
+        pdf.cell(0, 5, f"Alumno: {clean_html(info.get('alumno'))} | Fecha: {clean_html(info.get('fecha'))}", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
         pdf.ln(2)
         if phase_id == 'fase1': render_evolution_brief(pdf, 'start')
 
     for item in phase.get('content', []):
         type = item.get('type')
         if type == 'section':
+            title = clean_html(item.get('title', ''))
+            
+            # [MODIFIED] Force page break for specific sections
+            if "Diseño del Flujo" in title or "Implementación de IA" in title:
+                pdf.add_page()
+
             pdf.set_font('helvetica', 'B', 13)
             pdf.set_text_color(0, 51, 102)
-            pdf.cell(0, 10, clean_html(item.get('title', '')), ln=True)
+            pdf.cell(0, 10, title, new_x=XPos.LMARGIN, new_y=YPos.NEXT)
             if item.get('subtitle'):
                 pdf.set_font('helvetica', 'B', 11)
                 pdf.set_text_color(46, 125, 50)
-                pdf.cell(0, 8, clean_html(item.get('subtitle')), ln=True)
+                pdf.cell(0, 8, clean_html(item.get('subtitle')), new_x=XPos.LMARGIN, new_y=YPos.NEXT)
             
             if item.get('body'):
                 pdf.set_font('helvetica', '', 10)
@@ -179,7 +185,7 @@ def generate_pdf(phase_id, filename, version, content_data):
                     if block['type'] == 'highlight':
                         pdf.set_fill_color(240, 245, 250)
                         pdf.set_font('helvetica', 'B', 11)
-                        pdf.cell(0, 8, f" {clean_html(block['title'])}", fill=True, ln=True)
+                        pdf.cell(0, 8, f" {clean_html(block['title'])}", fill=True, new_x=XPos.LMARGIN, new_y=YPos.NEXT)
                         pdf.set_font('helvetica', '', 10)
                         pdf.multi_cell(0, 6, clean_html(block['body']))
                         pdf.ln(3)
@@ -203,13 +209,21 @@ def generate_pdf(phase_id, filename, version, content_data):
     if pdf.gallery:
         pdf.add_page()
         pdf.set_font('helvetica', 'B', 14)
-        pdf.cell(0, 15, "GALERÍA DE FIGURAS TÉCNICAS", align='C', ln=True)
+        pdf.cell(0, 15, "GALERÍA DE FIGURAS TÉCNICAS", align='C', new_x=XPos.LMARGIN, new_y=YPos.NEXT)
         for i, img in enumerate(pdf.gallery):
             img_path = os.path.join("www-dtic-gema", img['src'])
             if os.path.exists(img_path):
                 if pdf.get_y() > 220: pdf.add_page()
                 pdf.ln(2)
-                pdf.image(img_path, x=50, w=110) 
+                
+                # [MODIFIED] Maximize width for Figure 2 (Index 1) or specific diagrams
+                width = 110
+                x_pos = 50
+                if i == 1: # Figure 2 usually Make Blueprint
+                    width = 190
+                    x_pos = 10
+                
+                pdf.image(img_path, x=x_pos, w=width) 
                 pdf.set_font('helvetica', 'I', 8)
                 pdf.cell(0, 10, f"Figura {i+1}: {clean_html(img['caption'])}", align='C', ln=True)
                 pdf.ln(2)
@@ -245,15 +259,20 @@ if __name__ == "__main__":
         content_data['fase1']['studentInfo']['fecha'] = fecha_es
 
     # 2. Generar nombres de archivos
-    f1_name = f"{p_name}_{v}_Fase1_{ts}.pdf"
-    f2_name = f"{p_name}_{v}_Fase2_{ts}.pdf"
+    # Asegurar que la versión tenga 'v'
+    ver_str = v if v.lower().startswith('v') else f"v{v}"
+    
+    f1_name = f"{p_name}_{ver_str}_Fase1_{ts}.pdf"
+    f2_name = f"{p_name}_{ver_str}_Fase2_{ts}.pdf"
     
     # 3. Generar PDFs y Sincronizar (en memoria)
     os.makedirs(os.path.join("www-dtic-gema", "assets", "docs"), exist_ok=True)
-    generate_pdf('fase1', f1_name, v, content_data)
+    
+    # Para el header, pasamos la versión con 'v'
+    generate_pdf('fase1', f1_name, ver_str, content_data)
     sync_references(content_data, 'fase1', f1_name)
     
-    generate_pdf('fase2', f2_name, v, content_data)
+    generate_pdf('fase2', f2_name, ver_str, content_data)
     sync_references(content_data, 'fase2', f2_name)
     
     # 4. Una única escritura final al disco

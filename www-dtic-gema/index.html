@@ -4,106 +4,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>dtic-GEMA - Facultad X</title>
+    <title>dtic-GEMA | v1.9-stable</title>
     <link rel="stylesheet" href="assets/css/style.css">
-    <!-- Lucide Icons for premium feel -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Google Identity Services v1.9 -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 
-<body>
-    <div class="app-wrapper">
-        <!-- Sidebar Unificado (Inyectado dinámicamente) -->
+<body
+    style="margin:0; padding:0; display:flex; justify-content:center; align-items:center; height:100vh; background: var(--bg-dark);">
 
-        <!-- Contenido Principal -->
-        <div class="main-content">
-            <div class="chat-container" style="display: none;">
-                <!-- Header -->
-                <header class="chat-header">
-                    <div class="brand">
-                        <div class="brand-text">
-                            <h1>Portal Inteligente dtic-GEMA</h1>
-                            <span>Asistencia Estratégica TIC</span>
-                        </div>
-                    </div>
-                    <div class="header-actions">
-                        <div class="status-badge">
-                            <div class="status-dot"></div>
-                            Sistema Activo
-                        </div>
-                        <button id="clearChat" class="icon-btn" title="Limpiar Chat">
-                            <i data-lucide="trash-2"></i>
-                        </button>
-                    </div>
-                </header>
-
-                <div class="user-info-bar">
-                    <!-- Google Login Container -->
-                    <div id="g_id_onload"
-                        data-client_id="53963989076-qn335h177qk4nqrqaac8h13l5hl4e3rb.apps.googleusercontent.com"
-                        data-callback="handleCredentialResponse" data-auto_prompt="false">
-                    </div>
-                    <div class="g_id_signin" data-type="standard"></div>
-
-                    <div id="userInfoDisplay"
-                        style="display: none; align-items: center; gap: 15px; color: var(--accent); font-size: 0.9em; background: rgba(0, 242, 255, 0.05); padding: 5px 15px; border-radius: 12px; border: 1px solid rgba(0, 242, 255, 0.1);">
-                        <i data-lucide="user-check" style="width: 16px; height: 16px;"></i>
-                        <span id="userNameDisplay" style="font-weight: 600;">Usuario</span>
-                        <span style="opacity: 0.5;">|</span>
-                        <span id="userEmailDisplay" style="opacity: 0.9;">email@ejemplo.com</span>
-                        <button id="logoutBtn" onclick="handleSignout()" title="Cerrar Sesión"
-                            style="background: none; border: none; color: var(--accent); cursor: pointer; padding: 0 5px;">
-                            <i data-lucide="log-out" style="width: 16px; height: 16px;"></i>
-                        </button>
-                    </div>
-
-                    <!-- Hidden Inputs for Logic (Google populated) -->
-                    <input type="hidden" id="userEmail" value="">
-                    <input type="hidden" id="userDNI" value="">
+    <div class="chat-container"
+        style="display: flex; width: 100%; height: 100%; max-width: 100%; border-radius: 0; box-shadow: none;">
+        <!-- Header -->
+        <header class="chat-header">
+            <div class="brand">
+                <div class="brand-text">
+                    <h1>Portal Inteligente dtic-GEMA</h1>
+                    <span>Asistencia Estratégica TIC</span>
                 </div>
-
-                <!-- Messages Area -->
-                <main class="chat-messages" id="chatMessages">
-                    <div class="message bot">
-                        <div class="avatar-msg">
-                            <img src="assets/img/avatar/gema-avatar-web.webp" alt="GEMA">
-                        </div>
-                        <div class="msg-content">
-                            ¡Hola! Soy **GEMA**, el Asistente Estratégico de la Dirección de TIC.
-                            <br><br>
-                            Antes de iniciar, necesito confirmar que sos una persona real. Por favor, <strong>inicia
-                                sesión con Google</strong> para continuar.
-                            <span class="timestamp">Justo ahora</span>
-                        </div>
-                    </div>
-                </main>
-
-                <!-- Input Area -->
-                <footer class="chat-input-area">
-                    <div class="suggested-questions" id="suggestedQuestions"></div>
-                    <div class="typing-container" id="typingIndicator">
-                        <div class="typing-dots">
-                            <span></span><span></span><span></span>
-                        </div>
-                        GEMA está redactando una respuesta...
-                    </div>
-                    <form class="input-wrapper" id="chatForm">
-                        <input type="text" id="userInput" placeholder="Escribe tu consulta aquí..." autocomplete="off">
-                        <button type="submit" class="send-btn">
-                            <i data-lucide="send"></i>
-                        </button>
-                    </form>
-                </footer>
             </div>
+            <div class="header-actions">
+                <div class="status-badge">
+                    <div class="status-dot"></div>
+                    Sistema Activo
+                </div>
+                <button id="clearChat" class="icon-btn" title="Limpiar Chat">
+                    <i data-lucide="trash-2"></i>
+                </button>
+            </div>
+        </header>
+
+        <div class="user-info-bar">
+            <!-- Google Login -->
+            <div id="g_id_onload"
+                data-client_id="53963989076-qn335h177qk4nqrqaac8h13l5hl4e3rb.apps.googleusercontent.com"
+                data-callback="handleCredentialResponse" data-auto_prompt="false">
+            </div>
+            <div class="g_id_signin" data-type="standard"></div>
+
+            <div id="userInfoDisplay"
+                style="display: none; align-items: center; gap: 15px; color: var(--accent); font-size: 0.9em; background: rgba(0, 242, 255, 0.05); padding: 5px 15px; border-radius: 12px; border: 1px solid rgba(0, 242, 255, 0.1);">
+                <i data-lucide="user-check" style="width: 16px; height: 16px;"></i>
+                <span id="userNameDisplay" style="font-weight: 600;">Usuario</span>
+                <span style="opacity: 0.5;">|</span>
+                <span id="userEmailDisplay" style="opacity: 0.9;">email@ejemplo.com</span>
+                <button id="logoutBtn" onclick="handleSignout()" title="Cerrar Sesión"
+                    style="background: none; border: none; color: var(--accent); cursor: pointer; padding: 0 5px;">
+                    <i data-lucide="log-out" style="width: 16px; height: 16px;"></i>
+                </button>
+            </div>
+            <input type="hidden" id="userEmail" value="">
+            <input type="hidden" id="userDNI" value="">
         </div>
+
+        <!-- Messages Area -->
+        <main class="chat-messages" id="chatMessages">
+            <div class="message bot" id="welcome-message">
+                <div class="avatar-msg">
+                    <img src="assets/img/avatar/gema-avatar-web.webp" alt="GEMA">
+                </div>
+                <div class="msg-content">
+                    ¡Hola! Soy **GEMA**, el Asistente Estratégico de la Dirección de TIC.
+                    <br><br>
+                    Antes de iniciar, necesito confirmar que sos una persona real. Por favor, <strong>inicia sesión con
+                        Google</strong> para continuar.
+                    <span class="timestamp">Justo ahora</span>
+                </div>
+            </div>
+        </main>
+
+        <!-- Input Area -->
+        <footer class="chat-input-area">
+            <div class="suggested-questions" id="suggestedQuestions"></div>
+            <div class="typing-container" id="typingIndicator">
+                <div class="typing-dots"><span></span><span></span><span></span></div>
+                GEMA está redactando una respuesta...
+            </div>
+            <form class="input-wrapper" id="chatForm">
+                <input type="text" id="userInput" placeholder="Escribe tu consulta aquí..." autocomplete="off">
+                <button type="submit" class="send-btn">
+                    <i data-lucide="send"></i>
+                </button>
+            </form>
+        </footer>
     </div>
 
-    <script src="assets/js/navigation.js?v=1.6.4"></script>
-    <script src="assets/js/layout.js?v=1.6.4"></script>
-    <script src="assets/js/chatbot.js?v=1.9"></script>
+    <!-- Cargar Chatbot Logic -->
+    <script src="assets/js/chatbot.js"></script>
     <script>
-        // Initialize Lucide icons
         lucide.createIcons();
     </script>
 </body>

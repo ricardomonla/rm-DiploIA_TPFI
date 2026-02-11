@@ -84,8 +84,12 @@ async function initHandshake() {
     unlockChatInterface(); // Desbloquear UI
 
     console.log("dtic-GEMA: Iniciando Handshake proactivo...");
-    // Simulamos un submit con el mensaje 'INIT'
-    sendToWebhook("INIT");
+
+    // v1.9.7: Detectar burbuja de bienvenida para reemplazo in-place
+    const welcomeMsg = document.getElementById('welcome-message');
+
+    // Simulamos un submit con el mensaje 'INIT', pasando el elemento a actualizar
+    sendToWebhook("INIT", null, null, welcomeMsg);
 }
 
 function updateUIForAuthenticatedUser() {
@@ -127,7 +131,7 @@ window.handleSignout = () => {
     if (loginBtn) loginBtn.style.display = 'block';
     if (userInfo) userInfo.style.display = 'none';
     if (suggestions) suggestions.innerHTML = ''; // Limpiar sugerencias
-    if (userInput) userInput.placeholder = "GEMA v1.9 Activa"; // Reset placeholder
+    if (userInput) userInput.placeholder = "GEMA v1.9-stable Activa"; // Reset placeholder
 
     // Reset Chat message
     const chatMessages = document.getElementById('chatMessages');
@@ -177,7 +181,7 @@ function initChatbot(formElement) {
     const suggestedQuestionsContainer = document.getElementById('suggestedQuestions');
 
     // Señal visual de sistema activo
-    if (userInput) userInput.placeholder = "GEMA v1.9 Activa";
+    if (userInput) userInput.placeholder = "GEMA v1.9-stable Activa";
 
     // Renderizar sugerencias SOLO si ya está logueado (raro en init, pero posible si persistimos sesión)
     if (userProfile) {
@@ -226,8 +230,43 @@ function handleChatSubmit(e, userInput, form) {
     sendToWebhook(message, controller, timeoutId, thinkingMsgHtml);
 }
 
-function sendToWebhook(message, controller = null, timeoutId = null, thinkingMsg = null) {
+function sendToWebhook(message, controller = null, timeoutId = null, existingMsgElement = null) {
     if (!controller) controller = new AbortController();
+
+    // v1.9.7: updateHeaderAvatar call moved here to ensure avatar animation starts
+    updateHeaderAvatar();
+    showTyping(true);
+
+    let thinkingMsgHtml;
+
+    // Lógica para determinar la burbuja de destino (Thinking Bubble)
+    if (existingMsgElement) {
+        thinkingMsgHtml = existingMsgElement;
+
+        // Si es el Handshake (INIT), cambiamos el mensaje de bienvenida por Feedback de proceso
+        if (message === 'INIT') {
+            updateMessageContent(thinkingMsgHtml, "GEMA está verificando tus credenciales...");
+        }
+        // Si viene de handleChatSubmit, ya dice "GEMA está pensando..." (no necesario cambiar)
+    } else {
+        // Fallback: Si no se pasa elemento, creamos uno nuevo
+        thinkingMsgHtml = appendSystemMessage("GEMA está pensando la respuesta...");
+    }
+
+    // Gestion de Timeout para Handshake (donde timeoutId es null)
+    if (!timeoutId) {
+        timeoutId = setTimeout(() => {
+            controller.abort();
+            const errorMsg = "Tiempo de espera agotado (15s).";
+            // Intentar actualizar la burbuja existente para no generar basura
+            if (thinkingMsgHtml) {
+                updateMessageContent(thinkingMsgHtml, errorMsg);
+            } else {
+                appendSystemMessage(errorMsg);
+            }
+            showTyping(false);
+        }, 15000);
+    }
 
     // Prepare Payload
     const emailInput = document.getElementById('userEmail');
@@ -240,11 +279,13 @@ function sendToWebhook(message, controller = null, timeoutId = null, thinkingMsg
         if (timeoutId) clearTimeout(timeoutId);
         showTyping(false);
 
-        // Si teníamos un mensaje de "pensando", lo actualizamos con la advertencia
-        if (thinkingMsg) {
-            updateMessageContent(thinkingMsg, "Antes de iniciar, necesito confirmar que sos una persona real. Por favor, inicia sesión con Google para continuar.");
+        const loginMsg = "Antes de iniciar, necesito confirmar que sos una persona real. Por favor, inicia sesión con Google para continuar.";
+
+        // Feedback in-place
+        if (thinkingMsgHtml) {
+            updateMessageContent(thinkingMsgHtml, loginMsg);
         } else {
-            appendMessage('bot', "Antes de iniciar, necesito confirmar que sos una persona real. Por favor, inicia sesión con Google para continuar.");
+            appendMessage('bot', loginMsg);
         }
 
         // Highlight Login Button (Visual Feedback)
@@ -264,7 +305,7 @@ function sendToWebhook(message, controller = null, timeoutId = null, thinkingMsg
         if (timeoutId) clearTimeout(timeoutId);
         showTyping(false);
         const errorText = "Por favor, ingresa un email válido o inicia sesión con Google.";
-        if (thinkingMsg) updateMessageContent(thinkingMsg, errorText);
+        if (thinkingMsgHtml) updateMessageContent(thinkingMsgHtml, errorText);
         else appendMessage('bot', errorText);
         return;
     }
@@ -304,9 +345,18 @@ function sendToWebhook(message, controller = null, timeoutId = null, thinkingMsg
                 let isJson = false;
 
                 try {
-                    data = JSON.parse(text);
+                    // v1.9.5: Limpieza de Markdown (```json ... ```) común en respuestas de LLMs
+                    const cleanText = text.replace(/```json\s*|\s*```/g, '').trim();
+                    data = JSON.parse(cleanText);
                     isJson = true;
-                } catch (e) { /* No es JSON */ }
+                } catch (e) {
+                    console.warn("No se pudo parsear como JSON estricto:", e);
+                    // Fallback: intentar parsear el texto original por si acaso
+                    try {
+                        data = JSON.parse(text);
+                        isJson = true;
+                    } catch (e2) { /* Definitivamente no es JSON */ }
+                }
 
                 // --- SIMULACIÓN MOCK (Para pruebas locales sin Backend listo) ---
                 // Descomentar para probar:
@@ -349,9 +399,9 @@ function sendToWebhook(message, controller = null, timeoutId = null, thinkingMsg
                     botMsg = text || "Mensaje recibido.";
                 }
 
-                // Actualizar el mensaje de "Pensando..." con la respuesta final
-                if (thinkingMsg) {
-                    updateMessageContent(thinkingMsg, botMsg);
+                // Actualizar el mensaje de "Pensando..." con la respuesta final (In-Place)
+                if (thinkingMsgHtml) {
+                    updateMessageContent(thinkingMsgHtml, botMsg);
                 } else {
                     appendMessage('bot', botMsg);
                 }
@@ -359,20 +409,19 @@ function sendToWebhook(message, controller = null, timeoutId = null, thinkingMsg
                 updateHeaderAvatar();
             } else {
                 const errorMsg = "Error en el servidor de IA.";
-                appendSystemMessage(`Error servidor: ${response.status}`);
+                // appendSystemMessage(`Error servidor: ${response.status}`);
 
-                if (thinkingMsg) updateMessageContent(thinkingMsg, errorMsg);
+                if (thinkingMsgHtml) updateMessageContent(thinkingMsgHtml, `Error servidor: ${response.status}`);
                 else appendMessage('bot', errorMsg);
             }
         })
         .catch(error => {
-            clearTimeout(timeoutId);
+            // clearTimeout(timeoutId); // Ya manejado arriba o no relevante si es abort
             if (error.name === 'AbortError') return; // Handled by timeout
             console.error(error);
-            // appendSystemMessage(`Error de red: ${error.message}`); // Opcional mostrar error técnico
 
             const connErrorMsg = "Problema de conexión.";
-            if (thinkingMsg) updateMessageContent(thinkingMsg, connErrorMsg);
+            if (thinkingMsgHtml) updateMessageContent(thinkingMsgHtml, connErrorMsg);
             else appendMessage('bot', connErrorMsg);
         })
         .finally(() => {

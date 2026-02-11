@@ -1,4 +1,4 @@
-# dtic-GEMA v1.9-dev: Inicialización de Ciclo 1.9
+# dtic-GEMA: Asistente Estratégico (v1.9-stable): Inicialización de Ciclo 1.9
 
 **Sistema de Gestión Estratégica Mediante Automatización - Facultad X**
 

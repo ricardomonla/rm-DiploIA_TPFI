@@ -1,15 +1,34 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=www-dtic-gema/index.html">
-    <title>Redirigiendo a dtic-GEMA...</title>
-    <script>window.location.href = "www-dtic-gema/index.html";</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dtic-GEMA TPFI | v1.9-stable</title>
+    <meta name="description" content="Portal de Documentación del TPFI - Dipl. IA Generativa">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Lucide Icons for premium feel -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Identity Services v1.9 -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
-<body style="background: #0f172a; color: white; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0;">
-    <div style="text-align: center;">
-        <h2>Iniciando Portal dtic-GEMA...</h2>
-        <p>Si no eres redirigido, <a href="www-dtic-gema/index.html" style="color: #4facfe;">haz clic aquí</a>.</p>
+
+<body>
+    <div class="app-wrapper">
+        <!-- Sidebar Unificado (Inyectado dinámicamente) -->
+
+        <!-- Contenido Principal -->
+        <div class="main-content">
+            <!-- El contenido se inyecta vía layout.js -->
+        </div>
     </div>
+
+    <script src="assets/js/navigation.js?v=1.6.4"></script>
+    <script src="assets/js/layout.js?v=1.7.0"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
 </body>
+
 </html>

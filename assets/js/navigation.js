@@ -47,8 +47,7 @@ function handleRouting() {
     }
 
     // 6. Sincronizar título
-    const institution = (typeof PROJECT_DATA !== 'undefined' ? PROJECT_DATA.institution : 'UTNLR');
-    document.title = `dtic-GEMA ${institution}`;
+    document.title = `dtic-GEMA TPFI`;
 }
 
 /**
