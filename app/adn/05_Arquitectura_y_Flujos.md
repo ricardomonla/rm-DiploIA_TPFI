@@ -19,7 +19,8 @@ El sistema opera bajo una arquitectura de tres capas claramente definidas, donde
     *   Orquestación del handshake de identidad.
     *   Parseo de respuestas JSON estructuradas.
     *   Renderizado de componentes dinámicos (botones de sugerencia).
-
+    *   Renderizado de componentes dinámicos (botones de sugerencia).
+    *   **Despliegue Dual:** El aplicativo GEMA (`www-dtic-gema`) reside en una carpeta aislada, separado físicamente del Portal de Documentación TPFI (Raíz), simulando un entorno de producción limpio.
 ### Capa 3: Make (Cerebro Interprete y Elaborador)
 *   **Componente:** Blueprints de Make.com (v1.9+).
 *   **Responsabilidad:**

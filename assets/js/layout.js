@@ -39,10 +39,13 @@ async function loadData() {
         // Sincronizar versión: El Changelog manda.
         PROJECT_DATA = {
             ...project,
-            version: LATEST_VERSION || project.version || 'v1.x'
+            version: project.version || LATEST_VERSION || 'v1.x'
         };
         CONTENT_DATA = content;
         MENU_DATA = menu;
+
+        // Actualizar Título del Documento
+        document.title = `${PROJECT_DATA.projectName} TPFI | ${PROJECT_DATA.version}`;
     } catch (e) {
         console.error('Error cargando datos:', e);
     }

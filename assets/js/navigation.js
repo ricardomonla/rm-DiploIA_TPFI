@@ -105,10 +105,10 @@ function renderNavigation(currentId, position) {
     if (position === 'bottom' && next) {
         const targetPath = next.path || next.id;
 
-        if (next.external) {
+        if (next.external || next.id === 'chatbot') {
             return `
                 <div class="nav-auto-bottom">
-                    <a href="${next.url}" class="nav-sutil-btn next" target="_blank">
+                    <a href="${next.url || 'www-dtic-gema/index.html'}" class="nav-sutil-btn next" target="_blank">
                         <span>Ir al Aplicativo <strong>${next.title}</strong></span>
                         <i data-lucide="external-link" style="width: 16px; margin-left: 5px;"></i>
                     </a>

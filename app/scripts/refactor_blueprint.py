@@ -100,7 +100,14 @@ def refactor_blueprint(input_file, output_file):
     print(f"Clean Blueprint generated at {output_file}")
 
 if __name__ == "__main__":
-    refactor_blueprint(
-        '/home/rmonla/Documentos/GitHub/rm-DiploIA_TPFI/www-dtic-gema/assets/docs/blueprint.json',
-        '/home/rmonla/Documentos/GitHub/rm-DiploIA_TPFI/www-dtic-gema/assets/docs/blueprint-v1.9-clean.json'
-    )
+    import os
+    
+    # Determine project root (2 levels up from app/scripts)
+    SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+    PROJECT_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, '..', '..'))
+    
+    INPUT_PATH = os.path.join(PROJECT_ROOT, 'www-dtic-gema', 'assets', 'docs', 'blueprint.json')
+    OUTPUT_PATH = os.path.join(PROJECT_ROOT, 'www-dtic-gema', 'assets', 'docs', 'blueprint-v1.9-clean.json')
+    
+    print(f"Project Root: {PROJECT_ROOT}")
+    refactor_blueprint(INPUT_PATH, OUTPUT_PATH)

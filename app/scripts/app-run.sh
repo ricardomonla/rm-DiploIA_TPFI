@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Navegar al directorio raíz del proyecto (2 niveles arriba de app/scripts)
+cd "$(dirname "$0")/../.." || exit 1
 # Colores ANSI para estética premium
 BLUE='\033[0;34m'
 CYAN='\033[0;36m'

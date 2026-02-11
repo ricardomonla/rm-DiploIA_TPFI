@@ -3,9 +3,37 @@
  */
 
 // Configuración
+// Configuración
 const MAKE_WEBHOOK_URL = 'https://hook.us2.make.com/tosnfu28xcpf5cty3p1y807ci7rpg4qd';
 const AVATAR_PATH = 'assets/video/avatar/';
 const AVATAR_FILES = ['gema-00.mp4', 'gema-01.mp4', 'gema-02.mp4', 'gema-03.mp4', 'gema-04.mp4', 'gema-05.mp4'];
+const PROJECT_DATA_URL = 'assets/data/project.json';
+
+// Carga de Versión Dinámica (SSOT)
+async function loadProjectVersion() {
+    try {
+        const response = await fetch(PROJECT_DATA_URL);
+        if (response.ok) {
+            const data = await response.json();
+            const version = data.version || 'v1.X';
+
+            // Actualizar Título
+            document.title = `dtic-GEMA | ${version}`;
+
+            // Actualizar Placeholder
+            const userInput = document.getElementById('userInput');
+            if (userInput) userInput.placeholder = `GEMA ${version} Activa`;
+
+            console.log(`dtic-GEMA: Versión ${version} cargada.`);
+        }
+    } catch (e) {
+        console.error("Error cargando versión del proyecto", e);
+    }
+}
+
+// Iniciar carga de versión
+loadProjectVersion();
+
 const SUGGESTIONS = [
     "¿Cómo saco mi certificado?",
     "¿Dónde está mi legajo?",
@@ -131,7 +159,7 @@ window.handleSignout = () => {
     if (loginBtn) loginBtn.style.display = 'block';
     if (userInfo) userInfo.style.display = 'none';
     if (suggestions) suggestions.innerHTML = ''; // Limpiar sugerencias
-    if (userInput) userInput.placeholder = "GEMA v1.9-stable Activa"; // Reset placeholder
+    if (userInput) userInput.placeholder = "GEMA Activa"; // Reset placeholder (version loaded async)
 
     // Reset Chat message
     const chatMessages = document.getElementById('chatMessages');
@@ -182,7 +210,8 @@ function initChatbot(formElement) {
     const suggestedQuestionsContainer = document.getElementById('suggestedQuestions');
 
     // Señal visual de sistema activo
-    if (userInput) userInput.placeholder = "GEMA v1.9-stable Activa";
+    // Señal visual de sistema activo
+    // if (userInput) userInput.placeholder = ... (Manejado por loadProjectVersion)
 
     // Renderizar sugerencias SOLO si ya está logueado (raro en init, pero posible si persistimos sesión)
     if (userProfile) {

@@ -16,6 +16,8 @@ Enviado vía POST al Webhook de Make.
   "dni": "12345678",
   "session_id": "sess_uuid",
   "user_name": "Nombre de Usuario",
+  "user_name": "Nombre de Usuario",
+  "token": "google_jwt_token_secure",
   "is_verified": true,
   "descripcion": "El texto del usuario o comando 'INIT'",
   "meta": {
@@ -23,6 +25,8 @@ Enviado vía POST al Webhook de Make.
   }
 }
 ```
+
+> **Human-First Policy:** El campo `is_verified` y el `token` son **OBLIGATORIOS**. La Capa 3 rechazará cualquier petición anónima para proteger la integridad de los datos académicos.
 
 *   **`meta.intent`**: Define el camino lógico en Make.
     *   `handshake`: Se envía al cargar el chat por primera vez.

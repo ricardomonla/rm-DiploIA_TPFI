@@ -344,6 +344,18 @@
                     },
                     {
                         "type": "action_item",
+                        "title": "Entrega Histórica v1.6",
+                        "body": "Archivo ZIP original de la segunda presentación.",
+                        "action": {
+                            "label": "Descargar v1.6.zip",
+                            "link": "assets/entregas/270127_entrega_v1.6.zip",
+                            "icon": "archive",
+                            "download": true,
+                            "target": "_blank"
+                        }
+                    },
+                    {
+                        "type": "action_item",
                         "title": "Evidencia: Primera Evaluación Formal",
                         "body": "Feedback detallado del evaluador sobre la versión 1.6.",
                         "action": {
@@ -357,6 +369,18 @@
                         "type": "highlight",
                         "title": "1️⃣ Primera Presentación (Iteración Inicial)",
                         "body": "<strong>Estado:</strong> Entrega formativa.<br><strong>Resultado:</strong> Revisión preliminar para ajuste de arquitectura."
+                    },
+                    {
+                        "type": "action_item",
+                        "title": "Entrega Histórica v1.0",
+                        "body": "Archivo ZIP original de la primera iteración.",
+                        "action": {
+                            "label": "Descargar v1.0.zip",
+                            "link": "assets/entregas/260122_entrega_v1.0.zip",
+                            "icon": "archive",
+                            "download": true,
+                            "target": "_blank"
+                        }
                     }
                 ]
             }

@@ -52,3 +52,14 @@ Base de conocimiento para el contexto de la IA.
 - **Make.com:** Utiliza estas hojas como "Data Store" principal.
 - **RAG:** La tabla Conocimientos alimenta el contexto del LLM.
 - **Handshake:** GEMA cruza `Email` (Usuarios) con `Email` (Tickets) para dar el saludo contextual.
+
+---
+
+## 4. Archivos de Configuración (SSOT Local)
+Fuente de verdad para el versionado y metadatos del aplicativo.
+
+| Archivo | Ubicación | Propósito |
+| :--- | :--- | :--- |
+| **project.json** | `assets/data/` (Raíz) y `www-dtic-gema/assets/data/` | **Master SSOT.** Define versión, fecha y estado. Sincroniza UI de Chatbot y Portal. |
+| **changelog.json** | `assets/data/` | Historial humano de cambios. Fuente para el modal de "Novedades". |
+
