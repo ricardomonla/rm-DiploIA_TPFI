@@ -11,8 +11,8 @@
         ]
     },
     {
-        "version": "v1.10-rc",
-        "title": "Release Candidate: Saneamiento Integral & Token Security",
+        "version": "v1.10",
+        "title": "Saneamiento Integral & Token Security (Stable)",
         "date": "11 de Febrero, 2026",
         "changes": [
             "feat(core): Versionado Dinámico SSOT (project.json) unificado para Portal y Chatbot.",

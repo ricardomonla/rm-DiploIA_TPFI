@@ -1,9 +1,9 @@
 {
     "projectName": "dtic-GEMA",
     "institution": "Facultad X",
-    "version": "v1.10-rc",
+    "version": "v1.10",
     "lastUpdate": "11 de Febrero, 2026",
-    "status": "Release Candidate",
+    "status": "Stable",
     "author": {
         "name": "Lic. Ricardo MONLA",
         "role": "Director TIC"

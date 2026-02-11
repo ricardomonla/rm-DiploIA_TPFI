@@ -2,7 +2,8 @@
     "projectName": "dtic-GEMA",
     "institution": "Facultad X",
     "area": "Dirección de TIC",
-    "version": "v1.10-rc",
+    "version": "v1.10",
+    "status": "Stable",
     "academicContext": "Diplomatura en IA para No Programadores",
     "student": {
         "name": "Lic. Ricardo MONLA",
