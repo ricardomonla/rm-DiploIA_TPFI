@@ -344,7 +344,7 @@ async function openChangelogModal() {
                                 <summary><span>${item.version} - ${item.title}</span></summary>
                                 <div class="changelog-content">
                                     <p style="font-size: 0.75rem; margin-bottom: 10px; color: #4facfe;">${item.date}</p>
-                                    <ul>${item.changes.map(c => `<li>${c}</li>`).join('')}</ul>
+                                    <ul>${item.changes.map(c => `<li>${parseSimpleMarkdown(c)}</li>`).join('')}</ul>
                                 </div>
                             </details>
                         </div>
@@ -360,6 +360,17 @@ async function openChangelogModal() {
             setTimeout(() => modal.remove(), 300);
         });
     } catch (e) { console.error(e); }
+}
+
+function parseSimpleMarkdown(text) {
+    if (!text) return '';
+    return text
+        // Bold: **text** or __text__
+        .replace(/(\*\*|__)(.*?)\1/g, '<strong>$2</strong>')
+        // Italic: *text* or _text_
+        .replace(/(\*|_)(.*?)\1/g, '<em>$2</em>')
+        // Code: `text`
+        .replace(/`([^`]+)`/g, '<code>$1</code>');
 }
 
 let theaterIndex = 0;
