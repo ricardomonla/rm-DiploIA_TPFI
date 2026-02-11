@@ -42,6 +42,10 @@ Al finalizar un ciclo de desarrollo (ej. `v1.9`), se debe ejecutar el siguiente 
         *   No limitarse a listar commits técnicos.
         *   Redactar un resumen narrativo que explique el *valor* de cada cambio (Arquitectura, UX, Seguridad, Académico).
         *   Usar categorías claras (feat, fix, docs) pero con descripciones ricas y contextuales.
-5.  **Archivado (Renaming):** Una vez cerrado, cambiar el nombre del directorio de hitos de desarrollo a su forma estable o abreviada.
-    *   Ejemplo: `app/hitos/1.9-dev` -> `app/hitos/1.9-stbl` (o `-stable`).
-6.  **Limpieza:** Eliminar ramas de características (feature branches) ya fusionadas.
+5.  **Archivado (Renaming - MANDATORIO):** Una vez cerrado el hito y tagueado, **se debe cambiar el nombre del directorio de hitos**.
+    *   **Acción:** Renombrar `app/hitos/X.Y-dev` a `app/hitos/X.Y-stable`.
+    *   *Razón:* Esto congela la carpeta y señaliza visualmente que esa versión no recibirá más cambios evolutivos.
+6.  **Consolidación Final (Merge a Main - MANDATORIO):**
+    *   **Acción:** Fusionar la rama de desarrollo (ej. `dtic-GEMA_X.Y-dev`) a la rama `master` (o `main`).
+    *   **Verificación:** Asegurar que `master` contenga la carpeta ya renombrada a `-stable` y el `changelog.json` actualizado.
+7.  **Limpieza:** Eliminar ramas de características (feature branches) ya fusionadas para mantener el repo limpio.

@@ -1,25 +1,14 @@
 [
     {
-        "version": "v1.10.1",
-        "title": "Saneamiento y Optimización Web (GEMA v2 Layer)",
-        "date": "11 de Febrero, 2026",
-        "changes": [
-            "feat(core): Versionado Dinámico SSOT (project.json).",
-            "fix(ui): Corrección de contraste y logout en Chatbot.",
-            "refactor: Unificación de directorios scripts y data.",
-            "chore: Archivado de versiones legacy (1.7/1.8)."
-        ]
-    },
-    {
         "version": "v1.10",
-        "title": "Saneamiento Integral & Token Security (Stable)",
+        "title": "Versión Estable: Seguridad Human-First & Saneamiento",
         "date": "11 de Febrero, 2026",
         "changes": [
-            "feat(core): Versionado Dinámico SSOT (project.json) unificado para Portal y Chatbot.",
-            "sec(auth): Protocolo Human-First estricto. Inyección de Token Google JWT en cada request de Make.",
-            "refactor(arch): Aislamiento físico de 'www-dtic-gema' como producto stand-alone.",
-            "fix(nav): Corrección de enlaces externos en pie de página (target='_blank').",
-            "chore: Saneamiento de assets (eliminación de scripts legado y PDFs duplicados)."
+            "🔒 **Seguridad Mejorada:** Implementación del protocolo 'Human-First'. Ahora GEMA verifica tu identidad con Google en cada interacción para proteger tus datos.",
+            "🧹 **Limpieza Integral:** Eliminación de archivos antiguos y optimización de la estructura del proyecto para mayor velocidad y orden.",
+            "🏛️ **Arquitectura Robusta:** Separación total entre el 'Portal de Documentación' y el 'Chatbot GEMA', evitando conflictos y mejorando la estabilidad.",
+            "🔗 **Navegación Corregida:** Los enlaces externos ahora se abren correctamente en nuevas pestañas, mejorando la experiencia de usuario.",
+            "⚡ **Optimización Interna:** Unificación de versiones y limpieza de código para asegurar que el sistema sea más ligero y fiable."
         ]
     },
     {
