@@ -138,12 +138,13 @@ window.handleSignout = () => {
     if (chatMessages) {
         chatMessages.innerHTML = ''; // Clear history
 
-        // Restore Initial Greeting
-        const initialMsg = `¡Hola! Soy **GEMA**, el Asistente Estratégico de la Dirección de TIC.
+        // Show Goodbye Message (with ID for next cycle)
+        const goodbyeMsg = `¡Hasta luego! Has cerrado sesión correctamente.
         <br><br>
-        Antes de iniciar, necesito confirmar que sos una persona real. Por favor, <strong>inicia sesión con Google</strong> para continuar.`;
+        Para volver a acceder a mis servicios, por favor <strong>inicia sesión con Google</strong>.`;
 
-        appendMessage('bot', initialMsg);
+        const msgElement = appendMessage('bot', goodbyeMsg);
+        if (msgElement) msgElement.id = 'welcome-message'; // v1.10.1: Restore ID for dynamic replacement
     }
     console.log("dtic-GEMA: Usuario deslogueado y chat reiniciado.");
 };
@@ -462,7 +463,15 @@ function updateHeaderAvatar() {
     try {
         const randomAvatar = AVATAR_FILES[Math.floor(Math.random() * AVATAR_FILES.length)];
         headerAvatar.src = AVATAR_PATH + randomAvatar;
-        headerAvatar.play().catch(() => { });
+        // Play once when interaction occurs
+        headerAvatar.play()
+            .then(() => {
+                // Return to poster when video ends (avoid black frame)
+                headerAvatar.onended = () => {
+                    headerAvatar.load(); // Resets to poster
+                };
+            })
+            .catch(() => { });
     } catch (e) { }
 }
 

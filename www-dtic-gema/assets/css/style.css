@@ -11,6 +11,7 @@
     --text-muted: #94a3b8;
     --glass: rgba(30, 41, 59, 0.7);
     --border-glass: rgba(255, 255, 255, 0.1);
+    --accent: #00f2ff;
 }
 
 * {
@@ -340,7 +341,8 @@ body {
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
-    background: #000;
+    background: var(--bg-dark);
+    /* Evitar flash negro */
     transition: opacity 0.3s ease;
 }
 
