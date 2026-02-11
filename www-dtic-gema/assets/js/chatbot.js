@@ -65,6 +65,7 @@ window.handleCredentialResponse = (response) => {
         };
         // v1.9.4: Persistencia
         localStorage.setItem('gema_user_profile', JSON.stringify(userProfile));
+        localStorage.setItem('gema_session_token', response.credential); // v1.10.3: Token persistence
 
         console.log("dtic-GEMA: Usuario autenticado", userProfile);
         updateUIForAuthenticatedUser();
@@ -79,7 +80,9 @@ window.handleCredentialResponse = (response) => {
 // v1.9.4: Restaurar sesión persistente
 const restoreSession = () => {
     const storedProfile = localStorage.getItem('gema_user_profile');
-    if (storedProfile) {
+    const storedToken = localStorage.getItem('gema_session_token');
+
+    if (storedProfile && storedToken) {
         try {
             userProfile = JSON.parse(storedProfile);
             console.log("dtic-GEMA: Sesión restaurada", userProfile);
@@ -87,7 +90,7 @@ const restoreSession = () => {
             unlockChatInterface();
         } catch (e) {
             console.error("Error restaurando sesión", e);
-            localStorage.removeItem('gema_user_profile');
+            handleSignout(); // Force cleanup if corrupted
         }
     }
 };
@@ -149,6 +152,7 @@ window.handleSignout = () => {
     userProfile = null;
     localStorage.removeItem('gema_session_id'); // Opcional: limpiar sesión local o mantenerla
     localStorage.removeItem('gema_user_profile'); // v1.9.4: Limpiar perfil persistente
+    localStorage.removeItem('gema_session_token'); // v1.10.3: Limpiar token
 
     // Reset UI
     const loginBtn = document.querySelector('.g_id_signin');
@@ -346,6 +350,7 @@ function sendToWebhook(message, controller = null, timeoutId = null, existingMsg
         dni,
         session_id: getSessionId(),
         user_name: userProfile ? userProfile.name : 'Usuario',
+        token: localStorage.getItem('gema_session_token') || '', // v1.10.3: Mandatory for Human-First Policy
         is_verified: !!userProfile,
         descripcion: message,
         fuente: "Chatbot GEMA v1.9-Dev-Proactive",

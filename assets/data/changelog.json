@@ -11,6 +11,18 @@
         ]
     },
     {
+        "version": "v1.10-rc",
+        "title": "Release Candidate: Saneamiento Integral & Token Security",
+        "date": "11 de Febrero, 2026",
+        "changes": [
+            "feat(core): Versionado Dinámico SSOT (project.json) unificado para Portal y Chatbot.",
+            "sec(auth): Protocolo Human-First estricto. Inyección de Token Google JWT en cada request de Make.",
+            "refactor(arch): Aislamiento físico de 'www-dtic-gema' como producto stand-alone.",
+            "fix(nav): Corrección de enlaces externos en pie de página (target='_blank').",
+            "chore: Saneamiento de assets (eliminación de scripts legado y PDFs duplicados)."
+        ]
+    },
+    {
         "version": "v1.9",
         "title": "Inicialización Ciclo 1.9-dev (TPFI)",
         "date": "07 de Febrero, 2026",

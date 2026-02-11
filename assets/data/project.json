@@ -2,13 +2,12 @@
     "projectName": "dtic-GEMA",
     "institution": "Facultad X",
     "area": "Dirección de TIC",
-    "version": "v1.10.1",
+    "version": "v1.10-rc",
     "academicContext": "Diplomatura en IA para No Programadores",
     "student": {
         "name": "Lic. Ricardo MONLA",
         "title": "Asistente Estratégico TIC",
         "email": "rmonla@frlr.utn.edu.ar"
     },
-    "status": "Stable",
     "last_update": "2026-02-11"
 }
