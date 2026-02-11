@@ -1,4 +1,3 @@
-[
     {
         "version": "v1.10",
         "title": "Versión Estable: Seguridad Human-First & Saneamiento",
@@ -16,11 +15,11 @@
         "title": "Inicialización Ciclo 1.9-dev (TPFI)",
         "date": "07 de Febrero, 2026",
         "changes": [
-            "feat(backend): Arquitectura Cognitiva (JSON Estricto). Estandarización de comunicación GEMA-Make con objetos estructurados { response, suggestions }.",
-            "feat(ai): Motor RAG Universal con Gemini. Implementación de 'Optimizador IA' para búsqueda semántica en Base de Conocimientos.",
-            "feat(security): Identidad Humana (Google Identity). Login obligatorio y Handshake Proactivo que consulta historial de tickets.",
-            "fix(ux): Interfaz Líquida (Dynamic DOM). Estados de 'Pensando...' in-place sin recargas. Persistencia de sesión.",
-            "docs(academic): Separación de Capas. Aislamiento físico de 'www-dtic-gema' (Producto) vs Portal TPFI (Documentación)."
+            "🧠 **Arquitectura Cognitiva:** Implementación de comunicación estructurada (JSON) para dotar a GEMA de mayor inteligencia y precisión en sus respuestas.",
+            "📚 **Motor de Conocimiento (RAG):** Integración de un 'Optimizador IA' que permite a GEMA buscar y aprender de la Base de Conocimientos del proyecto.",
+            "🛡️ **Identidad & Seguridad:** Inicio de sesión obligatorio con Google y 'Handshake Proactivo' que reconoce tu historial previo.",
+            "💧 **Interfaz Líquida:** Experiencia de usuario fluida con actualizaciones en tiempo real (sin recargas) y persistencia de sesión inteligente.",
+            "🏗️ **Separación de Capas:** Definición clara entre el Producto (Chatbot) y la Documentación (Portal TPFI) para mejorar la mantenibilidad."
         ]
     },
     {
@@ -28,10 +27,10 @@
         "title": "Chatbot Inteligente Robustez & SPA",
         "date": "30 de Enero, 2026",
         "changes": [
-            "feat(chatbot): respuestas humanizadas y formateo de tickets.",
-            "fix(chatbot): carga dinámica en SPA (MutationObserver) y manejo de errores.",
-            "refactor: arquitectura aislada en chatbot.js para mayor estabilidad.",
-            "test: suite de pruebas curl y validación integral de comunicación."
+            "💬 **Respuestas Humanizadas:** El chatbot ahora responde de manera más natural y empática, formateando los tickets para mejor lectura.",
+            "🔄 **Carga Dinámica (SPA):** Mejora en la velocidad de respuesta mediante carga inteligente de contenidos sin refrescar la página.",
+            "🛡️ **Estabilidad Aislada:** Refactorización del núcleo del chatbot (`chatbot.js`) para que funcione robustamente sin depender del resto del portal.",
+            "🧪 **Validación Integral:** Suite de pruebas exhaustiva para asegurar que cada mensaje llegue y se procese correctamente."
         ]
     },
     {
@@ -39,12 +38,11 @@
         "title": "Optimización Líquida, Transiciones Cinemáticas y Eficiencia de Assets",
         "date": "27 de Enero, 2026",
         "changes": [
-            "Optimización Extrema de Assets: Reducción del avatar de 7.5MB a 14KB (WebP) logrando una carga 99.8% más rápida.",
-            "Sistema de Doble Buffer de Video: Eliminación total de parpadeos negros en las transiciones del avatar (Sidebar y Teatro).",
-            "Efecto Portal Cinemático: Transformación del Modo Teatro en un lobby interactivo con CTA 'Hablar con GEMA' y navegación fluida.",
-            "Hardening de app-run.sh: Implementación de validación de identidad robusta, colores ANSI y gestión dinámica de puertos.",
-            "Protocolo de Versionado Total: Automatización de la sincronización entre Project, Changelog y README para consistencia absoluta.",
-            "Limpieza y Saneamiento: Eliminación de residuos temporales y optimización de flujos de generación interna."
+            "🚀 **Optimización Extrema:** Reducción del peso del avatar (de 7.5MB a 14KB), logrando que la web cargue instantáneamente (99.8% más rápido).",
+            "🎬 **Transiciones de Cine:** Eliminación total de parpadeos negros, logrando una experiencia visual suave y profesional.",
+            "🌌 **Modo Teatro Interactivo:** El avatar ahora te recibe en un 'lobby' inmersivo que invita a conversar.",
+            "🔐 **Seguridad en Ejecución:** Script de inicio (`app-run.sh`) blindado para validar identidad y gestionar puertos de forma segura.",
+            "📝 **Sincronización Total:** Automatización que mantiene alineados el Proyecto, el Historial y la Documentación sin intervención manual."
         ]
     },
     {
@@ -52,14 +50,11 @@
         "title": "Arquitectura Dinámica, Navegación Minimalista y Excelencia Documental",
         "date": "26 de Enero, 2026",
         "changes": [
-            "Arquitectura de 3 Capas: Implementación de la imagen maestra 'Ciclo de Vida GEMA' (Ronda 5) con lógica de bifurcación IA (Gemini AI) y Responder.",
-            "Navegación Minimalista: Simplificación del sidebar a Nivel 1 para máxima estabilidad y eliminación de conflictos de eventos.",
-            "Motor de Resolución de Slugs: Sincronización absoluta entre URLs, IDs de contenido y resaltado visual en el sidebar.",
-            "Unificación de Fuente de Verdad: Eliminación total de versiones hardcodeadas; el proyecto ahora se autogestiona desde el Changelog.",
-            "Dinamismo PDF: Implementación de timestamps anti-caché y nomenclatura estandarizada [Proyecto]_[Versión]_[Entregable]_[TS].",
-            "Excelencia Editorial: Rediseño del 'Protocolo de Mejora Continua' con hipervínculos funcionales y optimización de fuentes académicas (16pt/13pt/10pt).",
-            "Sincronización de Datos: Corrección masiva de claves (src -> link) y soporte dual en el motor de renderizado SPA.",
-            "Automatización Cronológica: Actualización dinámica de fechas en entregables directamente desde el script de generación."
+            "🏗️ **Arquitectura de 3 Capas:** Implementación del 'Ciclo de Vida GEMA' con cerebro IA separado para decisiones complejas.",
+            "🧭 **Navegación Zen:** Simplificación del menú lateral para evitar distracciones y mejorar la estabilidad.",
+            "🔗 **Enlaces Inteligentes:** Sistema que corrige automáticamente las URLs para que nunca te encuentres con un 'Error 404'.",
+            "📄 **Documentación Viva:** Los PDFs entregables ahora se generan con fecha y versión automática, garantizando frescura.",
+            "✨ **Excelencia Editorial:** Rediseño tipográfico y de estilos para que leer la documentación sea un placer visual."
         ]
     },
     {
@@ -67,13 +62,11 @@
         "title": "Ecosistema SPA, Excelencia Editorial e Inmersión GEMA",
         "date": "24 de Enero (Noche), 2026",
         "changes": [
-            "Arquitectura SPA Premium: Transición total a Single Page Application con ruteo dinámico fluido.",
-            "Modo Teatro GEMA: Experiencia inmersiva en primer plano con ciclo infinito de animaciones IA (gema-00 a gema-05).",
-            "Excelencia Editorial PDF: Restauración de la Integridad de Contenidos (Regla de Oro) y layout premium de Entregables.",
-            "Identidad Unificada: Consolidación del branding dtic-GEMA y personalización académica avanzada.",
-            "Visor de Changelog Interactivo: Restauración de la transparencia técnica mediante acceso directo al historial desde la UI.",
-            "Optimización de Entregables: Compactación de Fase 1 (one-sheet), inyección de URL viva y galería balanceada.",
-            "Protocolo de Memoria v1.5.2: Sistematización del rastro histórico aditivo y seguro."
+            "⚡ **Experiencia SPA Premium:** Navegación instantánea entre secciones sin esperas.",
+            "🎭 **Inmersión Total:** Modo Teatro con animaciones infinitas de GEMA que dan vida al asistente.",
+            "📰 **Layout Editorial:** Entregables con diseño académico de alto nivel, listos para presentar.",
+            "🆔 **Identidad Única:** Consolidación de la marca 'dtic-GEMA' con personalidad propia.",
+            "📜 **Transparencia Técnica:** Acceso directo al historial de cambios desde la propia interfaz."
         ]
     },
     {
@@ -81,13 +74,11 @@
         "title": "Evolución Estructural, Identidad y Entregables Dinámicos",
         "date": "24 de Enero, 2026",
         "changes": [
-            "Reingeniería del Sidebar: Arquitectura modular de 3 bloques (Header, Nav, Footer).",
-            "Navegación Inteligente: Ruteo proactivo y numeración dinámica automática (Padre <=> Hijo).",
-            "Identidad Facultad X: Desvinculación institucional y personalización del branding global.",
-            "Restauración de Avatar Premium: Recuperación del video interactivo GEMA dinámico.",
-            "Motor de Entregables Dinámicos: Generación en tiempo real de PDF Fase 1 y 2 con estética académica clásica e inyección de avatar.",
-            "Registro de Protocolos de Agente: Implementación de comandos OK versiona, OK guarda y flujo de memoria técnica.",
-            "Saneamiento de Repositorio: Consolidación de historial en ZIP y eliminación de redundancias técnicas."
+            "🧱 **Estructura Modular:** Rediseño del menú en bloques lógicos (Cabecera, Navegación, Pie) para mayor orden.",
+            "🧠 **Ruteo Proactivo:** El sistema ahora 'adivina' a dónde quieres ir y te facilita el camino.",
+            "🎨 **Branding Personal:** Desvinculación de plantillas genéricas para adoptar una identidad visual única.",
+            "📄 **Docs en Tiempo Real:** Generación de PDFs al vuelo, inyectando el avatar y datos actualizados al momento.",
+            "💾 **Memoria de Agente:** Primeros pasos en la capacidad de GEMA para recordar comandos y versiones."
         ]
     },
     {
@@ -95,12 +86,10 @@
         "title": "UX Premium, PDF y Memoria Histórica",
         "date": "24 (mediodía) de Enero, 2026",
         "changes": [
-            "Implementación de Numeración Dinámica Inteligente (Menú <=> Contenidos).",
-            "Navegación Proactiva: Redirección automática al primer hijo en categorías padre.",
-            "Arquitectura de Sidebar Flex-3-Bloques con Sticky Footer y Scroll Independiente.",
-            "Integración de Sistema de Exportación PDF (html2pdf.js) en todos los reportes.",
-            "Optimización GEMA: Debouncing de animaciones (400ms) y Avatar premium (100px).",
-            "Protocolo de Memoria Técnica organizado por Versiones (data/memoria/vX.Y/)."
+            "🔢 **Índices Inteligentes:** Numeración automática de contenidos para que siempre sepas dónde estás.",
+            "🖱️ **Navegación Fluida:** Scroll independiente y menús que se quedan fijos para tu comodidad.",
+            "🖨️ **Motor PDF:** Capacidad de exportar cualquier reporte a PDF con un solo clic.",
+            "⚡ **Avatar Optimizado:** Animaciones más suaves que no consumen recursos innecesarios de tu dispositivo."
         ]
     },
     {
@@ -108,12 +97,9 @@
         "title": "Arquitectura de Datos Dinámica",
         "date": "24 de Enero, 2026",
         "changes": [
-            "Externalización del historial de versiones a un archivo JSON independiente.",
-            "Implementación de carga asíncrona (Fetch API) para mayor eficiencia.",
-            "Optimización del sistema de navegación global dinámico.",
-            "Detección automática de la versión más reciente desde el JSON.",
-            "Sistema de cache-busting dinámico para garantizar datos frescos.",
-            "Mejora en la mantenibilidad del portal dtic-GEMA."
+            "📂 **Historial Externo:** Separación de los datos de versión para facilitar actualizaciones sin tocar código.",
+            "🚀 **Carga Asíncrona:** El sistema carga los datos en segundo plano para que la interfaz nunca se congele.",
+            "🔄 **Datos Frescos:** Mecanismo 'cache-busting' que asegura que siempre veas la última versión disponible."
         ]
     },
     {
@@ -121,11 +107,9 @@
         "title": "Unificación y Optimización",
         "date": "23 de Enero, 2026",
         "changes": [
-            "Unificación de portales (Chatbot + Entregables).",
-            "Sistema de navegación dinámico (layout.js).",
-            "Optimización de videos del avatar (reducción del 70% en peso).",
-            "Estética Glassmorphism Premium consistente.",
-            "Saneamiento de assets e imágenes redundantes."
+            "🌐 **Portal Unificado:** Integración del Chatbot y la Documentación en un solo sitio web coherente.",
+            "💎 **Estética Glass:** Diseño moderno con efectos de transparencia 'Glassmorphism'.",
+            "📉 **Dieta Digital:** Reducción masiva del peso de videos e imágenes para cuidar tus datos."
         ]
     },
     {
@@ -133,10 +117,10 @@
         "title": "Lanzamiento Inicial",
         "date": "22 de Enero, 2026",
         "changes": [
-            "Chatbot inteligente GEMA con Gemini AI.",
-            "Integración nativa con Make.com.",
-            "Avatar interactivo basado en video.",
-            "Documentación técnica E01 y E02."
+            "🤖 **Nacimiento de GEMA:** Primera versión del Chatbot integrado con Inteligencia Artificial (Gemini).",
+            "🔌 **Conexión Neuronal:** Integración nativa con Make.com para procesar lógica compleja.",
+            "👤 **Avatar Original:** Implementación inicial del avatar interactivo basado en video.",
+            "📝 **Base Documental:** Publicación de los primeros documentos técnicos (E01 y E02)."
         ]
     }
 ]
